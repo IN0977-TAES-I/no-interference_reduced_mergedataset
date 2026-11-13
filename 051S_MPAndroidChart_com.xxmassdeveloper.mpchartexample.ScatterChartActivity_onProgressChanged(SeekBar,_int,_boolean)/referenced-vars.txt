@@ -1,0 +1,20 @@
+# class name : com.xxmassdeveloper.mpchartexample.ScatterChartActivity
+# method name: onProgressChanged(SeekBar, int, boolean)
+# variables referenced in the affected region:
+LineData	external/inherited	roles=source
+String	external/inherited	roles=source,sink
+ds1	declared-in-file	roles=sink
+ds4	declared-in-file	roles=sink
+mLabels	declared-in-file	roles=sink
+sets	declared-in-file	roles=source,sink
+
+# per-line detail:
+sink:168	ds1
+sink:173	ds4
+sink:178	sets,ds1
+source:183	LineData,sets
+source:186	
+sink:188	String,mLabels,String
+source:191	String
+sink:204	
+sink:205	

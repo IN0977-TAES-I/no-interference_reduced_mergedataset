@@ -1,0 +1,205 @@
+# scenario   : 035S
+# project    : elasticsearch-river-mongodb
+# commit     : 6b6ce8e851c6613213c4508c3f277a80649e0c7b
+# class name : org.elasticsearch.river.mongodb.MongoDBRiverDefinition
+# method name: parseSettings(String, String, RiverSettings, ScriptService)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):475:         logger.info("Parse river settings for {}", riverName);
+source@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):500:                         logger.info("Server: " + mongoHost + " - " + mongoPort);
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):526:             .socketKeepAlive(true);
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):534:                 builder.connectTimeout(XContentMapValues.nodeIntegerValue(mongoOptionsSettings.get(CONNECT_TIMEOUT),
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):535:                         DEFAULT_CONNECT_TIMEOUT));
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):536:                 builder.socketTimeout(XContentMapValues.nodeIntegerValue(mongoOptionsSettings.get(SOCKET_TIMEOUT), DEFAULT_SOCKET_TIMEOUT));
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):538:                 String isMongos = XContentMapValues.nodeStringValue(mongoOptionsSettings.get(IS_MONGOS_FIELD), null);
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):539:                 if (isMongos != null) {
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):540:                     builder.isMongos(Boolean.valueOf(isMongos));
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):541:                 }
+source@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):561:                     logger.debug("parentTypesSettings: " + parentTypesSettings);
+source@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):567:                             logger.debug("Field: " + field);
+source@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):602:                     logger.debug("includeFieldsSettings: " + includeFieldsSettings);
+source@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):620:                     logger.debug("excludeFieldsSettings: " + excludeFieldsSettings);
+sink@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):646:                                     initalTimestampSettings.get(INITIAL_TIMESTAMP_SCRIPT_FIELD).toString(), ScriptService.ScriptType.INLINE, Maps.newHashMap());
+source@org.elasticsearch.river.mongodb.MongoDBRiverDefinition.parseSettings(String, String, RiverSettings, ScriptService):655:                         logger.warn("Could set initial timestamp", t, new Object());
+
+# same region in merge.java (scenario update):
+merge:475:         logger.trace("Parse river settings for {}", riverName);
+merge:476:         Preconditions.checkNotNull(riverName, "No riverName specified");
+merge:477:         Preconditions.checkNotNull(riverIndexName, "No riverIndexName specified");
+merge:478:         Preconditions.checkNotNull(settings, "No settings specified");
+merge:479: 
+merge:480:         Builder builder = new Builder();
+merge:481:         builder.riverName(riverName);
+merge:482:         builder.riverIndexName(riverIndexName);
+merge:483: 
+merge:484:         List<ServerAddress> mongoServers = new ArrayList<ServerAddress>();
+merge:485:         String mongoHost;
+merge:486:         int mongoPort;
+merge:487: 
+merge:488:         if (settings.settings().containsKey(MongoDBRiver.TYPE)) {
+merge:489:             Map<String, Object> mongoSettings = (Map<String, Object>) settings.settings().get(MongoDBRiver.TYPE);
+merge:490:             if (mongoSettings.containsKey(SERVERS_FIELD)) {
+merge:491:                 Object mongoServersSettings = mongoSettings.get(SERVERS_FIELD);
+merge:492:                 logger.trace("mongoServersSettings: " + mongoServersSettings);
+merge:493:                 boolean array = XContentMapValues.isArray(mongoServersSettings);
+merge:494: 
+merge:495:                 if (array) {
+merge:496:                     ArrayList<Map<String, Object>> feeds = (ArrayList<Map<String, Object>>) mongoServersSettings;
+merge:497:                     for (Map<String, Object> feed : feeds) {
+merge:498:                         mongoHost = XContentMapValues.nodeStringValue(feed.get(HOST_FIELD), null);
+merge:499:                         mongoPort = XContentMapValues.nodeIntegerValue(feed.get(PORT_FIELD), DEFAULT_DB_PORT);
+merge:500:                         logger.trace("Server: " + mongoHost + " - " + mongoPort);
+merge:501:                         try {
+merge:502:                             mongoServers.add(new ServerAddress(mongoHost, mongoPort));
+merge:503:                         } catch (UnknownHostException uhEx) {
+merge:504:                             logger.warn("Cannot add mongo server {}:{}", uhEx, mongoHost, mongoPort);
+merge:505:                         }
+merge:506:                     }
+merge:507:                 }
+merge:508:             } else {
+merge:509:                 mongoHost = XContentMapValues.nodeStringValue(mongoSettings.get(HOST_FIELD), DEFAULT_DB_HOST);
+merge:510:                 mongoPort = XContentMapValues.nodeIntegerValue(mongoSettings.get(PORT_FIELD), DEFAULT_DB_PORT);
+merge:511:                 try {
+merge:512:                     mongoServers.add(new ServerAddress(mongoHost, mongoPort));
+merge:513:                 } catch (UnknownHostException uhEx) {
+merge:514:                     logger.warn("Cannot add mongo server {}:{}", uhEx, mongoHost, mongoPort);
+merge:515:                 }
+merge:516:             }
+merge:517:             builder.mongoServers(mongoServers);
+merge:518: 
+merge:519:             MongoClientOptions.Builder mongoClientOptionsBuilder = MongoClientOptions.builder()/*
+merge:520:                                                                                                 * .
+merge:521:                                                                                                 * autoConnectRetry
+merge:522:                                                                                                 * (
+merge:523:                                                                                                 * true
+merge:524:                                                                                                 * )
+merge:525:                                                                                                 */
+merge:526:             .socketKeepAlive(true);
+merge:527: 
+merge:528:             // MongoDB options
+merge:529:             if (mongoSettings.containsKey(OPTIONS_FIELD)) {
+merge:530:                 Map<String, Object> mongoOptionsSettings = (Map<String, Object>) mongoSettings.get(OPTIONS_FIELD);
+merge:531:                 logger.trace("mongoOptionsSettings: " + mongoOptionsSettings);
+merge:532:                 builder.mongoSecondaryReadPreference(XContentMapValues.nodeBooleanValue(
+merge:533:                         mongoOptionsSettings.get(SECONDARY_READ_PREFERENCE_FIELD), false));
+merge:534:                 builder.connectTimeout(XContentMapValues.nodeIntegerValue(mongoOptionsSettings.get(CONNECT_TIMEOUT),
+merge:535:                         DEFAULT_CONNECT_TIMEOUT));
+merge:536:                 builder.socketTimeout(XContentMapValues.nodeIntegerValue(mongoOptionsSettings.get(SOCKET_TIMEOUT), DEFAULT_SOCKET_TIMEOUT));
+merge:537:                 builder.dropCollection(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(DROP_COLLECTION_FIELD), false));
+merge:538:                 String isMongos = XContentMapValues.nodeStringValue(mongoOptionsSettings.get(IS_MONGOS_FIELD), null);
+merge:539:                 if (isMongos != null) {
+merge:540:                     builder.isMongos(Boolean.valueOf(isMongos));
+merge:541:                 }
+merge:542:                 builder.mongoUseSSL(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(SSL_CONNECTION_FIELD), false));
+merge:543:                 builder.mongoSSLVerifyCertificate(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(SSL_VERIFY_CERT_FIELD), true));
+merge:544:                 builder.advancedTransformation(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(ADVANCED_TRANSFORMATION_FIELD),
+merge:545:                         false));
+merge:546:                 builder.skipInitialImport(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(SKIP_INITIAL_IMPORT_FIELD), false));
+merge:547: 
+merge:548:                 mongoClientOptionsBuilder.connectTimeout(builder.connectTimeout).socketTimeout(builder.socketTimeout);
+merge:549: 
+merge:550:                 if (builder.mongoSecondaryReadPreference) {
+merge:551:                     mongoClientOptionsBuilder.readPreference(ReadPreference.secondaryPreferred());
+merge:552:                 }
+merge:553: 
+merge:554:                 if (builder.mongoUseSSL) {
+merge:555:                     mongoClientOptionsBuilder.socketFactory(getSSLSocketFactory());
+merge:556:                 }
+merge:557: 
+merge:558:                 if (mongoOptionsSettings.containsKey(PARENT_TYPES_FIELD)) {
+merge:559:                     Set<String> parentTypes = new HashSet<String>();
+merge:560:                     Object parentTypesSettings = mongoOptionsSettings.get(PARENT_TYPES_FIELD);
+merge:561:                     logger.trace("parentTypesSettings: " + parentTypesSettings);
+merge:562:                     boolean array = XContentMapValues.isArray(parentTypesSettings);
+merge:563: 
+merge:564:                     if (array) {
+merge:565:                         ArrayList<String> fields = (ArrayList<String>) parentTypesSettings;
+merge:566:                         for (String field : fields) {
+merge:567:                             logger.trace("Field: " + field);
+merge:568:                             parentTypes.add(field);
+merge:569:                         }
+merge:570:                     }
+merge:571: 
+merge:572:                     builder.parentTypes(parentTypes);
+merge:573:                 }
+merge:574: 
+merge:575:                 if (mongoOptionsSettings.containsKey(STORE_STATISTICS_FIELD)) {
+merge:576:                     Object storeStatistics = mongoOptionsSettings.get(STORE_STATISTICS_FIELD);
+merge:577:                     boolean object = XContentMapValues.isObject(storeStatistics);
+merge:578:                     if (object) {
+merge:579:                         Map<String, Object> storeStatisticsSettings = (Map<String, Object>) storeStatistics;
+merge:580:                         builder.storeStatistics(true);
+merge:581:                         builder.statisticsIndexName(XContentMapValues.nodeStringValue(storeStatisticsSettings.get(INDEX_OBJECT), riverName
+merge:582:                                 + "-stats"));
+merge:583:                         builder.statisticsTypeName(XContentMapValues.nodeStringValue(storeStatisticsSettings.get(TYPE_FIELD), "stats"));
+merge:584:                     } else {
+merge:585:                         builder.storeStatistics(XContentMapValues.nodeBooleanValue(storeStatistics, false));
+merge:586:                         if (builder.storeStatistics) {
+merge:587:                             builder.statisticsIndexName(riverName + "-stats");
+merge:588:                             builder.statisticsTypeName("stats");
+merge:589:                         }
+merge:590:                     }
+merge:591:                 }
+merge:592:                 // builder.storeStatistics(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(STORE_STATISTICS_FIELD),
+merge:593:                 // false));
+merge:594:                 builder.importAllCollections(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(IMPORT_ALL_COLLECTIONS_FIELD),
+merge:595:                         false));
+merge:596:                 builder.disableIndexRefresh(XContentMapValues.nodeBooleanValue(mongoOptionsSettings.get(DISABLE_INDEX_REFRESH_FIELD), false));
+merge:597:                 builder.includeCollection(XContentMapValues.nodeStringValue(mongoOptionsSettings.get(INCLUDE_COLLECTION_FIELD), ""));
+merge:598: 
+merge:599:                 if (mongoOptionsSettings.containsKey(INCLUDE_FIELDS_FIELD)) {
+merge:600:                     Set<String> includeFields = new HashSet<String>();
+merge:601:                     Object includeFieldsSettings = mongoOptionsSettings.get(INCLUDE_FIELDS_FIELD);
+merge:602:                     logger.trace("includeFieldsSettings: " + includeFieldsSettings);
+merge:603:                     boolean array = XContentMapValues.isArray(includeFieldsSettings);
+merge:604: 
+merge:605:                     if (array) {
+merge:606:                         ArrayList<String> fields = (ArrayList<String>) includeFieldsSettings;
+merge:607:                         for (String field : fields) {
+merge:608:                             logger.trace("Field: " + field);
+merge:609:                             includeFields.add(field);
+merge:610:                         }
+merge:611:                     }
+merge:612: 
+merge:613:                     if (!includeFields.contains(MongoDBRiver.MONGODB_ID_FIELD)) {
+merge:614:                         includeFields.add(MongoDBRiver.MONGODB_ID_FIELD);
+merge:615:                     }
+merge:616:                     builder.includeFields(includeFields);
+merge:617:                 } else if (mongoOptionsSettings.containsKey(EXCLUDE_FIELDS_FIELD)) {
+merge:618:                     Set<String> excludeFields = new HashSet<String>();
+merge:619:                     Object excludeFieldsSettings = mongoOptionsSettings.get(EXCLUDE_FIELDS_FIELD);
+merge:620:                     logger.trace("excludeFieldsSettings: " + excludeFieldsSettings);
+merge:621:                     boolean array = XContentMapValues.isArray(excludeFieldsSettings);
+merge:622: 
+merge:623:                     if (array) {
+merge:624:                         ArrayList<String> fields = (ArrayList<String>) excludeFieldsSettings;
+merge:625:                         for (String field : fields) {
+merge:626:                             logger.trace("Field: " + field);
+merge:627:                             excludeFields.add(field);
+merge:628:                         }
+merge:629:                     }
+merge:630: 
+merge:631:                     builder.excludeFields(excludeFields);
+merge:632:                 }
+merge:633: 
+merge:634:                 if (mongoOptionsSettings.containsKey(INITIAL_TIMESTAMP_FIELD)) {
+merge:635:                     BSONTimestamp timeStamp = null;
+merge:636:                     try {
+merge:637:                         Map<String, Object> initalTimestampSettings = (Map<String, Object>) mongoOptionsSettings
+merge:638:                                 .get(INITIAL_TIMESTAMP_FIELD);
+merge:639:                         String scriptType = "js";
+merge:640:                         if (initalTimestampSettings.containsKey(INITIAL_TIMESTAMP_SCRIPT_TYPE_FIELD)) {
+merge:641:                             scriptType = initalTimestampSettings.get(INITIAL_TIMESTAMP_SCRIPT_TYPE_FIELD).toString();
+merge:642:                         }
+merge:643:                         if (initalTimestampSettings.containsKey(INITIAL_TIMESTAMP_SCRIPT_FIELD)) {
+merge:644: 
+merge:645:                             ExecutableScript scriptExecutable = scriptService.executable(scriptType,
+merge:646:                                     initalTimestampSettings.get(INITIAL_TIMESTAMP_SCRIPT_FIELD).toString(), ScriptService.ScriptType.INLINE, Maps.newHashMap());
+merge:647:                             Object ctx = scriptExecutable.run();
+merge:648:                             logger.trace("initialTimestamp script returned: {}", ctx);
+merge:649:                             if (ctx != null) {
+merge:650:                                 long timestamp = Long.parseLong(ctx.toString());
+merge:651:                                 timeStamp = new BSONTimestamp((int) (new Date(timestamp).getTime() / 1000), 1);
+merge:652:                             }
+merge:653:                         }
+merge:654:                     } catch (Throwable t) {
+merge:655:                         logger.error("Could not set initial timestamp", t);

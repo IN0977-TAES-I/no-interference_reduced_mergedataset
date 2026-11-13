@@ -1,0 +1,31 @@
+# scenario   : 050S
+# project    : titan
+# commit     : 04edd7f0e7eab2e8255a497922e34dc707d84c19
+# class name : com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx
+# method name: StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction)
+# side       : left (left-right-lines.csv)
+sink@com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx.StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction):182:         indexCache = CacheBuilder.newBuilder().weigher(new Weigher<IndexQuery, List<Object>>() {
+sink@com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx.StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction):183:             @Override
+source@com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx.StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction):197:      */
+source@com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx.StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction):198: 
+source@com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx.StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction):199:     private void verifyWriteAccess(TitanVertex... vertices) {
+
+# same region in merge.java (scenario update):
+merge:182:         externalVertexRetriever = new VertexConstructor(config.hasVerifyExternalVertexExistence());
+merge:183:         internalVertexRetriever = new VertexConstructor(config.hasVerifyInternalVertexExistence());
+merge:184: 
+merge:185:         vertexCache = new LRUVertexCache(config.getVertexCacheSize(), concurrencyLevel);
+merge:186:         indexCache = CacheBuilder.newBuilder().weigher(new Weigher<IndexQuery, List<Object>>() {
+merge:187:             @Override
+merge:188:             public int weigh(IndexQuery q, List<Object> r) {
+merge:189:                 return 2 + r.size();
+merge:190:             }
+merge:191:         }).concurrencyLevel(concurrencyLevel).maximumWeight(config.getIndexCacheWeight()).build();
+merge:192: 
+merge:193:         uniqueLocks = UNINITIALIZED_LOCKS;
+merge:194:         deletedRelations = EMPTY_DELETED_RELATIONS;
+merge:195: 
+merge:196:         this.isOpen = true;
+merge:197:         if (null != config.getMetricsPrefix()) {
+merge:198:             MetricManager.INSTANCE.getCounter(config.getMetricsPrefix(), "tx", "begin").inc();
+merge:199:         }

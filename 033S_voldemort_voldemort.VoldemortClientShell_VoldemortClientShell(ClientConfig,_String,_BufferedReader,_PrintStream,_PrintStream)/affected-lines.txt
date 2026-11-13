@@ -1,0 +1,17 @@
+# scenario   : 033S
+# project    : voldemort
+# commit     : b30fdfebe30c9b6e37b9fbc3fec0ff74cd19f997
+# class name : voldemort.VoldemortClientShell
+# method name: VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream)
+# side       : left (left-right-lines.csv)
+sink@voldemort.VoldemortClientShell.VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream):123:             safeClose();
+source@voldemort.VoldemortClientShell.VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream):127: 
+source@voldemort.VoldemortClientShell.VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream):128:     // getter method for the Store
+
+# same region in merge.java (scenario update):
+merge:123:             adminClient = new AdminClient(bootstrapUrl, new AdminClientConfig(), clientConfig);
+merge:124: 
+merge:125:             storeDef = StoreUtils.getStoreDef(factory.getStoreDefs(), storeName);
+merge:126: 
+merge:127: 	    Cluster cluster = adminClient.getAdminClientCluster();
+merge:128: 	    routingStrategy = new RoutingStrategyFactory().updateRoutingStrategy(storeDef, cluster);

@@ -1,0 +1,26 @@
+# class name : org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest
+# method name: testSynonymsAnalysis()
+# variables referenced in the affected region:
+Files	external/inherited	roles=sink
+IndexMetaData	external/inherited	roles=sink
+InputStream	external/inherited	roles=sink
+Path	external/inherited	roles=sink
+Settings	external/inherited	roles=source
+Version	external/inherited	roles=sink
+config	declared-in-file	roles=sink
+home	declared-in-file	roles=source,sink
+settings	declared-in-file	roles=source
+synonyms	declared-in-file	roles=sink
+synonymsWordnet	declared-in-file	roles=sink
+
+# per-line detail:
+sink:65	InputStream,synonyms
+sink:66	InputStream,synonymsWordnet
+sink:67	Path,home
+sink:68	Path,config,home
+sink:69	Files,config
+sink:70	Files,synonyms,config
+sink:71	Files,synonymsWordnet,config
+source:73	Settings,settings
+source:75	home
+sink:76	IndexMetaData,Version

@@ -1,0 +1,7 @@
+# class name : org.springframework.boot.context.web.SpringBootServletInitializer
+# method name: createRootApplicationContext(ServletContext)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:87	
+source:88	

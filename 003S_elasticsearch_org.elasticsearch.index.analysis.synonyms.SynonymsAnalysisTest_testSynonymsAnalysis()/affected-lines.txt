@@ -1,0 +1,30 @@
+# scenario   : 003S
+# project    : elasticsearch
+# commit     : f3d63095dbcc985e24162fbac4ee0d6914dc757d
+# class name : org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest
+# method name: testSynonymsAnalysis()
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():65:         InputStream synonyms = getClass().getResourceAsStream("synonyms.txt");
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():66:         InputStream synonymsWordnet = getClass().getResourceAsStream("synonyms_wordnet.txt");
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():67:         Path home = createTempDir();
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():68:         Path config = home.resolve("config");
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():69:         Files.createDirectory(config);
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():70:         Files.copy(synonyms, config.resolve("synonyms.txt"));
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():71:         Files.copy(synonymsWordnet, config.resolve("synonyms_wordnet.txt"));
+source@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():73:         Settings settings = settingsBuilder().
+source@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():75:                 .put("path.home", home)
+sink@org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest.testSynonymsAnalysis():76:                 .put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT).build();
+
+# same region in merge.java (scenario update):
+merge:65:         InputStream synonyms = getClass().getResourceAsStream("synonyms.txt");
+merge:66:         InputStream synonymsWordnet = getClass().getResourceAsStream("synonyms_wordnet.txt");
+merge:67:         Path home = createTempDir();
+merge:68:         Path config = home.resolve("config");
+merge:69:         Files.createDirectory(config);
+merge:70:         Files.copy(synonyms, config.resolve("synonyms.txt"));
+merge:71:         Files.copy(synonymsWordnet, config.resolve("synonyms_wordnet.txt"));
+merge:72: 
+merge:73:         String json = "/org/elasticsearch/index/analysis/synonyms/synonyms.json";
+merge:74:         Settings settings = settingsBuilder().
+merge:75:             loadFromStream(json, getClass().getResourceAsStream(json))
+merge:76:                 .put("path.home", home)

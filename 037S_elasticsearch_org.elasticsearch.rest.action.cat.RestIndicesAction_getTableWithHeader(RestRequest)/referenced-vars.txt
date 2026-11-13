@@ -1,0 +1,12 @@
+# class name : org.elasticsearch.rest.action.cat.RestIndicesAction
+# method name: getTableWithHeader(RestRequest)
+# variables referenced in the affected region:
+table	declared-in-file	roles=source
+
+# per-line detail:
+source:138	table
+source:141	
+source:144	table
+source:147	table
+source:150	table
+source:153	table

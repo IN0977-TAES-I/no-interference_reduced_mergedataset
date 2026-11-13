@@ -1,0 +1,11 @@
+# class name : org.elasticsearch.action.delete.TransportDeleteAction
+# method name: executeDeleteRequestOnPrimary(DeleteRequest, IndexShard)
+# variables referenced in the affected region:
+Fields	external/inherited	roles=source,sink
+builder	declared-in-file	roles=source
+id	declared-in-file	roles=sink
+shardId	declared-in-file	roles=source
+
+# per-line detail:
+sink:136	Fields,id
+source:140	builder,Fields,shardId

@@ -1,0 +1,31 @@
+# scenario   : 020S
+# project    : pushy
+# commit     : 58901c846e4f0874977c5aabbc34bcb4de3670e0
+# class name : com.relayrides.pushy.apns.PushManager
+# method name: handleConnectionFailure(ApnsConnection<T>, Throwable)
+# side       : left (left-right-lines.csv)
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):476: 			this.connectionPool.addConnection(connection);
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):478: 	}
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):481: 	 * (non-Javadoc)
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):482: 	 * @see com.relayrides.pushy.apns.ApnsConnectionListener#handleConnectionFailure(com.relayrides.pushy.apns.ApnsConnection, java.lang.Throwable)
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):483: 	 */
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):484: 	public void handleConnectionFailure(final ApnsConnection<T> connection, final Throwable cause) {
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):485: 
+source@com.relayrides.pushy.apns.PushManager.handleConnectionFailure(ApnsConnection<T>, Throwable):490: 			// Handle connection failures in a separate thread in case a handler takes a long time to run
+
+# same region in merge.java (scenario update):
+merge:476: 		final PushManager<T> pushManager = this;
+merge:477: 
+merge:478: 		for (final FailedConnectionListener<? super T> listener : this.failedConnectionListeners) {
+merge:479: 
+merge:480: 			// Handle connection failures in a separate thread in case a handler takes a long time to run
+merge:481: 			this.listenerExecutorService.submit(new Runnable() {
+merge:482: 				public void run() {
+merge:483: 					listener.handleFailedConnection(pushManager, cause);
+merge:484: 				}
+merge:485: 			});
+merge:486: 		}
+merge:487: 
+merge:488: 		// As long as we're not shut down, keep trying to open a replacement connection.
+merge:489: 		if (!this.isShutDown()) {
+merge:490: 			this.startNewConnection();

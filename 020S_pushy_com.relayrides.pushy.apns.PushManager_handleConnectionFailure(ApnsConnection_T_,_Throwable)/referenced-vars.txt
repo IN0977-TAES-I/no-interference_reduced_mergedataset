@@ -1,0 +1,22 @@
+# class name : com.relayrides.pushy.apns.PushManager
+# method name: handleConnectionFailure(ApnsConnection<T>, Throwable)
+# variables referenced in the affected region:
+ApnsConnection	external/inherited	roles=sink
+Javadoc	external/inherited	roles=sink
+Throwable	external/inherited	roles=sink
+cause	external/inherited	roles=sink
+com	external/inherited	roles=sink
+connection	declared-in-file	roles=sink
+java	external/inherited	roles=sink
+non	external/inherited	roles=sink
+see	external/inherited	roles=sink
+
+# per-line detail:
+sink:476	connection
+sink:478	
+sink:481	non,Javadoc
+sink:482	see,com,com,java
+sink:483	
+sink:484	ApnsConnection,connection,Throwable,cause
+sink:485	
+source:490	

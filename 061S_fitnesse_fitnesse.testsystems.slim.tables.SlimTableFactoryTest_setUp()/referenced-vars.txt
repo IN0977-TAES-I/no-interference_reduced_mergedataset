@@ -1,0 +1,11 @@
+# class name : fitnesse.testsystems.slim.tables.SlimTableFactoryTest
+# method name: setUp()
+# variables referenced in the affected region:
+DynamicDecisionTable	external/inherited	roles=sink
+ScenarioTable	external/inherited	roles=source
+map	declared-in-file	roles=source,sink
+
+# per-line detail:
+sink:31	map,DynamicDecisionTable
+sink:32	map,DynamicDecisionTable
+source:38	map,ScenarioTable

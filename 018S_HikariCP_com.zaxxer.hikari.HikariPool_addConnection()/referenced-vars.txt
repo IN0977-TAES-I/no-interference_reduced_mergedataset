@@ -1,0 +1,27 @@
+# class name : com.zaxxer.hikari.HikariPool
+# method name: addConnection()
+# variables referenced in the affected region:
+Class	external/inherited	roles=sink
+Properties	external/inherited	roles=source
+dataSourceProperties	declared-in-file	roles=source
+driverClass	declared-in-file	roles=sink
+driverClassName	external/inherited	roles=sink
+idleTimeoutMs	external/inherited	roles=sink
+propertyName	external/inherited	roles=source
+value	external/inherited	roles=source
+
+# per-line detail:
+source:339	dataSourceProperties,propertyName,value
+source:340	
+source:341	
+source:342	Properties
+source:343	
+source:344	dataSourceProperties
+source:345	
+source:346	
+source:348	
+sink:356	Class,driverClass,driverClassName
+source:362	
+sink:365	
+sink:372	idleTimeoutMs
+sink:374	idleTimeoutMs

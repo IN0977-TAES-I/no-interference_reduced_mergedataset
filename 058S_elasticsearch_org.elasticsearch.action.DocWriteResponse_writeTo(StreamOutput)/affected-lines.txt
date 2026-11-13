@@ -1,0 +1,12 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.action.DocWriteResponse
+# method name: writeTo(StreamOutput)
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.action.DocWriteResponse.writeTo(StreamOutput):140:         builder.field(Fields._SHARD_ID, shardId.id());
+source@org.elasticsearch.action.DocWriteResponse.writeTo(StreamOutput):141:         if (getSeqNo() >= 0) {
+
+# same region in merge.java (scenario update):
+merge:140:         out.writeZLong(seqNo);
+merge:141:         out.writeBoolean(forcedRefresh);

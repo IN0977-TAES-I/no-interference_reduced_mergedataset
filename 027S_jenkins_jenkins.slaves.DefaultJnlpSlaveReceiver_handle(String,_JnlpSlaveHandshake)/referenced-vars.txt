@@ -1,0 +1,12 @@
+# class name : jenkins.slaves.DefaultJnlpSlaveReceiver
+# method name: handle(String, JnlpSlaveHandshake)
+# variables referenced in the affected region:
+String	external/inherited	roles=source
+cookie	declared-in-file	roles=source
+response	declared-in-file	roles=source
+
+# per-line detail:
+sink:52	
+source:52	
+source:56	String,cookie
+source:57	response,cookie

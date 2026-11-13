@@ -1,0 +1,55 @@
+# scenario   : 035S
+# project    : elasticsearch-river-mongodb
+# commit     : 6b6ce8e851c6613213c4508c3f277a80649e0c7b
+# class name : org.elasticsearch.river.mongodb.Slurper
+# method name: run()
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.river.mongodb.Slurper.run():105: 
+source@org.elasticsearch.river.mongodb.Slurper.run():145:     private final boolean importAllCollections;
+source@org.elasticsearch.river.mongodb.Slurper.run():148:     private final String indexName;
+
+# same region in merge.java (scenario update):
+merge:105: 
+merge:106:     // river
+merge:107:     private final String riverName;
+merge:108:     private final String riverIndexName;
+merge:109: 
+merge:110:     // mongodb.servers
+merge:111:     private final List<ServerAddress> mongoServers = new ArrayList<ServerAddress>();
+merge:112:     // mongodb
+merge:113:     private final String mongoDb;
+merge:114:     private final String mongoCollection;
+merge:115:     private final boolean mongoGridFS;
+merge:116:     private final BasicDBObject mongoOplogFilter;
+merge:117:     private final BasicDBObject mongoCollectionFilter;
+merge:118:     // mongodb.credentials
+merge:119:     private final String mongoAdminUser;
+merge:120:     private final String mongoAdminPassword;
+merge:121:     private final String mongoLocalUser;
+merge:122:     private final String mongoLocalPassword;
+merge:123: 
+merge:124:     // mongodb.options
+merge:125:     private final MongoClientOptions mongoClientOptions;
+merge:126:     private final int connectTimeout;
+merge:127:     private final int socketTimeout;
+merge:128:     private final boolean mongoSecondaryReadPreference;
+merge:129:     private final boolean mongoUseSSL;
+merge:130:     private final boolean mongoSSLVerifyCertificate;
+merge:131:     private final boolean dropCollection;
+merge:132:     private final Boolean isMongos;
+merge:133:     private final Set<String> excludeFields;
+merge:134:     private final Set<String> includeFields;
+merge:135:     private final String includeCollection;
+merge:136:     private final Timestamp<?> initialTimestamp;
+merge:137:     private final String script;
+merge:138:     private final String scriptType;
+merge:139:     private final boolean advancedTransformation;
+merge:140:     private final boolean skipInitialImport;
+merge:141:     private final Set<String> parentTypes;
+merge:142:     private final boolean storeStatistics;
+merge:143:     private final String statisticsIndexName;
+merge:144:     private final String statisticsTypeName;
+merge:145:     private final boolean importAllCollections;
+merge:146:     private final boolean disableIndexRefresh;
+merge:147:     // index
+merge:148:     private final String indexName;

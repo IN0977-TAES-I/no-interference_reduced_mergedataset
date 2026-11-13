@@ -1,0 +1,20 @@
+# scenario   : 018S
+# project    : HikariCP
+# commit     : 1bca94af9ec625f21d1b58ff10efb5be71ab87a6
+# class name : com.zaxxer.hikari.HikariConfig
+# method name: validate()
+# side       : left (left-right-lines.csv)
+sink@com.zaxxer.hikari.HikariConfig.validate():577:         }
+sink@com.zaxxer.hikari.HikariConfig.validate():578: 
+sink@com.zaxxer.hikari.HikariConfig.validate():579:         if (connectionCustomizerClassName != null && connectionCustomizer == null)
+sink@com.zaxxer.hikari.HikariConfig.validate():580:         {
+sink@com.zaxxer.hikari.HikariConfig.validate():581:             try
+sink@com.zaxxer.hikari.HikariConfig.validate():582:             {
+
+# same region in merge.java (scenario update):
+merge:577:         if (jdbcUrl != null)
+merge:578:         {
+merge:579:             logger.info("Really, a JDBC URL?  It's time to party like it's 1999!");
+merge:580:             dataSource = new DriverDataSource(jdbcUrl, dataSourceProperties);
+merge:581:         }
+merge:582:         else if (dataSource == null && dataSourceClassName == null)

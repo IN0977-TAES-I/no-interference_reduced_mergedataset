@@ -1,0 +1,14 @@
+# class name : org.elasticsearch.index.query.support.NestedInnerQueryParseSupport
+# method name: setPathLevel()
+# variables referenced in the affected region:
+nestedObjectMapper	declared-in-file	roles=source
+objectMapper	declared-in-file	roles=sink
+parentObjectMapper	declared-in-file	roles=source
+shardContext	declared-in-file	roles=source
+
+# per-line detail:
+sink:193	objectMapper
+sink:195	
+sink:197	
+source:199	parentObjectMapper,shardContext,nestedObjectMapper
+sink:200	

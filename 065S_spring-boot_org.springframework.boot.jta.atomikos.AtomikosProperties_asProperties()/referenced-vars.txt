@@ -1,0 +1,12 @@
+# class name : org.springframework.boot.jta.atomikos.AtomikosProperties
+# method name: asProperties()
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:317	
+sink:323	
+sink:324	
+sink:325	
+sink:326	
+sink:327	
+sink:328	

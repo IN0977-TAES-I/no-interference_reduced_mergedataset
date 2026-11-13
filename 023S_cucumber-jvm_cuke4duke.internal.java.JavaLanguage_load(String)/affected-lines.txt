@@ -1,0 +1,16 @@
+# scenario   : 023S
+# project    : cucumber-jvm
+# commit     : 4505c156b6267c1b760deec570ddbfe047b42aa9
+# class name : cuke4duke.internal.java.JavaLanguage
+# method name: load(String)
+# side       : left (left-right-lines.csv)
+source@cuke4duke.internal.java.JavaLanguage.load(String):36:         registerStepDefinitionsFor(clazz);
+sink@cuke4duke.internal.java.JavaLanguage.load(String):38:             objectFactory.addClass(clazz);
+sink@cuke4duke.internal.java.JavaLanguage.load(String):40:     }
+
+# same region in merge.java (scenario update):
+merge:36:         Class<?> clazz = loadClass(java_file);
+merge:37:         registerStepDefinitionsFor(clazz);
+merge:38:         if(!Modifier.isAbstract(clazz.getModifiers())) {
+merge:39:             objectFactory.addClass(clazz);
+merge:40:         }

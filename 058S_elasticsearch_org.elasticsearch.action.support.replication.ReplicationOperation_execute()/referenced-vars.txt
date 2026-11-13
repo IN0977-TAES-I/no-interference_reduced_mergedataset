@@ -1,0 +1,21 @@
+# class name : org.elasticsearch.action.support.replication.ReplicationOperation
+# method name: execute()
+# variables referenced in the affected region:
+IOException	external/inherited	roles=source
+RestStatus	external/inherited	roles=source,sink
+StreamOutput	external/inherited	roles=source
+in	external/inherited	roles=source,sink
+out	external/inherited	roles=source
+seqNo	declared-in-file	roles=source,sink
+version	declared-in-file	roles=source
+
+# per-line detail:
+sink:98	RestStatus
+source:98	RestStatus
+source:99	
+source:101	
+source:108	version,in
+sink:109	seqNo,in
+source:110	
+source:113	StreamOutput,out,IOException
+source:119	out,seqNo

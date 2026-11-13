@@ -1,0 +1,7 @@
+# class name : org.elasticsearch.index.engine.InternalEngineTests
+# method name: testRecoverFromForeignTranslog()
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:2091	
+source:2124	

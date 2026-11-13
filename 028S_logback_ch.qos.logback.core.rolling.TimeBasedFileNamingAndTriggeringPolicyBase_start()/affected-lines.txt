@@ -1,0 +1,26 @@
+# scenario   : 028S
+# project    : logback
+# commit     : 542843fd04a793fb9e0eea0c84d199e66d7c15af
+# class name : ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase
+# method name: start()
+# side       : left (left-right-lines.csv)
+sink@ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase.start():45:     if (dtc == null) {
+source@ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase.start():52:     rc.init(dtc.getDatePattern());
+source@ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase.start():53:     addInfo("The date pattern is '" + dtc.getDatePattern()
+source@ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase.start():54:             + "' from file name pattern '" + tbrp.fileNamePattern.getPattern()
+source@ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase.start():55:             + "'.");
+source@ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase.start():56:     rc.printPeriodicity(this);
+
+# same region in merge.java (scenario update):
+merge:45:     DateTokenConverter<Object> dtc = tbrp.fileNamePattern.getPrimaryDateTokenConverter();
+merge:46:     if (dtc == null) {
+merge:47:       throw new IllegalStateException("FileNamePattern ["
+merge:48:               + tbrp.fileNamePattern.getPattern()
+merge:49:               + "] does not contain a valid DateToken");
+merge:50:     }
+merge:51: 
+merge:52:     if (dtc.getTimeZone() != null) {
+merge:53:       rc = new RollingCalendar(dtc.getTimeZone(), Locale.getDefault());
+merge:54:     } else {
+merge:55:       rc = new RollingCalendar();
+merge:56:     }

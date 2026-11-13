@@ -1,0 +1,18 @@
+# class name : me.prettyprint.cassandra.connection.client.HSaslThriftClient
+# method name: open()
+# variables referenced in the affected region:
+TSSLTransportFactory	external/inherited	roles=sink
+cassandraHost	external/inherited	roles=source,sink
+params	declared-in-file	roles=sink
+servicePrincipalName	declared-in-file	roles=sink
+socket	declared-in-file	roles=sink
+timeout	external/inherited	roles=sink
+transport	declared-in-file	roles=sink
+
+# per-line detail:
+sink:94	params
+sink:95	socket,cassandraHost,cassandraHost,timeout
+sink:96	
+sink:97	socket,TSSLTransportFactory,cassandraHost,cassandraHost,timeout,params
+sink:111	transport,socket,servicePrincipalName
+source:122	cassandraHost

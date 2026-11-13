@@ -1,0 +1,37 @@
+# scenario   : 048S
+# project    : hector
+# commit     : a33a46506656a39d1b0f7780973905665d3b6145
+# class name : me.prettyprint.cassandra.connection.client.HKerberosThriftClient
+# method name: open()
+# side       : left (left-right-lines.csv)
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():69:       // Thrift exceptions aren't very good in reporting, so we have to catch the exception here and
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():70:       // add details to it.
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():71:       log.debug("Unable to open transport to " + cassandraHost.getName());
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():72:       //clientMonitor.incCounter(Counter.CONNECT_ERROR);
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():73:       throw new HectorTransportException("Unable to open transport to " + cassandraHost.getName() +" , " +
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():74:           e.getLocalizedMessage(), e);
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():75:     }
+source@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():76:     
+sink@me.prettyprint.cassandra.connection.client.HKerberosThriftClient.open():88:   }
+
+# same region in merge.java (scenario update):
+merge:69:     TSocket socket;    
+merge:70:     try {
+merge:71:         socket = params == null ? 
+merge:72:                                 new TSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout)
+merge:73:                                 : TSSLTransportFactory.getClientSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout, params);
+merge:74:     } catch (TTransportException e) {
+merge:75:         throw new HectorTransportException("Could not get client socket: ", e);
+merge:76:     }
+merge:77:             
+merge:78:     if ( cassandraHost.getUseSocketKeepalive() ) {
+merge:79:       try {
+merge:80:         socket.getSocket().setKeepAlive(true);
+merge:81:       } catch (SocketException se) {
+merge:82:         throw new HectorTransportException("Could not set SO_KEEPALIVE on socket: ", se);
+merge:83:       }
+merge:84:     }
+merge:85: 
+merge:86:     // TODO (patricioe) What should I do with it ?
+merge:87:     // KerberosHelper.getSourcePrinciple(clientContext));
+merge:88:     transport = maybeWrapWithTFramedTransport(socket);

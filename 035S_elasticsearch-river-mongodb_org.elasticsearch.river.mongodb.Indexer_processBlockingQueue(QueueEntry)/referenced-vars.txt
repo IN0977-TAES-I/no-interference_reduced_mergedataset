@@ -1,0 +1,18 @@
+# class name : org.elasticsearch.river.mongodb.Indexer
+# method name: processBlockingQueue(QueueEntry)
+# variables referenced in the affected region:
+ArrayList	external/inherited	roles=source
+List	external/inherited	roles=source
+ServerAddress	external/inherited	roles=source
+String	external/inherited	roles=source
+indexName	declared-in-file	roles=source
+mongoServers	declared-in-file	roles=source
+skipInitialImport	declared-in-file	roles=source
+socketTimeout	declared-in-file	roles=sink
+
+# per-line detail:
+source:161	List,ServerAddress,mongoServers,ArrayList,ServerAddress
+sink:176	socketTimeout
+source:189	skipInitialImport
+source:198	String,indexName
+source:201	

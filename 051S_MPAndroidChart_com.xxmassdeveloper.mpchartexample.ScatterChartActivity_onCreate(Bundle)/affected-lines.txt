@@ -1,0 +1,43 @@
+# scenario   : 051S
+# project    : MPAndroidChart
+# commit     : af114d180da6ec5633d32c701ff5467f7629fcf3
+# class name : com.xxmassdeveloper.mpchartexample.ScatterChartActivity
+# method name: onCreate(Bundle)
+# side       : left (left-right-lines.csv)
+source@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onCreate(Bundle):57:                 entries.add(new BarEntry(j, (float) (Math.random() * range) + range / 4));
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onCreate(Bundle):63:         }
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onCreate(Bundle):77:            
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onCreate(Bundle):80:             for(int j = 0; j < count; j++) {        
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onCreate(Bundle):86:             ds.setScatterShape(shapes[i % shapes.length]);
+
+# same region in merge.java (scenario update):
+merge:57:             }
+merge:58:             
+merge:59:             BarDataSet ds = new BarDataSet(entries, getLabel(i));
+merge:60:             ds.setColors(ColorTemplate.VORDIPLOM_COLORS);
+merge:61:             sets.add(ds);
+merge:62:         }
+merge:63:         
+merge:64:         BarData d = new BarData(sets);
+merge:65:         d.setValueTypeface(tf);
+merge:66:         return d;
+merge:67:     }
+merge:68:     
+merge:69:     protected ScatterData generateScatterData(int dataSets, float range, int count) {
+merge:70:         
+merge:71:         ArrayList<IScatterDataSet> sets = new ArrayList<IScatterDataSet>();
+merge:72:         
+merge:73:         ScatterChart.ScatterShape[] shapes = ScatterChart.ScatterShape.getAllDefaultShapes();
+merge:74:         
+merge:75:         for(int i = 0; i < dataSets; i++) {
+merge:76:            
+merge:77:             ArrayList<Entry> entries = new ArrayList<Entry>();
+merge:78:             
+merge:79:             for(int j = 0; j < count; j++) {        
+merge:80:                 entries.add(new Entry(j, (float) (Math.random() * range) + range / 4));
+merge:81:             }
+merge:82:             
+merge:83:             ScatterDataSet ds = new ScatterDataSet(entries, getLabel(i));
+merge:84:             ds.setScatterShapeSize(12f);
+merge:85:             ds.setScatterShape(shapes[i % shapes.length]);
+merge:86:             ds.setColors(ColorTemplate.COLORFUL_COLORS);

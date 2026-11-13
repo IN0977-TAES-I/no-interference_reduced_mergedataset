@@ -1,0 +1,18 @@
+# scenario   : 040S
+# project    : libgdx
+# commit     : da27e2dae56be0a159e82231e5c3a5b83b099063
+# class name : com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
+# method name: newWindow(ApplicationListener, Lwjgl3WindowConfiguration)
+# side       : left (left-right-lines.csv)
+sink@com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.newWindow(ApplicationListener, Lwjgl3WindowConfiguration):318: 		appConfig.setWindowSizeLimits(config.windowMinWidth, config.windowMinHeight, config.windowMaxWidth, config.windowMaxHeight);
+source@com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.newWindow(ApplicationListener, Lwjgl3WindowConfiguration):325: 		Lwjgl3Window window = createWindow(appConfig, listener, windows.get(0).getWindowHandle());
+
+# same region in merge.java (scenario update):
+merge:318: 		appConfig.setWindowSizeLimits(config.windowMinWidth, config.windowMinHeight, config.windowMaxWidth, config.windowMaxHeight);
+merge:319: 		appConfig.setResizable(config.windowResizable);
+merge:320: 		appConfig.setDecorated(config.windowDecorated);
+merge:321: 		appConfig.setWindowListener(config.windowListener);
+merge:322: 		appConfig.setFullscreenMode(config.fullscreenMode);
+merge:323: 		appConfig.setTitle(config.title);
+merge:324: 		appConfig.setInitialBackgroundColor(config.initialBackgroundColor);
+merge:325: 		appConfig.setInitialVisible(config.initialVisible);

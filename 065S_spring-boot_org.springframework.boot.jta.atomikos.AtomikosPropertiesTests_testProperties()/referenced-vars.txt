@@ -1,0 +1,15 @@
+# class name : org.springframework.boot.jta.atomikos.AtomikosPropertiesTests
+# method name: testProperties()
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:49	
+sink:55	
+sink:56	
+sink:57	
+sink:58	
+sink:68	
+sink:74	
+sink:75	
+sink:76	
+sink:77	

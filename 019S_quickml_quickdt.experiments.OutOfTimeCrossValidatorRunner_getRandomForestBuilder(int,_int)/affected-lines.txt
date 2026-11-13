@@ -1,0 +1,12 @@
+# scenario   : 019S
+# project    : quickml
+# commit     : bae968d9a85c0501ba8842a6f88e7fc2c6b78693
+# class name : quickdt.experiments.OutOfTimeCrossValidatorRunner
+# method name: getRandomForestBuilder(int, int)
+# side       : left (left-right-lines.csv)
+source@quickdt.experiments.OutOfTimeCrossValidatorRunner.getRandomForestBuilder(int, int):42: 
+source@quickdt.experiments.OutOfTimeCrossValidatorRunner.getRandomForestBuilder(int, int):43:     private static RandomForest getRandomForest(List<AbstractInstance> trainingData, int maxDepth, int numTrees) {
+
+# same region in merge.java (scenario update):
+merge:42:         RandomForestBuilder RandomForestBuilder = new RandomForestBuilder(treeBuilder).numTrees(numTrees);
+merge:43:         return RandomForestBuilder;

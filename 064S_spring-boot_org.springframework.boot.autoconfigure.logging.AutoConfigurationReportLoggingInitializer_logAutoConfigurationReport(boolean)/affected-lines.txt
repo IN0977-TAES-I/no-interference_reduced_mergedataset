@@ -1,0 +1,10 @@
+# scenario   : 064S
+# project    : spring-boot
+# commit     : fdd3f12ee0f92ac18844c08bf71df39feebb6673
+# class name : org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
+# method name: logAutoConfigurationReport(boolean)
+# side       : left (left-right-lines.csv)
+source@org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer.logAutoConfigurationReport(boolean):110: <out of range>
+sink@org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer.logAutoConfigurationReport(boolean):114: <out of range>
+
+# same region in merge.java (scenario update):

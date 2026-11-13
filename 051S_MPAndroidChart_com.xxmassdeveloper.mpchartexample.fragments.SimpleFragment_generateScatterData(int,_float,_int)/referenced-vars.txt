@@ -1,0 +1,9 @@
+# class name : com.xxmassdeveloper.mpchartexample.fragments.SimpleFragment
+# method name: generateScatterData(int, float, int)
+# variables referenced in the affected region:
+count	declared-in-file	roles=sink
+
+# per-line detail:
+source:73	
+sink:80	count
+sink:91	

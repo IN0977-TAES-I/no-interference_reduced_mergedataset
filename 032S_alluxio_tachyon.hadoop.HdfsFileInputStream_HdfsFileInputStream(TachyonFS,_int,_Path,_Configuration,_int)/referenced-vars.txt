@@ -1,0 +1,20 @@
+# class name : tachyon.hadoop.HdfsFileInputStream
+# method name: HdfsFileInputStream(TachyonFS, int, Path, Configuration, int)
+# variables referenced in the affected region:
+ReadType	external/inherited	roles=source
+TachyonFile	external/inherited	roles=source
+bufferSize	external/inherited	roles=sink
+mCurrentPosition	declared-in-file	roles=sink
+mFileId	declared-in-file	roles=source
+mHadoopConf	declared-in-file	roles=source
+mTFS	declared-in-file	roles=source
+mTachyonFileInputStream	declared-in-file	roles=source
+tachyonFile	declared-in-file	roles=source
+
+# per-line detail:
+sink:44	bufferSize
+sink:45	mCurrentPosition
+source:52	TachyonFile,tachyonFile,mTFS,mFileId
+source:53	tachyonFile
+source:56	tachyonFile,mHadoopConf
+source:58	mTachyonFileInputStream,tachyonFile,ReadType

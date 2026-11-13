@@ -1,0 +1,36 @@
+# class name : org.elasticsearch.river.mongodb.Slurper
+# method name: addToStream(Operation, Timestamp<?>, DBObject, String)
+# variables referenced in the affected region:
+ACTIONS_FIELD	declared-in-file	roles=sink
+CONCURRENT_REQUESTS_FIELD	declared-in-file	roles=sink
+DEFAULT_BULK_ACTIONS	declared-in-file	roles=sink
+EsExecutors	external/inherited	roles=sink
+INDEX_OBJECT	declared-in-file	roles=source
+ImmutableSettings	external/inherited	roles=sink
+Map	external/inherited	roles=source
+NAME_FIELD	declared-in-file	roles=source
+Object	external/inherited	roles=source
+String	external/inherited	roles=source
+TYPE_FIELD	declared-in-file	roles=source
+XContentMapValues	external/inherited	roles=source,sink
+builder	declared-in-file	roles=source
+bulkActions	declared-in-file	roles=sink
+bulkBuilder	declared-in-file	roles=sink
+bulkSettings	declared-in-file	roles=sink
+indexSettings	declared-in-file	roles=source
+riverName	declared-in-file	roles=source
+settings	external/inherited	roles=source
+
+# per-line detail:
+source:736	builder,riverName
+source:737	
+source:738	
+source:739	settings,INDEX_OBJECT
+source:740	Map,String,Object,indexSettings,Map,String,Object,settings,INDEX_OBJECT
+source:741	builder,XContentMapValues,indexSettings,NAME_FIELD,builder
+source:742	builder,XContentMapValues,indexSettings,TYPE_FIELD,builder
+source:743	
+sink:747	bulkActions,XContentMapValues,bulkSettings,ACTIONS_FIELD,DEFAULT_BULK_ACTIONS
+sink:748	bulkBuilder,bulkActions
+sink:751	bulkBuilder,XContentMapValues,bulkSettings,CONCURRENT_REQUESTS_FIELD
+sink:752	EsExecutors,ImmutableSettings

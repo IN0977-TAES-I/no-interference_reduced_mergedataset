@@ -1,0 +1,15 @@
+# class name : me.prettyprint.cassandra.connection.client.HThriftClient
+# method name: open()
+# variables referenced in the affected region:
+
+# per-line detail:
+source:147	
+source:148	
+source:149	
+source:150	
+source:151	
+source:152	
+source:153	
+source:154	
+sink:164	
+source:169	

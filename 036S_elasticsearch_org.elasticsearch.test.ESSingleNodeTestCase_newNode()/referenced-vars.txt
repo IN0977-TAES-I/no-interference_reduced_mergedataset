@@ -1,0 +1,9 @@
+# class name : org.elasticsearch.test.ESSingleNodeTestCase
+# method name: newNode()
+# variables referenced in the affected region:
+EsExecutors	external/inherited	roles=sink
+
+# per-line detail:
+sink:171	EsExecutors
+source:173	
+source:174	

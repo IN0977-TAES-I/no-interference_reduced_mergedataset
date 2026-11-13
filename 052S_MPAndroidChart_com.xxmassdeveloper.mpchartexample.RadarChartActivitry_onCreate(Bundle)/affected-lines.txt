@@ -1,0 +1,27 @@
+# scenario   : 052S
+# project    : MPAndroidChart
+# commit     : 9297923f09460d0484cd713b0abbeaea9b888ec0
+# class name : com.xxmassdeveloper.mpchartexample.RadarChartActivitry
+# method name: onCreate(Bundle)
+# side       : left (left-right-lines.csv)
+sink@com.xxmassdeveloper.mpchartexample.RadarChartActivitry.onCreate(Bundle):59: 
+sink@com.xxmassdeveloper.mpchartexample.RadarChartActivitry.onCreate(Bundle):60:         mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+sink@com.xxmassdeveloper.mpchartexample.RadarChartActivitry.onCreate(Bundle):61:         mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+sink@com.xxmassdeveloper.mpchartexample.RadarChartActivitry.onCreate(Bundle):62: 
+source@com.xxmassdeveloper.mpchartexample.RadarChartActivitry.onCreate(Bundle):72:         mChart.setDrawGridBackground(false);
+
+# same region in merge.java (scenario update):
+merge:59: 
+merge:60:         mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+merge:61:         mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+merge:62: 
+merge:63:         mSeekBarX.setProgress(45);
+merge:64:         mSeekBarY.setProgress(100);
+merge:65: 
+merge:66:         mSeekBarY.setOnSeekBarChangeListener(this);
+merge:67:         mSeekBarX.setOnSeekBarChangeListener(this);
+merge:68: 
+merge:69:         mChart = (LineChart) findViewById(R.id.chart1);
+merge:70:         mChart.setOnChartGestureListener(this);
+merge:71:         mChart.setOnChartValueSelectedListener(this);
+merge:72:         mChart.setDrawGridBackground(false);

@@ -1,0 +1,10 @@
+# class name : org.elasticsearch.action.DocWriteResponse
+# method name: writeTo(StreamOutput)
+# variables referenced in the affected region:
+Fields	external/inherited	roles=sink
+builder	declared-in-file	roles=sink
+shardId	declared-in-file	roles=sink
+
+# per-line detail:
+sink:140	builder,Fields,shardId
+source:141	

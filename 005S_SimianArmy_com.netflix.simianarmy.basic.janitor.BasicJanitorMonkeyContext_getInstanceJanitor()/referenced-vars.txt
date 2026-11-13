@@ -1,0 +1,24 @@
+# class name : com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext
+# method name: getInstanceJanitor()
+# variables referenced in the affected region:
+BasicJanitorContext	external/inherited	roles=sink
+EBSVolumeJanitor	external/inherited	roles=source
+JanitorRuleEngine	external/inherited	roles=source
+instanceCrawler	declared-in-file	roles=sink
+instanceJanitorCtx	declared-in-file	roles=sink
+janitorResourceTracker	declared-in-file	roles=sink
+monkeyCalendar	declared-in-file	roles=source,sink
+monkeyRegion	declared-in-file	roles=sink
+ruleEngine	declared-in-file	roles=source,sink
+
+# per-line detail:
+sink:227	
+sink:228	BasicJanitorContext,instanceJanitorCtx
+sink:229	monkeyRegion,ruleEngine,instanceCrawler,janitorResourceTracker
+sink:230	monkeyCalendar
+source:232	
+source:233	
+source:234	EBSVolumeJanitor
+source:235	JanitorRuleEngine,ruleEngine
+source:237	ruleEngine,monkeyCalendar
+source:238	

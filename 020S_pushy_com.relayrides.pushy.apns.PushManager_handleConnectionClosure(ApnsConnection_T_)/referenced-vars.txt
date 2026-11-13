@@ -1,0 +1,13 @@
+# class name : com.relayrides.pushy.apns.PushManager
+# method name: handleConnectionClosure(ApnsConnection<T>)
+# variables referenced in the affected region:
+ApnsConnection	external/inherited	roles=source
+connection	declared-in-file	roles=source
+
+# per-line detail:
+source:500	
+source:502	
+source:503	ApnsConnection
+sink:510	
+source:515	ApnsConnection,connection
+sink:520	

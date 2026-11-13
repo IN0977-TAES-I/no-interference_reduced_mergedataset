@@ -1,0 +1,20 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.action.DocWriteResponse
+# method name: toXContent(XContentBuilder, Params)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.action.DocWriteResponse.toXContent(XContentBuilder, Params):160: <out of range>
+sink@org.elasticsearch.action.DocWriteResponse.toXContent(XContentBuilder, Params):163: <out of range>
+sink@org.elasticsearch.action.DocWriteResponse.toXContent(XContentBuilder, Params):164: <out of range>
+sink@org.elasticsearch.action.DocWriteResponse.toXContent(XContentBuilder, Params):165: <out of range>
+sink@org.elasticsearch.action.DocWriteResponse.toXContent(XContentBuilder, Params):166: <out of range>
+
+# same region in merge.java (scenario update):
+merge:160:             .field("forced_refresh", forcedRefresh);
+merge:161:         shardInfo.toXContent(builder, params);
+merge:162:         //nocommit: i'm not sure we want to expose it in the api but it will be handy for debugging while we work...
+merge:163:         builder.field(Fields._SHARD_ID, shardId.id());
+merge:164:         if (getSeqNo() >= 0) {
+merge:165:             builder.field(Fields._SEQ_NO, getSeqNo());
+merge:166:         }

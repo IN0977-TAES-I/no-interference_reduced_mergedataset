@@ -1,0 +1,15 @@
+# class name : org.elasticsearch.index.analysis.KuromojiAnalysisTests
+# method name: createAnalysisService()
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:196	
+sink:197	
+sink:198	
+sink:199	
+sink:200	
+sink:201	
+sink:202	
+source:204	
+sink:206	
+source:207	

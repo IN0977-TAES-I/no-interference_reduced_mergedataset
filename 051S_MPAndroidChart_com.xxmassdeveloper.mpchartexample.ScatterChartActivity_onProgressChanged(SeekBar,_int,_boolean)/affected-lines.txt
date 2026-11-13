@@ -1,0 +1,43 @@
+# scenario   : 051S
+# project    : MPAndroidChart
+# commit     : af114d180da6ec5633d32c701ff5467f7629fcf3
+# class name : com.xxmassdeveloper.mpchartexample.ScatterChartActivity
+# method name: onProgressChanged(SeekBar, int, boolean)
+# side       : left (left-right-lines.csv)
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):168:         ds1.setCircleRadius(3f);
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):173:         ds4.setLineWidth(2.5f);
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):178:         sets.add(ds1);        
+source@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):183:         LineData d = new LineData(sets);
+source@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):186:     }
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):188:     private String[] mLabels = new String[] { "Company A", "Company B", "Company C", "Company D", "Company E", "Company F" };
+source@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):191:     private String getLabel(int i) {
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):204: <out of range>
+sink@com.xxmassdeveloper.mpchartexample.ScatterChartActivity.onProgressChanged(SeekBar, int, boolean):205: <out of range>
+
+# same region in merge.java (scenario update):
+merge:168:         ds2.setLineWidth(2.5f);
+merge:169:         ds2.setCircleRadius(3f);
+merge:170:         ds3.setLineWidth(2.5f);
+merge:171:         ds3.setCircleRadius(3f);
+merge:172:         ds4.setLineWidth(2.5f);
+merge:173:         ds4.setCircleRadius(3f);
+merge:174:         
+merge:175:         
+merge:176:         // load DataSets from textfiles in assets folders
+merge:177:         sets.add(ds1);        
+merge:178:         sets.add(ds2);
+merge:179:         sets.add(ds3);
+merge:180:         sets.add(ds4);
+merge:181:         
+merge:182:         LineData d = new LineData(sets);
+merge:183:         d.setValueTypeface(tf);
+merge:184:         return d;
+merge:185:     }
+merge:186:     
+merge:187:     private String[] mLabels = new String[] { "Company A", "Company B", "Company C", "Company D", "Company E", "Company F" };
+merge:188: //    private String[] mXVals = new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec" };
+merge:189:     
+merge:190:     private String getLabel(int i) {
+merge:191:         return mLabels[i];
+merge:192:     }
+merge:193: }

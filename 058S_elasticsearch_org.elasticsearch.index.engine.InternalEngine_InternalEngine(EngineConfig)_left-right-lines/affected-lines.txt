@@ -1,0 +1,44 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.index.engine.InternalEngine
+# method name: InternalEngine(EngineConfig)
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.index.engine.InternalEngine.InternalEngine(EngineConfig):134:         builder.field(Fields._INDEX, shardId.getIndexName())
+source@org.elasticsearch.index.engine.InternalEngine.InternalEngine(EngineConfig):161: <out of range>
+source@org.elasticsearch.index.engine.InternalEngine.InternalEngine(EngineConfig):162: <out of range>
+source@org.elasticsearch.index.engine.InternalEngine.InternalEngine(EngineConfig):163: <out of range>
+source@org.elasticsearch.index.engine.InternalEngine.InternalEngine(EngineConfig):164: <out of range>
+
+# same region in merge.java (scenario update):
+merge:134:     public void writeTo(StreamOutput out) throws IOException {
+merge:135:         super.writeTo(out);
+merge:136:         shardId.writeTo(out);
+merge:137:         out.writeString(type);
+merge:138:         out.writeString(id);
+merge:139:         out.writeZLong(version);
+merge:140:         out.writeZLong(seqNo);
+merge:141:         out.writeBoolean(forcedRefresh);
+merge:142:     }
+merge:143: 
+merge:144:     static final class Fields {
+merge:145:         static final String _INDEX = "_index";
+merge:146:         static final String _TYPE = "_type";
+merge:147:         static final String _ID = "_id";
+merge:148:         static final String _VERSION = "_version";
+merge:149:         static final String _SHARD_ID = "_shard_id";
+merge:150:         static final String _SEQ_NO = "_seq_no";
+merge:151:     }
+merge:152: 
+merge:153:     @Override
+merge:154:     public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
+merge:155:         ReplicationResponse.ShardInfo shardInfo = getShardInfo();
+merge:156:         builder.field(Fields._INDEX, shardId.getIndexName())
+merge:157:             .field(Fields._TYPE, type)
+merge:158:             .field(Fields._ID, id)
+merge:159:             .field(Fields._VERSION, version)
+merge:160:             .field("forced_refresh", forcedRefresh);
+merge:161:         shardInfo.toXContent(builder, params);
+merge:162:         //nocommit: i'm not sure we want to expose it in the api but it will be handy for debugging while we work...
+merge:163:         builder.field(Fields._SHARD_ID, shardId.id());
+merge:164:         if (getSeqNo() >= 0) {

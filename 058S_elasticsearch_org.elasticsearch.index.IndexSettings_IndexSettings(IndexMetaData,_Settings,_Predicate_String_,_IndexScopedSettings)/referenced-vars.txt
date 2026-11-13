@@ -1,0 +1,8 @@
+# class name : org.elasticsearch.index.IndexSettings
+# method name: IndexSettings(IndexMetaData, Settings, Predicate<String>, IndexScopedSettings)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:238	
+source:246	
+source:269	

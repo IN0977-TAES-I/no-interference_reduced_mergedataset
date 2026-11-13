@@ -1,0 +1,14 @@
+# class name : com.xxmassdeveloper.mpchartexample.RadarChartActivitry
+# method name: onCreate(Bundle)
+# variables referenced in the affected region:
+SeekBar	external/inherited	roles=sink
+mChart	declared-in-file	roles=source
+mSeekBarX	external/inherited	roles=sink
+mSeekBarY	declared-in-file	roles=sink
+
+# per-line detail:
+sink:59	
+sink:60	mSeekBarX,SeekBar
+sink:61	mSeekBarY,SeekBar
+sink:62	
+source:72	mChart

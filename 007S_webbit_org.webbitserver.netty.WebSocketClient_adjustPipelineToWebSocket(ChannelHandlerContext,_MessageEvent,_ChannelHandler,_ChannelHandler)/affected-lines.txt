@@ -1,0 +1,10 @@
+# scenario   : 007S
+# project    : webbit
+# commit     : 74d2d2b87704d003acacb34e4ca8fb5f897b938f
+# class name : org.webbitserver.netty.WebSocketClient
+# method name: adjustPipelineToWebSocket(ChannelHandlerContext, MessageEvent, ChannelHandler, ChannelHandler)
+# side       : left (left-right-lines.csv)
+sink@org.webbitserver.netty.WebSocketClient.adjustPipelineToWebSocket(ChannelHandlerContext, MessageEvent, ChannelHandler, ChannelHandler):260: <out of range>
+source@org.webbitserver.netty.WebSocketClient.adjustPipelineToWebSocket(ChannelHandlerContext, MessageEvent, ChannelHandler, ChannelHandler):262: <out of range>
+
+# same region in merge.java (scenario update):

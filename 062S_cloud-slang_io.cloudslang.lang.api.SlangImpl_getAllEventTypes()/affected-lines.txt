@@ -1,0 +1,22 @@
+# scenario   : 062S
+# project    : cloud-slang
+# commit     : 20bac30d9bd76569aa6a4fa1e8261c1a9b5e6f76
+# class name : io.cloudslang.lang.api.SlangImpl
+# method name: getAllEventTypes()
+# side       : left (left-right-lines.csv)
+sink@io.cloudslang.lang.api.SlangImpl.getAllEventTypes():116:         Assert.assertNotNull(compilationArtifact);
+source@io.cloudslang.lang.api.SlangImpl.getAllEventTypes():123:     public void testCompileOperationWithException() throws IOException {
+source@io.cloudslang.lang.api.SlangImpl.getAllEventTypes():124:         Mockito.when(compiler.compile(any(SlangSource.class), anySetOf(SlangSource.class))).thenThrow(Exception.class);
+source@io.cloudslang.lang.api.SlangImpl.getAllEventTypes():125:         SlangSource tempFile = createTempFile();
+
+# same region in merge.java (scenario update):
+merge:116:         Assert.assertNotNull(compilationArtifact);
+merge:117:         Set<SlangSource> dependencyFiles = new HashSet<>();
+merge:118:         dependencyFiles.add(SlangSource.fromFile(tempDependencyFile));
+merge:119:         Mockito.verify(compiler).compile(tempFile, dependencyFiles);
+merge:120:     }
+merge:121: 
+merge:122:     @Test(expected = Exception.class)
+merge:123:     public void testCompileOperationWithException() throws IOException {
+merge:124:         Mockito.when(compiler.compile(any(SlangSource.class), anySetOf(SlangSource.class))).thenThrow(Exception.class);
+merge:125:         SlangSource tempFile = createTempFile();

@@ -1,0 +1,10 @@
+# class name : org.elasticsearch.river.mongodb.Indexer
+# method name: applyAdvancedTransformation(QueueEntry, String)
+# variables referenced in the affected region:
+
+# per-line detail:
+source:287	
+source:288	
+sink:321	
+source:331	
+source:358	

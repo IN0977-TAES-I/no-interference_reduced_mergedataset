@@ -1,0 +1,20 @@
+# scenario   : 001S
+# project    : elasticsearch
+# commit     : 36884807b3cc9d660db4da062275c7fdbec8ba67
+# class name : org.elasticsearch.index.query.SimpleIndexQueryParserTests
+# method name: setup()
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.index.query.SimpleIndexQueryParserTests.setup():208:         IndexQueryParserService queryParser = queryParser();
+sink@org.elasticsearch.index.query.SimpleIndexQueryParserTests.setup():217: 
+
+# same region in merge.java (scenario update):
+merge:208:                 .put("index.queryparser.query.dummy.type", DummyQueryParser.class)
+merge:209:                 .put("index.cache.filter.type", "none")
+merge:210:                 .put("name", "SimpleIndexQueryParserTests")
+merge:211:                 .build();
+merge:212:         IndexService indexService = createIndex("test", settings);
+merge:213:         MapperService mapperService = indexService.mapperService();
+merge:214: 
+merge:215:         String mapping = copyToStringFromClasspath("/org/elasticsearch/index/query/mapping.json");
+merge:216:         mapperService.merge("person", new CompressedString(mapping), true);
+merge:217:         ParsedDocument doc = mapperService.documentMapper("person").parse("person", "1", new BytesArray(copyToBytesFromClasspath("/org/elasticsearch/index/query/data.json")));

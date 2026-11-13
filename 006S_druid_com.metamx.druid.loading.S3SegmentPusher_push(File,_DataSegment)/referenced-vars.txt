@@ -1,0 +1,18 @@
+# class name : com.metamx.druid.loading.S3SegmentPusher
+# method name: push(File, DataSegment)
+# variables referenced in the affected region:
+Override	external/inherited	roles=sink
+String	external/inherited	roles=source
+config	declared-in-file	roles=source
+descriptorObject	declared-in-file	roles=source
+outputBucket	declared-in-file	roles=source,sink
+s3Client	declared-in-file	roles=sink
+toPush	declared-in-file	roles=sink
+
+# per-line detail:
+sink:66	Override
+source:105	String,outputBucket,config
+sink:110	s3Client,outputBucket,toPush
+sink:118	
+source:125	descriptorObject,outputBucket
+sink:139	

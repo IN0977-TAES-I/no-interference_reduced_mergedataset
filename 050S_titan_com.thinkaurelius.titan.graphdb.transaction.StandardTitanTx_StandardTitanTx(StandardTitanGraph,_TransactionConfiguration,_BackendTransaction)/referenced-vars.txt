@@ -1,0 +1,18 @@
+# class name : com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx
+# method name: StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction)
+# variables referenced in the affected region:
+CacheBuilder	external/inherited	roles=sink
+IndexQuery	external/inherited	roles=sink
+List	external/inherited	roles=sink
+Object	external/inherited	roles=sink
+Override	external/inherited	roles=sink
+TitanVertex	external/inherited	roles=source
+Weigher	external/inherited	roles=sink
+indexCache	declared-in-file	roles=sink
+
+# per-line detail:
+sink:182	indexCache,CacheBuilder,Weigher,IndexQuery,List,Object
+sink:183	Override
+source:197	
+source:198	
+source:199	TitanVertex

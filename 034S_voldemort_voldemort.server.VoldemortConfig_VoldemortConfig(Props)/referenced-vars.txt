@@ -1,0 +1,10 @@
+# class name : voldemort.server.VoldemortConfig
+# method name: VoldemortConfig(Props)
+# variables referenced in the affected region:
+DEFAULT_FETCHER_BUFFER_SIZE	declared-in-file	roles=sink
+props	external/inherited	roles=source
+
+# per-line detail:
+sink:359	DEFAULT_FETCHER_BUFFER_SIZE
+source:448	
+source:455	props

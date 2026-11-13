@@ -1,0 +1,15 @@
+# scenario   : 036S
+# project    : elasticsearch
+# commit     : 0404db65e3497452886173957729c8e82cfd4a03
+# class name : org.elasticsearch.test.ESSingleNodeTestCase
+# method name: newNode()
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.test.ESSingleNodeTestCase.newNode():171:             .put(EsExecutors.PROCESSORS_SETTING.getKey(), 1) // limit the number of threads created
+source@org.elasticsearch.test.ESSingleNodeTestCase.newNode():173:             .put("node.local", true)
+source@org.elasticsearch.test.ESSingleNodeTestCase.newNode():174:             .put("node.data", true)
+
+# same region in merge.java (scenario update):
+merge:171:             .put(EsExecutors.PROCESSORS_SETTING.getKey(), 1) // limit the number of threads created
+merge:172:             .put("http.enabled", false)
+merge:173:             .put(Node.NODE_LOCAL_SETTING.getKey(), true)
+merge:174:             .put(Node.NODE_DATA_SETTING.getKey(), true)

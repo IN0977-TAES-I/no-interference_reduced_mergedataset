@@ -1,0 +1,18 @@
+# scenario   : 066S
+# project    : spring-boot
+# commit     : 2d4e68a9777601bfb8309c94d8b74bc21be80ad1
+# class name : org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory
+# method name: customizeConnector(Connector)
+# side       : left (left-right-lines.csv)
+source@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):228: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):240: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):241: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):242: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):243: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):244: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):246: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):247: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):248: <out of range>
+sink@org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory.customizeConnector(Connector):249: <out of range>
+
+# same region in merge.java (scenario update):

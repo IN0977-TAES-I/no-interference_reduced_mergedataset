@@ -1,0 +1,8 @@
+# class name : voldemort.VoldemortClientShell
+# method name: VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:123	
+source:127	
+source:128	

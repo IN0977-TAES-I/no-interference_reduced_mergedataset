@@ -1,0 +1,10 @@
+# class name : io.dropwizard.setup.Bootstrap
+# method name: Bootstrap(Application<T>)
+# variables referenced in the affected region:
+
+# per-line detail:
+source:65	
+source:67	
+source:68	
+source:69	
+sink:71	

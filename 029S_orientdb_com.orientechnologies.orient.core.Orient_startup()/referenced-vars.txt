@@ -1,0 +1,8 @@
+# class name : com.orientechnologies.orient.core.Orient
+# method name: startup()
+# variables referenced in the affected region:
+Exception	external/inherited	roles=sink
+
+# per-line detail:
+source:158	
+sink:191	Exception

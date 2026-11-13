@@ -1,0 +1,17 @@
+# class name : rx.concurrency.TestScheduler
+# method name: triggerActions(long)
+# variables referenced in the affected region:
+TimeUnit	external/inherited	roles=source
+TimedAction	external/inherited	roles=sink
+action	declared-in-file	roles=source,sink
+delayTime	external/inherited	roles=sink
+queue	declared-in-file	roles=sink
+state	declared-in-file	roles=source,sink
+time	declared-in-file	roles=sink
+unit	external/inherited	roles=sink
+
+# per-line detail:
+source:95	state,action,TimeUnit
+source:96	
+source:97	
+sink:100	queue,TimedAction,time,unit,delayTime,action,state

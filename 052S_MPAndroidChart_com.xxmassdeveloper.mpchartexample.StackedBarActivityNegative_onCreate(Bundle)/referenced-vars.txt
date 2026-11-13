@@ -1,0 +1,8 @@
+# class name : com.xxmassdeveloper.mpchartexample.StackedBarActivityNegative
+# method name: onCreate(Bundle)
+# variables referenced in the affected region:
+mSeekBarY	declared-in-file	roles=sink
+
+# per-line detail:
+sink:64	mSeekBarY
+sink:65	

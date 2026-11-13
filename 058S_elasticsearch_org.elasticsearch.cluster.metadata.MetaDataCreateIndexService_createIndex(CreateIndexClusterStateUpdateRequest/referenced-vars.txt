@@ -1,0 +1,13 @@
+# class name : org.elasticsearch.cluster.metadata.MetaDataCreateIndexService
+# method name: createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>)
+# variables referenced in the affected region:
+
+# per-line detail:
+source:300	
+source:304	
+source:305	
+source:309	
+source:310	
+source:312	
+sink:315	
+source:346	

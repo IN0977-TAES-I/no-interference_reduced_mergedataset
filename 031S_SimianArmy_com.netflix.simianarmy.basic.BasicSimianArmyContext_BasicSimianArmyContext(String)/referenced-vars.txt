@@ -1,0 +1,38 @@
+# class name : com.netflix.simianarmy.basic.BasicSimianArmyContext
+# method name: BasicSimianArmyContext(String)
+# variables referenced in the affected region:
+Integer	external/inherited	roles=sink
+LOGGER	declared-in-file	roles=source
+String	external/inherited	roles=source
+account	declared-in-file	roles=sink
+assumeRoleArn	declared-in-file	roles=sink
+awsClientConfig	declared-in-file	roles=sink
+calendar	declared-in-file	roles=source
+config	declared-in-file	roles=source,sink
+prop	external/inherited	roles=source
+properties	declared-in-file	roles=source
+proxyHost	declared-in-file	roles=sink
+proxyPassword	declared-in-file	roles=sink
+proxyPort	declared-in-file	roles=sink
+proxyUsernaem	declared-in-file	roles=sink
+secret	declared-in-file	roles=sink
+
+# per-line detail:
+source:110	LOGGER,String,prop,prop
+source:111	
+source:112	
+source:113	config,properties
+source:114	calendar,config
+sink:115	
+source:115	
+sink:126	awsClientConfig,proxyHost
+sink:127	awsClientConfig,Integer,proxyPort
+sink:128	proxyUsernaem,proxyPassword
+sink:129	awsClientConfig,proxyUsernaem
+sink:130	awsClientConfig,proxyPassword
+sink:131	
+sink:132	
+sink:133	
+sink:134	assumeRoleArn,config
+sink:135	assumeRoleArn
+sink:141	account,secret

@@ -1,0 +1,10 @@
+# class name : cuke4duke.internal.java.JavaLanguage
+# method name: load(String)
+# variables referenced in the affected region:
+clazz	declared-in-file	roles=source,sink
+objectFactory	declared-in-file	roles=sink
+
+# per-line detail:
+source:36	clazz
+sink:38	objectFactory,clazz
+sink:40	

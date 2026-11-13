@@ -1,0 +1,23 @@
+# scenario   : 021S
+# project    : java-faker
+# commit     : ca42fcfaf45cae1754c58e02e1d5d2a58ec03561
+# class name : com.github.javafaker.Faker
+# method name: Faker(Locale, Random)
+# side       : left (left-right-lines.csv)
+sink@com.github.javafaker.Faker.Faker(Locale, Random):59:         this.app = new App(this, proxiedFakeValueService);
+sink@com.github.javafaker.Faker.Faker(Locale, Random):69:         this.company = new Company(this, proxiedFakeValueService);
+source@com.github.javafaker.Faker.Faker(Locale, Random):70:         this.hacker = new Hacker(proxiedFakeValueService);
+
+# same region in merge.java (scenario update):
+merge:59:         this.app = new App(this, proxiedFakeValueService);
+merge:60:         this.lorem = new Lorem(proxiedFakeValueService, randomService);
+merge:61:         this.name = new Name(this, proxiedFakeValueService);
+merge:62:         this.number = new Number(randomService);
+merge:63:         this.internet = new Internet(name, proxiedFakeValueService, randomService);
+merge:64:         this.phoneNumber = new PhoneNumber(proxiedFakeValueService);
+merge:65:         this.address = new Address(this, name, proxiedFakeValueService, randomService);
+merge:66:         this.book = new Book(this, proxiedFakeValueService);
+merge:67:         this.business = new Business(proxiedFakeValueService);
+merge:68:         this.color = new Color(proxiedFakeValueService);
+merge:69:         this.hacker = new Hacker(proxiedFakeValueService);
+merge:70:         this.company = new Company(this, proxiedFakeValueService, randomService);

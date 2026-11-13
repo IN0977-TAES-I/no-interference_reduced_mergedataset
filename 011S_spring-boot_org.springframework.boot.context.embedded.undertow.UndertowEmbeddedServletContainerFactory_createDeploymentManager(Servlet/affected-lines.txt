@@ -1,0 +1,36 @@
+# scenario   : 011S
+# project    : spring-boot
+# commit     : ea8107b6a53fa60b5f23b33e1b6d2e88bb60133c
+# class name : org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory
+# method name: createDeploymentManager(ServletContextInitializer)
+# side       : left (left-right-lines.csv)
+sink@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):345: 		deployment.setDisplayName(getDisplayName());
+sink@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):357: 		if (isAccessLogEnabled()) {
+sink@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):358: 			configureAccessLog(deployment);
+sink@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):359: 		}
+sink@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):360: 		if (isPersistSession()) {
+sink@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):361: 			File dir = getValidSessionStoreDir();
+sink@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):362: 			deployment.setSessionPersistenceManager(new FileSessionPersistence(dir));
+source@org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory.createDeploymentManager(ServletContextInitializer):364: 		DeploymentManager manager = Servlets.defaultContainer().addDeployment(deployment);
+
+# same region in merge.java (scenario update):
+merge:345: 		deployment.setDisplayName(getDisplayName());
+merge:346: 		deployment.setDeploymentName("spring-boot");
+merge:347: 		if (isRegisterDefaultServlet()) {
+merge:348: 			deployment.addServlet(Servlets.servlet("default", DefaultServlet.class));
+merge:349: 		}
+merge:350: 		configureErrorPages(deployment);
+merge:351: 		deployment.setServletStackTraces(ServletStackTraces.NONE);
+merge:352: 		deployment.setResourceManager(getDocumentRootResourceManager());
+merge:353: 		configureMimeMappings(deployment);
+merge:354: 		for (UndertowDeploymentInfoCustomizer customizer : this.deploymentInfoCustomizers) {
+merge:355: 			customizer.customize(deployment);
+merge:356: 		}
+merge:357: 		if (isAccessLogEnabled()) {
+merge:358: 			configureAccessLog(deployment);
+merge:359: 		}
+merge:360: 		if (isPersistSession()) {
+merge:361: 			File dir = getValidSessionStoreDir();
+merge:362: 			deployment.setSessionPersistenceManager(new FileSessionPersistence(dir));
+merge:363: 		}
+merge:364: 		DeploymentManager manager = Servlets.newContainer().addDeployment(deployment);

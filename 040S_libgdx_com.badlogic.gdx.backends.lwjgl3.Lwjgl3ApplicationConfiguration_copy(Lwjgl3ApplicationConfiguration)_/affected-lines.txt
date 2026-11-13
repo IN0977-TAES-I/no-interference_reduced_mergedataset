@@ -1,0 +1,25 @@
+# scenario   : 040S
+# project    : libgdx
+# commit     : da27e2dae56be0a159e82231e5c3a5b83b099063
+# class name : com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
+# method name: copy(Lwjgl3ApplicationConfiguration)
+# side       : left (left-right-lines.csv)
+sink@com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration.copy(Lwjgl3ApplicationConfiguration):96: 		try {
+sink@com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration.copy(Lwjgl3ApplicationConfiguration):97: 			loop();
+sink@com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration.copy(Lwjgl3ApplicationConfiguration):98: 		} catch(Throwable t) {
+sink@com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration.copy(Lwjgl3ApplicationConfiguration):99: 			if (t instanceof RuntimeException)
+source@com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration.copy(Lwjgl3ApplicationConfiguration):107: 
+
+# same region in merge.java (scenario update):
+merge:96: 		try {
+merge:97: 			loop();
+merge:98: 		} catch(Throwable t) {
+merge:99: 			if (t instanceof RuntimeException)
+merge:100: 				throw (RuntimeException) t;
+merge:101: 			else
+merge:102: 				throw new GdxRuntimeException(t);
+merge:103: 		} finally {
+merge:104: 			cleanup();
+merge:105: 		}
+merge:106: 	}
+merge:107: 

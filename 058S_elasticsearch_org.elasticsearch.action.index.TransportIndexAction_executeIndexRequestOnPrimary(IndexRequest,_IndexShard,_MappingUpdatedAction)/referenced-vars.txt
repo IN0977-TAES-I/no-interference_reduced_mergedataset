@@ -1,0 +1,7 @@
+# class name : org.elasticsearch.action.index.TransportIndexAction
+# method name: executeIndexRequestOnPrimary(IndexRequest, IndexShard, MappingUpdatedAction)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:196	
+source:201	

@@ -1,0 +1,10 @@
+# scenario   : 002S
+# project    : elasticsearch
+# commit     : 59cb67c7bd0ab6311115b20954e013412b676b29
+# class name : org.elasticsearch.index.query.MultiMatchQueryBuilder
+# method name: doXContent(XContentBuilder, Params)
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.index.query.MultiMatchQueryBuilder.doXContent(XContentBuilder, Params):306: <out of range>
+sink@org.elasticsearch.index.query.MultiMatchQueryBuilder.doXContent(XContentBuilder, Params):367: <out of range>
+
+# same region in merge.java (scenario update):

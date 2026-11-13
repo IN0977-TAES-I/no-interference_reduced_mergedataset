@@ -1,0 +1,18 @@
+# scenario   : 042S
+# project    : RxJava
+# commit     : 1c47b0cb26e6d971eefa42ebb3479099236b0125
+# class name : rx.concurrency.TestScheduler
+# method name: triggerActions(long)
+# side       : left (left-right-lines.csv)
+source@rx.concurrency.TestScheduler.triggerActions(long):95:         return schedule(state, action, 0, TimeUnit.MILLISECONDS);
+source@rx.concurrency.TestScheduler.triggerActions(long):96:     }
+source@rx.concurrency.TestScheduler.triggerActions(long):97: 
+sink@rx.concurrency.TestScheduler.triggerActions(long):100:         queue.add(new TimedAction<T>(this, time + unit.toNanos(delayTime), action, state));
+
+# same region in merge.java (scenario update):
+merge:95:             if (!current.isCancelled.get()) {
+merge:96:                 // because the queue can have wildcards we have to ignore the type T for the state
+merge:97:                 ((Func2<Scheduler, Object, Subscription>) current.action).call(current.scheduler, current.state);
+merge:98:             }
+merge:99:         }
+merge:100:         time = targetTimeInNanos;

@@ -1,0 +1,13 @@
+# class name : com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
+# method name: newWindow(ApplicationListener, Lwjgl3WindowConfiguration)
+# variables referenced in the affected region:
+Lwjgl3Window	external/inherited	roles=source
+appConfig	declared-in-file	roles=source,sink
+config	declared-in-file	roles=sink
+listener	external/inherited	roles=source
+window	declared-in-file	roles=source
+windows	declared-in-file	roles=source
+
+# per-line detail:
+sink:318	appConfig,config,config,config,config
+source:325	Lwjgl3Window,window,appConfig,listener,windows

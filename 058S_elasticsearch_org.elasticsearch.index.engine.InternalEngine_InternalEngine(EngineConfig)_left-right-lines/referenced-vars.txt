@@ -1,0 +1,13 @@
+# class name : org.elasticsearch.index.engine.InternalEngine
+# method name: InternalEngine(EngineConfig)
+# variables referenced in the affected region:
+Fields	external/inherited	roles=sink
+builder	declared-in-file	roles=sink
+shardId	declared-in-file	roles=sink
+
+# per-line detail:
+sink:134	builder,Fields,shardId
+source:161	
+source:162	
+source:163	
+source:164	

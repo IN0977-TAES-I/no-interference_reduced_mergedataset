@@ -1,0 +1,108 @@
+# scenario   : 034S
+# project    : voldemort
+# commit     : 4cc1c145819030c8e2baffe4c92383de14b8d880
+# class name : voldemort.server.VoldemortConfig
+# method name: VoldemortConfig(Props)
+# side       : left (left-right-lines.csv)
+sink@voldemort.server.VoldemortConfig.VoldemortConfig(Props):359:                                                       DEFAULT_FETCHER_BUFFER_SIZE);
+source@voldemort.server.VoldemortConfig.VoldemortConfig(Props):448:                                                                      .availableProcessors()));
+source@voldemort.server.VoldemortConfig.VoldemortConfig(Props):455:         this.clientSelectors = props.getInt("client.selectors", 4);
+
+# same region in merge.java (scenario update):
+merge:359:         this.readOnlyLoginIntervalMs = props.getLong("fetcher.login.interval.ms", -1);
+merge:360:         this.fetcherBufferSize = (int) props.getBytes("hdfs.fetcher.buffer.size",
+merge:361:                                                       DEFAULT_FETCHER_BUFFER_SIZE);
+merge:362:         this.fetcherSocketTimeout = props.getInt("hdfs.fetcher.socket.timeout",
+merge:363:                                                  DEFAULT_FETCHER_SOCKET_TIMEOUT);
+merge:364:         this.readOnlyKeytabPath = props.getString("readonly.keytab.path",
+merge:365:                                                   this.metadataDirectory
+merge:366:                                                           + VoldemortConfig.DEFAULT_KEYTAB_PATH);
+merge:367:         this.readOnlyKerberosUser = props.getString("readonly.kerberos.user",
+merge:368:                                                     VoldemortConfig.DEFAULT_KERBEROS_PRINCIPAL);
+merge:369:         this.hadoopConfigPath = (props.getString(VoldemortConfig.HADOOP_CONFIG_PATH,
+merge:370:                                                  this.metadataDirectory + "/hadoop-conf"));
+merge:371:         this.readOnlyKerberosKdc = props.getString("readonly.kerberos.kdc",
+merge:372:                                                    VoldemortConfig.DEFAULT_KERBEROS_KDC);
+merge:373:         this.readOnlykerberosRealm = props.getString("readonly.kerberos.realm",
+merge:374:                                                      VoldemortConfig.DEFAULT_KERBEROS_REALM);
+merge:375:         this.fileFetcherClass = props.getString("file.fetcher.class",
+merge:376:                                                 VoldemortConfig.DEFAULT_FILE_FETCHER_CLASS);
+merge:377:         this.readOnlyStatsFileEnabled = props.getBoolean("readonly.stats.file.enabled", true);
+merge:378:         this.readOnlyMaxVersionsStatsFile = props.getInt("readonly.stats.file.max.versions", 1000);
+merge:379: 
+merge:380:         // To set the Voldemort RO server compression codec to GZIP, explicitly
+merge:381:         // set this
+merge:382:         // property "readonly.compression.codec" to "GZIP"
+merge:383:         this.readOnlyCompressionCodec = props.getString("readonly.compression.codec",
+merge:384:                                                         VoldemortConfig.DEFAULT_RO_COMPRESSION_CODEC);
+merge:385: 
+merge:386:         this.highAvailabilityPushClusterId = props.getString(PUSH_HA_CLUSTER_ID, null);
+merge:387:         this.highAvailabilityPushLockPath = props.getString(PUSH_HA_LOCK_PATH, null);
+merge:388:         this.highAvailabilityPushLockImplementation = props.getString(PUSH_HA_LOCK_IMPLEMENTATION, null);
+merge:389:         this.highAvailabilityPushMaxNodeFailures = props.getInt(PUSH_HA_MAX_NODE_FAILURES, 0);
+merge:390:         this.highAvailabilityPushEnabled = props.getBoolean(PUSH_HA_ENABLED, false);
+merge:391: 
+merge:392:         this.mysqlUsername = props.getString("mysql.user", "root");
+merge:393:         this.mysqlPassword = props.getString("mysql.password", "");
+merge:394:         this.mysqlHost = props.getString("mysql.host", "localhost");
+merge:395:         this.mysqlPort = props.getInt("mysql.port", 3306);
+merge:396:         this.mysqlDatabaseName = props.getString("mysql.database", "voldemort");
+merge:397: 
+merge:398:         this.testingSlowQueueingDelays = new OpTimeMap(0);
+merge:399:         this.testingSlowQueueingDelays.setOpTime(VoldemortOpCode.GET_OP_CODE,
+merge:400:                                                  props.getInt("testing.slow.queueing.get.ms", 0));
+merge:401:         this.testingSlowQueueingDelays.setOpTime(VoldemortOpCode.GET_ALL_OP_CODE,
+merge:402:                                                  props.getInt("testing.slow.queueing.getall.ms", 0));
+merge:403:         this.testingSlowQueueingDelays.setOpTime(VoldemortOpCode.GET_VERSION_OP_CODE,
+merge:404:                                                  props.getInt("testing.slow.queueing.getversions.ms",
+merge:405:                                                               0));
+merge:406:         this.testingSlowQueueingDelays.setOpTime(VoldemortOpCode.PUT_OP_CODE,
+merge:407:                                                  props.getInt("testing.slow.queueing.put.ms", 0));
+merge:408:         this.testingSlowQueueingDelays.setOpTime(VoldemortOpCode.DELETE_OP_CODE,
+merge:409:                                                  props.getInt("testing.slow.queueing.delete.ms", 0));
+merge:410: 
+merge:411:         this.testingSlowConcurrentDelays = new OpTimeMap(0);
+merge:412:         this.testingSlowConcurrentDelays.setOpTime(VoldemortOpCode.GET_OP_CODE,
+merge:413:                                                    props.getInt("testing.slow.concurrent.get.ms", 0));
+merge:414:         this.testingSlowConcurrentDelays.setOpTime(VoldemortOpCode.GET_ALL_OP_CODE,
+merge:415:                                                    props.getInt("testing.slow.concurrent.getall.ms",
+merge:416:                                                                 0));
+merge:417:         this.testingSlowConcurrentDelays.setOpTime(VoldemortOpCode.GET_VERSION_OP_CODE,
+merge:418:                                                    props.getInt("testing.slow.concurrent.getversions.ms",
+merge:419:                                                                 0));
+merge:420:         this.testingSlowConcurrentDelays.setOpTime(VoldemortOpCode.PUT_OP_CODE,
+merge:421:                                                    props.getInt("testing.slow.concurrent.put.ms", 0));
+merge:422:         this.testingSlowConcurrentDelays.setOpTime(VoldemortOpCode.DELETE_OP_CODE,
+merge:423:                                                    props.getInt("testing.slow.concurrent.delete.ms",
+merge:424:                                                                 0));
+merge:425: 
+merge:426:         this.maxThreads = props.getInt("max.threads", 100);
+merge:427:         this.coreThreads = props.getInt("core.threads", Math.max(1, maxThreads / 2));
+merge:428: 
+merge:429:         // Admin client should have less threads but very high buffer size.
+merge:430:         this.adminMaxThreads = props.getInt("admin.max.threads", 20);
+merge:431:         this.adminCoreThreads = props.getInt("admin.core.threads", Math.max(1, adminMaxThreads / 2));
+merge:432:         this.adminStreamBufferSize = (int) props.getBytes("admin.streams.buffer.size",
+merge:433:                                                           10 * 1000 * 1000);
+merge:434:         this.adminConnectionTimeout = props.getInt("admin.client.connection.timeout.sec", 60);
+merge:435:         this.adminSocketTimeout = props.getInt("admin.client.socket.timeout.sec", 24 * 60 * 60);
+merge:436: 
+merge:437:         this.streamMaxReadBytesPerSec = props.getBytes("stream.read.byte.per.sec", 10 * 1000 * 1000);
+merge:438:         this.streamMaxWriteBytesPerSec = props.getBytes("stream.write.byte.per.sec",
+merge:439:                                                         10 * 1000 * 1000);
+merge:440:         this.multiVersionStreamingPutsEnabled = props.getBoolean("use.multi.version.streaming.puts",
+merge:441:                                                                  true);
+merge:442: 
+merge:443:         this.socketTimeoutMs = props.getInt("socket.timeout.ms", 5000);
+merge:444:         this.socketBufferSize = (int) props.getBytes("socket.buffer.size", 64 * 1024);
+merge:445:         this.socketKeepAlive = props.getBoolean("socket.keepalive", false);
+merge:446: 
+merge:447:         this.useNioConnector = props.getBoolean("enable.nio.connector", true);
+merge:448:         this.nioConnectorKeepAlive = props.getBoolean("nio.connector.keepalive", false);
+merge:449:         this.nioConnectorSelectors = props.getInt("nio.connector.selectors",
+merge:450:                                                   Math.max(8, Runtime.getRuntime()
+merge:451:                                                                      .availableProcessors()));
+merge:452:         this.nioAdminConnectorSelectors = props.getInt("nio.admin.connector.selectors",
+merge:453:                                                        Math.max(8, Runtime.getRuntime()
+merge:454:                                                                           .availableProcessors()));
+merge:455:         this.nioAdminConnectorKeepAlive = props.getBoolean("nio.admin.connector.keepalive", false);

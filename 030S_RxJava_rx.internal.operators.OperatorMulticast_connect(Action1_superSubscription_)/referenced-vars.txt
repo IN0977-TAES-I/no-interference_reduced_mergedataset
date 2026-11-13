@@ -1,0 +1,22 @@
+# class name : rx.internal.operators.OperatorMulticast
+# method name: connect(Action1<?superSubscription>)
+# variables referenced in the affected region:
+Subscriber	external/inherited	roles=source
+Subscribers	external/inherited	roles=sink
+subject	declared-in-file	roles=source,sink
+subscription	declared-in-file	roles=sink
+waitingForConnect	declared-in-file	roles=source
+
+# per-line detail:
+sink:94	subscription,Subscribers,subject
+source:117	Subscriber,waitingForConnect
+source:118	subject
+source:119	
+source:120	
+source:121	waitingForConnect
+source:122	
+source:124	
+source:125	
+source:128	
+source:129	
+source:131	

@@ -1,0 +1,10 @@
+# scenario   : 069S
+# project    : spring-boot
+# commit     : 074771ec125dd407af0282b92960e9e9e3377e84
+# class name : org.springframework.boot.context.web.SpringBootServletInitializer
+# method name: createRootApplicationContext(ServletContext)
+# side       : left (left-right-lines.csv)
+sink@org.springframework.boot.context.web.SpringBootServletInitializer.createRootApplicationContext(ServletContext):87: <out of range>
+source@org.springframework.boot.context.web.SpringBootServletInitializer.createRootApplicationContext(ServletContext):88: <out of range>
+
+# same region in merge.java (scenario update):

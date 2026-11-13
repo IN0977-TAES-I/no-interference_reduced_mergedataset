@@ -1,0 +1,28 @@
+# scenario   : 004S
+# project    : okhttp
+# commit     : 35166168529bd27281685e56a0a122eff44460e9
+# class name : com.squareup.okhttp.OkHttpClient
+# method name: copyWithDefaults()
+# side       : left (left-right-lines.csv)
+sink@com.squareup.okhttp.OkHttpClient.copyWithDefaults():277:     result.proxy = proxy;
+source@com.squareup.okhttp.OkHttpClient.copyWithDefaults():287:     result.authenticator = authenticator != null
+sink@com.squareup.okhttp.OkHttpClient.copyWithDefaults():293:     return result;
+
+# same region in merge.java (scenario update):
+merge:277:     OkHttpClient result = new OkHttpClient(this);
+merge:278:     result.proxy = proxy;
+merge:279:     result.proxySelector = proxySelector != null ? proxySelector : ProxySelector.getDefault();
+merge:280:     result.cookieHandler = cookieHandler != null ? cookieHandler : CookieHandler.getDefault();
+merge:281:     result.responseCache = responseCache != null ? responseCache : ResponseCache.getDefault();
+merge:282:     result.sslSocketFactory = sslSocketFactory != null
+merge:283:         ? sslSocketFactory
+merge:284:         : HttpsURLConnection.getDefaultSSLSocketFactory();
+merge:285:     result.hostnameVerifier = hostnameVerifier != null
+merge:286:         ? hostnameVerifier
+merge:287:         : new OkHostnameVerifier();
+merge:288:     result.authenticator = authenticator != null
+merge:289:         ? authenticator
+merge:290:         : HttpAuthenticator.SYSTEM_DEFAULT;
+merge:291:     result.connectionPool = connectionPool != null ? connectionPool : ConnectionPool.getDefault();
+merge:292:     result.followProtocolRedirects = followProtocolRedirects;
+merge:293:     result.transports = transports != null ? transports : DEFAULT_TRANSPORTS;

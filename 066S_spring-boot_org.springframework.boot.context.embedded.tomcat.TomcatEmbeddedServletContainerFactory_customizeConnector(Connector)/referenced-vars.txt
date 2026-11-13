@@ -1,0 +1,15 @@
+# class name : org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory
+# method name: customizeConnector(Connector)
+# variables referenced in the affected region:
+
+# per-line detail:
+source:228	
+sink:240	
+sink:241	
+sink:242	
+sink:243	
+sink:244	
+sink:246	
+sink:247	
+sink:248	
+sink:249	

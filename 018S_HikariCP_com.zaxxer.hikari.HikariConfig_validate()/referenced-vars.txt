@@ -1,0 +1,13 @@
+# class name : com.zaxxer.hikari.HikariConfig
+# method name: validate()
+# variables referenced in the affected region:
+connectionCustomizer	declared-in-file	roles=sink
+connectionCustomizerClassName	declared-in-file	roles=sink
+
+# per-line detail:
+sink:577	
+sink:578	
+sink:579	connectionCustomizerClassName,connectionCustomizer
+sink:580	
+sink:581	
+sink:582	

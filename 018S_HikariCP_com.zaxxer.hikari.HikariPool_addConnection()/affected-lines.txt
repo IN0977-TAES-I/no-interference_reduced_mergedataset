@@ -1,0 +1,58 @@
+# scenario   : 018S
+# project    : HikariCP
+# commit     : 1bca94af9ec625f21d1b58ff10efb5be71ab87a6
+# class name : com.zaxxer.hikari.HikariPool
+# method name: addConnection()
+# side       : left (left-right-lines.csv)
+source@com.zaxxer.hikari.HikariPool.addConnection():339:         dataSourceProperties.put(propertyName, value);
+source@com.zaxxer.hikari.HikariPool.addConnection():340:     }
+source@com.zaxxer.hikari.HikariPool.addConnection():341: 
+source@com.zaxxer.hikari.HikariPool.addConnection():342:     public Properties getDataSourceProperties()
+source@com.zaxxer.hikari.HikariPool.addConnection():343:     {
+source@com.zaxxer.hikari.HikariPool.addConnection():344:         return dataSourceProperties;
+source@com.zaxxer.hikari.HikariPool.addConnection():345:     }
+source@com.zaxxer.hikari.HikariPool.addConnection():346: 
+source@com.zaxxer.hikari.HikariPool.addConnection():348:     {
+sink@com.zaxxer.hikari.HikariPool.addConnection():356:             Class<?> driverClass = this.getClass().getClassLoader().loadClass(driverClassName);
+source@com.zaxxer.hikari.HikariPool.addConnection():362:         }
+sink@com.zaxxer.hikari.HikariPool.addConnection():365:     /** {@inheritDoc} */
+sink@com.zaxxer.hikari.HikariPool.addConnection():372:     public void setIdleTimeout(long idleTimeoutMs)
+sink@com.zaxxer.hikari.HikariPool.addConnection():374:         this.idleTimeout = idleTimeoutMs;
+
+# same region in merge.java (scenario update):
+merge:339:         try
+merge:340:         {
+merge:341:             Class<?> driverClass = this.getClass().getClassLoader().loadClass(driverClassName);
+merge:342:             driverClass.newInstance();
+merge:343:         }
+merge:344:         catch (Exception e)
+merge:345:         {
+merge:346:             throw new RuntimeException("driverClassName specified class '" + driverClassName + "' could not be loaded", e);
+merge:347:         }
+merge:348:     }
+merge:349: 
+merge:350:     /** {@inheritDoc} */
+merge:351:     public long getIdleTimeout()
+merge:352:     {
+merge:353:         return idleTimeout;
+merge:354:     }
+merge:355: 
+merge:356:     /** {@inheritDoc} */
+merge:357:     public void setIdleTimeout(long idleTimeoutMs)
+merge:358:     {
+merge:359:         this.idleTimeout = idleTimeoutMs;
+merge:360:     }
+merge:361: 
+merge:362:     public String getJdbcUrl()
+merge:363:     {
+merge:364:         return jdbcUrl;
+merge:365:     }
+merge:366: 
+merge:367:     public void setJdbcUrl(String jdbcUrl)
+merge:368:     {
+merge:369:         this.jdbcUrl = jdbcUrl;
+merge:370:     }
+merge:371: 
+merge:372:     /**
+merge:373:      * Get the default auto-commit behavior of connections in the pool.
+merge:374:      *

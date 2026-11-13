@@ -1,0 +1,19 @@
+# scenario   : 061S
+# project    : fitnesse
+# commit     : 4d9ba9d221d879507440feb084fa7521b95111ec
+# class name : fitnesse.testsystems.slim.tables.SlimTableFactoryTest
+# method name: setUp()
+# side       : left (left-right-lines.csv)
+sink@fitnesse.testsystems.slim.tables.SlimTableFactoryTest.setUp():31:     map.put("ddt:", DynamicDecisionTable.class);
+sink@fitnesse.testsystems.slim.tables.SlimTableFactoryTest.setUp():32:     map.put("dynamic decision:", DynamicDecisionTable.class);
+source@fitnesse.testsystems.slim.tables.SlimTableFactoryTest.setUp():38:     map.put("scenario", ScenarioTable.class);
+
+# same region in merge.java (scenario update):
+merge:31:     map.put("ddt:", DynamicDecisionTable.class);
+merge:32:     map.put("dynamic decision:", DynamicDecisionTable.class);
+merge:33:     map.put("ordered query:", OrderedQueryTable.class);
+merge:34:     map.put("subset query:", SubsetQueryTable.class);
+merge:35:     map.put("query:", QueryTable.class);
+merge:36:     map.put("table:", TableTable.class);
+merge:37:     map.put("script", ScriptTable.class);
+merge:38:     map.put("script:", ScriptTable.class);

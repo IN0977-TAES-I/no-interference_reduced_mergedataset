@@ -1,0 +1,41 @@
+# scenario   : 013S
+# project    : titan
+# commit     : 387c16ea05ef9fa312f37139228d2bbf61455ff4
+# class name : com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization
+# method name: initialize(Serializer)
+# side       : left (left-right-lines.csv)
+source@com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization.initialize(Serializer):31:         serializer.registerClass(byte[].class, KRYO_OFFSET + 12);
+sink@com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization.initialize(Serializer):52:         serializer.registerClass(Parameter.class,KRYO_OFFSET + 33);
+sink@com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization.initialize(Serializer):53:         serializer.registerClass(Parameter[].class,KRYO_OFFSET + 34);
+sink@com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization.initialize(Serializer):54:         serializer.registerClass(IndexParameters.class,KRYO_OFFSET + 35);
+sink@com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization.initialize(Serializer):55:         serializer.registerClass(IndexParameters[].class,KRYO_OFFSET + 36);
+sink@com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization.initialize(Serializer):57:         Preconditions.checkArgument(KRYO_OFFSET + 50 < RESERVED_ID_OFFSET, "ID allocation overflow!");
+
+# same region in merge.java (scenario update):
+merge:31:         serializer.registerClass(byte[].class, new ByteArrayHandler(), KRYO_OFFSET + 12);
+merge:32:         serializer.registerClass(boolean[].class, KRYO_OFFSET + 13);
+merge:33: //        serializer.registerClass(IndexType.class, KRYO_OFFSET + 14); //duplicate of 20
+merge:34:         serializer.registerClass(TitanTypeClass.class, KRYO_OFFSET + 15);
+merge:35:         serializer.registerClass(Integer.class, new IntegerSerializer(), KRYO_OFFSET + 16);
+merge:36:         serializer.registerClass(Double.class, new DoubleSerializer(), KRYO_OFFSET + 17);
+merge:37:         serializer.registerClass(Float.class, new FloatSerializer(), KRYO_OFFSET + 18);
+merge:38:         serializer.registerClass(Long.class, new LongSerializer(), KRYO_OFFSET + 19);
+merge:39:         serializer.registerClass(IndexType.class, KRYO_OFFSET + 20);
+merge:40:         serializer.registerClass(IndexType[].class, KRYO_OFFSET + 21);
+merge:41:         serializer.registerClass(Geoshape.class, new GeoshapeHandler(), KRYO_OFFSET + 22);
+merge:42:         serializer.registerClass(Byte.class, new ByteSerializer(), KRYO_OFFSET + 23);
+merge:43:         serializer.registerClass(Short.class, new ShortSerializer(), KRYO_OFFSET + 24);
+merge:44:         serializer.registerClass(Character.class, new CharacterSerializer(), KRYO_OFFSET + 25);
+merge:45:         serializer.registerClass(Boolean.class, new BooleanSerializer(), KRYO_OFFSET + 26);
+merge:46:         serializer.registerClass(Object.class, KRYO_OFFSET + 27);
+merge:47:         serializer.registerClass(FullFloat.class, new FullFloatHandler(), KRYO_OFFSET + 28);
+merge:48:         serializer.registerClass(FullDouble.class, new FullDoubleHandler(), KRYO_OFFSET + 29);
+merge:49:         serializer.registerClass(char[].class, KRYO_OFFSET + 30);
+merge:50:         serializer.registerClass(short[].class, KRYO_OFFSET + 31);
+merge:51:         serializer.registerClass(float[].class, KRYO_OFFSET + 32);
+merge:52:         serializer.registerClass(Parameter.class,KRYO_OFFSET + 33);
+merge:53:         serializer.registerClass(Parameter[].class,KRYO_OFFSET + 34);
+merge:54:         serializer.registerClass(IndexParameters.class,KRYO_OFFSET + 35);
+merge:55:         serializer.registerClass(IndexParameters[].class,KRYO_OFFSET + 36);
+merge:56: 
+merge:57:         Preconditions.checkArgument(KRYO_OFFSET + 50 < RESERVED_ID_OFFSET, "ID allocation overflow!");

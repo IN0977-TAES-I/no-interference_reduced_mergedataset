@@ -1,0 +1,37 @@
+# scenario   : 017S
+# project    : okhttp
+# commit     : 1151c9853ccc3c9c3211c613b9b845b925f8c6a6
+# class name : com.squareup.okhttp.internal.bytes.GzipSource
+# method name: consumeHeader(Deadline)
+# side       : left (left-right-lines.csv)
+sink@com.squareup.okhttp.internal.bytes.GzipSource.consumeHeader(Deadline):112:     byte flags = buffer.getByte(3);
+source@com.squareup.okhttp.internal.bytes.GzipSource.consumeHeader(Deadline):138:       long index = seek((byte) 0, deadline);
+
+# same region in merge.java (scenario update):
+merge:112:     byte flags = buffer.getByte(3);
+merge:113:     boolean fhcrc = ((flags >> FHCRC) & 1) == 1;
+merge:114:     if (fhcrc) updateCrc(buffer, 0, 10);
+merge:115: 
+merge:116:     short id1id2 = buffer.readShort();
+merge:117:     checkEqual("ID1ID2", (short) 0x1f8b, id1id2);
+merge:118:     buffer.skip(8);
+merge:119: 
+merge:120:     // Skip optional extra fields.
+merge:121:     // +---+---+=================================+
+merge:122:     // | XLEN  |...XLEN bytes of "extra field"...| (more-->)
+merge:123:     // +---+---+=================================+
+merge:124:     if (((flags >> FEXTRA) & 1) == 1) {
+merge:125:       require(2, deadline);
+merge:126:       if (fhcrc) updateCrc(buffer, 0, 2);
+merge:127:       int xlen = buffer.readShortLe() & 0xffff;
+merge:128:       require(xlen, deadline);
+merge:129:       if (fhcrc) updateCrc(buffer, 0, xlen);
+merge:130:       buffer.skip(xlen);
+merge:131:     }
+merge:132: 
+merge:133:     // Skip an optional 0-terminated name.
+merge:134:     // +=========================================+
+merge:135:     // |...original file name, zero-terminated...| (more-->)
+merge:136:     // +=========================================+
+merge:137:     if (((flags >> FNAME) & 1) == 1) {
+merge:138:       long index = OkBuffers.seek(buffer, (byte) 0, source, deadline);

@@ -1,0 +1,18 @@
+# scenario   : 067S
+# project    : spring-boot
+# commit     : 958a0a45f164601d01cb706c19f22ed3e25eff56
+# class name : org.springframework.boot.autoconfigure.mongo.MongoProperties
+# method name: builder(MongoClientOptions)
+# side       : left (left-right-lines.csv)
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):261: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):262: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):263: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):264: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):265: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):266: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):267: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):268: <out of range>
+source@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):271: <out of range>
+sink@org.springframework.boot.autoconfigure.mongo.MongoProperties.builder(MongoClientOptions):272: <out of range>
+
+# same region in merge.java (scenario update):

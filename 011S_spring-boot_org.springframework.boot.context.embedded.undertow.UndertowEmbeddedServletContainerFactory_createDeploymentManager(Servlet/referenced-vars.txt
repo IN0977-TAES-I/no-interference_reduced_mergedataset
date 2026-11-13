@@ -1,0 +1,19 @@
+# class name : org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory
+# method name: createDeploymentManager(ServletContextInitializer)
+# variables referenced in the affected region:
+DeploymentManager	external/inherited	roles=source
+File	external/inherited	roles=sink
+Servlets	external/inherited	roles=source
+deployment	declared-in-file	roles=source,sink
+dir	declared-in-file	roles=sink
+manager	declared-in-file	roles=source
+
+# per-line detail:
+sink:345	deployment
+sink:357	
+sink:358	deployment
+sink:359	
+sink:360	
+sink:361	File,dir
+sink:362	deployment,dir
+source:364	DeploymentManager,manager,Servlets,deployment

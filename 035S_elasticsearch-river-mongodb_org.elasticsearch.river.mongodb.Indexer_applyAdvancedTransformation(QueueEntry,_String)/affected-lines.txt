@@ -1,0 +1,85 @@
+# scenario   : 035S
+# project    : elasticsearch-river-mongodb
+# commit     : 6b6ce8e851c6613213c4508c3f277a80649e0c7b
+# class name : org.elasticsearch.river.mongodb.Indexer
+# method name: applyAdvancedTransformation(QueueEntry, String)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.river.mongodb.Indexer.applyAdvancedTransformation(QueueEntry, String):287:         }
+source@org.elasticsearch.river.mongodb.Indexer.applyAdvancedTransformation(QueueEntry, String):288: 
+sink@org.elasticsearch.river.mongodb.Indexer.applyAdvancedTransformation(QueueEntry, String):321:             return this;
+source@org.elasticsearch.river.mongodb.Indexer.applyAdvancedTransformation(QueueEntry, String):331:             return this;
+source@org.elasticsearch.river.mongodb.Indexer.applyAdvancedTransformation(QueueEntry, String):358: 
+
+# same region in merge.java (scenario update):
+merge:287:         }
+merge:288: 
+merge:289:         public Builder mongoSSLVerifyCertificate(boolean mongoSSLVerifyCertificate) {
+merge:290:             this.mongoSSLVerifyCertificate = mongoSSLVerifyCertificate;
+merge:291:             return this;
+merge:292:         }
+merge:293: 
+merge:294:         public Builder dropCollection(boolean dropCollection) {
+merge:295:             this.dropCollection = dropCollection;
+merge:296:             return this;
+merge:297:         }
+merge:298: 
+merge:299:         public Builder isMongos(Boolean isMongos) {
+merge:300:             this.isMongos = isMongos;
+merge:301:             return this;
+merge:302:         }
+merge:303: 
+merge:304:         public Builder excludeFields(Set<String> excludeFields) {
+merge:305:             this.excludeFields = excludeFields;
+merge:306:             return this;
+merge:307:         }
+merge:308: 
+merge:309:         public Builder includeFields(Set<String> includeFields) {
+merge:310:             this.includeFields = includeFields;
+merge:311:             return this;
+merge:312:         }
+merge:313: 
+merge:314:         public Builder includeCollection(String includeCollection) {
+merge:315:             this.includeCollection = includeCollection;
+merge:316:             return this;
+merge:317:         }
+merge:318: 
+merge:319:         public Builder disableIndexRefresh(boolean disableIndexRefresh) {
+merge:320:             this.disableIndexRefresh = disableIndexRefresh;
+merge:321:             return this;
+merge:322:         }
+merge:323: 
+merge:324:         public Builder initialTimestamp(Binary initialTimestamp) {
+merge:325:             this.initialTimestamp = new Timestamp.GTID(initialTimestamp.getData(), null);
+merge:326:             return this;
+merge:327:         }
+merge:328: 
+merge:329:         public Builder initialTimestamp(BSONTimestamp initialTimestamp) {
+merge:330:             this.initialTimestamp = new Timestamp.BSON(initialTimestamp);
+merge:331:             return this;
+merge:332:         }
+merge:333: 
+merge:334:         public Builder advancedTransformation(boolean advancedTransformation) {
+merge:335:             this.advancedTransformation = advancedTransformation;
+merge:336:             return this;
+merge:337:         }
+merge:338: 
+merge:339:         public Builder skipInitialImport(boolean skipInitialImport) {
+merge:340:             this.skipInitialImport = skipInitialImport;
+merge:341:             return this;
+merge:342:         }
+merge:343: 
+merge:344:         public Builder parentTypes(Set<String> parentTypes) {
+merge:345:             this.parentTypes = parentTypes;
+merge:346:             return this;
+merge:347:         }
+merge:348: 
+merge:349:         public Builder storeStatistics(boolean storeStatistics) {
+merge:350:             this.storeStatistics = storeStatistics;
+merge:351:             return this;
+merge:352:         }
+merge:353: 
+merge:354:         public Builder statisticsIndexName(String statisticsIndexName) {
+merge:355:             this.statisticsIndexName = statisticsIndexName;
+merge:356:             return this;
+merge:357:         }
+merge:358: 

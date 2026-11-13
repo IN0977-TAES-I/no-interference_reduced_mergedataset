@@ -1,0 +1,16 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.cluster.metadata.MetaDataCreateIndexService
+# method name: createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):300: <out of range>
+source@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):304: <out of range>
+source@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):305: <out of range>
+source@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):309: <out of range>
+source@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):310: <out of range>
+source@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):312: <out of range>
+sink@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):315: <out of range>
+source@org.elasticsearch.cluster.metadata.MetaDataCreateIndexService.createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>):346: <out of range>
+
+# same region in merge.java (scenario update):

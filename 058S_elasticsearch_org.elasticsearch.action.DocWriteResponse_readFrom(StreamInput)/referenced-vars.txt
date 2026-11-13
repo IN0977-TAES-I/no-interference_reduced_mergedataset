@@ -1,0 +1,7 @@
+# class name : org.elasticsearch.action.DocWriteResponse
+# method name: readFrom(StreamInput)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:129	
+source:130	

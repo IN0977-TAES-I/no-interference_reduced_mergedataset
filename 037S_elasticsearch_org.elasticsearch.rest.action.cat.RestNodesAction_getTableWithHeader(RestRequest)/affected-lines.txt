@@ -1,0 +1,21 @@
+# scenario   : 037S
+# project    : elasticsearch
+# commit     : 3764b3ff800c94293aba0bb0fa18c7df80a764f7
+# class name : org.elasticsearch.rest.action.cat.RestNodesAction
+# method name: getTableWithHeader(RestRequest)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.rest.action.cat.RestNodesAction.getTableWithHeader(RestRequest):153:         table.addCell("search.query_total", "alias:sqto,searchQueryTotal;default:false;text-align:right;desc:total query phase ops");
+source@org.elasticsearch.rest.action.cat.RestNodesAction.getTableWithHeader(RestRequest):154:         table.addCell("search.scroll_current", "alias:scc,searchScrollCurrent;default:false;text-align:right;desc:open scroll contexts");
+source@org.elasticsearch.rest.action.cat.RestNodesAction.getTableWithHeader(RestRequest):156:         table.addCell("search.scroll_total", "alias:scto,searchScrollTotal;default:false;text-align:right;desc:completed scroll contexts");
+source@org.elasticsearch.rest.action.cat.RestNodesAction.getTableWithHeader(RestRequest):157: 
+source@org.elasticsearch.rest.action.cat.RestNodesAction.getTableWithHeader(RestRequest):158:         table.addCell("segments.count", "alias:sc,segmentsCount;default:false;text-align:right;desc:number of segments");
+source@org.elasticsearch.rest.action.cat.RestNodesAction.getTableWithHeader(RestRequest):159:         table.addCell("segments.memory", "alias:sm,segmentsMemory;default:false;text-align:right;desc:memory used by segments");
+
+# same region in merge.java (scenario update):
+merge:153:         table.addCell("search.query_total", "alias:sqto,searchQueryTotal;default:false;text-align:right;desc:total query phase ops");
+merge:154:         table.addCell("search.scroll_current", "alias:scc,searchScrollCurrent;default:false;text-align:right;desc:open scroll contexts");
+merge:155:         table.addCell("search.scroll_time", "alias:scti,searchScrollTime;default:false;text-align:right;desc:time scroll contexts held open");
+merge:156:         table.addCell("search.scroll_total", "alias:scto,searchScrollTotal;default:false;text-align:right;desc:completed scroll contexts");
+merge:157: 
+merge:158:         table.addCell("segments.count", "alias:sc,segmentsCount;default:false;text-align:right;desc:number of segments");
+merge:159:         table.addCell("segments.memory", "alias:sm,segmentsMemory;default:false;text-align:right;desc:memory used by segments");

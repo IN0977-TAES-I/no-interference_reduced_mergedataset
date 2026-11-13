@@ -1,0 +1,9 @@
+# class name : com.github.javafaker.Faker
+# method name: Faker(Locale, Random)
+# variables referenced in the affected region:
+proxiedFakeValueService	declared-in-file	roles=source,sink
+
+# per-line detail:
+sink:59	proxiedFakeValueService
+sink:69	proxiedFakeValueService
+source:70	proxiedFakeValueService

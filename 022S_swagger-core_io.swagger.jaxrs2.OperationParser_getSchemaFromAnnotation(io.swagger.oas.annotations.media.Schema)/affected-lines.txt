@@ -1,0 +1,77 @@
+# scenario   : 022S
+# project    : swagger-core
+# commit     : e7fea7c4889dbdd6a4e0b2d059c8aa0f126ab1c2
+# class name : io.swagger.jaxrs2.OperationParser
+# method name: getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema)
+# side       : left (left-right-lines.csv)
+source@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):187:             isEmpty = false;
+source@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):188:         }
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):234:             schemaObject.setMaximum(new BigDecimal(filteredMaximum));
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):235:         }
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):236: 
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):237:         if (NumberUtils.isNumber(schema.minimum())) {
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):238:             String filteredMinimum = schema.minimum().replaceAll(COMMA, StringUtils.EMPTY);
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):239:             schemaObject.setMinimum(new BigDecimal(filteredMinimum));
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):240:         }
+sink@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):241: 
+source@io.swagger.jaxrs2.OperationParser.getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema):244: 
+
+# same region in merge.java (scenario update):
+merge:187:         if (StringUtils.isNotBlank(schema.defaultValue())) {
+merge:188:             schemaObject.setDefault(schema.defaultValue());
+merge:189:             isEmpty = false;
+merge:190:         }
+merge:191:         if (StringUtils.isNotBlank(schema.example())) {
+merge:192:             schemaObject.setExample(schema.example());
+merge:193:             isEmpty = false;
+merge:194:         }
+merge:195:         if (StringUtils.isNotBlank(schema.format())) {
+merge:196:             schemaObject.setFormat(schema.format());
+merge:197:             isEmpty = false;
+merge:198:         }
+merge:199:         if (StringUtils.isNotBlank(schema.example())) {
+merge:200:             schemaObject.setExample(schema.example());
+merge:201:             isEmpty = false;
+merge:202:         }
+merge:203:         if (StringUtils.isNotBlank(schema.pattern())) {
+merge:204:             schemaObject.setPattern(schema.pattern());
+merge:205:             isEmpty = false;
+merge:206:         }
+merge:207:         if (schema.readOnly()) {
+merge:208:             schemaObject.setReadOnly(schema.readOnly());
+merge:209:             isEmpty = false;
+merge:210:         }
+merge:211:         if (schema.deprecated()) {
+merge:212:             schemaObject.setDeprecated(schema.deprecated());
+merge:213:             isEmpty = false;
+merge:214:         }
+merge:215:         if (schema.exclusiveMaximum()) {
+merge:216:             schemaObject.setExclusiveMaximum(schema.exclusiveMaximum());
+merge:217:             isEmpty = false;
+merge:218:         }
+merge:219:         if (schema.exclusiveMinimum()) {
+merge:220:             schemaObject.setExclusiveMinimum(schema.exclusiveMinimum());
+merge:221:             isEmpty = false;
+merge:222:         }
+merge:223:         if (schema.maxLength() > 0) {
+merge:224:             if (schema.maxProperties() > 0) {
+merge:225:                 schemaObject.setMaxProperties(schema.maxProperties());
+merge:226:                 isEmpty = false;
+merge:227:             }
+merge:228:         }
+merge:229:         if (schema.minProperties() > 0) {
+merge:230:             schemaObject.setMinProperties(schema.minProperties());
+merge:231:             isEmpty = false;
+merge:232:         }
+merge:233: 
+merge:234:         if (NumberUtils.isNumber(schema.maximum())) {
+merge:235:             String filteredMaximum = schema.maximum().replaceAll(COMMA, StringUtils.EMPTY);
+merge:236:             schemaObject.setMaximum(new BigDecimal(filteredMaximum));
+merge:237:         }
+merge:238: 
+merge:239:         if (NumberUtils.isNumber(schema.minimum())) {
+merge:240:             String filteredMinimum = schema.minimum().replaceAll(COMMA, StringUtils.EMPTY);
+merge:241:             schemaObject.setMinimum(new BigDecimal(filteredMinimum));
+merge:242:         }
+merge:243: 
+merge:244:         ReaderUtils.getStringListFromStringArray(schema.allowableValues()).ifPresent(schemaObject::setEnum);

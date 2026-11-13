@@ -1,0 +1,30 @@
+# scenario   : 051S
+# project    : MPAndroidChart
+# commit     : af114d180da6ec5633d32c701ff5467f7629fcf3
+# class name : com.xxmassdeveloper.mpchartexample.fragments.SimpleFragment
+# method name: generateScatterData(int, float, int)
+# side       : left (left-right-lines.csv)
+source@com.xxmassdeveloper.mpchartexample.fragments.SimpleFragment.generateScatterData(int, float, int):73:         
+sink@com.xxmassdeveloper.mpchartexample.fragments.SimpleFragment.generateScatterData(int, float, int):80:             for(int j = 0; j < count; j++) {        
+sink@com.xxmassdeveloper.mpchartexample.fragments.SimpleFragment.generateScatterData(int, float, int):91:         
+
+# same region in merge.java (scenario update):
+merge:73:         ScatterChart.ScatterShape[] shapes = ScatterChart.ScatterShape.getAllDefaultShapes();
+merge:74:         
+merge:75:         for(int i = 0; i < dataSets; i++) {
+merge:76:            
+merge:77:             ArrayList<Entry> entries = new ArrayList<Entry>();
+merge:78:             
+merge:79:             for(int j = 0; j < count; j++) {        
+merge:80:                 entries.add(new Entry(j, (float) (Math.random() * range) + range / 4));
+merge:81:             }
+merge:82:             
+merge:83:             ScatterDataSet ds = new ScatterDataSet(entries, getLabel(i));
+merge:84:             ds.setScatterShapeSize(12f);
+merge:85:             ds.setScatterShape(shapes[i % shapes.length]);
+merge:86:             ds.setColors(ColorTemplate.COLORFUL_COLORS);
+merge:87:             ds.setScatterShapeSize(9f);
+merge:88:             sets.add(ds);
+merge:89:         }
+merge:90:         
+merge:91:         ScatterData d = new ScatterData(sets);

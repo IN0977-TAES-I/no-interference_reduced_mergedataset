@@ -1,0 +1,15 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.action.delete.TransportDeleteAction
+# method name: executeDeleteRequestOnPrimary(DeleteRequest, IndexShard)
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.action.delete.TransportDeleteAction.executeDeleteRequestOnPrimary(DeleteRequest, IndexShard):136:                 .field(Fields._ID, id)
+source@org.elasticsearch.action.delete.TransportDeleteAction.executeDeleteRequestOnPrimary(DeleteRequest, IndexShard):140:         builder.field(Fields._SHARD_ID, shardId.id());
+
+# same region in merge.java (scenario update):
+merge:136:         shardId.writeTo(out);
+merge:137:         out.writeString(type);
+merge:138:         out.writeString(id);
+merge:139:         out.writeZLong(version);
+merge:140:         out.writeZLong(seqNo);

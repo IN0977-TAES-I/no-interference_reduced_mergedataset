@@ -1,0 +1,18 @@
+# scenario   : 048S
+# project    : hector
+# commit     : a33a46506656a39d1b0f7780973905665d3b6145
+# class name : me.prettyprint.cassandra.connection.client.HThriftClient
+# method name: open()
+# side       : left (left-right-lines.csv)
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():147: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():148: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():149: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():150: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():151: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():152: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():153: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():154: <out of range>
+sink@me.prettyprint.cassandra.connection.client.HThriftClient.open():164: <out of range>
+source@me.prettyprint.cassandra.connection.client.HThriftClient.open():169: <out of range>
+
+# same region in merge.java (scenario update):

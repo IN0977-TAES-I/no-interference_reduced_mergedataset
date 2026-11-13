@@ -1,0 +1,7 @@
+# class name : org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
+# method name: logAutoConfigurationReport(boolean)
+# variables referenced in the affected region:
+
+# per-line detail:
+source:110	
+sink:114	

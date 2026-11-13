@@ -1,0 +1,10 @@
+# scenario   : 056S
+# project    : MPAndroidChart
+# commit     : 9531ba69895cd64fce48038ffd8df2543eeea1d2
+# class name : com.github.mikephil.charting.renderer.PieChartRenderer
+# method name: drawData(Canvas)
+# side       : left (left-right-lines.csv)
+source@com.github.mikephil.charting.renderer.PieChartRenderer.drawData(Canvas):94:             if (set.isVisible())
+
+# same region in merge.java (scenario update):
+merge:94:                     (int) mViewPortHandler.getChartHeight(), Bitmap.Config.ARGB_8888);

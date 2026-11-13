@@ -1,0 +1,15 @@
+# scenario   : 065S
+# project    : spring-boot
+# commit     : 6664ce19d6f2388ebd6cf54763f54fdddd226b9a
+# class name : org.springframework.boot.jta.atomikos.AtomikosProperties
+# method name: asProperties()
+# side       : left (left-right-lines.csv)
+sink@org.springframework.boot.jta.atomikos.AtomikosProperties.asProperties():317: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosProperties.asProperties():323: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosProperties.asProperties():324: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosProperties.asProperties():325: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosProperties.asProperties():326: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosProperties.asProperties():327: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosProperties.asProperties():328: <out of range>
+
+# same region in merge.java (scenario update):

@@ -1,0 +1,18 @@
+# scenario   : 065S
+# project    : spring-boot
+# commit     : 6664ce19d6f2388ebd6cf54763f54fdddd226b9a
+# class name : org.springframework.boot.jta.atomikos.AtomikosPropertiesTests
+# method name: testProperties()
+# side       : left (left-right-lines.csv)
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():49: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():55: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():56: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():57: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():58: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():68: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():74: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():75: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():76: <out of range>
+sink@org.springframework.boot.jta.atomikos.AtomikosPropertiesTests.testProperties():77: <out of range>
+
+# same region in merge.java (scenario update):

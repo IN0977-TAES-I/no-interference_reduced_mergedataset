@@ -1,0 +1,58 @@
+# scenario   : 031S
+# project    : SimianArmy
+# commit     : c39c19bc6b9231601f6bc7358e638a99adf37e0d
+# class name : com.netflix.simianarmy.basic.BasicSimianArmyContext
+# method name: BasicSimianArmyContext(String)
+# side       : left (left-right-lines.csv)
+source@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):110:             LOGGER.info(String.format("%s = %s", prop.getKey(), prop.getValue()));
+source@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):111:         }
+source@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):112: 
+source@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):113:         config = new BasicConfiguration(properties);
+source@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):114:         calendar = new BasicCalendar(config);
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):115: 
+source@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):115: 
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):126:             awsClientConfig.setProxyHost(proxyHost);
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):127:             awsClientConfig.setProxyPort(Integer.parseInt(proxyPort));
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):128:             if ((proxyUsernaem != null) && (proxyPassword != null)) {
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):129:                 awsClientConfig.setProxyUsername(proxyUsernaem);
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):130:                 awsClientConfig.setProxyPassword(proxyPassword);
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):131:             }
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):132:         }
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):133: 
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):134:         assumeRoleArn = config.getStr("simianarmy.client.aws.assumeRoleArn");
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):135:         if (assumeRoleArn != null) {
+sink@com.netflix.simianarmy.basic.BasicSimianArmyContext.BasicSimianArmyContext(String):141:             this.exportCredentials(account, secret);
+
+# same region in merge.java (scenario update):
+merge:110:             Object propertyKey = prop.getKey();
+merge:111:             if (isSafeToLog(propertyKey)) {
+merge:112:                 LOGGER.info(String.format("%s = %s", propertyKey, prop.getValue()));
+merge:113:             } else {
+merge:114:                 LOGGER.info(String.format("%s = (not shown here)", propertyKey));
+merge:115:             }
+merge:116:         }
+merge:117: 
+merge:118:         config = new BasicConfiguration(properties);
+merge:119:         calendar = new BasicCalendar(config);
+merge:120: 
+merge:121:         account = config.getStr("simianarmy.client.aws.accountKey");
+merge:122:         secret = config.getStr("simianarmy.client.aws.secretKey");
+merge:123:         region = config.getStrOrElse("simianarmy.client.aws.region", "us-east-1");
+merge:124: 
+merge:125:         // Check for and configure optional proxy configuration
+merge:126:         proxyHost = config.getStr("simianarmy.client.aws.proxyHost");
+merge:127:         proxyPort = config.getStr("simianarmy.client.aws.proxyPort");
+merge:128:         proxyUsernaem = config.getStr("simianarmy.client.aws.proxyUser");
+merge:129:         proxyPassword = config.getStr("simianarmy.client.aws.proxyPassword");
+merge:130:         if ((proxyHost != null) && (proxyPort != null)) {
+merge:131:             awsClientConfig.setProxyHost(proxyHost);
+merge:132:             awsClientConfig.setProxyPort(Integer.parseInt(proxyPort));
+merge:133:             if ((proxyUsernaem != null) && (proxyPassword != null)) {
+merge:134:                 awsClientConfig.setProxyUsername(proxyUsernaem);
+merge:135:                 awsClientConfig.setProxyPassword(proxyPassword);
+merge:136:             }
+merge:137:         }
+merge:138: 
+merge:139:         assumeRoleArn = config.getStr("simianarmy.client.aws.assumeRoleArn");
+merge:140:         if (assumeRoleArn != null) {
+merge:141:             this.awsCredentialsProvider = new STSAssumeRoleSessionCredentialsProvider(assumeRoleArn, awsClientConfig);

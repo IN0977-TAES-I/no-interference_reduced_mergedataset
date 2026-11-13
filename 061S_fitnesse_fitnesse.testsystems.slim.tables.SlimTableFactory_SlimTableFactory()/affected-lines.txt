@@ -1,0 +1,19 @@
+# scenario   : 061S
+# project    : fitnesse
+# commit     : 4d9ba9d221d879507440feb084fa7521b95111ec
+# class name : fitnesse.testsystems.slim.tables.SlimTableFactory
+# method name: SlimTableFactory()
+# side       : left (left-right-lines.csv)
+sink@fitnesse.testsystems.slim.tables.SlimTableFactory.SlimTableFactory():24:   public void setUp() {
+sink@fitnesse.testsystems.slim.tables.SlimTableFactory.SlimTableFactory():25:     slimTableFactory = new SlimTableFactory();
+source@fitnesse.testsystems.slim.tables.SlimTableFactory.SlimTableFactory():31:     map.put("ddt:", DynamicDecisionTable.class);
+
+# same region in merge.java (scenario update):
+merge:24:   public void setUp() {
+merge:25:     slimTableFactory = new SlimTableFactory();
+merge:26:     table = mock(Table.class);
+merge:27:     map = new HashMap<String, Class<? extends SlimTable>>();
+merge:28:     map.put("dt:", DecisionTable.class);
+merge:29:     map.put("dT:", DecisionTable.class);
+merge:30:     map.put("decision:", DecisionTable.class);
+merge:31:     map.put("ddt:", DynamicDecisionTable.class);

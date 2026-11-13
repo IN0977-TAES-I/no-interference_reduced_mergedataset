@@ -1,0 +1,7 @@
+# class name : org.elasticsearch.index.query.MultiMatchQueryBuilder
+# method name: doXContent(XContentBuilder, Params)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:306	
+sink:367	

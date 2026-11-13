@@ -1,0 +1,30 @@
+# scenario   : 005S
+# project    : SimianArmy
+# commit     : 345ad9513aafff397050d613fa87ad06ddffe99d
+# class name : com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext
+# method name: getInstanceJanitor()
+# side       : left (left-right-lines.csv)
+sink@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():227:         }
+sink@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():228:         BasicJanitorContext instanceJanitorCtx = new BasicJanitorContext(
+sink@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():229:                 monkeyRegion, ruleEngine, instanceCrawler, janitorResourceTracker,
+sink@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():230:                 monkeyCalendar, configuration(), recorder());
+source@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():232:     }
+source@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():233: 
+source@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():234:     private EBSVolumeJanitor getEBSVolumeJanitor() {
+source@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():235:         JanitorRuleEngine ruleEngine = new BasicJanitorRuleEngine();
+source@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():237:             ruleEngine.addRule(new OldDetachedVolumeRule(monkeyCalendar,
+source@com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext.getInstanceJanitor():238:                     (int) configuration().getNumOrElse(
+
+# same region in merge.java (scenario update):
+merge:227:                                             8),
+merge:228:                                     configuration().getBoolOrElse(
+merge:229:                                             "simianarmy.janitor.rule.orphanedInstanceRule.opsworks.parentage",
+merge:230:                                             false)));
+merge:231:         }
+merge:232:         if (configuration().getBoolOrElse("simianarmy.janitor.rule.untaggedRule.enabled", false)) {
+merge:233:             ruleEngine.addRule(new UntaggedRule(monkeyCalendar, getPropertySet("simianarmy.janitor.rule.untaggedRule.requiredTags"),
+merge:234:                     (int) configuration().getNumOrElse(
+merge:235:                             "simianarmy.janitor.rule.untaggedRule.retentionDaysWithOwner", 3),
+merge:236:                             (int) configuration().getNumOrElse(
+merge:237:                                     "simianarmy.janitor.rule.untaggedRule.retentionDaysWithoutOwner",
+merge:238:                                     8)));

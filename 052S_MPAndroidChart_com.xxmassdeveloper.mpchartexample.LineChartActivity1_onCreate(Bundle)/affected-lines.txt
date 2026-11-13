@@ -1,0 +1,10 @@
+# scenario   : 052S
+# project    : MPAndroidChart
+# commit     : 9297923f09460d0484cd713b0abbeaea9b888ec0
+# class name : com.xxmassdeveloper.mpchartexample.LineChartActivity1
+# method name: onCreate(Bundle)
+# side       : left (left-right-lines.csv)
+sink@com.xxmassdeveloper.mpchartexample.LineChartActivity1.onCreate(Bundle):135:         leftAxis.enableGridDashedLine(10f, 10f, 0f);
+
+# same region in merge.java (scenario update):
+merge:135:         leftAxis.setDrawZeroLine(false);

@@ -1,0 +1,13 @@
+# scenario   : 024S
+# project    : dropwizard
+# commit     : ddd15a681bf42360337844412cae4aba1556eb88
+# class name : io.dropwizard.setup.Bootstrap
+# method name: Bootstrap(Application<T>)
+# side       : left (left-right-lines.csv)
+source@io.dropwizard.setup.Bootstrap.Bootstrap(Application<T>):65: <out of range>
+source@io.dropwizard.setup.Bootstrap.Bootstrap(Application<T>):67: <out of range>
+source@io.dropwizard.setup.Bootstrap.Bootstrap(Application<T>):68: <out of range>
+source@io.dropwizard.setup.Bootstrap.Bootstrap(Application<T>):69: <out of range>
+sink@io.dropwizard.setup.Bootstrap.Bootstrap(Application<T>):71: <out of range>
+
+# same region in merge.java (scenario update):

@@ -1,0 +1,1912 @@
+[
+  {
+    "scenario": "022S",
+    "project": "swagger-core",
+    "commit": "e7fea7c4889dbdd6a4e0b2d059c8aa0f126ab1c2",
+    "class_name": "io.swagger.jaxrs2.OperationParser",
+    "method": "getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema)",
+    "csv": "right-left-lines.csv",
+    "rows": 11,
+    "vars": 6
+  },
+  {
+    "scenario": "022S",
+    "project": "swagger-core",
+    "commit": "e7fea7c4889dbdd6a4e0b2d059c8aa0f126ab1c2",
+    "class_name": "io.swagger.jaxrs2.OperationParser",
+    "method": "getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema)",
+    "csv": "left-right-lines.csv",
+    "rows": 11,
+    "vars": 9
+  },
+  {
+    "scenario": "069S",
+    "project": "spring-boot",
+    "commit": "074771ec125dd407af0282b92960e9e9e3377e84",
+    "class_name": "org.springframework.boot.context.web.SpringBootServletInitializer",
+    "method": "createRootApplicationContext(ServletContext)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "069S",
+    "project": "spring-boot",
+    "commit": "074771ec125dd407af0282b92960e9e9e3377e84",
+    "class_name": "org.springframework.boot.context.web.SpringBootServletInitializer",
+    "method": "createRootApplicationContext(ServletContext)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "069S",
+    "project": "spring-boot",
+    "commit": "074771ec125dd407af0282b92960e9e9e3377e84",
+    "class_name": "org.springframework.boot.context.web.SpringBootServletInitializer",
+    "method": "createRootApplicationContext(ServletContext)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "069S",
+    "project": "spring-boot",
+    "commit": "074771ec125dd407af0282b92960e9e9e3377e84",
+    "class_name": "org.springframework.boot.context.web.SpringBootServletInitializer",
+    "method": "createRootApplicationContext(ServletContext)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "011S",
+    "project": "spring-boot",
+    "commit": "ea8107b6a53fa60b5f23b33e1b6d2e88bb60133c",
+    "class_name": "org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory",
+    "method": "createDeploymentManager(ServletContextInitializer)",
+    "csv": "right-left-lines.csv",
+    "rows": 8,
+    "vars": 2
+  },
+  {
+    "scenario": "011S",
+    "project": "spring-boot",
+    "commit": "ea8107b6a53fa60b5f23b33e1b6d2e88bb60133c",
+    "class_name": "org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory",
+    "method": "createDeploymentManager(ServletContextInitializer)",
+    "csv": "left-right-lines.csv",
+    "rows": 8,
+    "vars": 6
+  },
+  {
+    "scenario": "066S",
+    "project": "spring-boot",
+    "commit": "2d4e68a9777601bfb8309c94d8b74bc21be80ad1",
+    "class_name": "org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory",
+    "method": "customizeConnector(Connector)",
+    "csv": "right-left-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "066S",
+    "project": "spring-boot",
+    "commit": "2d4e68a9777601bfb8309c94d8b74bc21be80ad1",
+    "class_name": "org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory",
+    "method": "customizeConnector(Connector)",
+    "csv": "left-right-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "068S",
+    "project": "spring-boot",
+    "commit": "3444ebbc05b99a164474c14d6a6784f749514428",
+    "class_name": "org.springframework.boot.context.web.SpringBootServletInitializer",
+    "method": "createRootApplicationContext(ServletContext)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "068S",
+    "project": "spring-boot",
+    "commit": "3444ebbc05b99a164474c14d6a6784f749514428",
+    "class_name": "org.springframework.boot.context.web.SpringBootServletInitializer",
+    "method": "createRootApplicationContext(ServletContext)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "064S",
+    "project": "spring-boot",
+    "commit": "fdd3f12ee0f92ac18844c08bf71df39feebb6673",
+    "class_name": "org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer",
+    "method": "logAutoConfigurationReport(boolean)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "064S",
+    "project": "spring-boot",
+    "commit": "fdd3f12ee0f92ac18844c08bf71df39feebb6673",
+    "class_name": "org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer",
+    "method": "logAutoConfigurationReport(boolean)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "070S",
+    "project": "spring-boot",
+    "commit": "c93ea54ea3e08eaa2a17640d5d2b3e60264c1a9c",
+    "class_name": "org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration",
+    "method": "cacheManager(RedisTemplate<Object,Object>)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "070S",
+    "project": "spring-boot",
+    "commit": "c93ea54ea3e08eaa2a17640d5d2b3e60264c1a9c",
+    "class_name": "org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration",
+    "method": "cacheManager(RedisTemplate<Object,Object>)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "065S",
+    "project": "spring-boot",
+    "commit": "6664ce19d6f2388ebd6cf54763f54fdddd226b9a",
+    "class_name": "org.springframework.boot.jta.atomikos.AtomikosPropertiesTests",
+    "method": "testProperties()",
+    "csv": "right-left-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "065S",
+    "project": "spring-boot",
+    "commit": "6664ce19d6f2388ebd6cf54763f54fdddd226b9a",
+    "class_name": "org.springframework.boot.jta.atomikos.AtomikosPropertiesTests",
+    "method": "testProperties()",
+    "csv": "left-right-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "065S",
+    "project": "spring-boot",
+    "commit": "6664ce19d6f2388ebd6cf54763f54fdddd226b9a",
+    "class_name": "org.springframework.boot.jta.atomikos.AtomikosPropertiesTests",
+    "method": "testDefaultProperties()",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "065S",
+    "project": "spring-boot",
+    "commit": "6664ce19d6f2388ebd6cf54763f54fdddd226b9a",
+    "class_name": "org.springframework.boot.jta.atomikos.AtomikosPropertiesTests",
+    "method": "testDefaultProperties()",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "065S",
+    "project": "spring-boot",
+    "commit": "6664ce19d6f2388ebd6cf54763f54fdddd226b9a",
+    "class_name": "org.springframework.boot.jta.atomikos.AtomikosProperties",
+    "method": "asProperties()",
+    "csv": "right-left-lines.csv",
+    "rows": 7,
+    "vars": 0
+  },
+  {
+    "scenario": "065S",
+    "project": "spring-boot",
+    "commit": "6664ce19d6f2388ebd6cf54763f54fdddd226b9a",
+    "class_name": "org.springframework.boot.jta.atomikos.AtomikosProperties",
+    "method": "asProperties()",
+    "csv": "left-right-lines.csv",
+    "rows": 7,
+    "vars": 0
+  },
+  {
+    "scenario": "067S",
+    "project": "spring-boot",
+    "commit": "958a0a45f164601d01cb706c19f22ed3e25eff56",
+    "class_name": "org.springframework.boot.autoconfigure.mongo.MongoProperties",
+    "method": "builder(MongoClientOptions)",
+    "csv": "right-left-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "067S",
+    "project": "spring-boot",
+    "commit": "958a0a45f164601d01cb706c19f22ed3e25eff56",
+    "class_name": "org.springframework.boot.autoconfigure.mongo.MongoProperties",
+    "method": "builder(MongoClientOptions)",
+    "csv": "left-right-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "061S",
+    "project": "fitnesse",
+    "commit": "4d9ba9d221d879507440feb084fa7521b95111ec",
+    "class_name": "fitnesse.testsystems.slim.tables.SlimTableFactory",
+    "method": "SlimTableFactory()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "061S",
+    "project": "fitnesse",
+    "commit": "4d9ba9d221d879507440feb084fa7521b95111ec",
+    "class_name": "fitnesse.testsystems.slim.tables.SlimTableFactory",
+    "method": "SlimTableFactory()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "061S",
+    "project": "fitnesse",
+    "commit": "4d9ba9d221d879507440feb084fa7521b95111ec",
+    "class_name": "fitnesse.testsystems.slim.tables.SlimTableFactoryTest",
+    "method": "setUp()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 4
+  },
+  {
+    "scenario": "061S",
+    "project": "fitnesse",
+    "commit": "4d9ba9d221d879507440feb084fa7521b95111ec",
+    "class_name": "fitnesse.testsystems.slim.tables.SlimTableFactoryTest",
+    "method": "setUp()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "018S",
+    "project": "HikariCP",
+    "commit": "1bca94af9ec625f21d1b58ff10efb5be71ab87a6",
+    "class_name": "com.zaxxer.hikari.HikariConfig",
+    "method": "validate()",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "018S",
+    "project": "HikariCP",
+    "commit": "1bca94af9ec625f21d1b58ff10efb5be71ab87a6",
+    "class_name": "com.zaxxer.hikari.HikariConfig",
+    "method": "validate()",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 2
+  },
+  {
+    "scenario": "018S",
+    "project": "HikariCP",
+    "commit": "1bca94af9ec625f21d1b58ff10efb5be71ab87a6",
+    "class_name": "com.zaxxer.hikari.HikariPool",
+    "method": "addConnection()",
+    "csv": "right-left-lines.csv",
+    "rows": 14,
+    "vars": 1
+  },
+  {
+    "scenario": "018S",
+    "project": "HikariCP",
+    "commit": "1bca94af9ec625f21d1b58ff10efb5be71ab87a6",
+    "class_name": "com.zaxxer.hikari.HikariPool",
+    "method": "addConnection()",
+    "csv": "left-right-lines.csv",
+    "rows": 14,
+    "vars": 8
+  },
+  {
+    "scenario": "050S",
+    "project": "titan",
+    "commit": "04edd7f0e7eab2e8255a497922e34dc707d84c19",
+    "class_name": "com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx",
+    "method": "StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 9
+  },
+  {
+    "scenario": "050S",
+    "project": "titan",
+    "commit": "04edd7f0e7eab2e8255a497922e34dc707d84c19",
+    "class_name": "com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx",
+    "method": "StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 8
+  },
+  {
+    "scenario": "013S",
+    "project": "titan",
+    "commit": "387c16ea05ef9fa312f37139228d2bbf61455ff4",
+    "class_name": "com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization",
+    "method": "initialize(Serializer)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 4
+  },
+  {
+    "scenario": "013S",
+    "project": "titan",
+    "commit": "387c16ea05ef9fa312f37139228d2bbf61455ff4",
+    "class_name": "com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization",
+    "method": "initialize(Serializer)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 6
+  },
+  {
+    "scenario": "019S",
+    "project": "quickml",
+    "commit": "bae968d9a85c0501ba8842a6f88e7fc2c6b78693",
+    "class_name": "quickdt.experiments.OutOfTimeCrossValidatorRunner",
+    "method": "getRandomForestBuilder(int, int)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "019S",
+    "project": "quickml",
+    "commit": "bae968d9a85c0501ba8842a6f88e7fc2c6b78693",
+    "class_name": "quickdt.experiments.OutOfTimeCrossValidatorRunner",
+    "method": "getRandomForestBuilder(int, int)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 6
+  },
+  {
+    "scenario": "031S",
+    "project": "SimianArmy",
+    "commit": "c39c19bc6b9231601f6bc7358e638a99adf37e0d",
+    "class_name": "com.netflix.simianarmy.basic.BasicSimianArmyContext",
+    "method": "BasicSimianArmyContext(String)",
+    "csv": "right-left-lines.csv",
+    "rows": 18,
+    "vars": 26
+  },
+  {
+    "scenario": "031S",
+    "project": "SimianArmy",
+    "commit": "c39c19bc6b9231601f6bc7358e638a99adf37e0d",
+    "class_name": "com.netflix.simianarmy.basic.BasicSimianArmyContext",
+    "method": "BasicSimianArmyContext(String)",
+    "csv": "left-right-lines.csv",
+    "rows": 18,
+    "vars": 15
+  },
+  {
+    "scenario": "005S",
+    "project": "SimianArmy",
+    "commit": "345ad9513aafff397050d613fa87ad06ddffe99d",
+    "class_name": "com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext",
+    "method": "getInstanceJanitor()",
+    "csv": "right-left-lines.csv",
+    "rows": 10,
+    "vars": 4
+  },
+  {
+    "scenario": "005S",
+    "project": "SimianArmy",
+    "commit": "345ad9513aafff397050d613fa87ad06ddffe99d",
+    "class_name": "com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext",
+    "method": "getInstanceJanitor()",
+    "csv": "left-right-lines.csv",
+    "rows": 10,
+    "vars": 9
+  },
+  {
+    "scenario": "032S",
+    "project": "alluxio",
+    "commit": "dafe76c90024a915224264b4862b33f40cb8478c",
+    "class_name": "tachyon.hadoop.HdfsFileInputStream",
+    "method": "HdfsFileInputStream(TachyonFS, int, Path, Configuration, int)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 6
+  },
+  {
+    "scenario": "032S",
+    "project": "alluxio",
+    "commit": "dafe76c90024a915224264b4862b33f40cb8478c",
+    "class_name": "tachyon.hadoop.HdfsFileInputStream",
+    "method": "HdfsFileInputStream(TachyonFS, int, Path, Configuration, int)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 9
+  },
+  {
+    "scenario": "042S",
+    "project": "RxJava",
+    "commit": "1c47b0cb26e6d971eefa42ebb3479099236b0125",
+    "class_name": "rx.concurrency.TestScheduler",
+    "method": "triggerActions(long)",
+    "csv": "right-left-lines.csv",
+    "rows": 4,
+    "vars": 1
+  },
+  {
+    "scenario": "042S",
+    "project": "RxJava",
+    "commit": "1c47b0cb26e6d971eefa42ebb3479099236b0125",
+    "class_name": "rx.concurrency.TestScheduler",
+    "method": "triggerActions(long)",
+    "csv": "left-right-lines.csv",
+    "rows": 4,
+    "vars": 8
+  },
+  {
+    "scenario": "030S",
+    "project": "RxJava",
+    "commit": "a40a4130edcdadc2340da5787ca30353018173f2",
+    "class_name": "rx.internal.operators.OperatorMulticast",
+    "method": "connect(Action1<?superSubscription>)",
+    "csv": "right-left-lines.csv",
+    "rows": 12,
+    "vars": 7
+  },
+  {
+    "scenario": "030S",
+    "project": "RxJava",
+    "commit": "a40a4130edcdadc2340da5787ca30353018173f2",
+    "class_name": "rx.internal.operators.OperatorMulticast",
+    "method": "connect(Action1<?superSubscription>)",
+    "csv": "left-right-lines.csv",
+    "rows": 12,
+    "vars": 5
+  },
+  {
+    "scenario": "007S",
+    "project": "webbit",
+    "commit": "74d2d2b87704d003acacb34e4ca8fb5f897b938f",
+    "class_name": "org.webbitserver.netty.WebSocketClient",
+    "method": "adjustPipelineToWebSocket(ChannelHandlerContext, MessageEvent, ChannelHandler, ChannelHandler)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "007S",
+    "project": "webbit",
+    "commit": "74d2d2b87704d003acacb34e4ca8fb5f897b938f",
+    "class_name": "org.webbitserver.netty.WebSocketClient",
+    "method": "adjustPipelineToWebSocket(ChannelHandlerContext, MessageEvent, ChannelHandler, ChannelHandler)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "029S",
+    "project": "orientdb",
+    "commit": "a5ce3bcc0a1d196745c575ad6602019f7a6b86f8",
+    "class_name": "com.orientechnologies.orient.core.Orient",
+    "method": "startup()",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 2
+  },
+  {
+    "scenario": "029S",
+    "project": "orientdb",
+    "commit": "a5ce3bcc0a1d196745c575ad6602019f7a6b86f8",
+    "class_name": "com.orientechnologies.orient.core.Orient",
+    "method": "startup()",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testQueryModeCommonGramsAnalysis()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testQueryModeCommonGramsAnalysis()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testCommonGramsAnalysis()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testCommonGramsAnalysis()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest",
+    "method": "testSynonymsAnalysis()",
+    "csv": "right-left-lines.csv",
+    "rows": 10,
+    "vars": 8
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.synonyms.SynonymsAnalysisTest",
+    "method": "testSynonymsAnalysis()",
+    "csv": "left-right-lines.csv",
+    "rows": 10,
+    "vars": 11
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.KuromojiAnalysisTests",
+    "method": "createAnalysisService()",
+    "csv": "right-left-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.KuromojiAnalysisTests",
+    "method": "createAnalysisService()",
+    "csv": "left-right-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testQueryModeCommonGramsAnalysis()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testQueryModeCommonGramsAnalysis()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testCommonGramsAnalysis()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "003S",
+    "project": "elasticsearch",
+    "commit": "f3d63095dbcc985e24162fbac4ee0d6914dc757d",
+    "class_name": "org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests",
+    "method": "testCommonGramsAnalysis()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "002S",
+    "project": "elasticsearch",
+    "commit": "59cb67c7bd0ab6311115b20954e013412b676b29",
+    "class_name": "org.elasticsearch.index.query.MultiMatchQueryBuilder",
+    "method": "doXContent(XContentBuilder, Params)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "002S",
+    "project": "elasticsearch",
+    "commit": "59cb67c7bd0ab6311115b20954e013412b676b29",
+    "class_name": "org.elasticsearch.index.query.MultiMatchQueryBuilder",
+    "method": "doXContent(XContentBuilder, Params)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "002S",
+    "project": "elasticsearch",
+    "commit": "59cb67c7bd0ab6311115b20954e013412b676b29",
+    "class_name": "org.elasticsearch.index.query.support.NestedInnerQueryParseSupport",
+    "method": "setPathLevel()",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 3
+  },
+  {
+    "scenario": "002S",
+    "project": "elasticsearch",
+    "commit": "59cb67c7bd0ab6311115b20954e013412b676b29",
+    "class_name": "org.elasticsearch.index.query.support.NestedInnerQueryParseSupport",
+    "method": "setPathLevel()",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 4
+  },
+  {
+    "scenario": "036S",
+    "project": "elasticsearch",
+    "commit": "0404db65e3497452886173957729c8e82cfd4a03",
+    "class_name": "org.elasticsearch.test.ESSingleNodeTestCase",
+    "method": "newNode()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 2
+  },
+  {
+    "scenario": "036S",
+    "project": "elasticsearch",
+    "commit": "0404db65e3497452886173957729c8e82cfd4a03",
+    "class_name": "org.elasticsearch.test.ESSingleNodeTestCase",
+    "method": "newNode()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 1
+  },
+  {
+    "scenario": "036S",
+    "project": "elasticsearch",
+    "commit": "0404db65e3497452886173957729c8e82cfd4a03",
+    "class_name": "org.elasticsearch.common.settings.ClusterSettings",
+    "method": "BUILT_IN_CLUSTER_SETTINGS",
+    "csv": "right-left-lines.csv",
+    "rows": 9,
+    "vars": 9
+  },
+  {
+    "scenario": "036S",
+    "project": "elasticsearch",
+    "commit": "0404db65e3497452886173957729c8e82cfd4a03",
+    "class_name": "org.elasticsearch.common.settings.ClusterSettings",
+    "method": "BUILT_IN_CLUSTER_SETTINGS",
+    "csv": "left-right-lines.csv",
+    "rows": 9,
+    "vars": 9
+  },
+  {
+    "scenario": "001S",
+    "project": "elasticsearch",
+    "commit": "36884807b3cc9d660db4da062275c7fdbec8ba67",
+    "class_name": "org.elasticsearch.index.query.SimpleIndexQueryParserTests",
+    "method": "setup()",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 4
+  },
+  {
+    "scenario": "001S",
+    "project": "elasticsearch",
+    "commit": "36884807b3cc9d660db4da062275c7fdbec8ba67",
+    "class_name": "org.elasticsearch.index.query.SimpleIndexQueryParserTests",
+    "method": "setup()",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 2
+  },
+  {
+    "scenario": "037S",
+    "project": "elasticsearch",
+    "commit": "3764b3ff800c94293aba0bb0fa18c7df80a764f7",
+    "class_name": "org.elasticsearch.rest.action.cat.RestNodesAction",
+    "method": "getTableWithHeader(RestRequest)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 1
+  },
+  {
+    "scenario": "037S",
+    "project": "elasticsearch",
+    "commit": "3764b3ff800c94293aba0bb0fa18c7df80a764f7",
+    "class_name": "org.elasticsearch.rest.action.cat.RestNodesAction",
+    "method": "getTableWithHeader(RestRequest)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 1
+  },
+  {
+    "scenario": "037S",
+    "project": "elasticsearch",
+    "commit": "3764b3ff800c94293aba0bb0fa18c7df80a764f7",
+    "class_name": "org.elasticsearch.rest.action.cat.RestShardsAction",
+    "method": "getTableWithHeader(RestRequest)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "037S",
+    "project": "elasticsearch",
+    "commit": "3764b3ff800c94293aba0bb0fa18c7df80a764f7",
+    "class_name": "org.elasticsearch.rest.action.cat.RestShardsAction",
+    "method": "getTableWithHeader(RestRequest)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "037S",
+    "project": "elasticsearch",
+    "commit": "3764b3ff800c94293aba0bb0fa18c7df80a764f7",
+    "class_name": "org.elasticsearch.rest.action.cat.RestIndicesAction",
+    "method": "getTableWithHeader(RestRequest)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 1
+  },
+  {
+    "scenario": "037S",
+    "project": "elasticsearch",
+    "commit": "3764b3ff800c94293aba0bb0fa18c7df80a764f7",
+    "class_name": "org.elasticsearch.rest.action.cat.RestIndicesAction",
+    "method": "getTableWithHeader(RestRequest)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 1
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.index.IndexSettings",
+    "method": "IndexSettings(IndexMetaData, Settings, Predicate<String>, IndexScopedSettings)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.index.IndexSettings",
+    "method": "IndexSettings(IndexMetaData, Settings, Predicate<String>, IndexScopedSettings)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.index.TransportIndexAction",
+    "method": "executeIndexRequestOnPrimary(IndexRequest, IndexShard, MappingUpdatedAction)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.index.TransportIndexAction",
+    "method": "executeIndexRequestOnPrimary(IndexRequest, IndexShard, MappingUpdatedAction)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.ReplicationOperationTests",
+    "method": "testReplication()",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 6
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.ReplicationOperationTests",
+    "method": "testReplication()",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 9
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.index.engine.InternalEngine",
+    "method": "InternalEngine(EngineConfig)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 2
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.index.engine.InternalEngine",
+    "method": "InternalEngine(EngineConfig)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 3
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.index.engine.InternalEngineTests",
+    "method": "testRecoverFromForeignTranslog()",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.index.engine.InternalEngineTests",
+    "method": "testRecoverFromForeignTranslog()",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.update.TransportUpdateAction",
+    "method": "shardOperation(UpdateRequest, ActionListener<UpdateResponse>, int)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.update.TransportUpdateAction",
+    "method": "shardOperation(UpdateRequest, ActionListener<UpdateResponse>, int)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.TransportReplicationAction",
+    "method": "doRun()",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.TransportReplicationAction",
+    "method": "doRun()",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.cluster.metadata.MetaDataCreateIndexService",
+    "method": "createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>)",
+    "csv": "right-left-lines.csv",
+    "rows": 8,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.cluster.metadata.MetaDataCreateIndexService",
+    "method": "createIndex(CreateIndexClusterStateUpdateRequest, ActionListener<ClusterStateUpdateResponse>)",
+    "csv": "left-right-lines.csv",
+    "rows": 8,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.bulk.TransportShardBulkAction",
+    "method": "update(IndexMetaData, BulkShardRequest, IndexShard, long[], VersionType[], Translog.Location, int, BulkItemRequest)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.bulk.TransportShardBulkAction",
+    "method": "update(IndexMetaData, BulkShardRequest, IndexShard, long[], VersionType[], Translog.Location, int, BulkItemRequest)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "readFrom(StreamInput)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 3
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "readFrom(StreamInput)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "writeTo(StreamOutput)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 6
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "writeTo(StreamOutput)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 3
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "toXContent(XContentBuilder, Params)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "toXContent(XContentBuilder, Params)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.ReplicationOperation",
+    "method": "execute()",
+    "csv": "right-left-lines.csv",
+    "rows": 9,
+    "vars": 5
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.ReplicationOperation",
+    "method": "execute()",
+    "csv": "left-right-lines.csv",
+    "rows": 9,
+    "vars": 7
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.delete.TransportDeleteAction",
+    "method": "executeDeleteRequestOnPrimary(DeleteRequest, IndexShard)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 3
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.delete.TransportDeleteAction",
+    "method": "executeDeleteRequestOnPrimary(DeleteRequest, IndexShard)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 4
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.common.settings.IndexScopedSettings",
+    "method": "BUILT_IN_INDEX_SETTINGS",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.common.settings.IndexScopedSettings",
+    "method": "BUILT_IN_INDEX_SETTINGS",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 2
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.TransportReplicationAction",
+    "method": "doRun()",
+    "csv": "right-left-lines.csv",
+    "rows": 7,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.support.replication.TransportReplicationAction",
+    "method": "doRun()",
+    "csv": "left-right-lines.csv",
+    "rows": 7,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "writeTo(StreamOutput)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 6
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "writeTo(StreamOutput)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 3
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "toXContent(XContentBuilder, Params)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.DocWriteResponse",
+    "method": "toXContent(XContentBuilder, Params)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "058S",
+    "project": "elasticsearch",
+    "commit": "d896886973660785aac45275ddb110c1a6babc57",
+    "class_name": "org.elasticsearch.action.update.TransportUpdateAction",
+    "method": "shardOperation(UpdateRequest, ActionListener<UpdateResponse>, int)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 0
+  },
+  {
+    "scenario": "027S",
+    "project": "jenkins",
+    "commit": "48b2b951dfb3438999ceda330093cac82b857ce6",
+    "class_name": "jenkins.slaves.DefaultJnlpSlaveReceiver",
+    "method": "handle(String, JnlpSlaveHandshake)",
+    "csv": "right-left-lines.csv",
+    "rows": 4,
+    "vars": 2
+  },
+  {
+    "scenario": "027S",
+    "project": "jenkins",
+    "commit": "48b2b951dfb3438999ceda330093cac82b857ce6",
+    "class_name": "jenkins.slaves.DefaultJnlpSlaveReceiver",
+    "method": "handle(String, JnlpSlaveHandshake)",
+    "csv": "left-right-lines.csv",
+    "rows": 4,
+    "vars": 3
+  },
+  {
+    "scenario": "023S",
+    "project": "cucumber-jvm",
+    "commit": "4505c156b6267c1b760deec570ddbfe047b42aa9",
+    "class_name": "cuke4duke.internal.java.JavaLanguage",
+    "method": "load(String)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 4
+  },
+  {
+    "scenario": "023S",
+    "project": "cucumber-jvm",
+    "commit": "4505c156b6267c1b760deec570ddbfe047b42aa9",
+    "class_name": "cuke4duke.internal.java.JavaLanguage",
+    "method": "load(String)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 2
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.LineChartActivity1",
+    "method": "onCreate(Bundle)",
+    "csv": "right-left-lines.csv",
+    "rows": 1,
+    "vars": 0
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.LineChartActivity1",
+    "method": "onCreate(Bundle)",
+    "csv": "left-right-lines.csv",
+    "rows": 1,
+    "vars": 1
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.StackedBarActivityNegative",
+    "method": "onCreate(Bundle)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.StackedBarActivityNegative",
+    "method": "onCreate(Bundle)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.LineChartActivity2",
+    "method": "onCreate(Bundle)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.LineChartActivity2",
+    "method": "onCreate(Bundle)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.RadarChartActivitry",
+    "method": "onCreate(Bundle)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 4
+  },
+  {
+    "scenario": "052S",
+    "project": "MPAndroidChart",
+    "commit": "9297923f09460d0484cd713b0abbeaea9b888ec0",
+    "class_name": "com.xxmassdeveloper.mpchartexample.RadarChartActivitry",
+    "method": "onCreate(Bundle)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 4
+  },
+  {
+    "scenario": "056S",
+    "project": "MPAndroidChart",
+    "commit": "9531ba69895cd64fce48038ffd8df2543eeea1d2",
+    "class_name": "com.github.mikephil.charting.renderer.PieChartRenderer",
+    "method": "drawData(Canvas)",
+    "csv": "right-left-lines.csv",
+    "rows": 1,
+    "vars": 2
+  },
+  {
+    "scenario": "056S",
+    "project": "MPAndroidChart",
+    "commit": "9531ba69895cd64fce48038ffd8df2543eeea1d2",
+    "class_name": "com.github.mikephil.charting.renderer.PieChartRenderer",
+    "method": "drawData(Canvas)",
+    "csv": "left-right-lines.csv",
+    "rows": 1,
+    "vars": 1
+  },
+  {
+    "scenario": "051S",
+    "project": "MPAndroidChart",
+    "commit": "af114d180da6ec5633d32c701ff5467f7629fcf3",
+    "class_name": "com.xxmassdeveloper.mpchartexample.ScatterChartActivity",
+    "method": "onProgressChanged(SeekBar, int, boolean)",
+    "csv": "right-left-lines.csv",
+    "rows": 9,
+    "vars": 6
+  },
+  {
+    "scenario": "051S",
+    "project": "MPAndroidChart",
+    "commit": "af114d180da6ec5633d32c701ff5467f7629fcf3",
+    "class_name": "com.xxmassdeveloper.mpchartexample.ScatterChartActivity",
+    "method": "onProgressChanged(SeekBar, int, boolean)",
+    "csv": "left-right-lines.csv",
+    "rows": 9,
+    "vars": 6
+  },
+  {
+    "scenario": "051S",
+    "project": "MPAndroidChart",
+    "commit": "af114d180da6ec5633d32c701ff5467f7629fcf3",
+    "class_name": "com.xxmassdeveloper.mpchartexample.ScatterChartActivity",
+    "method": "onCreate(Bundle)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 7
+  },
+  {
+    "scenario": "051S",
+    "project": "MPAndroidChart",
+    "commit": "af114d180da6ec5633d32c701ff5467f7629fcf3",
+    "class_name": "com.xxmassdeveloper.mpchartexample.ScatterChartActivity",
+    "method": "onCreate(Bundle)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 6
+  },
+  {
+    "scenario": "051S",
+    "project": "MPAndroidChart",
+    "commit": "af114d180da6ec5633d32c701ff5467f7629fcf3",
+    "class_name": "com.xxmassdeveloper.mpchartexample.fragments.SimpleFragment",
+    "method": "generateScatterData(int, float, int)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 9
+  },
+  {
+    "scenario": "051S",
+    "project": "MPAndroidChart",
+    "commit": "af114d180da6ec5633d32c701ff5467f7629fcf3",
+    "class_name": "com.xxmassdeveloper.mpchartexample.fragments.SimpleFragment",
+    "method": "generateScatterData(int, float, int)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 1
+  },
+  {
+    "scenario": "014S",
+    "project": "jsoup",
+    "commit": "fee4762322f85a1109edd75ccb67f38cf5008c80",
+    "class_name": "org.jsoup.helper.HttpConnection",
+    "method": "createConnection(Connection.Request)",
+    "csv": "right-left-lines.csv",
+    "rows": 7,
+    "vars": 6
+  },
+  {
+    "scenario": "014S",
+    "project": "jsoup",
+    "commit": "fee4762322f85a1109edd75ccb67f38cf5008c80",
+    "class_name": "org.jsoup.helper.HttpConnection",
+    "method": "createConnection(Connection.Request)",
+    "csv": "left-right-lines.csv",
+    "rows": 7,
+    "vars": 5
+  },
+  {
+    "scenario": "028S",
+    "project": "logback",
+    "commit": "542843fd04a793fb9e0eea0c84d199e66d7c15af",
+    "class_name": "ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase",
+    "method": "start()",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 5
+  },
+  {
+    "scenario": "028S",
+    "project": "logback",
+    "commit": "542843fd04a793fb9e0eea0c84d199e66d7c15af",
+    "class_name": "ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase",
+    "method": "start()",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 3
+  },
+  {
+    "scenario": "034S",
+    "project": "voldemort",
+    "commit": "4cc1c145819030c8e2baffe4c92383de14b8d880",
+    "class_name": "voldemort.server.VoldemortConfig",
+    "method": "VoldemortConfig(Props)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 4
+  },
+  {
+    "scenario": "034S",
+    "project": "voldemort",
+    "commit": "4cc1c145819030c8e2baffe4c92383de14b8d880",
+    "class_name": "voldemort.server.VoldemortConfig",
+    "method": "VoldemortConfig(Props)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 2
+  },
+  {
+    "scenario": "033S",
+    "project": "voldemort",
+    "commit": "b30fdfebe30c9b6e37b9fbc3fec0ff74cd19f997",
+    "class_name": "voldemort.VoldemortClientShell",
+    "method": "VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 6
+  },
+  {
+    "scenario": "033S",
+    "project": "voldemort",
+    "commit": "b30fdfebe30c9b6e37b9fbc3fec0ff74cd19f997",
+    "class_name": "voldemort.VoldemortClientShell",
+    "method": "VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "020S",
+    "project": "pushy",
+    "commit": "58901c846e4f0874977c5aabbc34bcb4de3670e0",
+    "class_name": "com.relayrides.pushy.apns.PushManager",
+    "method": "handleConnectionFailure(ApnsConnection<T>, Throwable)",
+    "csv": "right-left-lines.csv",
+    "rows": 8,
+    "vars": 7
+  },
+  {
+    "scenario": "020S",
+    "project": "pushy",
+    "commit": "58901c846e4f0874977c5aabbc34bcb4de3670e0",
+    "class_name": "com.relayrides.pushy.apns.PushManager",
+    "method": "handleConnectionFailure(ApnsConnection<T>, Throwable)",
+    "csv": "left-right-lines.csv",
+    "rows": 8,
+    "vars": 9
+  },
+  {
+    "scenario": "020S",
+    "project": "pushy",
+    "commit": "58901c846e4f0874977c5aabbc34bcb4de3670e0",
+    "class_name": "com.relayrides.pushy.apns.PushManager",
+    "method": "handleConnectionClosure(ApnsConnection<T>)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 1
+  },
+  {
+    "scenario": "020S",
+    "project": "pushy",
+    "commit": "58901c846e4f0874977c5aabbc34bcb4de3670e0",
+    "class_name": "com.relayrides.pushy.apns.PushManager",
+    "method": "handleConnectionClosure(ApnsConnection<T>)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 2
+  },
+  {
+    "scenario": "004S",
+    "project": "okhttp",
+    "commit": "35166168529bd27281685e56a0a122eff44460e9",
+    "class_name": "com.squareup.okhttp.OkHttpClient",
+    "method": "copyWithDefaults()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "004S",
+    "project": "okhttp",
+    "commit": "35166168529bd27281685e56a0a122eff44460e9",
+    "class_name": "com.squareup.okhttp.OkHttpClient",
+    "method": "copyWithDefaults()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "004S",
+    "project": "okhttp",
+    "commit": "35166168529bd27281685e56a0a122eff44460e9",
+    "class_name": "com.squareup.okhttp.OkHttpClient",
+    "method": "copyWithDefaults()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 0
+  },
+  {
+    "scenario": "004S",
+    "project": "okhttp",
+    "commit": "35166168529bd27281685e56a0a122eff44460e9",
+    "class_name": "com.squareup.okhttp.OkHttpClient",
+    "method": "copyWithDefaults()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "017S",
+    "project": "okhttp",
+    "commit": "1151c9853ccc3c9c3211c613b9b845b925f8c6a6",
+    "class_name": "com.squareup.okhttp.internal.bytes.GzipSource",
+    "method": "consumeHeader(Deadline)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 6
+  },
+  {
+    "scenario": "017S",
+    "project": "okhttp",
+    "commit": "1151c9853ccc3c9c3211c613b9b845b925f8c6a6",
+    "class_name": "com.squareup.okhttp.internal.bytes.GzipSource",
+    "method": "consumeHeader(Deadline)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 4
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.MongoDBRiverDefinition",
+    "method": "parseSettings(String, String, RiverSettings, ScriptService)",
+    "csv": "right-left-lines.csv",
+    "rows": 16,
+    "vars": 26
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.MongoDBRiverDefinition",
+    "method": "parseSettings(String, String, RiverSettings, ScriptService)",
+    "csv": "left-right-lines.csv",
+    "rows": 16,
+    "vars": 23
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Slurper",
+    "method": "addToStream(Operation, Timestamp<?>, DBObject, String)",
+    "csv": "right-left-lines.csv",
+    "rows": 12,
+    "vars": 14
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Slurper",
+    "method": "addToStream(Operation, Timestamp<?>, DBObject, String)",
+    "csv": "left-right-lines.csv",
+    "rows": 12,
+    "vars": 19
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Slurper",
+    "method": "run()",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Slurper",
+    "method": "run()",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 3
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Indexer",
+    "method": "applyAdvancedTransformation(QueueEntry, String)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Indexer",
+    "method": "applyAdvancedTransformation(QueueEntry, String)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Indexer",
+    "method": "processBlockingQueue(QueueEntry)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 3
+  },
+  {
+    "scenario": "035S",
+    "project": "elasticsearch-river-mongodb",
+    "commit": "6b6ce8e851c6613213c4508c3f277a80649e0c7b",
+    "class_name": "org.elasticsearch.river.mongodb.Indexer",
+    "method": "processBlockingQueue(QueueEntry)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 8
+  },
+  {
+    "scenario": "040S",
+    "project": "libgdx",
+    "commit": "da27e2dae56be0a159e82231e5c3a5b83b099063",
+    "class_name": "com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application",
+    "method": "newWindow(ApplicationListener, Lwjgl3WindowConfiguration)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 6
+  },
+  {
+    "scenario": "040S",
+    "project": "libgdx",
+    "commit": "da27e2dae56be0a159e82231e5c3a5b83b099063",
+    "class_name": "com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application",
+    "method": "newWindow(ApplicationListener, Lwjgl3WindowConfiguration)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 6
+  },
+  {
+    "scenario": "040S",
+    "project": "libgdx",
+    "commit": "da27e2dae56be0a159e82231e5c3a5b83b099063",
+    "class_name": "com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration",
+    "method": "copy(Lwjgl3ApplicationConfiguration)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 2
+  },
+  {
+    "scenario": "040S",
+    "project": "libgdx",
+    "commit": "da27e2dae56be0a159e82231e5c3a5b83b099063",
+    "class_name": "com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration",
+    "method": "copy(Lwjgl3ApplicationConfiguration)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 2
+  },
+  {
+    "scenario": "062S",
+    "project": "cloud-slang",
+    "commit": "20bac30d9bd76569aa6a4fa1e8261c1a9b5e6f76",
+    "class_name": "io.cloudslang.lang.api.SlangImpl",
+    "method": "getAllEventTypes()",
+    "csv": "right-left-lines.csv",
+    "rows": 4,
+    "vars": 8
+  },
+  {
+    "scenario": "062S",
+    "project": "cloud-slang",
+    "commit": "20bac30d9bd76569aa6a4fa1e8261c1a9b5e6f76",
+    "class_name": "io.cloudslang.lang.api.SlangImpl",
+    "method": "getAllEventTypes()",
+    "csv": "left-right-lines.csv",
+    "rows": 4,
+    "vars": 8
+  },
+  {
+    "scenario": "062S",
+    "project": "cloud-slang",
+    "commit": "20bac30d9bd76569aa6a4fa1e8261c1a9b5e6f76",
+    "class_name": "io.cloudslang.lang.api.SlangImplTest",
+    "method": "ALL_EVENTS_SIZE",
+    "csv": "right-left-lines.csv",
+    "rows": 1,
+    "vars": 1
+  },
+  {
+    "scenario": "062S",
+    "project": "cloud-slang",
+    "commit": "20bac30d9bd76569aa6a4fa1e8261c1a9b5e6f76",
+    "class_name": "io.cloudslang.lang.api.SlangImplTest",
+    "method": "ALL_EVENTS_SIZE",
+    "csv": "left-right-lines.csv",
+    "rows": 1,
+    "vars": 1
+  },
+  {
+    "scenario": "006S",
+    "project": "druid",
+    "commit": "05168808c278c080c59c19e858d9471b316cd1f5",
+    "class_name": "com.metamx.druid.loading.S3SegmentPusher",
+    "method": "push(File, DataSegment)",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 7
+  },
+  {
+    "scenario": "006S",
+    "project": "druid",
+    "commit": "05168808c278c080c59c19e858d9471b316cd1f5",
+    "class_name": "com.metamx.druid.loading.S3SegmentPusher",
+    "method": "push(File, DataSegment)",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 7
+  },
+  {
+    "scenario": "021S",
+    "project": "java-faker",
+    "commit": "ca42fcfaf45cae1754c58e02e1d5d2a58ec03561",
+    "class_name": "com.github.javafaker.Faker",
+    "method": "Faker(Locale, Random)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 2
+  },
+  {
+    "scenario": "021S",
+    "project": "java-faker",
+    "commit": "ca42fcfaf45cae1754c58e02e1d5d2a58ec03561",
+    "class_name": "com.github.javafaker.Faker",
+    "method": "Faker(Locale, Random)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 1
+  },
+  {
+    "scenario": "015S",
+    "project": "retrofit",
+    "commit": "2b6c719c6645f8e48dca6d0047c752069d321bc4",
+    "class_name": "retrofit.RestAdapter",
+    "method": "logAndReplaceRequest(Request)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 7
+  },
+  {
+    "scenario": "015S",
+    "project": "retrofit",
+    "commit": "2b6c719c6645f8e48dca6d0047c752069d321bc4",
+    "class_name": "retrofit.RestAdapter",
+    "method": "logAndReplaceRequest(Request)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 4
+  },
+  {
+    "scenario": "015S",
+    "project": "retrofit",
+    "commit": "2b6c719c6645f8e48dca6d0047c752069d321bc4",
+    "class_name": "retrofit.RestAdapter",
+    "method": "logAndReplaceResponse(String, Response, long)",
+    "csv": "right-left-lines.csv",
+    "rows": 2,
+    "vars": 1
+  },
+  {
+    "scenario": "015S",
+    "project": "retrofit",
+    "commit": "2b6c719c6645f8e48dca6d0047c752069d321bc4",
+    "class_name": "retrofit.RestAdapter",
+    "method": "logAndReplaceResponse(String, Response, long)",
+    "csv": "left-right-lines.csv",
+    "rows": 2,
+    "vars": 4
+  },
+  {
+    "scenario": "024S",
+    "project": "dropwizard",
+    "commit": "ddd15a681bf42360337844412cae4aba1556eb88",
+    "class_name": "io.dropwizard.setup.Bootstrap",
+    "method": "Bootstrap(Application<T>)",
+    "csv": "right-left-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "024S",
+    "project": "dropwizard",
+    "commit": "ddd15a681bf42360337844412cae4aba1556eb88",
+    "class_name": "io.dropwizard.setup.Bootstrap",
+    "method": "Bootstrap(Application<T>)",
+    "csv": "left-right-lines.csv",
+    "rows": 5,
+    "vars": 0
+  },
+  {
+    "scenario": "026S",
+    "project": "hector",
+    "commit": "213f7887ea70eabdf0705cf8454de29af89e8c38",
+    "class_name": "me.prettyprint.cassandra.connection.HConnectionManager",
+    "method": "operateWithFailover(Operation<?>)",
+    "csv": "right-left-lines.csv",
+    "rows": 3,
+    "vars": 6
+  },
+  {
+    "scenario": "026S",
+    "project": "hector",
+    "commit": "213f7887ea70eabdf0705cf8454de29af89e8c38",
+    "class_name": "me.prettyprint.cassandra.connection.HConnectionManager",
+    "method": "operateWithFailover(Operation<?>)",
+    "csv": "left-right-lines.csv",
+    "rows": 3,
+    "vars": 1
+  },
+  {
+    "scenario": "025S",
+    "project": "hector",
+    "commit": "0588608e7a2bdf974c985ff546207104f672bf6c",
+    "class_name": "me.prettyprint.cassandra.connection.client.HSaslThriftClient",
+    "method": "open()",
+    "csv": "right-left-lines.csv",
+    "rows": 6,
+    "vars": 3
+  },
+  {
+    "scenario": "025S",
+    "project": "hector",
+    "commit": "0588608e7a2bdf974c985ff546207104f672bf6c",
+    "class_name": "me.prettyprint.cassandra.connection.client.HSaslThriftClient",
+    "method": "open()",
+    "csv": "left-right-lines.csv",
+    "rows": 6,
+    "vars": 7
+  },
+  {
+    "scenario": "048S",
+    "project": "hector",
+    "commit": "a33a46506656a39d1b0f7780973905665d3b6145",
+    "class_name": "me.prettyprint.cassandra.connection.client.HThriftClient",
+    "method": "open()",
+    "csv": "right-left-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "048S",
+    "project": "hector",
+    "commit": "a33a46506656a39d1b0f7780973905665d3b6145",
+    "class_name": "me.prettyprint.cassandra.connection.client.HThriftClient",
+    "method": "open()",
+    "csv": "left-right-lines.csv",
+    "rows": 10,
+    "vars": 0
+  },
+  {
+    "scenario": "048S",
+    "project": "hector",
+    "commit": "a33a46506656a39d1b0f7780973905665d3b6145",
+    "class_name": "me.prettyprint.cassandra.connection.client.HKerberosThriftClient",
+    "method": "open()",
+    "csv": "right-left-lines.csv",
+    "rows": 9,
+    "vars": 7
+  },
+  {
+    "scenario": "048S",
+    "project": "hector",
+    "commit": "a33a46506656a39d1b0f7780973905665d3b6145",
+    "class_name": "me.prettyprint.cassandra.connection.client.HKerberosThriftClient",
+    "method": "open()",
+    "csv": "left-right-lines.csv",
+    "rows": 9,
+    "vars": 2
+  }
+]

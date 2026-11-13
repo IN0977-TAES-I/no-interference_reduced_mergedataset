@@ -1,0 +1,11 @@
+# class name : com.squareup.okhttp.OkHttpClient
+# method name: copyWithDefaults()
+# variables referenced in the affected region:
+authenticator	declared-in-file	roles=source
+proxy	declared-in-file	roles=sink
+result	declared-in-file	roles=source,sink
+
+# per-line detail:
+sink:277	result,proxy
+source:287	result,authenticator
+sink:293	result

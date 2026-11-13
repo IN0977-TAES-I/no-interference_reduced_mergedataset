@@ -1,0 +1,7 @@
+# class name : org.webbitserver.netty.WebSocketClient
+# method name: adjustPipelineToWebSocket(ChannelHandlerContext, MessageEvent, ChannelHandler, ChannelHandler)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:260	
+source:262	

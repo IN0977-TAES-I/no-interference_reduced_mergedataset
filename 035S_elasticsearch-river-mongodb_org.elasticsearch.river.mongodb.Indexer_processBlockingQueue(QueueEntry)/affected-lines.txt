@@ -1,0 +1,54 @@
+# scenario   : 035S
+# project    : elasticsearch-river-mongodb
+# commit     : 6b6ce8e851c6613213c4508c3f277a80649e0c7b
+# class name : org.elasticsearch.river.mongodb.Indexer
+# method name: processBlockingQueue(QueueEntry)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.river.mongodb.Indexer.processBlockingQueue(QueueEntry):161:         private List<ServerAddress> mongoServers = new ArrayList<ServerAddress>();
+sink@org.elasticsearch.river.mongodb.Indexer.processBlockingQueue(QueueEntry):176:         private int socketTimeout = 0;
+source@org.elasticsearch.river.mongodb.Indexer.processBlockingQueue(QueueEntry):189:         private boolean skipInitialImport;
+source@org.elasticsearch.river.mongodb.Indexer.processBlockingQueue(QueueEntry):198:         private String indexName;
+source@org.elasticsearch.river.mongodb.Indexer.processBlockingQueue(QueueEntry):201: 
+
+# same region in merge.java (scenario update):
+merge:161:         private List<ServerAddress> mongoServers = new ArrayList<ServerAddress>();
+merge:162:         // mongodb
+merge:163:         private String mongoDb;
+merge:164:         private String mongoCollection;
+merge:165:         private boolean mongoGridFS;
+merge:166:         private BasicDBObject mongoOplogFilter;// = new BasicDBObject();
+merge:167:         private BasicDBObject mongoCollectionFilter = new BasicDBObject();
+merge:168:         // mongodb.credentials
+merge:169:         private String mongoAdminUser = "";
+merge:170:         private String mongoAdminPassword = "";
+merge:171:         private String mongoLocalUser = "";
+merge:172:         private String mongoLocalPassword = "";
+merge:173:         // mongodb.options
+merge:174:         private MongoClientOptions mongoClientOptions = null;
+merge:175:         private int connectTimeout = 0;
+merge:176:         private int socketTimeout = 0;
+merge:177:         private boolean mongoSecondaryReadPreference = false;
+merge:178:         private boolean mongoUseSSL = false;
+merge:179:         private boolean mongoSSLVerifyCertificate = false;
+merge:180:         private boolean dropCollection = false;
+merge:181:         private Boolean isMongos = null;
+merge:182:         private Set<String> excludeFields = null;
+merge:183:         private Set<String> includeFields = null;
+merge:184:         private String includeCollection = "";
+merge:185:         private Timestamp<?> initialTimestamp = null;
+merge:186:         private String script = null;
+merge:187:         private String scriptType = null;
+merge:188:         private boolean advancedTransformation = false;
+merge:189:         private boolean skipInitialImport;
+merge:190:         private Set<String> parentTypes = null;
+merge:191:         private boolean storeStatistics;
+merge:192:         private String statisticsIndexName;
+merge:193:         private String statisticsTypeName;
+merge:194:         private boolean importAllCollections;
+merge:195:         private boolean disableIndexRefresh;
+merge:196: 
+merge:197:         // index
+merge:198:         private String indexName;
+merge:199:         private String typeName;
+merge:200:         private int throttleSize;
+merge:201: 

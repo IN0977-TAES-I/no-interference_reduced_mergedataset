@@ -1,0 +1,12 @@
+# scenario   : 037S
+# project    : elasticsearch
+# commit     : 3764b3ff800c94293aba0bb0fa18c7df80a764f7
+# class name : org.elasticsearch.rest.action.cat.RestShardsAction
+# method name: getTableWithHeader(RestRequest)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.rest.action.cat.RestShardsAction.getTableWithHeader(RestRequest):112:         table.addCell("query_cache.memory_size", "alias:fcm,queryCacheMemory;default:false;text-align:right;desc:used query cache");
+source@org.elasticsearch.rest.action.cat.RestShardsAction.getTableWithHeader(RestRequest):113:         table.addCell("query_cache.evictions", "alias:fce,queryCacheEvictions;default:false;text-align:right;desc:query cache evictions");
+
+# same region in merge.java (scenario update):
+merge:112:         table.addCell("query_cache.memory_size", "alias:qcm,queryCacheMemory;default:false;text-align:right;desc:used query cache");
+merge:113:         table.addCell("query_cache.evictions", "alias:qce,queryCacheEvictions;default:false;text-align:right;desc:query cache evictions");

@@ -1,0 +1,29 @@
+# scenario   : 032S
+# project    : alluxio
+# commit     : dafe76c90024a915224264b4862b33f40cb8478c
+# class name : tachyon.hadoop.HdfsFileInputStream
+# method name: HdfsFileInputStream(TachyonFS, int, Path, Configuration, int)
+# side       : left (left-right-lines.csv)
+sink@tachyon.hadoop.HdfsFileInputStream.HdfsFileInputStream(TachyonFS, int, Path, Configuration, int):44:         bufferSize);
+sink@tachyon.hadoop.HdfsFileInputStream.HdfsFileInputStream(TachyonFS, int, Path, Configuration, int):45:     mCurrentPosition = 0;
+source@tachyon.hadoop.HdfsFileInputStream.HdfsFileInputStream(TachyonFS, int, Path, Configuration, int):52:     TachyonFile tachyonFile = mTFS.getFile(mFileId);
+source@tachyon.hadoop.HdfsFileInputStream.HdfsFileInputStream(TachyonFS, int, Path, Configuration, int):53:     if (tachyonFile == null) {
+source@tachyon.hadoop.HdfsFileInputStream.HdfsFileInputStream(TachyonFS, int, Path, Configuration, int):56:     tachyonFile.setUFSConf(mHadoopConf);
+source@tachyon.hadoop.HdfsFileInputStream.HdfsFileInputStream(TachyonFS, int, Path, Configuration, int):58:       mTachyonFileInputStream = tachyonFile.getInStream(ReadType.CACHE);
+
+# same region in merge.java (scenario update):
+merge:44:     LOG.debug("PartitionInputStreamHdfs({}, {}, {}, {}, {})", tfs, fileId, hdfsPath, conf,
+merge:45:         bufferSize);
+merge:46:     mCurrentPosition = 0;
+merge:47:     mTFS = tfs;
+merge:48:     mFileId = fileId;
+merge:49:     mHdfsPath = hdfsPath;
+merge:50:     mHadoopConf = conf;
+merge:51:     mHadoopBufferSize = bufferSize;
+merge:52:     mTachyonFile = mTFS.getFile(mFileId);
+merge:53:     if (mTachyonFile == null) {
+merge:54:       throw new FileNotFoundException("File " + hdfsPath + " with FID " + fileId + " is not found.");
+merge:55:     }
+merge:56:     mTachyonFile.setUFSConf(mHadoopConf);
+merge:57:     try {
+merge:58:       mTachyonFileInputStream = mTachyonFile.getInStream(ReadType.CACHE);

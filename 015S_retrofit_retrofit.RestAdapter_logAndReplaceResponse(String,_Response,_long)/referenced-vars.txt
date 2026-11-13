@@ -1,0 +1,11 @@
+# class name : retrofit.RestAdapter
+# method name: logAndReplaceResponse(String, Response, long)
+# variables referenced in the affected region:
+bodyBytes	declared-in-file	roles=sink
+bodyCharset	declared-in-file	roles=sink
+header	external/inherited	roles=source
+log	declared-in-file	roles=source,sink
+
+# per-line detail:
+source:415	log,header,header
+sink:438	log,bodyBytes,bodyCharset

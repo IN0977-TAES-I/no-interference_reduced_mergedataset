@@ -1,0 +1,37 @@
+# scenario   : 035S
+# project    : elasticsearch-river-mongodb
+# commit     : 6b6ce8e851c6613213c4508c3f277a80649e0c7b
+# class name : org.elasticsearch.river.mongodb.Slurper
+# method name: addToStream(Operation, Timestamp<?>, DBObject, String)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):736:             builder.mongoCollection(riverName);
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):737:         }
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):738: 
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):739:         if (settings.settings().containsKey(INDEX_OBJECT)) {
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):740:             Map<String, Object> indexSettings = (Map<String, Object>) settings.settings().get(INDEX_OBJECT);
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):741:             builder.indexName(XContentMapValues.nodeStringValue(indexSettings.get(NAME_FIELD), builder.mongoDb));
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):742:             builder.typeName(XContentMapValues.nodeStringValue(indexSettings.get(TYPE_FIELD), builder.mongoDb));
+source@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):743: 
+sink@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):747:                 int bulkActions = XContentMapValues.nodeIntegerValue(bulkSettings.get(ACTIONS_FIELD), DEFAULT_BULK_ACTIONS);
+sink@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):748:                 bulkBuilder.bulkActions(bulkActions);
+sink@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):751:                 bulkBuilder.concurrentRequests(XContentMapValues.nodeIntegerValue(bulkSettings.get(CONCURRENT_REQUESTS_FIELD),
+sink@org.elasticsearch.river.mongodb.Slurper.addToStream(Operation, Timestamp<?>, DBObject, String):752:                         EsExecutors.boundedNumberOfProcessors(ImmutableSettings.EMPTY)));
+
+# same region in merge.java (scenario update):
+merge:736:             builder.mongoCollection(riverName);
+merge:737:         }
+merge:738: 
+merge:739:         if (settings.settings().containsKey(INDEX_OBJECT)) {
+merge:740:             Map<String, Object> indexSettings = (Map<String, Object>) settings.settings().get(INDEX_OBJECT);
+merge:741:             builder.indexName(XContentMapValues.nodeStringValue(indexSettings.get(NAME_FIELD), builder.mongoDb));
+merge:742:             builder.typeName(XContentMapValues.nodeStringValue(indexSettings.get(TYPE_FIELD), builder.mongoDb));
+merge:743: 
+merge:744:             Bulk.Builder bulkBuilder = new Bulk.Builder();
+merge:745:             if (indexSettings.containsKey(BULK_FIELD)) {
+merge:746:                 Map<String, Object> bulkSettings = (Map<String, Object>) indexSettings.get(BULK_FIELD);
+merge:747:                 int bulkActions = XContentMapValues.nodeIntegerValue(bulkSettings.get(ACTIONS_FIELD), DEFAULT_BULK_ACTIONS);
+merge:748:                 bulkBuilder.bulkActions(bulkActions);
+merge:749:                 String size = XContentMapValues.nodeStringValue(bulkSettings.get(SIZE_FIELD), DEFAULT_BULK_SIZE.toString());
+merge:750:                 bulkBuilder.bulkSize(ByteSizeValue.parseBytesSizeValue(size));
+merge:751:                 bulkBuilder.concurrentRequests(XContentMapValues.nodeIntegerValue(bulkSettings.get(CONCURRENT_REQUESTS_FIELD),
+merge:752:                         EsExecutors.boundedNumberOfProcessors(ImmutableSettings.EMPTY)));

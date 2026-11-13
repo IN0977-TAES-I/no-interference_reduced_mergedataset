@@ -1,0 +1,44 @@
+# class name : org.elasticsearch.river.mongodb.MongoDBRiverDefinition
+# method name: parseSettings(String, String, RiverSettings, ScriptService)
+# variables referenced in the affected region:
+Boolean	external/inherited	roles=sink
+CONNECT_TIMEOUT	declared-in-file	roles=sink
+DEFAULT_CONNECT_TIMEOUT	declared-in-file	roles=sink
+DEFAULT_SOCKET_TIMEOUT	declared-in-file	roles=sink
+INITIAL_TIMESTAMP_SCRIPT_FIELD	declared-in-file	roles=sink
+IS_MONGOS_FIELD	declared-in-file	roles=sink
+Maps	external/inherited	roles=sink
+SOCKET_TIMEOUT	declared-in-file	roles=sink
+ScriptService	external/inherited	roles=sink
+String	external/inherited	roles=sink
+XContentMapValues	external/inherited	roles=sink
+builder	declared-in-file	roles=sink
+excludeFieldsSettings	declared-in-file	roles=source
+field	external/inherited	roles=source
+includeFieldsSettings	declared-in-file	roles=source
+initalTimestampSettings	declared-in-file	roles=sink
+isMongos	declared-in-file	roles=sink
+logger	declared-in-file	roles=source
+mongoHost	declared-in-file	roles=source
+mongoOptionsSettings	declared-in-file	roles=sink
+mongoPort	declared-in-file	roles=source
+parentTypesSettings	declared-in-file	roles=source
+riverName	declared-in-file	roles=source
+
+# per-line detail:
+source:475	logger,riverName
+source:500	logger,mongoHost,mongoPort
+sink:526	
+sink:534	builder,XContentMapValues,mongoOptionsSettings,CONNECT_TIMEOUT
+sink:535	DEFAULT_CONNECT_TIMEOUT
+sink:536	builder,XContentMapValues,mongoOptionsSettings,SOCKET_TIMEOUT,DEFAULT_SOCKET_TIMEOUT
+sink:538	String,isMongos,XContentMapValues,mongoOptionsSettings,IS_MONGOS_FIELD
+sink:539	isMongos
+sink:540	builder,Boolean,isMongos
+sink:541	
+source:561	logger,parentTypesSettings
+source:567	logger,field
+source:602	logger,includeFieldsSettings
+source:620	logger,excludeFieldsSettings
+sink:646	initalTimestampSettings,INITIAL_TIMESTAMP_SCRIPT_FIELD,ScriptService,Maps
+source:655	logger

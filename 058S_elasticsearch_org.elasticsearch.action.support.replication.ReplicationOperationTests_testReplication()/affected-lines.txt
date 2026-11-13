@@ -1,0 +1,38 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.action.support.replication.ReplicationOperationTests
+# method name: testReplication()
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.action.support.replication.ReplicationOperationTests.testReplication():103:     public void readFrom(StreamInput in) throws IOException {
+sink@org.elasticsearch.action.support.replication.ReplicationOperationTests.testReplication():106:         type = in.readString();
+sink@org.elasticsearch.action.support.replication.ReplicationOperationTests.testReplication():108:         version = in.readZLong();
+source@org.elasticsearch.action.support.replication.ReplicationOperationTests.testReplication():116:         out.writeString(type);
+sink@org.elasticsearch.action.support.replication.ReplicationOperationTests.testReplication():125:         static final String _ID = "_id";
+sink@org.elasticsearch.action.support.replication.ReplicationOperationTests.testReplication():126:         static final String _VERSION = "_version";
+
+# same region in merge.java (scenario update):
+merge:103:     /**
+merge:104:      * Did this request force a refresh? Requests that set {@link WriteRequest#setRefreshPolicy(RefreshPolicy)} to
+merge:105:      * {@link RefreshPolicy#IMMEDIATE} will always return true for this. Requests that set it to {@link RefreshPolicy#WAIT_UNTIL} will
+merge:106:      * only return true here if they run out of refresh listener slots (see {@link IndexSettings#MAX_REFRESH_LISTENERS_PER_SHARD}).
+merge:107:      */
+merge:108:     public boolean forcedRefresh() {
+merge:109:         return forcedRefresh;
+merge:110:     }
+merge:111: 
+merge:112:     @Override
+merge:113:     public void setForcedRefresh(boolean forcedRefresh) {
+merge:114:         this.forcedRefresh = forcedRefresh;
+merge:115:     }
+merge:116: 
+merge:117:     /** returns the rest status for this response (based on {@link ShardInfo#status()} */
+merge:118:     public RestStatus status() {
+merge:119:         return getShardInfo().status();
+merge:120:     }
+merge:121: 
+merge:122:     @Override
+merge:123:     public void readFrom(StreamInput in) throws IOException {
+merge:124:         super.readFrom(in);
+merge:125:         shardId = ShardId.readShardId(in);
+merge:126:         type = in.readString();

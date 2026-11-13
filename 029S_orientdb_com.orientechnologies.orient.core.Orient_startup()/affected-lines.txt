@@ -1,0 +1,44 @@
+# scenario   : 029S
+# project    : orientdb
+# commit     : a5ce3bcc0a1d196745c575ad6602019f7a6b86f8
+# class name : com.orientechnologies.orient.core.Orient
+# method name: startup()
+# side       : left (left-right-lines.csv)
+source@com.orientechnologies.orient.core.Orient.startup():158:       }
+sink@com.orientechnologies.orient.core.Orient.startup():191:         } catch (Exception e) {
+
+# same region in merge.java (scenario update):
+merge:158:       profiler = new OProfiler();
+merge:159: 
+merge:160:       shutdownHook = new OrientShutdownHook();
+merge:161:       if (signalHandler == null) {
+merge:162:         signalHandler = new OSignalHandler();
+merge:163:         signalHandler.installDefaultSignals();
+merge:164:       }
+merge:165: 
+merge:166:       final int cores = Runtime.getRuntime().availableProcessors();
+merge:167: 
+merge:168:       workers = new ThreadPoolExecutor(cores, cores * 3, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(cores * 500) {
+merge:169:         @Override
+merge:170:         public boolean offer(Runnable e) {
+merge:171:           // turn offer() and add() into a blocking calls (unless interrupted)
+merge:172:           try {
+merge:173:             put(e);
+merge:174:             return true;
+merge:175:           } catch (InterruptedException ie) {
+merge:176:             Thread.currentThread().interrupt();
+merge:177:           }
+merge:178:           return false;
+merge:179:         }
+merge:180:       });
+merge:181: 
+merge:182:       // REGISTER THE EMBEDDED ENGINE
+merge:183:       registerEngine(new OEngineLocalPaginated());
+merge:184:       registerEngine(new OEngineMemory());
+merge:185:       registerEngine("com.orientechnologies.orient.client.remote.OEngineRemote");
+merge:186: 
+merge:187: 
+merge:188:       if (OGlobalConfiguration.ENVIRONMENT_DUMP_CFG_AT_STARTUP.getValueAsBoolean())
+merge:189:         OGlobalConfiguration.dumpConfiguration(System.out);
+merge:190: 
+merge:191:       active = true;

@@ -1,0 +1,8 @@
+# class name : org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests
+# method name: testQueryModeCommonGramsAnalysis()
+# variables referenced in the affected region:
+
+# per-line detail:
+source:226	
+source:228	
+sink:229	

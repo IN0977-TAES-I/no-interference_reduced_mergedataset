@@ -1,0 +1,20 @@
+# scenario   : 052S
+# project    : MPAndroidChart
+# commit     : 9297923f09460d0484cd713b0abbeaea9b888ec0
+# class name : com.xxmassdeveloper.mpchartexample.LineChartActivity2
+# method name: onCreate(Bundle)
+# side       : left (left-right-lines.csv)
+source@com.xxmassdeveloper.mpchartexample.LineChartActivity2.onCreate(Bundle):117:         ll1.setTextSize(10f);
+sink@com.xxmassdeveloper.mpchartexample.LineChartActivity2.onCreate(Bundle):126: 
+
+# same region in merge.java (scenario update):
+merge:117:         ll1.setTextSize(10f);
+merge:118:         ll1.setTypeface(tf);
+merge:119: 
+merge:120:         LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
+merge:121:         ll2.setLineWidth(4f);
+merge:122:         ll2.enableDashedLine(10f, 10f, 0f);
+merge:123:         ll2.setLabelPosition(LimitLabelPosition.RIGHT_BOTTOM);
+merge:124:         ll2.setTextSize(10f);
+merge:125:         ll2.setTypeface(tf);
+merge:126: 

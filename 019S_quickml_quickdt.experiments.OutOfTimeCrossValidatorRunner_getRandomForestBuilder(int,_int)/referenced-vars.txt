@@ -1,0 +1,13 @@
+# class name : quickdt.experiments.OutOfTimeCrossValidatorRunner
+# method name: getRandomForestBuilder(int, int)
+# variables referenced in the affected region:
+AbstractInstance	external/inherited	roles=source
+List	external/inherited	roles=source
+RandomForest	external/inherited	roles=source
+maxDepth	external/inherited	roles=source
+numTrees	external/inherited	roles=source
+trainingData	declared-in-file	roles=source
+
+# per-line detail:
+source:42	
+source:43	RandomForest,List,AbstractInstance,trainingData,maxDepth,numTrees

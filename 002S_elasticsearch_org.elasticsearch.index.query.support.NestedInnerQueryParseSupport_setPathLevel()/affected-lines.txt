@@ -1,0 +1,21 @@
+# scenario   : 002S
+# project    : elasticsearch
+# commit     : 59cb67c7bd0ab6311115b20954e013412b676b29
+# class name : org.elasticsearch.index.query.support.NestedInnerQueryParseSupport
+# method name: setPathLevel()
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.index.query.support.NestedInnerQueryParseSupport.setPathLevel():193:         if (objectMapper == null) {
+sink@org.elasticsearch.index.query.support.NestedInnerQueryParseSupport.setPathLevel():195:         } else {
+sink@org.elasticsearch.index.query.support.NestedInnerQueryParseSupport.setPathLevel():197:         }
+source@org.elasticsearch.index.query.support.NestedInnerQueryParseSupport.setPathLevel():199:         parentObjectMapper = shardContext.nestedScope().nextLevel(nestedObjectMapper);
+sink@org.elasticsearch.index.query.support.NestedInnerQueryParseSupport.setPathLevel():200:     }
+
+# same region in merge.java (scenario update):
+merge:193:         ObjectMapper objectMapper = shardContext.nestedScope().getObjectMapper();
+merge:194:         if (objectMapper == null) {
+merge:195:             parentFilter = shardContext.bitsetFilter(Queries.newNonNestedFilter());
+merge:196:         } else {
+merge:197:             parentFilter = shardContext.bitsetFilter(objectMapper.nestedTypeFilter());
+merge:198:         }
+merge:199:         childFilter = nestedObjectMapper.nestedTypeFilter();
+merge:200:         parentObjectMapper = shardContext.nestedScope().nextLevel(nestedObjectMapper);

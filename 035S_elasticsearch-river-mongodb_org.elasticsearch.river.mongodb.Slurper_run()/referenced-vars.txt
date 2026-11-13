@@ -1,0 +1,11 @@
+# class name : org.elasticsearch.river.mongodb.Slurper
+# method name: run()
+# variables referenced in the affected region:
+String	external/inherited	roles=source
+importAllCollections	declared-in-file	roles=source
+indexName	declared-in-file	roles=source
+
+# per-line detail:
+sink:105	
+source:145	importAllCollections
+source:148	String,indexName

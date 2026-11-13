@@ -1,0 +1,16 @@
+# class name : com.xxmassdeveloper.mpchartexample.ScatterChartActivity
+# method name: onCreate(Bundle)
+# variables referenced in the affected region:
+Math	external/inherited	roles=source
+count	declared-in-file	roles=sink
+ds	declared-in-file	roles=sink
+entries	declared-in-file	roles=source
+range	external/inherited	roles=source
+shapes	declared-in-file	roles=sink
+
+# per-line detail:
+source:57	entries,Math,range,range
+sink:63	
+sink:77	
+sink:80	count
+sink:86	ds,shapes,shapes

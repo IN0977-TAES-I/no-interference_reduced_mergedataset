@@ -1,0 +1,7 @@
+# class name : com.github.mikephil.charting.renderer.PieChartRenderer
+# method name: drawData(Canvas)
+# variables referenced in the affected region:
+set	declared-in-file	roles=source
+
+# per-line detail:
+source:94	set

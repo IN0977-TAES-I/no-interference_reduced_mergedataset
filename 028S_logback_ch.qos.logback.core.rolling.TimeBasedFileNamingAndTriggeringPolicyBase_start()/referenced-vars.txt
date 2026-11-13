@@ -1,0 +1,14 @@
+# class name : ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase
+# method name: start()
+# variables referenced in the affected region:
+dtc	declared-in-file	roles=source,sink
+rc	declared-in-file	roles=source
+tbrp	declared-in-file	roles=source
+
+# per-line detail:
+sink:45	dtc
+source:52	rc,dtc
+source:53	dtc
+source:54	tbrp
+source:55	
+source:56	rc

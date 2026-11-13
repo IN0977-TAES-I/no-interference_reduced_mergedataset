@@ -1,0 +1,25 @@
+# class name : io.swagger.jaxrs2.OperationParser
+# method name: getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema)
+# variables referenced in the affected region:
+COMMA	declared-in-file	roles=sink
+NumberUtils	external/inherited	roles=sink
+String	external/inherited	roles=sink
+StringUtils	external/inherited	roles=sink
+filteredMaximum	declared-in-file	roles=sink
+filteredMinimum	declared-in-file	roles=sink
+isEmpty	declared-in-file	roles=source
+schema	external/inherited	roles=sink
+schemaObject	declared-in-file	roles=sink
+
+# per-line detail:
+source:187	isEmpty
+source:188	
+sink:234	schemaObject,filteredMaximum
+sink:235	
+sink:236	
+sink:237	NumberUtils,schema
+sink:238	String,filteredMinimum,schema,COMMA,StringUtils
+sink:239	schemaObject,filteredMinimum
+sink:240	
+sink:241	
+source:244	

@@ -1,0 +1,30 @@
+# scenario   : 037S
+# project    : elasticsearch
+# commit     : 3764b3ff800c94293aba0bb0fa18c7df80a764f7
+# class name : org.elasticsearch.rest.action.cat.RestIndicesAction
+# method name: getTableWithHeader(RestRequest)
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.rest.action.cat.RestIndicesAction.getTableWithHeader(RestRequest):138:         table.addCell("merges.total_docs", "alias:mtd,mergesTotalDocs;default:false;text-align:right;desc:docs merged");
+source@org.elasticsearch.rest.action.cat.RestIndicesAction.getTableWithHeader(RestRequest):141: 
+source@org.elasticsearch.rest.action.cat.RestIndicesAction.getTableWithHeader(RestRequest):144:         table.addCell("refresh.total", "alias:rto,refreshTotal;default:false;text-align:right;desc:total refreshes");
+source@org.elasticsearch.rest.action.cat.RestIndicesAction.getTableWithHeader(RestRequest):147:         table.addCell("search.fetch_current", "alias:sfc,searchFetchCurrent;default:false;text-align:right;desc:current fetch phase ops");
+source@org.elasticsearch.rest.action.cat.RestIndicesAction.getTableWithHeader(RestRequest):150:         table.addCell("search.open_contexts", "alias:so,searchOpenContexts;default:false;text-align:right;desc:open search contexts");
+source@org.elasticsearch.rest.action.cat.RestIndicesAction.getTableWithHeader(RestRequest):153:         table.addCell("search.query_total", "alias:sqto,searchQueryTotal;default:false;text-align:right;desc:total query phase ops");
+
+# same region in merge.java (scenario update):
+merge:138:         table.addCell("merges.total_docs", "alias:mtd,mergesTotalDocs;default:false;text-align:right;desc:docs merged");
+merge:139:         table.addCell("merges.total_size", "alias:mts,mergesTotalSize;default:false;text-align:right;desc:size merged");
+merge:140:         table.addCell("merges.total_time", "alias:mtt,mergesTotalTime;default:false;text-align:right;desc:time spent in merges");
+merge:141: 
+merge:142:         table.addCell("percolate.queries", "alias:pq,percolateQueries;default:false;text-align:right;desc:number of registered percolation queries");
+merge:143: 
+merge:144:         table.addCell("refresh.total", "alias:rto,refreshTotal;default:false;text-align:right;desc:total refreshes");
+merge:145:         table.addCell("refresh.time", "alias:rti,refreshTime;default:false;text-align:right;desc:time spent in refreshes");
+merge:146: 
+merge:147:         table.addCell("search.fetch_current", "alias:sfc,searchFetchCurrent;default:false;text-align:right;desc:current fetch phase ops");
+merge:148:         table.addCell("search.fetch_time", "alias:sfti,searchFetchTime;default:false;text-align:right;desc:time spent in fetch phase");
+merge:149:         table.addCell("search.fetch_total", "alias:sfto,searchFetchTotal;default:false;text-align:right;desc:total fetch ops");
+merge:150:         table.addCell("search.open_contexts", "alias:so,searchOpenContexts;default:false;text-align:right;desc:open search contexts");
+merge:151:         table.addCell("search.query_current", "alias:sqc,searchQueryCurrent;default:false;text-align:right;desc:current query phase ops");
+merge:152:         table.addCell("search.query_time", "alias:sqti,searchQueryTime;default:false;text-align:right;desc:time spent in query phase");
+merge:153:         table.addCell("search.query_total", "alias:sqto,searchQueryTotal;default:false;text-align:right;desc:total query phase ops");

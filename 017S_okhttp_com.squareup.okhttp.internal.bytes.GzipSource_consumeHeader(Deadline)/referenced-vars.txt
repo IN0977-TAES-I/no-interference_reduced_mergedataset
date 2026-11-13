@@ -1,0 +1,11 @@
+# class name : com.squareup.okhttp.internal.bytes.GzipSource
+# method name: consumeHeader(Deadline)
+# variables referenced in the affected region:
+buffer	declared-in-file	roles=sink
+deadline	external/inherited	roles=source
+flags	declared-in-file	roles=sink
+index	declared-in-file	roles=source
+
+# per-line detail:
+sink:112	flags,buffer
+source:138	index,deadline

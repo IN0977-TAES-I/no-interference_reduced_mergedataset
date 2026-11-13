@@ -1,0 +1,10 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.index.engine.InternalEngineTests
+# method name: testRecoverFromForeignTranslog()
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.index.engine.InternalEngineTests.testRecoverFromForeignTranslog():2091: <out of range>
+source@org.elasticsearch.index.engine.InternalEngineTests.testRecoverFromForeignTranslog():2124: <out of range>
+
+# same region in merge.java (scenario update):

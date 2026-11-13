@@ -1,0 +1,17 @@
+# class name : io.cloudslang.lang.api.SlangImpl
+# method name: getAllEventTypes()
+# variables referenced in the affected region:
+Assert	external/inherited	roles=sink
+Exception	external/inherited	roles=source
+IOException	external/inherited	roles=source
+Mockito	external/inherited	roles=source
+SlangSource	external/inherited	roles=source
+compilationArtifact	declared-in-file	roles=sink
+compiler	declared-in-file	roles=source
+tempFile	declared-in-file	roles=source
+
+# per-line detail:
+sink:116	Assert,compilationArtifact
+source:123	IOException
+source:124	Mockito,compiler,SlangSource,SlangSource,Exception
+source:125	SlangSource,tempFile

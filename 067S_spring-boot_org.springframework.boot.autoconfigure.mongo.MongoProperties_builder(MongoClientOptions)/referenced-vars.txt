@@ -1,0 +1,15 @@
+# class name : org.springframework.boot.autoconfigure.mongo.MongoProperties
+# method name: builder(MongoClientOptions)
+# variables referenced in the affected region:
+
+# per-line detail:
+source:261	
+source:262	
+source:263	
+source:264	
+source:265	
+source:266	
+source:267	
+source:268	
+source:271	
+sink:272	

@@ -1,0 +1,11 @@
+# class name : org.elasticsearch.action.update.TransportUpdateAction
+# method name: shardOperation(UpdateRequest, ActionListener<UpdateResponse>, int)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:185	
+source:192	
+sink:224	
+source:249	
+source:250	
+sink:254	

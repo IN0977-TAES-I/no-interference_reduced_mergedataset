@@ -1,0 +1,88 @@
+# scenario   : 006S
+# project    : druid
+# commit     : 05168808c278c080c59c19e858d9471b316cd1f5
+# class name : com.metamx.druid.loading.S3SegmentPusher
+# method name: push(File, DataSegment)
+# side       : left (left-right-lines.csv)
+sink@com.metamx.druid.loading.S3SegmentPusher.push(File, DataSegment):66:   @Override
+source@com.metamx.druid.loading.S3SegmentPusher.push(File, DataSegment):105:       final String outputBucket = config.getBucket();
+sink@com.metamx.druid.loading.S3SegmentPusher.push(File, DataSegment):110:       s3Client.putObject(outputBucket, toPush);
+sink@com.metamx.druid.loading.S3SegmentPusher.push(File, DataSegment):118:                            )
+source@com.metamx.druid.loading.S3SegmentPusher.push(File, DataSegment):125:       descriptorObject.setBucketName(outputBucket);
+sink@com.metamx.druid.loading.S3SegmentPusher.push(File, DataSegment):139: 
+
+# same region in merge.java (scenario update):
+merge:66:     log.info("Uploading [%s] to S3", indexFilesDir);
+merge:67:     String outputKey = JOINER.join(
+merge:68:         config.getBaseKey().isEmpty() ? null : config.getBaseKey(),
+merge:69:         segment.getDataSource(),
+merge:70:         String.format(
+merge:71:             "%s_%s",
+merge:72:             segment.getInterval().getStart(),
+merge:73:             segment.getInterval().getEnd()
+merge:74:         ),
+merge:75:         segment.getVersion(),
+merge:76:         segment.getShardSpec().getPartitionNum()
+merge:77:     );
+merge:78: 
+merge:79:     long indexSize = 0;
+merge:80:     final File zipOutFile = File.createTempFile("druid", "index.zip");
+merge:81:     ZipOutputStream zipOut = null;
+merge:82:     try {
+merge:83:       zipOut = new ZipOutputStream(new FileOutputStream(zipOutFile));
+merge:84:       File[] indexFiles = indexFilesDir.listFiles();
+merge:85:       for (File indexFile : indexFiles) {
+merge:86:         log.info("Adding indexFile[%s] with size[%,d].  Total size[%,d]", indexFile, indexFile.length(), indexSize);
+merge:87:         if (indexFile.length() >= Integer.MAX_VALUE) {
+merge:88:             throw new ISE("indexFile[%s] too large [%,d]", indexFile, indexFile.length());
+merge:89:         }
+merge:90:         zipOut.putNextEntry(new ZipEntry(indexFile.getName()));
+merge:91:         IOUtils.copy(new FileInputStream(indexFile), zipOut);
+merge:92:         indexSize += indexFile.length();
+merge:93:       }
+merge:94:     }
+merge:95:     finally {
+merge:96:       Closeables.closeQuietly(zipOut);
+merge:97:     }
+merge:98: 
+merge:99:     try {
+merge:100:       S3Object toPush = new S3Object(zipOutFile);
+merge:101: 
+merge:102:       final String outputBucket = config.getBucket();
+merge:103:       toPush.setBucketName(outputBucket);
+merge:104:       toPush.setKey(outputKey + "/index.zip");
+merge:105:       toPush.setAcl(GSAccessControlList.REST_CANNED_BUCKET_OWNER_FULL_CONTROL);
+merge:106: 
+merge:107:       log.info("Pushing %s.", toPush);
+merge:108:       s3Client.putObject(outputBucket, toPush);
+merge:109: 
+merge:110:       segment = segment.withSize(indexSize)
+merge:111:                        .withLoadSpec(
+merge:112:                            ImmutableMap.<String, Object>of(
+merge:113:                                "type", "s3_zip",
+merge:114:                                "bucket", outputBucket,
+merge:115:                                "key", toPush.getKey()
+merge:116:                            )
+merge:117:                        )
+merge:118:                        .withBinaryVersion(IndexIO.getVersionFromDir(indexFilesDir));
+merge:119: 
+merge:120:       File descriptorFile = File.createTempFile("druid", "descriptor.json");
+merge:121:       StreamUtils.copyToFileAndClose(new ByteArrayInputStream(jsonMapper.writeValueAsBytes(segment)), descriptorFile);
+merge:122:       S3Object descriptorObject = new S3Object(descriptorFile);
+merge:123:       descriptorObject.setBucketName(outputBucket);
+merge:124:       descriptorObject.setKey(outputKey + "/descriptor.json");
+merge:125:       descriptorObject.setAcl(GSAccessControlList.REST_CANNED_BUCKET_OWNER_FULL_CONTROL);
+merge:126: 
+merge:127:       log.info("Pushing %s", descriptorObject);
+merge:128:       s3Client.putObject(outputBucket, descriptorObject);
+merge:129: 
+merge:130:       log.info("Deleting Index File[%s]", indexFilesDir);
+merge:131:       FileUtils.deleteDirectory(indexFilesDir);
+merge:132: 
+merge:133:       log.info("Deleting zipped index File[%s]", zipOutFile);
+merge:134:       zipOutFile.delete();
+merge:135: 
+merge:136:       log.info("Deleting descriptor file[%s]", descriptorFile);
+merge:137:       descriptorFile.delete();
+merge:138: 
+merge:139:       return segment;

@@ -1,0 +1,18 @@
+# scenario   : 003S
+# project    : elasticsearch
+# commit     : f3d63095dbcc985e24162fbac4ee0d6914dc757d
+# class name : org.elasticsearch.index.analysis.KuromojiAnalysisTests
+# method name: createAnalysisService()
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():196: <out of range>
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():197: <out of range>
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():198: <out of range>
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():199: <out of range>
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():200: <out of range>
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():201: <out of range>
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():202: <out of range>
+source@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():204: <out of range>
+sink@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():206: <out of range>
+source@org.elasticsearch.index.analysis.KuromojiAnalysisTests.createAnalysisService():207: <out of range>
+
+# same region in merge.java (scenario update):

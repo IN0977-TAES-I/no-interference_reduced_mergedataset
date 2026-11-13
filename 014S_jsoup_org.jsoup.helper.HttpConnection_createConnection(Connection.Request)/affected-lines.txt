@@ -1,0 +1,24 @@
+# scenario   : 014S
+# project    : jsoup
+# commit     : fee4762322f85a1109edd75ccb67f38cf5008c80
+# class name : org.jsoup.helper.HttpConnection
+# method name: createConnection(Connection.Request)
+# side       : left (left-right-lines.csv)
+sink@org.jsoup.helper.HttpConnection.createConnection(Connection.Request):609:             if (conn instanceof HttpsURLConnection) {
+sink@org.jsoup.helper.HttpConnection.createConnection(Connection.Request):610:                 if (!req.isValidateSSLCertificates()) {
+sink@org.jsoup.helper.HttpConnection.createConnection(Connection.Request):611:                     initUnSecureSSL();
+sink@org.jsoup.helper.HttpConnection.createConnection(Connection.Request):612:                     ((HttpsURLConnection)conn).setSSLSocketFactory(sslSocketFactory);
+sink@org.jsoup.helper.HttpConnection.createConnection(Connection.Request):613:                     ((HttpsURLConnection)conn).setHostnameVerifier(getInsecureVerifier());
+sink@org.jsoup.helper.HttpConnection.createConnection(Connection.Request):614:                 }
+source@org.jsoup.helper.HttpConnection.createConnection(Connection.Request):617:             if (req.method() == Method.POST)
+
+# same region in merge.java (scenario update):
+merge:609:             if (conn instanceof HttpsURLConnection) {
+merge:610:                 if (!req.isValidateSSLCertificates()) {
+merge:611:                     initUnSecureSSL();
+merge:612:                     ((HttpsURLConnection)conn).setSSLSocketFactory(sslSocketFactory);
+merge:613:                     ((HttpsURLConnection)conn).setHostnameVerifier(getInsecureVerifier());
+merge:614:                 }
+merge:615:             }
+merge:616: 
+merge:617:             if (req.method().hasBody())

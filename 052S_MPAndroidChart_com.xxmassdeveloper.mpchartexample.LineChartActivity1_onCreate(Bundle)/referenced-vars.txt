@@ -1,0 +1,7 @@
+# class name : com.xxmassdeveloper.mpchartexample.LineChartActivity1
+# method name: onCreate(Bundle)
+# variables referenced in the affected region:
+leftAxis	declared-in-file	roles=sink
+
+# per-line detail:
+sink:135	leftAxis

@@ -1,0 +1,12 @@
+# class name : com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
+# method name: copy(Lwjgl3ApplicationConfiguration)
+# variables referenced in the affected region:
+RuntimeException	external/inherited	roles=sink
+Throwable	external/inherited	roles=sink
+
+# per-line detail:
+sink:96	
+sink:97	
+sink:98	Throwable
+sink:99	RuntimeException
+source:107	

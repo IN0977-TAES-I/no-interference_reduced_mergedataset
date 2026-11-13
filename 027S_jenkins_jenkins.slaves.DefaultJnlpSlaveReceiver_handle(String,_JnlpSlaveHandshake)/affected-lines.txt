@@ -1,0 +1,18 @@
+# scenario   : 027S
+# project    : jenkins
+# commit     : 48b2b951dfb3438999ceda330093cac82b857ce6
+# class name : jenkins.slaves.DefaultJnlpSlaveReceiver
+# method name: handle(String, JnlpSlaveHandshake)
+# side       : left (left-right-lines.csv)
+sink@jenkins.slaves.DefaultJnlpSlaveReceiver.handle(String, JnlpSlaveHandshake):52:             }
+source@jenkins.slaves.DefaultJnlpSlaveReceiver.handle(String, JnlpSlaveHandshake):52:             }
+source@jenkins.slaves.DefaultJnlpSlaveReceiver.handle(String, JnlpSlaveHandshake):56:         String cookie = generateCookie();
+source@jenkins.slaves.DefaultJnlpSlaveReceiver.handle(String, JnlpSlaveHandshake):57:         response.put("Cookie",cookie);
+
+# same region in merge.java (scenario update):
+merge:52:                 return true;
+merge:53:             }
+merge:54:         }
+merge:55: 
+merge:56:         if (!matchesSecret(nodeName,handshake)) {
+merge:57:             handshake.error(nodeName + " can't be connected since the slave's secret does not match the handshake secret.");

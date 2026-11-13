@@ -1,0 +1,7 @@
+# class name : org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration
+# method name: cacheManager(RedisTemplate<Object,Object>)
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:55	
+source:60	

@@ -1,0 +1,12 @@
+# scenario   : 052S
+# project    : MPAndroidChart
+# commit     : 9297923f09460d0484cd713b0abbeaea9b888ec0
+# class name : com.xxmassdeveloper.mpchartexample.StackedBarActivityNegative
+# method name: onCreate(Bundle)
+# side       : left (left-right-lines.csv)
+sink@com.xxmassdeveloper.mpchartexample.StackedBarActivityNegative.onCreate(Bundle):64:         mSeekBarY.setProgress(100);
+sink@com.xxmassdeveloper.mpchartexample.StackedBarActivityNegative.onCreate(Bundle):65: 
+
+# same region in merge.java (scenario update):
+merge:64:         mSeekBarY.setProgress(100);
+merge:65: 

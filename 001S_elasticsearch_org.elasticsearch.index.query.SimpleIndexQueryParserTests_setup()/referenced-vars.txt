@@ -1,0 +1,9 @@
+# class name : org.elasticsearch.index.query.SimpleIndexQueryParserTests
+# method name: setup()
+# variables referenced in the affected region:
+IndexQueryParserService	external/inherited	roles=source
+queryParser	declared-in-file	roles=source
+
+# per-line detail:
+source:208	IndexQueryParserService,queryParser
+sink:217	

@@ -1,0 +1,11 @@
+# class name : org.springframework.boot.jta.atomikos.AtomikosPropertiesTests
+# method name: testDefaultProperties()
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:89	
+sink:93	
+sink:94	
+sink:95	
+sink:96	
+sink:98	

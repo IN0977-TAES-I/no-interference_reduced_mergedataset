@@ -1,0 +1,34 @@
+# scenario   : 015S
+# project    : retrofit
+# commit     : 2b6c719c6645f8e48dca6d0047c752069d321bc4
+# class name : retrofit.RestAdapter
+# method name: logAndReplaceResponse(String, Response, long)
+# side       : left (left-right-lines.csv)
+source@retrofit.RestAdapter.logAndReplaceResponse(String, Response, long):415:         log.log(header.getName() + ": " + header.getValue());
+sink@retrofit.RestAdapter.logAndReplaceResponse(String, Response, long):438:           log.log(new String(bodyBytes, bodyCharset));
+
+# same region in merge.java (scenario update):
+merge:415:         log.log(header.toString());
+merge:416:       }
+merge:417: 
+merge:418:       long bodySize = 0;
+merge:419:       TypedInput body = response.getBody();
+merge:420:       if (body != null) {
+merge:421:         bodySize = body.length();
+merge:422: 
+merge:423:         if (logLevel.ordinal() >= LogLevel.FULL.ordinal()) {
+merge:424:           if (!response.getHeaders().isEmpty()) {
+merge:425:             log.log("");
+merge:426:           }
+merge:427: 
+merge:428:           if (!(body instanceof TypedByteArray)) {
+merge:429:             // Read the entire response body so we can log it and replace the original response
+merge:430:             response = Utils.readBodyToBytesIfNecessary(response);
+merge:431:             body = response.getBody();
+merge:432:           }
+merge:433: 
+merge:434:           byte[] bodyBytes = ((TypedByteArray) body).getBytes();
+merge:435:           bodySize = bodyBytes.length;
+merge:436:           String bodyMime = body.mimeType();
+merge:437:           String bodyCharset = MimeUtil.parseCharset(bodyMime);
+merge:438:           log.log(new String(bodyBytes, bodyCharset));

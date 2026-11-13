@@ -1,0 +1,9 @@
+# class name : me.prettyprint.cassandra.connection.HConnectionManager
+# method name: operateWithFailover(Operation<?>)
+# variables referenced in the affected region:
+stats	declared-in-file	roles=source
+
+# per-line detail:
+source:200	stats
+sink:267	
+sink:268	

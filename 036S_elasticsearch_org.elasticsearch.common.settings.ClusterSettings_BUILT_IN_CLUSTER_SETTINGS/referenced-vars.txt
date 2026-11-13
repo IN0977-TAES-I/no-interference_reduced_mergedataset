@@ -1,0 +1,23 @@
+# class name : org.elasticsearch.common.settings.ClusterSettings
+# method name: BUILT_IN_CLUSTER_SETTINGS
+# variables referenced in the affected region:
+IndicesService	external/inherited	roles=source
+PageCacheRecycler	external/inherited	roles=sink
+ThreadPool	external/inherited	roles=sink
+health	declared-in-file	roles=source
+index	external/inherited	roles=source
+indexService	external/inherited	roles=sink
+instanceFromNode	declared-in-file	roles=source
+pageCacheRecycler	declared-in-file	roles=sink
+threadPool	declared-in-file	roles=sink
+
+# per-line detail:
+source:254	health
+source:255	IndicesService,instanceFromNode,IndicesService
+source:256	instanceFromNode,index
+source:257	
+source:258	
+sink:259	
+source:259	
+sink:264	ThreadPool,threadPool,indexService
+sink:265	PageCacheRecycler,pageCacheRecycler,PageCacheRecycler

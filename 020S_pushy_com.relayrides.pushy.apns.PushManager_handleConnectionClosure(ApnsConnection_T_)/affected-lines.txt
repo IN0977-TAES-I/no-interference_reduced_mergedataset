@@ -1,0 +1,35 @@
+# scenario   : 020S
+# project    : pushy
+# commit     : 58901c846e4f0874977c5aabbc34bcb4de3670e0
+# class name : com.relayrides.pushy.apns.PushManager
+# method name: handleConnectionClosure(ApnsConnection<T>)
+# side       : left (left-right-lines.csv)
+source@com.relayrides.pushy.apns.PushManager.handleConnectionClosure(ApnsConnection<T>):500: 			this.connectionLock.lock();
+source@com.relayrides.pushy.apns.PushManager.handleConnectionClosure(ApnsConnection<T>):502: 			try {
+source@com.relayrides.pushy.apns.PushManager.handleConnectionClosure(ApnsConnection<T>):503: 				new ApnsConnection<T>(this.environment, this.sslContext, this.eventLoopGroup, this).connect();
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionClosure(ApnsConnection<T>):510: 
+source@com.relayrides.pushy.apns.PushManager.handleConnectionClosure(ApnsConnection<T>):515: 	public void handleConnectionClosure(final ApnsConnection<T> connection) {
+sink@com.relayrides.pushy.apns.PushManager.handleConnectionClosure(ApnsConnection<T>):520: 			this.unfinishedConnectionCount -= 1;
+
+# same region in merge.java (scenario update):
+merge:500: 		this.connectionPool.removeConnection(connection);
+merge:501: 
+merge:502: 		if (!this.isShutDown()) {
+merge:503: 			this.startNewConnection();
+merge:504: 		}
+merge:505: 
+merge:506: 		if (this.dispatchThread != null && this.dispatchThread.isAlive()) {
+merge:507: 			this.dispatchThread.interrupt();
+merge:508: 		}
+merge:509: 
+merge:510: 		this.listenerExecutorService.submit(new Runnable() {
+merge:511: 
+merge:512: 			public void run() {
+merge:513: 				try {
+merge:514: 					connection.waitForPendingOperationsToFinish();
+merge:515: 					decrementConnectionCounter();
+merge:516: 				} catch (InterruptedException e) {
+merge:517: 					log.warn("Interrupted while waiting for closed connection's pending operations to finish.");
+merge:518: 				}
+merge:519: 			}
+merge:520: 		});

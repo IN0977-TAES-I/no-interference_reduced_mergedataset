@@ -1,0 +1,58 @@
+# scenario   : 030S
+# project    : RxJava
+# commit     : a40a4130edcdadc2340da5787ca30353018173f2
+# class name : rx.internal.operators.OperatorMulticast
+# method name: connect(Action1<?superSubscription>)
+# side       : left (left-right-lines.csv)
+sink@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):94:                 subscription = Subscribers.from(subject);
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):117:                 for(Subscriber<? super R> s : waitingForConnect) {
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):118:                     subject.unsafeSubscribe(s);
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):119:                 }
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):120:                 // clear the waiting list as any new ones that come in after leaving this synchronized block will go direct to the Subject
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):121:                 waitingForConnect.clear();
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):122:                 // record the Subject so OnSubscribe can see it
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):124:             }
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):125:             
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):128:         // in the lock above we determined we should subscribe, do it now outside the lock
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):129:         // register a subscription that will shut this down
+source@rx.internal.operators.OperatorMulticast.connect(Action1<?superSubscription>):131: 
+
+# same region in merge.java (scenario update):
+merge:94:                 subscription = Subscribers.from(subject);
+merge:95:                 final AtomicReference<Subscription> gs = new AtomicReference<Subscription>();
+merge:96:                 gs.set(Subscriptions.create(new Action0() {
+merge:97:                     @Override
+merge:98:                     public void call() {
+merge:99:                         Subscription s;
+merge:100:                         synchronized (guard) {
+merge:101:                             if ( guardedSubscription == gs.get()) {
+merge:102:                                 s = subscription;
+merge:103:                                 subscription = null;
+merge:104:                                 guardedSubscription = null;
+merge:105:                                 connectedSubject.set(null);
+merge:106:                             } else 
+merge:107:                                 return;
+merge:108:                         }
+merge:109:                         if (s != null) {
+merge:110:                             s.unsubscribe();
+merge:111:                         }
+merge:112:                     }
+merge:113:                 }));
+merge:114:                 guardedSubscription = gs.get();
+merge:115:                 
+merge:116:                 // register any subscribers that are waiting with this new subject
+merge:117:                 for(final Subscriber<? super R> s : waitingForConnect) {
+merge:118:                     subject.unsafeSubscribe(new Subscriber<R>(s) {
+merge:119:                         @Override
+merge:120:                         public void onNext(R t) {
+merge:121:                             s.onNext(t);
+merge:122:                         }
+merge:123:                         @Override
+merge:124:                         public void onError(Throwable e) {
+merge:125:                             s.onError(e);
+merge:126:                         }
+merge:127:                         @Override
+merge:128:                         public void onCompleted() {
+merge:129:                             s.onCompleted();
+merge:130:                         }
+merge:131:                     });

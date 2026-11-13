@@ -1,0 +1,8 @@
+# class name : com.xxmassdeveloper.mpchartexample.LineChartActivity2
+# method name: onCreate(Bundle)
+# variables referenced in the affected region:
+ll1	declared-in-file	roles=source
+
+# per-line detail:
+source:117	ll1
+sink:126	

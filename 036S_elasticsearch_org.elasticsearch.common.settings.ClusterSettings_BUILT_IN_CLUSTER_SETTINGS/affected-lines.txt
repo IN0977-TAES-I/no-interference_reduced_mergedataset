@@ -1,0 +1,29 @@
+# scenario   : 036S
+# project    : elasticsearch
+# commit     : 0404db65e3497452886173957729c8e82cfd4a03
+# class name : org.elasticsearch.common.settings.ClusterSettings
+# method name: BUILT_IN_CLUSTER_SETTINGS
+# side       : left (left-right-lines.csv)
+source@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:254:         assertThat("Cluster must be a single node cluster", health.getNumberOfDataNodes(), equalTo(1));
+source@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:255:         IndicesService instanceFromNode = getInstanceFromNode(IndicesService.class);
+source@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:256:         return instanceFromNode.indexServiceSafe(index);
+source@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:257:     }
+source@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:258: 
+sink@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:259:     /**
+source@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:259:     /**
+sink@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:264:         ThreadPool threadPool = indexService.getIndexServices().getThreadPool();
+sink@org.elasticsearch.common.settings.ClusterSettings.BUILT_IN_CLUSTER_SETTINGS:265:         PageCacheRecycler pageCacheRecycler = node().injector().getInstance(PageCacheRecycler.class);
+
+# same region in merge.java (scenario update):
+merge:254:         assertThat("Cluster must be a single node cluster", health.getNumberOfDataNodes(), equalTo(1));
+merge:255:         IndicesService instanceFromNode = getInstanceFromNode(IndicesService.class);
+merge:256:         return instanceFromNode.indexServiceSafe(index);
+merge:257:     }
+merge:258: 
+merge:259:     /**
+merge:260:      * Create a new search context.
+merge:261:      */
+merge:262:     protected static SearchContext createSearchContext(IndexService indexService) {
+merge:263:         BigArrays bigArrays = indexService.getIndexServices().getBigArrays();
+merge:264:         ThreadPool threadPool = indexService.getIndexServices().getThreadPool();
+merge:265:         PageCacheRecycler pageCacheRecycler = node().injector().getInstance(PageCacheRecycler.class);

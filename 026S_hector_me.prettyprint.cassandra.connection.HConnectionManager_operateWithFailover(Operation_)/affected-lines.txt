@@ -1,0 +1,80 @@
+# scenario   : 026S
+# project    : hector
+# commit     : 213f7887ea70eabdf0705cf8454de29af89e8c38
+# class name : me.prettyprint.cassandra.connection.HConnectionManager
+# method name: operateWithFailover(Operation<?>)
+# side       : left (left-right-lines.csv)
+source@me.prettyprint.cassandra.connection.HConnectionManager.operateWithFailover(Operation<?>):200:     return stats;
+sink@me.prettyprint.cassandra.connection.HConnectionManager.operateWithFailover(Operation<?>):267:           // I think this gives a sane way to future-proof against any API additions
+sink@me.prettyprint.cassandra.connection.HConnectionManager.operateWithFailover(Operation<?>):268:           // that we don't add in time. 
+
+# same region in merge.java (scenario update):
+merge:200:     final StopWatch stopWatch = stopWatchFactory.getStopWatch();
+merge:201:     int retries = Math.min(op.failoverPolicy.numRetries, hostPools.size());
+merge:202:     HThriftClient client = null;
+merge:203:     HClientPool pool = null;
+merge:204:     boolean success = false;
+merge:205:     boolean retryable = false;
+merge:206:     Set<CassandraHost> excludeHosts = new HashSet<CassandraHost>(); // HLT.getExcludedHosts() (will be empty most times)
+merge:207:     // TODO start timer for limiting retry time spent
+merge:208:     while ( !success ) {
+merge:209:       try {
+merge:210:         // TODO how to 'timeout' on this op when underlying pool is exhausted
+merge:211:         pool = getClientFromLBPolicy(excludeHosts);
+merge:212:         client = pool.borrowClient();
+merge:213:         Cassandra.Client c = client.getCassandra(op.keyspaceName);
+merge:214:         // Keyspace can be null for some system_* api calls
+merge:215:         if ( op.credentials != null && !op.credentials.isEmpty() ) {
+merge:216:           c.login(new AuthenticationRequest(op.credentials));
+merge:217:         }
+merge:218: 
+merge:219:         op.executeAndSetResult(c, pool.getCassandraHost());
+merge:220:         success = true;
+merge:221:         stopWatch.stop(op.stopWatchTagName + ".success_");
+merge:222:         break;
+merge:223: 
+merge:224:       } catch (Exception ex) {
+merge:225:         HectorException he = exceptionsTranslator.translate(ex);
+merge:226:         if ( he instanceof HInvalidRequestException || he instanceof HCassandraInternalException || he instanceof HUnavailableException) {
+merge:227:           // break out on HUnavailableException as well since we can no longer satisfy the CL
+merge:228:           throw he;
+merge:229:         } else if ( he instanceof HectorTransportException) {
+merge:230:           --retries;
+merge:231:           // client can be null in this situation
+merge:232:           if ( client != null ) {            
+merge:233:             client.close();
+merge:234:           }
+merge:235:           markHostAsDown(pool.getCassandraHost());
+merge:236:           excludeHosts.add(pool.getCassandraHost());
+merge:237:           retryable = true;
+merge:238:           if ( retries > 0 ) {
+merge:239:             monitor.incCounter(Counter.RECOVERABLE_TRANSPORT_EXCEPTIONS);
+merge:240:           }        
+merge:241:         } else if (he instanceof HTimedOutException ) {
+merge:242:           // DO NOT drecrement retries, we will be keep retrying on timeouts until it comes back
+merge:243:           // if HLT.checkTimeout(cassandraHost): suspendHost(cassandraHost);          
+merge:244:           doTimeoutCheck(pool.getCassandraHost());
+merge:245:           if ( hostPools.size() > 1) {
+merge:246:             retryable = true;
+merge:247:           }
+merge:248:           monitor.incCounter(Counter.RECOVERABLE_TIMED_OUT_EXCEPTIONS);
+merge:249:           client.close();
+merge:250:           // TODO timecheck on how long we've been waiting on timeouts here
+merge:251:           // suggestion per user moores on hector-users
+merge:252:         } else if ( he instanceof PoolExhaustedException ) {
+merge:253:           retryable = true;
+merge:254:           --retries;
+merge:255:           if ( hostPools.size() == 1 ) {
+merge:256:             throw he;
+merge:257:           }
+merge:258:           monitor.incCounter(Counter.POOL_EXHAUSTED);
+merge:259:           excludeHosts.add(pool.getCassandraHost());
+merge:260:         } else {
+merge:261:           // something strange happened. Added here as suggested by sbridges.
+merge:262:           // I think this gives a sane way to future-proof against any API additions
+merge:263:           // that we don't add in time. 
+merge:264:           retryable = false;
+merge:265:         }
+merge:266:         if ( retries <= 0 || retryable == false) throw he;
+merge:267:         log.warn("Could not fullfill request on this host {}", client);
+merge:268:         log.warn("Exception: ", he);

@@ -1,0 +1,17 @@
+# class name : com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization
+# method name: initialize(Serializer)
+# variables referenced in the affected region:
+IndexParameters	external/inherited	roles=sink
+KRYO_OFFSET	declared-in-file	roles=source,sink
+Parameter	external/inherited	roles=sink
+Preconditions	external/inherited	roles=sink
+RESERVED_ID_OFFSET	declared-in-file	roles=sink
+serializer	external/inherited	roles=source,sink
+
+# per-line detail:
+source:31	serializer,KRYO_OFFSET
+sink:52	serializer,Parameter,KRYO_OFFSET
+sink:53	serializer,Parameter,KRYO_OFFSET
+sink:54	serializer,IndexParameters,KRYO_OFFSET
+sink:55	serializer,IndexParameters,KRYO_OFFSET
+sink:57	Preconditions,KRYO_OFFSET,RESERVED_ID_OFFSET

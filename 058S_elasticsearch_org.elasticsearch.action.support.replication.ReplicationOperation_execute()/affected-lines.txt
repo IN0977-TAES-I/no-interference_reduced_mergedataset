@@ -1,0 +1,39 @@
+# scenario   : 058S
+# project    : elasticsearch
+# commit     : d896886973660785aac45275ddb110c1a6babc57
+# class name : org.elasticsearch.action.support.replication.ReplicationOperation
+# method name: execute()
+# side       : left (left-right-lines.csv)
+sink@org.elasticsearch.action.support.replication.ReplicationOperation.execute():98:     public RestStatus status() {
+source@org.elasticsearch.action.support.replication.ReplicationOperation.execute():98:     public RestStatus status() {
+source@org.elasticsearch.action.support.replication.ReplicationOperation.execute():99:         return getShardInfo().status();
+source@org.elasticsearch.action.support.replication.ReplicationOperation.execute():101: 
+source@org.elasticsearch.action.support.replication.ReplicationOperation.execute():108:         version = in.readZLong();
+sink@org.elasticsearch.action.support.replication.ReplicationOperation.execute():109:         seqNo = in.readZLong();
+source@org.elasticsearch.action.support.replication.ReplicationOperation.execute():110:     }
+source@org.elasticsearch.action.support.replication.ReplicationOperation.execute():113:     public void writeTo(StreamOutput out) throws IOException {
+source@org.elasticsearch.action.support.replication.ReplicationOperation.execute():119:         out.writeZLong(seqNo);
+
+# same region in merge.java (scenario update):
+merge:98:      */
+merge:99:     public long getSeqNo() {
+merge:100:         return seqNo;
+merge:101:     }
+merge:102: 
+merge:103:     /**
+merge:104:      * Did this request force a refresh? Requests that set {@link WriteRequest#setRefreshPolicy(RefreshPolicy)} to
+merge:105:      * {@link RefreshPolicy#IMMEDIATE} will always return true for this. Requests that set it to {@link RefreshPolicy#WAIT_UNTIL} will
+merge:106:      * only return true here if they run out of refresh listener slots (see {@link IndexSettings#MAX_REFRESH_LISTENERS_PER_SHARD}).
+merge:107:      */
+merge:108:     public boolean forcedRefresh() {
+merge:109:         return forcedRefresh;
+merge:110:     }
+merge:111: 
+merge:112:     @Override
+merge:113:     public void setForcedRefresh(boolean forcedRefresh) {
+merge:114:         this.forcedRefresh = forcedRefresh;
+merge:115:     }
+merge:116: 
+merge:117:     /** returns the rest status for this response (based on {@link ShardInfo#status()} */
+merge:118:     public RestStatus status() {
+merge:119:         return getShardInfo().status();

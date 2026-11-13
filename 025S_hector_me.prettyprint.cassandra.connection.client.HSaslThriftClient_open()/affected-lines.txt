@@ -1,0 +1,43 @@
+# scenario   : 025S
+# project    : hector
+# commit     : 0588608e7a2bdf974c985ff546207104f672bf6c
+# class name : me.prettyprint.cassandra.connection.client.HSaslThriftClient
+# method name: open()
+# side       : left (left-right-lines.csv)
+sink@me.prettyprint.cassandra.connection.client.HSaslThriftClient.open():94:         if (params == null)
+sink@me.prettyprint.cassandra.connection.client.HSaslThriftClient.open():95:           socket = new TSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout);
+sink@me.prettyprint.cassandra.connection.client.HSaslThriftClient.open():96:         else
+sink@me.prettyprint.cassandra.connection.client.HSaslThriftClient.open():97:           socket = TSSLTransportFactory.getClientSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout, params);
+sink@me.prettyprint.cassandra.connection.client.HSaslThriftClient.open():111:         transport = openKerberosTransport(socket, servicePrincipalName);
+source@me.prettyprint.cassandra.connection.client.HSaslThriftClient.open():122:       if (cassandraHost.getUseThriftFramedTransport()) {
+
+# same region in merge.java (scenario update):
+merge:94:         if (params == null)
+merge:95:           socket = new TSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout);
+merge:96:         else
+merge:97:           socket = TSSLTransportFactory.getClientSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout, params);
+merge:98:       } catch (TTransportException e) {
+merge:99:         throw new HectorTransportException("Could not get client socket: ", e);
+merge:100:       }
+merge:101: 
+merge:102:       if ( cassandraHost.getUseSocketKeepalive() ) {
+merge:103:         try {
+merge:104:           socket.getSocket().setKeepAlive(true);
+merge:105:         } catch (SocketException se) {
+merge:106:           throw new HectorTransportException("Could not set SO_KEEPALIVE on socket: ", se);
+merge:107:         }
+merge:108:       }
+merge:109: 
+merge:110:       try {
+merge:111:         transport = openKerberosTransport(socket, servicePrincipalName);
+merge:112:       } catch (LoginException e) {
+merge:113:         log.error("Kerberos login failed: ", e);
+merge:114:         close();
+merge:115:         throw new HectorTransportException("Kerberos context couldn't be established with client: ", e);
+merge:116:       } catch (TTransportException e) {
+merge:117:         log.error("Failed to open Kerberos transport.", e);
+merge:118:         close();
+merge:119:         throw new HectorTransportException("Kerberos context couldn't be established with client: ", e);
+merge:120:       }
+merge:121: 
+merge:122:       transport = maybeWrapWithTFramedTransport(transport);

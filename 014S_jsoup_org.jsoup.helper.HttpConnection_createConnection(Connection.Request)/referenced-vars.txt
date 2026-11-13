@@ -1,0 +1,17 @@
+# class name : org.jsoup.helper.HttpConnection
+# method name: createConnection(Connection.Request)
+# variables referenced in the affected region:
+HttpsURLConnection	external/inherited	roles=sink
+Method	external/inherited	roles=source
+conn	declared-in-file	roles=sink
+req	declared-in-file	roles=source,sink
+sslSocketFactory	declared-in-file	roles=sink
+
+# per-line detail:
+sink:609	conn,HttpsURLConnection
+sink:610	req
+sink:611	
+sink:612	HttpsURLConnection,conn,sslSocketFactory
+sink:613	HttpsURLConnection,conn
+sink:614	
+source:617	req,Method

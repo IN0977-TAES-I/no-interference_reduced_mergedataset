@@ -1,0 +1,20 @@
+# class name : org.elasticsearch.action.support.replication.ReplicationOperationTests
+# method name: testReplication()
+# variables referenced in the affected region:
+IOException	external/inherited	roles=source
+StreamInput	external/inherited	roles=source
+String	external/inherited	roles=sink
+_ID	declared-in-file	roles=sink
+_VERSION	declared-in-file	roles=sink
+in	external/inherited	roles=source,sink
+out	external/inherited	roles=source
+type	declared-in-file	roles=source,sink
+version	declared-in-file	roles=sink
+
+# per-line detail:
+source:103	StreamInput,in,IOException
+sink:106	type,in
+sink:108	version,in
+source:116	out,type
+sink:125	String,_ID
+sink:126	String,_VERSION

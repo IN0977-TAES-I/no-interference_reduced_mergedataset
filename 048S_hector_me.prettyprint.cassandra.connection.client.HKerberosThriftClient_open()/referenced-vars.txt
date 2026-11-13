@@ -1,0 +1,16 @@
+# class name : me.prettyprint.cassandra.connection.client.HKerberosThriftClient
+# method name: open()
+# variables referenced in the affected region:
+cassandraHost	external/inherited	roles=source
+log	declared-in-file	roles=source
+
+# per-line detail:
+source:69	
+source:70	
+source:71	log,cassandraHost
+source:72	
+source:73	cassandraHost
+source:74	
+source:75	
+source:76	
+sink:88	

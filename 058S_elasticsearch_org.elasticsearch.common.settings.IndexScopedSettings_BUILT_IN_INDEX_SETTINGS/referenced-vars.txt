@@ -1,0 +1,10 @@
+# class name : org.elasticsearch.common.settings.IndexScopedSettings
+# method name: BUILT_IN_INDEX_SETTINGS
+# variables referenced in the affected region:
+out	external/inherited	roles=sink
+seqNo	declared-in-file	roles=sink
+
+# per-line detail:
+sink:119	out,seqNo
+sink:120	
+source:121	

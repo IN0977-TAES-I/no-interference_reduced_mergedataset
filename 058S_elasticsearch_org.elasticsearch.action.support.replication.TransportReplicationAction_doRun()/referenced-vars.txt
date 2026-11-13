@@ -1,0 +1,12 @@
+# class name : org.elasticsearch.action.support.replication.TransportReplicationAction
+# method name: doRun()
+# variables referenced in the affected region:
+
+# per-line detail:
+sink:455	
+source:457	
+sink:458	
+source:459	
+sink:460	
+sink:462	
+source:462	
