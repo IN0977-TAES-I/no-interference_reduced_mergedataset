@@ -1,13 +1,37 @@
-// class name : com.netflix.simianarmy.basic.BasicSimianArmyContext
-// method name: BasicSimianArmyContext(String)
-// side       : base
-// region     : lines 110-141 (affected lines: [110, 111, 112, 113, 114, 115, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 141])
 class BasicSimianArmyContext {
-    void BasicSimianArmyContext_String_() {
+    static Logger LOGGER;
+    Properties properties;
+    MonkeyCalendar calendar;
+    BasicConfiguration config;
+    LinkedList<Event> eventReport;
+    AWSCredentialsProvider awsCredentialsProvider;
+    String assumeRoleArn;
+    String account;
+    String secret;
+    String region;
+
+    protected BasicSimianArmyContext(String... configFiles) {
+        eventReport = new LinkedList<Event>();
+        for (String configFile : configFiles) {
+            loadConfigurationFileIntoProperties(configFile);
+        }
+        LOGGER.info("The following are properties in the context.");
+        for (Entry<Object, Object> prop : properties.entrySet()) {
+            LOGGER.info(String.format("%s = %s", prop.getKey(), prop.getValue()));
+        }
+
+        config = new BasicConfiguration(properties);
+        calendar = new BasicCalendar(config);
+
+        account = config.getStr("simianarmy.client.aws.accountKey");
+        secret = config.getStr("simianarmy.client.aws.secretKey");
+        region = config.getStrOrElse("simianarmy.client.aws.region", "us-east-1");
+
+        assumeRoleArn = config.getStr("simianarmy.client.aws.assumeRoleArn");
+        if (assumeRoleArn != null) {
             this.awsCredentialsProvider = new STSAssumeRoleSessionCredentialsProvider(assumeRoleArn);
         }
 
-        // if credentials are set explicitly make them available to the AWS SDK
         if (StringUtils.isNotBlank(account) && StringUtils.isNotBlank(secret)) {
             this.exportCredentials(account, secret);
         }
@@ -18,23 +42,5 @@ class BasicSimianArmyContext {
 
         createRecorder();
 
-    }
-
-    /** loads the given config on top of the config read by previous calls. */
-    protected void loadConfigurationFileIntoProperties(String propertyFileName) {
-        String propFile = System.getProperty(propertyFileName, "/" + propertyFileName);
-        try {
-            InputStream is = BasicSimianArmyContext.class.getResourceAsStream(propFile);
-            try {
-                properties.load(is);
-            } finally {
-                is.close();
-            }
-        } catch (Exception e) {
-            String msg = "Unable to load properties file " + propFile + " set System property \"" + propertyFileName
-                    + "\" to valid file";
-            LOGGER.error(msg);
-            throw new RuntimeException(msg, e);
-        }
     }
 }

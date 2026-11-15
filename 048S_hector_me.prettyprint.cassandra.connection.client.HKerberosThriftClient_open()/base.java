@@ -1,28 +1,49 @@
-// class name : me.prettyprint.cassandra.connection.client.HKerberosThriftClient
-// method name: open()
-// side       : base
-// region     : lines 69-88 (affected lines: [69, 70, 71, 72, 73, 74, 75, 76, 88])
 class HKerberosThriftClient {
-    void open__() {
-    }
+    static Logger log;
+    Subject kerberosTicket;
+    String servicePrincipalName;
 
-    try {
-      transport.open();
-    } catch (TTransportException e) {
-      // Thrift exceptions aren't very good in reporting, so we have to catch the exception here and
-      // add details to it.
-      log.debug("Unable to open transport to " + cassandraHost.getName());
-      //clientMonitor.incCounter(Counter.CONNECT_ERROR);
-      throw new HectorTransportException("Unable to open transport to " + cassandraHost.getName() +" , " +
-          e.getLocalizedMessage(), e);
-    }
-    
-    // Kerberos authentication
-    Socket internalSocket = socket.getSocket();
+    public HKerberosThriftClient open() {
+      if ( isOpen() ) {
+        throw new IllegalStateException("Open called on already open connection. You should not have gotten here.");
+      }
+      if ( log.isDebugEnabled() ) {
+        log.debug("Creating a new thrift connection to {}", cassandraHost);
+      }
 
-    final GSSContext clientContext = KerberosHelper.authenticateClient(internalSocket, kerberosTicket, servicePrincipalName);
+      TSocket socket = new TSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout);
+      if ( cassandraHost.getUseSocketKeepalive() ) {
+        try {
+          socket.getSocket().setKeepAlive(true);
+        } catch (SocketException se) {
+          throw new HectorTransportException("Could not set SO_KEEPALIVE on socket: ", se);
+        }
+      }
 
-    if (clientContext == null) {
-      close();
+
+      if (cassandraHost.getUseThriftFramedTransport()) {
+        transport = new TFramedTransport(socket);
+      } else {
+        transport = socket;
+      }
+
+      try {
+        transport.open();
+      } catch (TTransportException e) {
+        log.debug("Unable to open transport to " + cassandraHost.getName());
+        throw new HectorTransportException("Unable to open transport to " + cassandraHost.getName() +" , " +
+            e.getLocalizedMessage(), e);
+      }
+
+      Socket internalSocket = socket.getSocket();
+
+      final GSSContext clientContext = KerberosHelper.authenticateClient(internalSocket, kerberosTicket, servicePrincipalName);
+
+      if (clientContext == null) {
+        close();
+        throw new HectorTransportException("Kerberos context couldn't be established with client.");
+      }
+
+      return this;
     }
 }

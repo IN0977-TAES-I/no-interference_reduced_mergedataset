@@ -1,30 +1,54 @@
-// class name : org.elasticsearch.action.support.replication.ReplicationOperation
-// method name: execute()
-// side       : right
-// region     : lines 98-119 (affected lines: [98, 99, 101, 108, 109, 110, 113, 119])
 class ReplicationOperation {
-    void execute__() {
-    public boolean forcedRefresh() {
-        return forcedRefresh;
-    }
+    ESLogger logger;
+    Request request;
+    Supplier<ClusterState> clusterStateSupplier;
+    String opType;
+    AtomicInteger totalShards;
+    AtomicInteger pendingShards;
+    AtomicInteger successfulShards;
+    boolean executeOnReplicas;
+    boolean checkWriteConsistency;
+    Primary<Request, ReplicaRequest, PrimaryResultT> primary;
+    PrimaryResultT primaryResult;
 
-    @Override
-    public void setForcedRefresh(boolean forcedRefresh) {
-        this.forcedRefresh = forcedRefresh;
-    }
+    void execute() throws Exception {
+        final String writeConsistencyFailure = checkWriteConsistency ? checkWriteConsistency() : null;
+        final ShardRouting primaryRouting = primary.routingEntry();
+        final ShardId primaryId = primaryRouting.shardId();
+        if (writeConsistencyFailure != null) {
+            finishAsFailed(new UnavailableShardsException(primaryId,
+                "{} Timeout: [{}], request: [{}]", writeConsistencyFailure, request.timeout(), request));
+            return;
+        }
 
-    /** returns the rest status for this response (based on {@link ShardInfo#status()} */
-    public RestStatus status() {
-        return getShardInfo().status();
-    }
+        totalShards.incrementAndGet();
+        pendingShards.incrementAndGet();
+        primaryResult = primary.perform(request);
+        final ReplicaRequest replicaRequest = primaryResult.replicaRequest();
+        assert replicaRequest.primaryTerm() > 0 : "replicaRequest doesn't have a primary term";
+        if (logger.isTraceEnabled()) {
+            logger.trace("[{}] op [{}] completed on primary for request [{}]", primaryId, opType, request);
+        }
+        final List<ShardRouting> shards = getShards(primaryId, clusterStateSupplier.get());
+        final String localNodeId = primary.routingEntry().currentNodeId();
+        for (final ShardRouting shard : shards) {
+            if (executeOnReplicas == false || shard.unassigned()) {
+                if (shard.primary() == false) {
+                    totalShards.incrementAndGet();
+                }
+                continue;
+            }
 
+            if (shard.currentNodeId().equals(localNodeId) == false) {
+                performOnReplica(shard, replicaRequest);
+            }
 
-    @Override
-    public void readFrom(StreamInput in) throws IOException {
-        super.readFrom(in);
-        shardId = ShardId.readShardId(in);
-        type = in.readString();
-        id = in.readString();
-        version = in.readZLong();
+            if (shard.relocating() && shard.relocatingNodeId().equals(localNodeId) == false) {
+                performOnReplica(shard.buildTargetRelocatingShard(), replicaRequest);
+            }
+        }
+
+        successfulShards.incrementAndGet();
+        decPendingAndFinishIfNeeded();
     }
 }

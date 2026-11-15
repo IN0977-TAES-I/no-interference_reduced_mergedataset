@@ -1,9 +1,247 @@
-// class name : voldemort.server.VoldemortConfig
-// method name: VoldemortConfig(Props)
-// side       : right
-// region     : lines 359-455 (affected lines: [359, 448, 455])
 class VoldemortConfig {
-    void VoldemortConfig_Props_() {
+    static String VOLDEMORT_NODE_ID_VAR_NAME;
+    static long REPORTING_INTERVAL_BYTES;
+    static int DEFAULT_FETCHER_BUFFER_SIZE;
+    static int DEFAULT_FETCHER_SOCKET_TIMEOUT;
+    static int DEFAULT_FETCHER_THROTTLE_INTERVAL_WINDOW_MS;
+    int nodeId;
+    String voldemortHome;
+    String dataDirectory;
+    String metadataDirectory;
+    long bdbCacheSize;
+    boolean bdbWriteTransactions;
+    boolean bdbFlushTransactions;
+    String bdbDataDirectory;
+    long bdbMaxLogFileSize;
+    int bdbBtreeFanout;
+    int bdbMaxDelta;
+    int bdbBinDelta;
+    long bdbCheckpointBytes;
+    long bdbCheckpointMs;
+    boolean bdbOneEnvPerStore;
+    int bdbCleanerMinFileUtilization;
+    int bdbCleanerMinUtilization;
+    int bdbCleanerLookAheadCacheSize;
+    long bdbCleanerBytesInterval;
+    boolean bdbCheckpointerHighPriority;
+    int bdbCleanerMaxBatchFiles;
+    boolean bdbReadUncommitted;
+    int bdbCleanerThreads;
+    long bdbLockTimeoutMs;
+    int bdbLockNLockTables;
+    int bdbLogFaultReadSize;
+    int bdbLogIteratorReadSize;
+    boolean bdbFairLatches;
+    long bdbStatsCacheTtlMs;
+    boolean bdbExposeSpaceUtilization;
+    long bdbMinimumSharedCache;
+    boolean bdbCleanerLazyMigration;
+    boolean bdbCacheModeEvictLN;
+    boolean bdbMinimizeScanImpact;
+    boolean bdbPrefixKeysWithPartitionId;
+    boolean bdbLevelBasedEviction;
+    boolean bdbCheckpointerOffForBatchWrites;
+    boolean bdbCleanerFetchObsoleteSize;
+    boolean bdbCleanerAdjustUtilization;
+    boolean bdbRecoveryForceCheckpoint;
+    String bdbRawPropertyString;
+    String mysqlUsername;
+    String mysqlPassword;
+    String mysqlDatabaseName;
+    String mysqlHost;
+    int mysqlPort;
+    String rocksdbDataDirectory;
+    boolean rocksdbPrefixKeysWithPartitionId;
+    boolean rocksdbEnableReadLocks;
+    int numReadOnlyVersions;
+    String readOnlyStorageDir;
+    String readOnlySearchStrategy;
+    int readOnlyDeleteBackupTimeMs;
+    long readOnlyFetcherMaxBytesPerSecond;
+    long readOnlyFetcherReportingIntervalBytes;
+    int readOnlyFetcherThrottlerInterval;
+    int readOnlyFetchRetryCount;
+    long readOnlyFetchRetryDelayMs;
+    int fetcherBufferSize;
+    int fetcherSocketTimeout;
+    String readOnlyKeytabPath;
+    String readOnlyKerberosUser;
+    String hadoopConfigPath;
+    String readOnlyKerberosKdc;
+    String readOnlykerberosRealm;
+    String fileFetcherClass;
+    String readOnlyCompressionCodec;
+    boolean readOnlyStatsFileEnabled;
+    int readOnlyMaxVersionsStatsFile;
+    static String PUSH_HA_ENABLED;
+    boolean highAvailabilityPushEnabled;
+    static String PUSH_HA_CLUSTER_ID;
+    String highAvailabilityPushClusterId;
+    static String PUSH_HA_LOCK_PATH;
+    String highAvailabilityPushLockPath;
+    static String PUSH_HA_LOCK_IMPLEMENTATION;
+    String highAvailabilityPushLockImplementation;
+    static String PUSH_HA_MAX_NODE_FAILURES;
+    int highAvailabilityPushMaxNodeFailures;
+    OpTimeMap testingSlowQueueingDelays;
+    OpTimeMap testingSlowConcurrentDelays;
+    int coreThreads;
+    int maxThreads;
+    int socketTimeoutMs;
+    int socketBufferSize;
+    boolean socketKeepAlive;
+    boolean useNioConnector;
+    boolean nioConnectorKeepAlive;
+    int nioConnectorSelectors;
+    int nioAdminConnectorSelectors;
+    boolean nioAdminConnectorKeepAlive;
+    int nioAcceptorBacklog;
+    int clientSelectors;
+    TimeoutConfig clientTimeoutConfig;
+    int clientMaxConnectionsPerNode;
+    int clientConnectionTimeoutMs;
+    int clientRoutingTimeoutMs;
+    int clientMaxThreads;
+    int clientThreadIdleMs;
+    int clientMaxQueuedRequests;
+    int schedulerThreads;
+    boolean mayInterruptService;
+    int numScanPermits;
+    RequestFormatType requestFormatType;
+    boolean enableSlop;
+    boolean enableSlopPusherJob;
+    boolean enableRepair;
+    boolean enablePruneJob;
+    boolean enableSlopPurgeJob;
+    boolean enableHttpServer;
+    boolean enableSocketServer;
+    boolean enableAdminServer;
+    boolean enableJmx;
+    boolean enableVerboseLogging;
+    boolean enableStatTracking;
+    boolean enableServerRouting;
+    boolean enableMetadataChecking;
+    boolean enableNetworkClassLoader;
+    boolean enableGossip;
+    boolean enableRebalanceService;
+    boolean enableJmxClusterName;
+    boolean enableQuotaLimiting;
+    List<String> storageConfigurations;
+    Props allProps;
+    String slopStoreType;
+    String pusherType;
+    long slopFrequencyMs;
+    long slopMaxWriteBytesPerSec;
+    long slopMaxReadBytesPerSec;
+    int slopBatchSize;
+    int slopZonesDownToTerminate;
+    boolean autoPurgeDeadSlops;
+    int adminCoreThreads;
+    int adminMaxThreads;
+    int adminStreamBufferSize;
+    int adminSocketTimeout;
+    int adminConnectionTimeout;
+    long streamMaxReadBytesPerSec;
+    long streamMaxWriteBytesPerSec;
+    boolean multiVersionStreamingPutsEnabled;
+    int gossipIntervalMs;
+    String failureDetectorImplementation;
+    long failureDetectorBannagePeriod;
+    int failureDetectorThreshold;
+    int failureDetectorThresholdCountMinimum;
+    long failureDetectorThresholdInterval;
+    long failureDetectorAsyncRecoveryInterval;
+    List<String> failureDetectorCatastrophicErrorTypes;
+    long failureDetectorRequestLengthThreshold;
+    int retentionCleanupFirstStartTimeInHour;
+    int retentionCleanupScheduledPeriodInHour;
+    int retentionCleanupFirstStartDayOfWeek;
+    boolean retentionCleanupPinStartTime;
+    boolean enforceRetentionPolicyOnRead;
+    boolean deleteExpiredValuesOnRead;
+    long rebalancingTimeoutSec;
+    int maxParallelStoresRebalancing;
+    boolean usePartitionScanForRebalance;
+    int maxProxyPutThreads;
+    boolean enableRestService;
+    int numRestServiceNettyServerBacklog;
+    int numRestServiceNettyBossThreads;
+    int numRestServiceNettyWorkerThreads;
+    int numRestServiceStorageThreads;
+    int restServiceStorageThreadPoolQueueSize;
+    int maxHttpAggregatedContentLength;
+    int repairJobMaxKeysScannedPerSec;
+    int pruneJobMaxKeysScannedPerSec;
+    int slopPurgeJobMaxKeysScannedPerSec;
+
+    public VoldemortConfig(Props props) {
+        try {
+            this.nodeId = props.getInt("node.id");
+        } catch(UndefinedPropertyException e) {
+            this.nodeId = getIntEnvVariable(VOLDEMORT_NODE_ID_VAR_NAME);
+        }
+        this.voldemortHome = props.getString("voldemort.home");
+        this.dataDirectory = props.getString("data.directory", this.voldemortHome + File.separator
+                                                               + "data");
+        this.metadataDirectory = props.getString("metadata.directory", voldemortHome
+                                                                       + File.separator + "config");
+
+        this.bdbCacheSize = props.getBytes("bdb.cache.size", 200 * 1024 * 1024);
+        this.bdbWriteTransactions = props.getBoolean("bdb.write.transactions", false);
+        this.bdbFlushTransactions = props.getBoolean("bdb.flush.transactions", false);
+        this.bdbDataDirectory = props.getString("bdb.data.directory", this.dataDirectory
+                                                                      + File.separator + "bdb");
+        this.bdbMaxLogFileSize = props.getBytes("bdb.max.logfile.size", 60 * 1024 * 1024);
+        this.bdbBtreeFanout = props.getInt("bdb.btree.fanout", 512);
+        this.bdbMaxDelta = props.getInt("bdb.max.delta", 100);
+        this.bdbBinDelta = props.getInt("bdb.bin.delta", 75);
+        this.bdbCheckpointBytes = props.getLong("bdb.checkpoint.interval.bytes", 200 * 1024 * 1024);
+        this.bdbCheckpointMs = props.getLong("bdb.checkpoint.interval.ms", 30 * Time.MS_PER_SECOND);
+        this.bdbOneEnvPerStore = props.getBoolean("bdb.one.env.per.store", false);
+        this.bdbCleanerMinFileUtilization = props.getInt("bdb.cleaner.min.file.utilization", 0);
+        this.bdbCleanerMinUtilization = props.getInt("bdb.cleaner.minUtilization", 50);
+        this.bdbCleanerThreads = props.getInt("bdb.cleaner.threads", 1);
+        this.bdbCleanerBytesInterval = props.getLong("bdb.cleaner.interval.bytes", 30 * 1024 * 1024);
+        this.bdbCleanerLookAheadCacheSize = props.getInt("bdb.cleaner.lookahead.cache.size", 8192);
+        this.bdbLockTimeoutMs = props.getLong("bdb.lock.timeout.ms", 500);
+        this.bdbLockNLockTables = props.getInt("bdb.lock.nLockTables", 7);
+        this.bdbLogFaultReadSize = props.getInt("bdb.log.fault.read.size", 2048);
+        this.bdbLogIteratorReadSize = props.getInt("bdb.log.iterator.read.size", 8192);
+        this.bdbFairLatches = props.getBoolean("bdb.fair.latches", false);
+        this.bdbCheckpointerHighPriority = props.getBoolean("bdb.checkpointer.high.priority", false);
+        this.bdbCleanerMaxBatchFiles = props.getInt("bdb.cleaner.max.batch.files", 0);
+        this.bdbReadUncommitted = props.getBoolean("bdb.lock.read_uncommitted", true);
+        this.bdbStatsCacheTtlMs = props.getLong("bdb.stats.cache.ttl.ms", 5 * Time.MS_PER_SECOND);
+        this.bdbExposeSpaceUtilization = props.getBoolean("bdb.expose.space.utilization", true);
+        this.bdbMinimumSharedCache = props.getLong("bdb.minimum.shared.cache", 0);
+        this.bdbCleanerLazyMigration = props.getBoolean("bdb.cleaner.lazy.migration", false);
+        this.bdbCacheModeEvictLN = props.getBoolean("bdb.cache.evictln", true);
+        this.bdbMinimizeScanImpact = props.getBoolean("bdb.minimize.scan.impact", true);
+        this.bdbPrefixKeysWithPartitionId = props.getBoolean("bdb.prefix.keys.with.partitionid",
+                                                             true);
+        this.bdbLevelBasedEviction = props.getBoolean("bdb.evict.by.level", false);
+        this.bdbCheckpointerOffForBatchWrites = props.getBoolean("bdb.checkpointer.off.batch.writes",
+                                                                 false);
+        this.bdbCleanerFetchObsoleteSize = props.getBoolean("bdb.cleaner.fetch.obsolete.size", true);
+        this.bdbCleanerAdjustUtilization = props.getBoolean("bdb.cleaner.adjust.utilization", false);
+        this.bdbRecoveryForceCheckpoint = props.getBoolean("bdb.recovery.force.checkpoint", false);
+        this.bdbRawPropertyString = props.getString("bdb.raw.property.string", null);
+
+        this.numReadOnlyVersions = props.getInt("readonly.backups", 1);
+        this.readOnlySearchStrategy = props.getString("readonly.search.strategy",
+                BinarySearchStrategy.class.getName());
+        this.readOnlyStorageDir = props.getString("readonly.data.directory", this.dataDirectory
+                                                                             + File.separator
+                                                                             + "read-only");
+        this.readOnlyDeleteBackupTimeMs = props.getInt("readonly.delete.backup.ms", 0);
+        this.readOnlyFetcherMaxBytesPerSecond = props.getBytes("fetcher.max.bytes.per.sec", 0);
+        this.readOnlyFetcherReportingIntervalBytes = props.getBytes("fetcher.reporting.interval.bytes",
+                                                                    REPORTING_INTERVAL_BYTES);
+        this.readOnlyFetcherThrottlerInterval = props.getInt("fetcher.throttler.interval",
+                                                             DEFAULT_FETCHER_THROTTLE_INTERVAL_WINDOW_MS);
+        this.readOnlyFetchRetryCount = props.getInt("fetcher.retry.count", 5);
+        this.readOnlyFetchRetryDelayMs = props.getLong("fetcher.retry.delay.ms", 5000);
+        this.fetcherBufferSize = (int) props.getBytes("hdfs.fetcher.buffer.size",
                                                       DEFAULT_FETCHER_BUFFER_SIZE);
         this.fetcherSocketTimeout = props.getInt("hdfs.fetcher.socket.timeout",
                                                  DEFAULT_FETCHER_SOCKET_TIMEOUT);
@@ -23,9 +261,6 @@ class VoldemortConfig {
         this.readOnlyStatsFileEnabled = props.getBoolean("readonly.stats.file.enabled", true);
         this.readOnlyMaxVersionsStatsFile = props.getInt("readonly.stats.file.max.versions", 1000);
 
-        // To set the Voldemort RO server compression codec to GZIP, explicitly
-        // set this
-        // property "readonly.compression.codec" to "GZIP"
         this.readOnlyCompressionCodec = props.getString("readonly.compression.codec",
                                                         VoldemortConfig.DEFAULT_RO_COMPRESSION_CODEC);
 
@@ -72,7 +307,6 @@ class VoldemortConfig {
         this.maxThreads = props.getInt("max.threads", 100);
         this.coreThreads = props.getInt("core.threads", Math.max(1, maxThreads / 2));
 
-        // Admin client should have less threads but very high buffer size.
         this.adminMaxThreads = props.getInt("admin.max.threads", 20);
         this.adminCoreThreads = props.getInt("admin.core.threads", Math.max(1, adminMaxThreads / 2));
         this.adminStreamBufferSize = (int) props.getBytes("admin.streams.buffer.size",
@@ -99,7 +333,152 @@ class VoldemortConfig {
                                                        Math.max(8, Runtime.getRuntime()
                                                                           .availableProcessors()));
         this.nioAdminConnectorKeepAlive = props.getBoolean("nio.admin.connector.keepalive", false);
-        // a value <= 0 forces the default to be used
         this.nioAcceptorBacklog = props.getInt("nio.acceptor.backlog", 256);
+
+        this.clientSelectors = props.getInt("client.selectors", 4);
+        this.clientMaxConnectionsPerNode = props.getInt("client.max.connections.per.node", 50);
+        this.clientConnectionTimeoutMs = props.getInt("client.connection.timeout.ms", 500);
+        this.clientRoutingTimeoutMs = props.getInt("client.routing.timeout.ms", 15000);
+        this.clientTimeoutConfig = new TimeoutConfig(this.clientRoutingTimeoutMs, false);
+        this.clientTimeoutConfig.setOperationTimeout(VoldemortOpCode.GET_OP_CODE,
+                                                     props.getInt("client.routing.get.timeout.ms",
+                                                                  this.clientRoutingTimeoutMs));
+        this.clientTimeoutConfig.setOperationTimeout(VoldemortOpCode.GET_ALL_OP_CODE,
+                                                     props.getInt("client.routing.getall.timeout.ms",
+                                                                  this.clientRoutingTimeoutMs));
+        this.clientTimeoutConfig.setOperationTimeout(VoldemortOpCode.PUT_OP_CODE,
+                                                     props.getInt("client.routing.put.timeout.ms",
+                                                                  this.clientRoutingTimeoutMs));
+        this.clientTimeoutConfig.setOperationTimeout(VoldemortOpCode.GET_VERSION_OP_CODE,
+                                                     props.getLong("client.routing.getversions.timeout.ms",
+                                                                   this.clientTimeoutConfig.getOperationTimeout(VoldemortOpCode.PUT_OP_CODE)));
+        this.clientTimeoutConfig.setOperationTimeout(VoldemortOpCode.DELETE_OP_CODE,
+                                                     props.getInt("client.routing.delete.timeout.ms",
+                                                                  this.clientRoutingTimeoutMs));
+        this.clientTimeoutConfig.setPartialGetAllAllowed(props.getBoolean("client.routing.allow.partial.getall",
+                                                                          false));
+        this.clientMaxThreads = props.getInt("client.max.threads", 500);
+        this.clientThreadIdleMs = props.getInt("client.thread.idle.ms", 100000);
+        this.clientMaxQueuedRequests = props.getInt("client.max.queued.requests", 1000);
+
+        this.enableHttpServer = props.getBoolean("http.enable", false);
+        this.enableSocketServer = props.getBoolean("socket.enable", true);
+        this.enableAdminServer = props.getBoolean("admin.enable", true);
+        this.enableJmx = props.getBoolean("jmx.enable", true);
+        this.enableSlop = props.getBoolean("slop.enable", true);
+        this.enableSlopPusherJob = props.getBoolean("slop.pusher.enable", true);
+        this.slopMaxWriteBytesPerSec = props.getBytes("slop.write.byte.per.sec", 10 * 1000 * 1000);
+        this.enableVerboseLogging = props.getBoolean("enable.verbose.logging", true);
+        this.enableStatTracking = props.getBoolean("enable.stat.tracking", true);
+        this.enableServerRouting = props.getBoolean("enable.server.routing", false);
+        this.enableMetadataChecking = props.getBoolean("enable.metadata.checking", true);
+        this.enableGossip = props.getBoolean("enable.gossip", false);
+        this.enableRebalanceService = props.getBoolean("enable.rebalancing", true);
+        this.enableRepair = props.getBoolean("enable.repair", true);
+        this.enablePruneJob = props.getBoolean("enable.prunejob", true);
+        this.enableSlopPurgeJob = props.getBoolean("enable.slop.purge.job", true);
+        this.enableJmxClusterName = props.getBoolean("enable.jmx.clustername", false);
+        this.enableQuotaLimiting = props.getBoolean("enable.quota.limiting", true);
+
+        this.gossipIntervalMs = props.getInt("gossip.interval.ms", 30 * 1000);
+
+        this.slopMaxWriteBytesPerSec = props.getBytes("slop.write.byte.per.sec", 10 * 1000 * 1000);
+        this.slopMaxReadBytesPerSec = props.getBytes("slop.read.byte.per.sec", 10 * 1000 * 1000);
+        this.slopStoreType = props.getString("slop.store.engine", BdbStorageConfiguration.TYPE_NAME);
+        this.slopFrequencyMs = props.getLong("slop.frequency.ms", 5 * 60 * 1000);
+        this.slopBatchSize = props.getInt("slop.batch.size", 100);
+        this.pusherType = props.getString("pusher.type", StreamingSlopPusherJob.TYPE_NAME);
+        this.slopZonesDownToTerminate = props.getInt("slop.zones.terminate", 0);
+        this.autoPurgeDeadSlops = props.getBoolean("auto.purge.dead.slops", true);
+
+        this.schedulerThreads = props.getInt("scheduler.threads", 6);
+        this.mayInterruptService = props.getBoolean("service.interruptible", true);
+
+        this.numScanPermits = props.getInt("num.scan.permits", 1);
+
+        this.storageConfigurations = props.getList("storage.configs",
+                                                   ImmutableList.of(BdbStorageConfiguration.class.getName(),
+                                                                    MysqlStorageConfiguration.class.getName(),
+                                                                    InMemoryStorageConfiguration.class.getName(),
+                                                                    CacheStorageConfiguration.class.getName(),
+                                                                    ReadOnlyStorageConfiguration.class.getName(),
+                                                                    RocksDbStorageConfiguration.class.getName()));
+
+        this.retentionCleanupFirstStartTimeInHour = props.getInt("retention.cleanup.first.start.hour",
+                                                                 0);
+        this.retentionCleanupFirstStartDayOfWeek = props.getInt("retention.cleanup.first.start.day",
+                                                                Utils.getDayOfTheWeekFromNow(1));
+        this.retentionCleanupScheduledPeriodInHour = props.getInt("retention.cleanup.period.hours",
+                                                                  24);
+        this.retentionCleanupPinStartTime = props.getBoolean("retention.cleanup.pin.start.time",
+                                                             true);
+        this.enforceRetentionPolicyOnRead = props.getBoolean("enforce.retention.policy.on.read",
+                                                             false);
+        this.deleteExpiredValuesOnRead = props.getBoolean("delete.expired.values.on.read", false);
+
+        this.allProps = props;
+
+        String requestFormatName = props.getString("request.format",
+                                                   RequestFormatType.VOLDEMORT_V1.getCode());
+        this.requestFormatType = RequestFormatType.fromCode(requestFormatName);
+
+        this.rebalancingTimeoutSec = props.getLong("rebalancing.timeout.seconds", 10 * 24 * 60 * 60);
+        this.maxParallelStoresRebalancing = props.getInt("max.parallel.stores.rebalancing", 3);
+        this.usePartitionScanForRebalance = props.getBoolean("use.partition.scan.for.rebalance",
+                                                             true);
+        this.maxProxyPutThreads = props.getInt("max.proxy.put.threads",
+                                               Math.max(8, Runtime.getRuntime()
+                                                                  .availableProcessors()));
+        this.failureDetectorImplementation = props.getString("failuredetector.implementation",
+                                                             FailureDetectorConfig.DEFAULT_IMPLEMENTATION_CLASS_NAME);
+
+        if(props.containsKey("client.node.bannage.ms")
+           && !props.containsKey("failuredetector.bannage.period")) {
+            props.put("failuredetector.bannage.period", props.get("client.node.bannage.ms"));
+        }
+
+        this.failureDetectorBannagePeriod = props.getLong("failuredetector.bannage.period",
+                                                          FailureDetectorConfig.DEFAULT_BANNAGE_PERIOD);
+        this.failureDetectorThreshold = props.getInt("failuredetector.threshold",
+                                                     FailureDetectorConfig.DEFAULT_THRESHOLD);
+        this.failureDetectorThresholdCountMinimum = props.getInt("failuredetector.threshold.countminimum",
+                                                                 FailureDetectorConfig.DEFAULT_THRESHOLD_COUNT_MINIMUM);
+        this.failureDetectorThresholdInterval = props.getLong("failuredetector.threshold.interval",
+                                                              FailureDetectorConfig.DEFAULT_THRESHOLD_INTERVAL);
+        this.failureDetectorAsyncRecoveryInterval = props.getLong("failuredetector.asyncrecovery.interval",
+                                                                  FailureDetectorConfig.DEFAULT_ASYNC_RECOVERY_INTERVAL);
+        this.failureDetectorCatastrophicErrorTypes = props.getList("failuredetector.catastrophic.error.types",
+                                                                   FailureDetectorConfig.DEFAULT_CATASTROPHIC_ERROR_TYPES);
+        this.failureDetectorRequestLengthThreshold = props.getLong("failuredetector.request.length.threshold",
+                                                                   getSocketTimeoutMs());
+
+        this.enableNetworkClassLoader = props.getBoolean("enable.network.classloader", false);
+
+        this.enableRestService = props.getBoolean("rest.enable", false);
+        this.numRestServiceNettyServerBacklog = props.getInt("num.rest.service.netty.server.backlog",
+                                                             1000);
+        this.numRestServiceNettyBossThreads = props.getInt("num.rest.service.netty.boss.threads", 1);
+        this.numRestServiceNettyWorkerThreads = props.getInt("num.rest.service.netty.worker.threads",
+                                                             20);
+        this.numRestServiceStorageThreads = props.getInt("num.rest.service.storage.threads", 50);
+        this.restServiceStorageThreadPoolQueueSize = props.getInt("rest.service.storage.thread.pool.queue.size",
+                                                                  numRestServiceStorageThreads);
+        this.maxHttpAggregatedContentLength = props.getInt("max.http.aggregated.content.length",
+                                                           1048576);
+
+        this.repairJobMaxKeysScannedPerSec = props.getInt("repairjob.max.keys.scanned.per.sec",
+                                                          Integer.MAX_VALUE);
+        this.pruneJobMaxKeysScannedPerSec = props.getInt("prunejob.max.keys.scanned.per.sec",
+                                                         Integer.MAX_VALUE);
+        this.slopPurgeJobMaxKeysScannedPerSec = props.getInt("slop.purgejob.max.keys.scanned.per.sec",
+                                                             10000);
+
+        this.rocksdbDataDirectory = props.getString("rocksdb.data.dir", this.dataDirectory
+                                                                    + File.separator + "rocksdb");
+        this.rocksdbPrefixKeysWithPartitionId = props.getBoolean("rocksdb.prefix.keys.with.partitionid",
+                                                                 true);
+        this.rocksdbEnableReadLocks = props.getBoolean("rocksdb.enable.read.locks", false);
+
+        validateParams();
     }
 }

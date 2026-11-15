@@ -1,38 +1,60 @@
-// class name : com.xxmassdeveloper.mpchartexample.ScatterChartActivity
-// method name: onCreate(Bundle)
-// side       : right
-// region     : lines 57-86 (affected lines: [57, 63, 77, 80, 86])
 class ScatterChartActivity {
-    void onCreate_Bundle_() {
-            }
-            
-            BarDataSet ds = new BarDataSet(entries, getLabel(i));
-            ds.setColors(ColorTemplate.VORDIPLOM_COLORS);
-            sets.add(ds);
-        }
-        
-        BarData d = new BarData(ChartData.generateXVals(0, count), sets);
-        d.setValueTypeface(tf);
-        return d;
-    }
-    
-    protected ScatterData generateScatterData(int dataSets, float range, int count) {
-        
-        ArrayList<IScatterDataSet> sets = new ArrayList<IScatterDataSet>();
-        
-        ScatterChart.ScatterShape[] shapes = ScatterChart.ScatterShape.getAllDefaultShapes();
-        
-        for(int i = 0; i < dataSets; i++) {
-           
-            ArrayList<Entry> entries = new ArrayList<Entry>();
-            
-            for(int j = 0; j < count; j++) {        
-                entries.add(new Entry((float) (Math.random() * range) + range / 4, j));
-            }
-            
-            ScatterDataSet ds = new ScatterDataSet(entries, getLabel(i));
-            ds.setScatterShapeSize(12f);
-            ds.setScatterShape(shapes[i % shapes.length]);
-            ds.setColors(ColorTemplate.COLORFUL_COLORS);
+    ScatterChart mChart;
+    SeekBar mSeekBarX;
+    SeekBar mSeekBarY;
+    TextView tvX;
+    TextView tvY;
+    Typeface tf;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_scatterchart);
+
+        tvX = (TextView) findViewById(R.id.tvXMax);
+        tvY = (TextView) findViewById(R.id.tvYMax);
+
+        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+        mSeekBarX.setOnSeekBarChangeListener(this);
+
+        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+        mSeekBarY.setOnSeekBarChangeListener(this);
+
+        mChart = (ScatterChart) findViewById(R.id.chart1);
+        mChart.setDescription("");
+        mChart.addShapeRenderer(new CustomScatterShapeRenderer(), CustomScatterShapeRenderer.IDENTIFIER);
+
+        tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+
+        mChart.setOnChartValueSelectedListener(this);
+
+        mChart.setDrawGridBackground(false);
+
+        mChart.setTouchEnabled(true);
+
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+
+        mChart.setMaxVisibleValueCount(200);
+        mChart.setPinchZoom(true);
+
+        mSeekBarX.setProgress(45);
+        mSeekBarY.setProgress(100);
+
+        Legend l = mChart.getLegend();
+        l.setPosition(LegendPosition.RIGHT_OF_CHART);
+        l.setTypeface(tf);
+
+        YAxis yl = mChart.getAxisLeft();
+        yl.setTypeface(tf);
+        yl.setAxisMinValue(0f);
+
+        mChart.getAxisRight().setEnabled(false);
+
+        XAxis xl = mChart.getXAxis();
+        xl.setTypeface(tf);
+        xl.setDrawGridLines(false);
     }
 }

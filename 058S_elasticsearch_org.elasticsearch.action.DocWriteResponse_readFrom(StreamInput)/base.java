@@ -1,8 +1,15 @@
-// class name : org.elasticsearch.action.DocWriteResponse
-// method name: readFrom(StreamInput)
-// side       : base
-// region     : lines 129-130 (affected lines: [129, 130])
 class DocWriteResponse {
-    void readFrom_StreamInput_() {
+    ShardId shardId;
+    String id;
+    String type;
+    long version;
+
+    @Override
+    public void readFrom(StreamInput in) throws IOException {
+        super.readFrom(in);
+        shardId = ShardId.readShardId(in);
+        type = in.readString();
+        id = in.readString();
+        version = in.readZLong();
     }
 }

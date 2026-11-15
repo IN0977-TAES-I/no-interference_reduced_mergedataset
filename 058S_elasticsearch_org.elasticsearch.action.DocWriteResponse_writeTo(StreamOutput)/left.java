@@ -1,10 +1,17 @@
-// class name : org.elasticsearch.action.DocWriteResponse
-// method name: writeTo(StreamOutput)
-// side       : left
-// region     : lines 140-141 (affected lines: [140, 141])
 class DocWriteResponse {
-    void writeTo_StreamOutput_() {
-        builder.field(Fields._SHARD_ID, shardId.id());
-        if (getSeqNo() >= 0) {
+    ShardId shardId;
+    String id;
+    String type;
+    long version;
+    long seqNo;
+
+    @Override
+    public void writeTo(StreamOutput out) throws IOException {
+        super.writeTo(out);
+        shardId.writeTo(out);
+        out.writeString(type);
+        out.writeString(id);
+        out.writeZLong(version);
+        out.writeZLong(seqNo);
     }
 }

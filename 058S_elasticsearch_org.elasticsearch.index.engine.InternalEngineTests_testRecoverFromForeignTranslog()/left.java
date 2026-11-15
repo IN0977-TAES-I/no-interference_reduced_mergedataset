@@ -1,8 +1,56 @@
-// class name : org.elasticsearch.index.engine.InternalEngineTests
-// method name: testRecoverFromForeignTranslog()
-// side       : left
-// region     : lines 2091-2124 (affected lines: [2091, 2124])
 class InternalEngineTests {
-    void testRecoverFromForeignTranslog__() {
+    ShardId shardId;
+    static IndexSettings INDEX_SETTINGS;
+    ThreadPool threadPool;
+    Store store;
+    InternalEngine engine;
+    Path primaryTranslogDir;
+
+    public void testRecoverFromForeignTranslog() throws IOException {
+        final int numDocs = randomIntBetween(1, 10);
+        for (int i = 0; i < numDocs; i++) {
+            ParsedDocument doc = testParsedDocument(Integer.toString(i), Integer.toString(i), "test", null, -1, -1, testDocument(), new BytesArray("{}"), null);
+            Engine.Index firstIndexRequest = new Engine.Index(newUid(Integer.toString(i)), doc, SequenceNumbersService.UNASSIGNED_SEQ_NO,
+                    Versions.MATCH_DELETED, VersionType.INTERNAL, PRIMARY, System.nanoTime());
+            engine.index(firstIndexRequest);
+            assertThat(firstIndexRequest.version(), equalTo(1L));
+        }
+        engine.refresh("test");
+        try (Engine.Searcher searcher = engine.acquireSearcher("test")) {
+            TopDocs topDocs = searcher.searcher().search(new MatchAllDocsQuery(), randomIntBetween(numDocs, numDocs + 10));
+            assertThat(topDocs.totalHits, equalTo(numDocs));
+        }
+        final MockDirectoryWrapper directory = DirectoryUtils.getLeaf(store.directory(), MockDirectoryWrapper.class);
+        if (directory != null) {
+            directory.setPreventDoubleWrite(false);
+        }
+        Translog.TranslogGeneration generation = engine.getTranslog().getGeneration();
+        engine.close();
+
+        Translog translog = new Translog(new TranslogConfig(shardId, createTempDir(), INDEX_SETTINGS, BigArrays.NON_RECYCLING_INSTANCE)
+            , null);
+        translog.add(new Translog.Index("test", "SomeBogusId", "{}".getBytes(Charset.forName("UTF-8"))));
+        assertEquals(generation.translogFileGeneration, translog.currentFileGeneration());
+        translog.close();
+
+        EngineConfig config = engine.config();
+        TranslogConfig translogConfig = new TranslogConfig(shardId, translog.location(), config.getIndexSettings(), BigArrays.NON_RECYCLING_INSTANCE);
+
+        EngineConfig brokenConfig = new EngineConfig(EngineConfig.OpenMode.OPEN_INDEX_AND_TRANSLOG, shardId, threadPool, config.getIndexSettings()
+                , null, store, createSnapshotDeletionPolicy(), newMergePolicy(),
+                config.getAnalyzer(), config.getSimilarity(), new CodecService(null, logger), config.getEventListener()
+                , config.getTranslogRecoveryPerformer(), IndexSearcher.getDefaultQueryCache(), IndexSearcher.getDefaultQueryCachingPolicy(), translogConfig, TimeValue.timeValueMinutes(5));
+
+        try {
+            InternalEngine internalEngine = new InternalEngine(brokenConfig);
+            fail("translog belongs to a different engine");
+        } catch (EngineCreationFailureException ex) {
+        }
+
+        engine = createEngine(store, primaryTranslogDir);
+        try (Engine.Searcher searcher = engine.acquireSearcher("test")) {
+            TopDocs topDocs = searcher.searcher().search(new MatchAllDocsQuery(), randomIntBetween(numDocs, numDocs + 10));
+            assertThat(topDocs.totalHits, equalTo(numDocs));
+        }
     }
 }

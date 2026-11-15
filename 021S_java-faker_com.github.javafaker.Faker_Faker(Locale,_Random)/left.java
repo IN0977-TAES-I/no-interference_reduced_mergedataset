@@ -1,9 +1,30 @@
-// class name : com.github.javafaker.Faker
-// method name: Faker(Locale, Random)
-// side       : left
-// region     : lines 59-70 (affected lines: [59, 69, 70])
 class Faker {
-    void Faker_Locale__Random_() {
+    RandomService randomService;
+    FakeValuesService fakeValuesService;
+    App app;
+    Lorem lorem;
+    Name name;
+    Number number;
+    Internet internet;
+    PhoneNumber phoneNumber;
+    Address address;
+    Business business;
+    Book book;
+    Color color;
+    Company company;
+    Hacker hacker;
+    Options options;
+    Code code;
+    Finance finance;
+    DateAndTime dateAndTime;
+
+    public Faker(Locale locale, Random random) {
+        this.randomService = new RandomService(random);
+        this.fakeValuesService = new FakeValuesService(locale, randomService);
+        FakeValuesService defaultEnglishFakeValuesService = new FakeValuesService(locale.ENGLISH, randomService);
+        FakeValuesServiceInterface proxiedFakeValueService = createProxiedFakeValuesService(fakeValuesService,
+                defaultEnglishFakeValuesService);
+
         this.app = new App(this, proxiedFakeValueService);
         this.lorem = new Lorem(proxiedFakeValueService, randomService);
         this.name = new Name(this, proxiedFakeValueService);
@@ -16,5 +37,9 @@ class Faker {
         this.color = new Color(proxiedFakeValueService);
         this.company = new Company(this, proxiedFakeValueService);
         this.hacker = new Hacker(proxiedFakeValueService);
+        this.options = new Options(randomService);
+        this.code = new Code(randomService);
+        this.finance = new Finance(proxiedFakeValueService, randomService);
+        this.dateAndTime = new DateAndTime(randomService);
     }
 }

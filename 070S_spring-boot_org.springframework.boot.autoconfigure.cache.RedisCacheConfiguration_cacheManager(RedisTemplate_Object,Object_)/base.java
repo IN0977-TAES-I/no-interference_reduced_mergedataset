@@ -1,8 +1,15 @@
-// class name : org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration
-// method name: cacheManager(RedisTemplate<Object,Object>)
-// side       : base
-// region     : lines 55-60 (affected lines: [55, 60])
 class RedisCacheConfiguration {
-    void cacheManager_RedisTemplate_Object_Object__() {
+    CacheProperties cacheProperties;
+    CacheManagerCustomizerInvoker customizerInvoker;
+
+    @Bean
+    public RedisCacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
+    	RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
+    	List<String> cacheNames = this.cacheProperties.getCacheNames();
+    	if (!cacheNames.isEmpty()) {
+    		cacheManager.setCacheNames(cacheNames);
+    	}
+    	this.customizerInvoker.customize(cacheManager);
+    	return cacheManager;
     }
 }

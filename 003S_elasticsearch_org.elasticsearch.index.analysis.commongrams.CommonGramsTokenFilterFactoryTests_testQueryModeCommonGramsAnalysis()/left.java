@@ -1,8 +1,23 @@
-// class name : org.elasticsearch.index.analysis.commongrams.CommonGramsTokenFilterFactoryTests
-// method name: testQueryModeCommonGramsAnalysis()
-// side       : left
-// region     : lines 226-229 (affected lines: [226, 228, 229])
 class CommonGramsTokenFilterFactoryTests {
-    void testQueryModeCommonGramsAnalysis__() {
+    @Test
+    public void testQueryModeCommonGramsAnalysis() throws IOException {
+        Settings settings = Settings.settingsBuilder()
+            .loadFromClasspath("org/elasticsearch/index/analysis/commongrams/commongrams_query_mode.json")
+                .put("path.home", createHome())
+                .build();
+        {
+            AnalysisService analysisService = AnalysisTestsHelper.createAnalysisServiceFromSettings(settings);
+            Analyzer analyzer = analysisService.analyzer("commongramsAnalyzer").analyzer();
+            String source = "the quick brown is a fox or not";
+            String[] expected = new String[] { "the", "quick_brown", "brown_is", "is", "a_fox", "fox_or", "or", "not" };
+            assertTokenStreamContents(analyzer.tokenStream("test", source), expected);
+        }
+        {
+            AnalysisService analysisService = AnalysisTestsHelper.createAnalysisServiceFromSettings(settings);
+            Analyzer analyzer = analysisService.analyzer("commongramsAnalyzer_file").analyzer();
+            String source = "the quick brown is a fox or not";
+            String[] expected = new String[] { "the", "quick_brown", "brown_is", "is", "a_fox", "fox_or", "or", "not" };
+            assertTokenStreamContents(analyzer.tokenStream("test", source), expected);
+        }
     }
 }

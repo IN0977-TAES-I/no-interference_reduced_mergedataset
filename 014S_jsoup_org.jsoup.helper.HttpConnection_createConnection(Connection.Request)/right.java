@@ -1,17 +1,17 @@
-// class name : org.jsoup.helper.HttpConnection
-// method name: createConnection(Connection.Request)
-// side       : right
-// region     : lines 609-617 (affected lines: [609, 610, 611, 612, 613, 614, 617])
 class HttpConnection {
-    void createConnection_Connection_Request_() {
-            if (previousResponse != null) {
-                for (Map.Entry<String, String> prevCookie : previousResponse.cookies().entrySet()) {
-                    if (!hasCookie(prevCookie.getKey()))
-                        cookie(prevCookie.getKey(), prevCookie.getValue());
-                }
-            }
+    private static HttpURLConnection createConnection(Connection.Request req) throws IOException {
+        HttpURLConnection conn = (HttpURLConnection) req.url().openConnection();
+        conn.setRequestMethod(req.method().name());
+        conn.setInstanceFollowRedirects(false);
+        conn.setConnectTimeout(req.timeout());
+        conn.setReadTimeout(req.timeout());
+        if (req.method().hasBody())
+            conn.setDoOutput(true);
+        if (req.cookies().size() > 0)
+            conn.addRequestProperty("Cookie", getRequestCookieString(req));
+        for (Map.Entry<String, String> header : req.headers().entrySet()) {
+            conn.addRequestProperty(header.getKey(), header.getValue());
         }
-
-        void processResponseHeaders(Map<String, List<String>> resHeaders) {
+        return conn;
     }
 }

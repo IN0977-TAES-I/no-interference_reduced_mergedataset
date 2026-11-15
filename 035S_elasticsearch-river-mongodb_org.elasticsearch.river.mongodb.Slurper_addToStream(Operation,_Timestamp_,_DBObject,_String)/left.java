@@ -1,25 +1,30 @@
-// class name : org.elasticsearch.river.mongodb.Slurper
-// method name: addToStream(Operation, Timestamp<?>, DBObject, String)
-// side       : left
-// region     : lines 736-752 (affected lines: [736, 737, 738, 739, 740, 741, 742, 743, 747, 748, 751, 752])
 class Slurper {
-    void addToStream_Operation__Timestamp_____DBObject__String_() {
-            builder.mongoCollection(riverName);
+    static ESLogger logger;
+    MongoDBRiverDefinition definition;
+    SharedContext context;
+    DB slurpedDb;
+
+    private void addToStream(final Operation operation, final Timestamp<?> currentTimestamp, final DBObject data, final String collection)
+            throws InterruptedException {
+        if (logger.isTraceEnabled()) {
+            logger.trace("addToStream - operation [{}], currentTimestamp [{}], data [{}], collection [{}]", operation, currentTimestamp,
+                    data, collection);
         }
 
-        if (settings.settings().containsKey(INDEX_OBJECT)) {
-            Map<String, Object> indexSettings = (Map<String, Object>) settings.settings().get(INDEX_OBJECT);
-            builder.indexName(XContentMapValues.nodeStringValue(indexSettings.get(NAME_FIELD), builder.mongoDb));
-            builder.typeName(XContentMapValues.nodeStringValue(indexSettings.get(TYPE_FIELD), builder.mongoDb));
-
-            Bulk.Builder bulkBuilder = new Bulk.Builder();
-            if (indexSettings.containsKey(BULK_FIELD)) {
-                Map<String, Object> bulkSettings = (Map<String, Object>) indexSettings.get(BULK_FIELD);
-                int bulkActions = XContentMapValues.nodeIntegerValue(bulkSettings.get(ACTIONS_FIELD), DEFAULT_BULK_ACTIONS);
-                bulkBuilder.bulkActions(bulkActions);
-                String size = XContentMapValues.nodeStringValue(bulkSettings.get(SIZE_FIELD), DEFAULT_BULK_SIZE.toString());
-                bulkBuilder.bulkSize(ByteSizeValue.parseBytesSizeValue(size));
-                bulkBuilder.concurrentRequests(XContentMapValues.nodeIntegerValue(bulkSettings.get(CONCURRENT_REQUESTS_FIELD),
-                        EsExecutors.boundedNumberOfProcessors(ImmutableSettings.EMPTY)));
+        if (operation == Operation.DROP_DATABASE) {
+            logger.info("addToStream - Operation.DROP_DATABASE, currentTimestamp [{}], data [{}], collection [{}]", currentTimestamp,
+                    data, collection);
+            if (definition.isImportAllCollections()) {
+                for (String name : slurpedDb.getCollectionNames()) {
+                    logger.info("addToStream - isImportAllCollections - Operation.DROP_DATABASE, currentTimestamp [{}], data [{}], collection [{}]", currentTimestamp,
+                            data, name);
+                    context.getStream().put(new MongoDBRiver.QueueEntry(currentTimestamp, Operation.DROP_COLLECTION, data, name));
+                }
+            } else {
+                context.getStream().put(new MongoDBRiver.QueueEntry(currentTimestamp, Operation.DROP_COLLECTION, data, collection));
+            }
+        } else {
+            context.getStream().put(new MongoDBRiver.QueueEntry(currentTimestamp, operation, data, collection));
+        }
     }
 }

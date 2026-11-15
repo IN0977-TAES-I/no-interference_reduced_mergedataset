@@ -1,29 +1,29 @@
-// class name : com.relayrides.pushy.apns.PushManager
-// method name: handleConnectionClosure(ApnsConnection<T>)
-// side       : right
-// region     : lines 500-520 (affected lines: [500, 502, 503, 510, 515, 520])
 class PushManager {
-    void handleConnectionClosure_ApnsConnection_T__() {
-	 */
-	public void handleUnprocessedNotifications(ApnsConnection<T> connection, Collection<T> unprocessedNotifications) {
-		this.retryQueue.addAll(unprocessedNotifications);
+    ApnsConnectionPool<T> connectionPool;
+    Thread dispatchThread;
+    Logger log;
 
-		if (this.dispatchThread != null) {
-			this.dispatchThread.interrupt();
-		}
-	}
+    public void handleConnectionClosure(final ApnsConnection<T> connection) {
+    	this.connectionPool.removeConnection(connection);
 
-	private void startNewConnection() {
-		this.connectionLock.lock();
+    	if (!this.isShutDown()) {
+    		this.startNewConnection();
+    	}
 
-		try {
-			new ApnsConnection<T>(this.environment, this.sslContext, this.eventLoopGroup, this).connect();
-			this.unfinishedConnectionCount += 1;
-		} finally {
-			this.connectionLock.unlock();
-		}
-	}
+    	if (this.dispatchThread != null && this.dispatchThread.isAlive()) {
+    		this.dispatchThread.interrupt();
+    	}
 
-	private void decrementConnectionCounter() {
+    	new Thread(new Runnable() {
+
+    		public void run() {
+    			try {
+    				connection.waitForPendingOperationsToFinish();
+    				decrementConnectionCounter();
+    			} catch (InterruptedException e) {
+    				log.warn("Interrupted while waiting for closed connection's pending operations to finish.");
+    			}
+    		}
+    	}).start();
     }
 }

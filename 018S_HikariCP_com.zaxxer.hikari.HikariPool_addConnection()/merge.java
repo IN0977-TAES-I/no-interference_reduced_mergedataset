@@ -1,44 +1,84 @@
-// class name : com.zaxxer.hikari.HikariPool
-// method name: addConnection()
-// side       : merge
-// region     : lines 339-374 (affected lines: [339, 340, 341, 342, 343, 344, 345, 346, 348, 356, 362, 365, 372, 374])
 class HikariPool {
-    void addConnection__() {
-        try
+    static Logger LOGGER;
+    DataSource dataSource;
+    IConnectionCustomizer connectionCustomizer;
+    HikariConfig configuration;
+    ConcurrentBag<IHikariConnectionProxy> idleConnectionBag;
+    AtomicInteger totalConnections;
+    boolean isAutoCommit;
+    boolean isReadOnly;
+    String catalog;
+    int transactionIsolation;
+    boolean shutdown;
+    boolean debug;
+
+    private void addConnection()
+    {
+        final int acquisitionTimeout = (int) configuration.getConnectionTimeout();
+        int retries = configuration.getAcquireRetries();
+        int loginTimeout = 2000;
+        if (retries == 0)
         {
-            Class<?> driverClass = this.getClass().getClassLoader().loadClass(driverClassName);
-            driverClass.newInstance();
+            loginTimeout = (acquisitionTimeout == 0 ? Integer.MAX_VALUE : acquisitionTimeout);
         }
-        catch (Exception e)
+        else if (acquisitionTimeout > 0)
         {
-            throw new RuntimeException("driverClassName specified class '" + driverClassName + "' could not be loaded", e);
+            loginTimeout = (acquisitionTimeout / (retries + 1));
         }
-    }
 
-    /** {@inheritDoc} */
-    public long getIdleTimeout()
-    {
-        return idleTimeout;
-    }
+        while (!shutdown)
+        {
+            try
+            {
+                if (retries == 0 && totalConnections.incrementAndGet() > configuration.getMaximumPoolSize())
+                {
+                    totalConnections.decrementAndGet();
+                    break;
+                }
 
-    /** {@inheritDoc} */
-    public void setIdleTimeout(long idleTimeoutMs)
-    {
-        this.idleTimeout = idleTimeoutMs;
-    }
+                dataSource.setLoginTimeout(loginTimeout);
+                Connection connection = dataSource.getConnection();
 
-    public String getJdbcUrl()
-    {
-        return jdbcUrl;
-    }
+                transactionIsolation =  (transactionIsolation < 0 ? connection.getTransactionIsolation() : transactionIsolation);
 
-    public void setJdbcUrl(String jdbcUrl)
-    {
-        this.jdbcUrl = jdbcUrl;
-    }
+                if (connectionCustomizer != null)
+                {
+                    connectionCustomizer.customize(connection);
+                }
 
-    /**
-     * Get the default auto-commit behavior of connections in the pool.
-     *
+                executeInitSql(connection);
+
+                IHikariConnectionProxy proxyConnection = ProxyFactory.getProxyConnection(this, connection, transactionIsolation, isAutoCommit, isReadOnly, catalog);
+            	proxyConnection.resetConnectionState();
+                idleConnectionBag.add(proxyConnection);
+                break;
+            }
+            catch (Exception e)
+            {
+                if (retries++ > configuration.getAcquireRetries())
+                {
+                    if (debug)
+                    {
+                        LOGGER.error("Maximum connection creation retries exceeded: {}", e.getMessage(), e);
+                    }
+                    else
+                    {
+                        LOGGER.error("Maximum connection creation retries exceeded: {}", e.getMessage());
+                    }
+                    totalConnections.decrementAndGet();
+                    break;
+                }
+
+                try
+                {
+                    Thread.sleep(configuration.getAcquireRetryDelay());
+                }
+                catch (InterruptedException e1)
+                {
+                    totalConnections.decrementAndGet();
+                    break;
+                }
+            }
+        }
     }
 }

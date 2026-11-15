@@ -1,16 +1,21 @@
-// class name : fitnesse.testsystems.slim.tables.SlimTableFactory
-// method name: SlimTableFactory()
-// side       : left
-// region     : lines 24-31 (affected lines: [24, 25, 31])
 class SlimTableFactory {
-    void SlimTableFactory__() {
-  public void setUp() {
-    slimTableFactory = new SlimTableFactory();
-    table = mock(Table.class);
-    map = new HashMap<String, Class<? extends SlimTable>>();
-    map.put("dt:", DecisionTable.class);
-    map.put("dT:", DecisionTable.class);
-    map.put("decision:", DecisionTable.class);
-    map.put("ddt:", DynamicDecisionTable.class);
+    Map<String, Class<? extends SlimTable>> tableTypes;
+    Map<String, String> tableTypeArrays;
+
+    public  SlimTableFactory() {
+      tableTypes = new HashMap<String, Class<? extends SlimTable>>(16);
+      tableTypeArrays = new HashMap<String, String>();
+      addTableType("dt:", DecisionTable.class);
+      addTableType("decision:", DecisionTable.class);
+      addTableType("ddt:", DynamicDecisionTable.class);
+      addTableType("dynamic decision:", DynamicDecisionTable.class);
+      addTableType("ordered query:", OrderedQueryTable.class);
+      addTableType("subset query:", SubsetQueryTable.class);
+      addTableType("query:", QueryTable.class);
+      addTableType("table:", TableTable.class);
+      addTableType("script", ScriptTable.class);
+      addTableType("scenario", ScenarioTable.class);
+      addTableType("import", ImportTable.class);
+      addTableType("library", LibraryTable.class);
     }
 }

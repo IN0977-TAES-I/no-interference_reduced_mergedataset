@@ -1,8 +1,27 @@
-// class name : org.elasticsearch.index.analysis.KuromojiAnalysisTests
-// method name: createAnalysisService()
-// side       : base
-// region     : lines 196-207 (affected lines: [196, 197, 198, 199, 200, 201, 202, 204, 206, 207])
 class KuromojiAnalysisTests {
-    void createAnalysisService__() {
+    public AnalysisService createAnalysisService() {
+        Settings settings = Settings.settingsBuilder()
+                .put("path.home", createTempDir())
+                .loadFromClasspath("org/elasticsearch/index/analysis/kuromoji_analysis.json")
+                .put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT)
+                .build();
+
+        Index index = new Index("test");
+
+        Injector parentInjector = new ModulesBuilder().add(new SettingsModule(settings),
+                new EnvironmentModule(new Environment(settings)),
+                new IndicesAnalysisModule())
+                .createInjector();
+
+        AnalysisModule analysisModule = new AnalysisModule(settings, parentInjector.getInstance(IndicesAnalysisService.class));
+        new AnalysisKuromojiPlugin().onModule(analysisModule);
+
+        Injector injector = new ModulesBuilder().add(
+                new IndexSettingsModule(index, settings),
+                new IndexNameModule(index),
+                analysisModule)
+                .createChildInjector(parentInjector);
+
+        return injector.getInstance(AnalysisService.class);
     }
 }

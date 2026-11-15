@@ -1,8 +1,33 @@
-// class name : org.springframework.boot.autoconfigure.mongo.MongoProperties
-// method name: builder(MongoClientOptions)
-// side       : merge
-// region     : lines 261-272 (affected lines: [261, 262, 263, 264, 265, 266, 267, 268, 271, 272])
 class MongoProperties {
-    void builder_MongoClientOptions_() {
+    private Builder builder(MongoClientOptions options) {
+    	Builder builder = MongoClientOptions.builder();
+    	if (options != null) {
+    		builder.alwaysUseMBeans(options.isAlwaysUseMBeans());
+    		builder.connectionsPerHost(options.getConnectionsPerHost());
+    		builder.connectTimeout(options.getConnectTimeout());
+    		builder.cursorFinalizerEnabled(options.isCursorFinalizerEnabled());
+    		builder.dbDecoderFactory(options.getDbDecoderFactory());
+    		builder.dbEncoderFactory(options.getDbEncoderFactory());
+    		builder.description(options.getDescription());
+    		builder.heartbeatConnectTimeout(options.getHeartbeatConnectTimeout());
+    		builder.heartbeatFrequency(options.getHeartbeatFrequency());
+    		builder.heartbeatSocketTimeout(options.getHeartbeatSocketTimeout());
+    		builder.localThreshold(options.getLocalThreshold());
+    		builder.minConnectionsPerHost(options.getMinConnectionsPerHost());
+    		builder.minHeartbeatFrequency(options.getMinHeartbeatFrequency());
+    		builder.maxConnectionIdleTime(options.getMaxConnectionIdleTime());
+    		builder.maxConnectionLifeTime(options.getMaxConnectionLifeTime());
+    		builder.maxWaitTime(options.getMaxWaitTime());
+    		builder.readPreference(options.getReadPreference());
+    		builder.requiredReplicaSetName(options.getRequiredReplicaSetName());
+    		builder.sslEnabled(options.isSslEnabled());
+    		builder.socketFactory(options.getSocketFactory());
+    		builder.socketKeepAlive(options.isSocketKeepAlive());
+    		builder.socketTimeout(options.getSocketTimeout());
+    		builder.threadsAllowedToBlockForConnectionMultiplier(
+    				options.getThreadsAllowedToBlockForConnectionMultiplier());
+    		builder.writeConcern(options.getWriteConcern());
+    	}
+    	return builder;
     }
 }

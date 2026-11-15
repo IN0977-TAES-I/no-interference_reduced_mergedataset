@@ -1,8 +1,19 @@
-// class name : org.elasticsearch.action.DocWriteResponse
-// method name: toXContent(XContentBuilder, Params)
-// side       : right
-// region     : lines 160-166 (affected lines: [160, 163, 164, 165, 166])
 class DocWriteResponse {
-    void toXContent_XContentBuilder__Params_() {
+    ShardId shardId;
+    String id;
+    String type;
+    long version;
+    boolean forcedRefresh;
+
+    @Override
+    public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
+        ReplicationResponse.ShardInfo shardInfo = getShardInfo();
+        builder.field(Fields._INDEX, shardId.getIndexName())
+            .field(Fields._TYPE, type)
+            .field(Fields._ID, id)
+            .field(Fields._VERSION, version)
+            .field("forced_refresh", forcedRefresh);
+        shardInfo.toXContent(builder, params);
+        return builder;
     }
 }

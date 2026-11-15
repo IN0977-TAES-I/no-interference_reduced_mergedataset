@@ -1,9 +1,22 @@
-// class name : rx.internal.operators.OperatorMulticast
-// method name: connect(Action1<?superSubscription>)
-// side       : base
-// region     : lines 94-131 (affected lines: [94, 117, 118, 119, 120, 121, 122, 124, 125, 128, 129, 131])
 class OperatorMulticast {
-    void connect_Action1__superSubscription__() {
+    Observable<? extends T> source;
+    Object guard;
+    Func0<? extends Subject<? super T, ? extends R>> subjectFactory;
+    AtomicReference<Subject<? super T, ? extends R>> connectedSubject;
+    List<Subscriber<? super R>> waitingForConnect;
+    Subscriber<T> subscription;
+    Subscription guardedSubscription;
+
+    @Override
+    public void connect(Action1<? super Subscription> connection) {
+
+        synchronized (guard) {
+            if (subscription != null) {
+                connection.call(guardedSubscription);
+                return;
+            } else {
+                final Subject<? super T, ? extends R> subject = subjectFactory.call();
+                subscription = new Subscriber<T>() {
                     @Override
                     public void onCompleted() {
                         subject.onCompleted();
@@ -30,7 +43,7 @@ class OperatorMulticast {
                                 subscription = null;
                                 guardedSubscription = null;
                                 connectedSubject.set(null);
-                            } else 
+                            } else
                                 return;
                         }
                         if (s != null) {
@@ -39,8 +52,23 @@ class OperatorMulticast {
                     }
                 }));
                 guardedSubscription = gs.get();
-                
-                // register any subscribers that are waiting with this new subject
+
                 for(Subscriber<? super R> s : waitingForConnect) {
+                    subject.unsafeSubscribe(s);
+                }
+                waitingForConnect.clear();
+                connectedSubject.set(subject);
+            }
+
+        }
+
+        connection.call(guardedSubscription);
+
+        Subscriber<T> sub;
+        synchronized (guard) {
+            sub = subscription;
+        }
+        if (sub != null)
+            source.subscribe(sub);
     }
 }

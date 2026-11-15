@@ -1,30 +1,55 @@
-// class name : org.elasticsearch.action.support.replication.ReplicationOperation
-// method name: execute()
-// side       : merge
-// region     : lines 98-119 (affected lines: [98, 99, 101, 108, 109, 110, 113, 119])
 class ReplicationOperation {
-    void execute__() {
-     */
-    public long getSeqNo() {
-        return seqNo;
-    }
+    ESLogger logger;
+    Request request;
+    Supplier<ClusterState> clusterStateSupplier;
+    String opType;
+    AtomicInteger totalShards;
+    AtomicInteger pendingShards;
+    AtomicInteger successfulShards;
+    boolean executeOnReplicas;
+    boolean checkWriteConsistency;
+    Primary<Request, ReplicaRequest, PrimaryResultT> primary;
+    PrimaryResultT primaryResult;
 
-    /**
-     * Did this request force a refresh? Requests that set {@link WriteRequest#setRefreshPolicy(RefreshPolicy)} to
-     * {@link RefreshPolicy#IMMEDIATE} will always return true for this. Requests that set it to {@link RefreshPolicy#WAIT_UNTIL} will
-     * only return true here if they run out of refresh listener slots (see {@link IndexSettings#MAX_REFRESH_LISTENERS_PER_SHARD}).
-     */
-    public boolean forcedRefresh() {
-        return forcedRefresh;
-    }
+    void execute() throws Exception {
+        final String writeConsistencyFailure = checkWriteConsistency ? checkWriteConsistency() : null;
+        final ShardRouting primaryRouting = primary.routingEntry();
+        final ShardId primaryId = primaryRouting.shardId();
+        if (writeConsistencyFailure != null) {
+            finishAsFailed(new UnavailableShardsException(primaryId,
+                "{} Timeout: [{}], request: [{}]", writeConsistencyFailure, request.timeout(), request));
+            return;
+        }
 
-    @Override
-    public void setForcedRefresh(boolean forcedRefresh) {
-        this.forcedRefresh = forcedRefresh;
-    }
+        totalShards.incrementAndGet();
+        pendingShards.incrementAndGet();
+        primaryResult = primary.perform(request);
+        primary.updateLocalCheckpointForShard(primaryRouting.allocationId().getId(), primary.localCheckpoint());
+        final ReplicaRequest replicaRequest = primaryResult.replicaRequest();
+        assert replicaRequest.primaryTerm() > 0 : "replicaRequest doesn't have a primary term";
+        if (logger.isTraceEnabled()) {
+            logger.trace("[{}] op [{}] completed on primary for request [{}]", primaryId, opType, request);
+        }
+        final List<ShardRouting> shards = getShards(primaryId, clusterStateSupplier.get());
+        final String localNodeId = primary.routingEntry().currentNodeId();
+        for (final ShardRouting shard : shards) {
+            if (executeOnReplicas == false || shard.unassigned()) {
+                if (shard.primary() == false) {
+                    totalShards.incrementAndGet();
+                }
+                continue;
+            }
 
-    /** returns the rest status for this response (based on {@link ShardInfo#status()} */
-    public RestStatus status() {
-        return getShardInfo().status();
+            if (shard.currentNodeId().equals(localNodeId) == false) {
+                performOnReplica(shard, replicaRequest);
+            }
+
+            if (shard.relocating() && shard.relocatingNodeId().equals(localNodeId) == false) {
+                performOnReplica(shard.buildTargetRelocatingShard(), replicaRequest);
+            }
+        }
+
+        successfulShards.incrementAndGet();
+        decPendingAndFinishIfNeeded();
     }
 }

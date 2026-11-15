@@ -1,32 +1,59 @@
-// class name : org.elasticsearch.action.support.replication.ReplicationOperationTests
-// method name: testReplication()
-// side       : right
-// region     : lines 103-126 (affected lines: [103, 106, 108, 116, 125, 126])
 class ReplicationOperationTests {
-    void testReplication__() {
-    public void setForcedRefresh(boolean forcedRefresh) {
-        this.forcedRefresh = forcedRefresh;
-    }
+    public void testReplication() throws Exception {
+        final String index = "test";
+        final ShardId shardId = new ShardId(index, "_na_", 0);
 
-    /** returns the rest status for this response (based on {@link ShardInfo#status()} */
-    public RestStatus status() {
-        return getShardInfo().status();
-    }
+        ClusterState state = stateWithActivePrimary(index, true, randomInt(5));
+        final long primaryTerm = state.getMetaData().index(index).primaryTerm(0);
+        final IndexShardRoutingTable indexShardRoutingTable = state.getRoutingTable().shardRoutingTable(shardId);
+        ShardRouting primaryShard = indexShardRoutingTable.primaryShard();
+        if (primaryShard.relocating() && randomBoolean()) {
+            state = ClusterState.builder(state)
+                .nodes(DiscoveryNodes.builder(state.nodes()).localNodeId(primaryShard.relocatingNodeId())).build();
+            primaryShard = primaryShard.buildTargetRelocatingShard();
+        }
 
+        final Set<ShardRouting> expectedReplicas = getExpectedReplicas(shardId, state);
 
-    @Override
-    public void readFrom(StreamInput in) throws IOException {
-        super.readFrom(in);
-        shardId = ShardId.readShardId(in);
-        type = in.readString();
-        id = in.readString();
-        version = in.readZLong();
-        forcedRefresh = in.readBoolean();
-    }
+        final Map<ShardRouting, Throwable> expectedFailures = new HashMap<>();
+        final Set<ShardRouting> expectedFailedShards = new HashSet<>();
+        for (ShardRouting replica : expectedReplicas) {
+            if (randomBoolean()) {
+                Throwable t;
+                boolean criticalFailure = randomBoolean();
+                if (criticalFailure) {
+                    t = new CorruptIndexException("simulated", (String) null);
+                } else {
+                    t = new IndexShardNotStartedException(shardId, IndexShardState.RECOVERING);
+                }
+                logger.debug("--> simulating failure on {} with [{}]", replica, t.getClass().getSimpleName());
+                expectedFailures.put(replica, t);
+                if (criticalFailure) {
+                    expectedFailedShards.add(replica);
+                }
+            }
+        }
 
-    @Override
-    public void writeTo(StreamOutput out) throws IOException {
-        super.writeTo(out);
-        shardId.writeTo(out);
+        Request request = new Request(shardId);
+        PlainActionFuture<TestPrimary.Result> listener = new PlainActionFuture<>();
+        final ClusterState finalState = state;
+        final TestReplicaProxy replicasProxy = new TestReplicaProxy(expectedFailures);
+        final TestReplicationOperation op = new TestReplicationOperation(request,
+            new TestPrimary(primaryShard, primaryTerm), listener, replicasProxy, () -> finalState);
+        op.execute();
+
+        assertThat(request.primaryTerm(), equalTo(primaryTerm));
+        assertThat("request was not processed on primary", request.processedOnPrimary.get(), equalTo(true));
+        assertThat(request.processedOnReplicas, equalTo(expectedReplicas));
+        assertThat(replicasProxy.failedReplicas, equalTo(expectedFailedShards));
+        assertTrue("listener is not marked as done", listener.isDone());
+        ShardInfo shardInfo = listener.actionGet().getShardInfo();
+        assertThat(shardInfo.getFailed(), equalTo(expectedFailedShards.size()));
+        assertThat(shardInfo.getFailures(), arrayWithSize(expectedFailedShards.size()));
+        assertThat(shardInfo.getSuccessful(), equalTo(1 + expectedReplicas.size() - expectedFailures.size()));
+        final List<ShardRouting> unassignedShards =
+            indexShardRoutingTable.shardsWithState(ShardRoutingState.UNASSIGNED);
+        final int totalShards = 1 + expectedReplicas.size() + unassignedShards.size();
+        assertThat(shardInfo.getTotal(), equalTo(totalShards));
     }
 }

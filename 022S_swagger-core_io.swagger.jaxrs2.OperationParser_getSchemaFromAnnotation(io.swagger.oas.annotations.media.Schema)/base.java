@@ -1,9 +1,69 @@
-// class name : io.swagger.jaxrs2.OperationParser
-// method name: getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema)
-// side       : base
-// region     : lines 187-244 (affected lines: [187, 188, 234, 235, 236, 237, 238, 239, 240, 241, 244])
 class OperationParser {
-    void getSchemaFromAnnotation_io_swagger_oas_annotations_media_Schema_() {
+    public static Optional<Schema> getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema schema) {
+        if (schema == null) {
+            return Optional.empty();
+        }
+        Schema schemaObject = new Schema();
+        boolean isEmpty = true;
+        if (StringUtils.isNotBlank(schema.description())) {
+            schemaObject.setDescription(schema.description());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.ref())) {
+            schemaObject.set$ref(schema.ref());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.type())) {
+            schemaObject.setType(schema.type());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema._default())) {
+            schemaObject.setDefault(schema._default());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.example())) {
+            schemaObject.setExample(schema.example());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.format())) {
+            schemaObject.setFormat(schema.format());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.example())) {
+            schemaObject.setExample(schema.example());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.pattern())) {
+            schemaObject.setPattern(schema.pattern());
+            isEmpty = false;
+        }
+        if (schema.readOnly()) {
+            schemaObject.setReadOnly(schema.readOnly());
+            isEmpty = false;
+        }
+        if (schema.deprecated()) {
+            schemaObject.setDeprecated(schema.deprecated());
+            isEmpty = false;
+        }
+        if (schema.exclusiveMaximum()) {
+            schemaObject.setExclusiveMaximum(schema.exclusiveMaximum());
+            isEmpty = false;
+        }
+        if (schema.exclusiveMinimum()) {
+            schemaObject.setExclusiveMinimum(schema.exclusiveMinimum());
+            isEmpty = false;
+        }
+        if (schema.maxLength() > 0) {
+            if (schema.maxProperties() > 0) {
+                schemaObject.setMaxProperties(schema.maxProperties());
+                isEmpty = false;
+            }
+        }
+        if (schema.minProperties() > 0) {
+            schemaObject.setMinProperties(schema.minProperties());
+            isEmpty = false;
+        }
+
         ReaderUtils.getStringListFromStringArray(schema._enum()).ifPresent(schemaObject::setEnum);
         getExternalDocumentation(schema.externalDocs()).ifPresent(schemaObject::setExternalDocs);
 
@@ -11,56 +71,5 @@ class OperationParser {
             return Optional.empty();
         }
         return Optional.of(schemaObject);
-    }
-
-    public static Optional<Set<Tag>> getTags(String[] tags) {
-        if (tags == null) {
-            return Optional.empty();
-        }
-        Set<Tag> tagsList = new LinkedHashSet<>();
-        boolean isEmpty = true;
-        for (String tag : tags) {
-            Tag tagObject = new Tag();
-            if (StringUtils.isNotBlank(tag)) {
-                isEmpty = false;
-            }
-            tagObject.setDescription(tag);
-            tagObject.setName(tag);
-            tagsList.add(tagObject);
-        }
-        if (isEmpty) {
-            return Optional.empty();
-        }
-        return Optional.of(tagsList);
-    }
-
-    public static Optional<List<Server>> getServers(io.swagger.oas.annotations.servers.Server[] servers) {
-        if (servers == null) {
-            return Optional.empty();
-        }
-        List<Server> serverObjects = new ArrayList<>();
-        for (io.swagger.oas.annotations.servers.Server server : servers) {
-            getServer(server).ifPresent(serverObjects::add);
-        }
-        if (serverObjects.size() == 0) {
-            return Optional.empty();
-        }
-        return Optional.of(serverObjects);
-    }
-
-    public static Optional<Server> getServer(io.swagger.oas.annotations.servers.Server server) {
-        if (server == null) {
-            return Optional.empty();
-        }
-
-        Server serverObject = new Server();
-        boolean isEmpty = true;
-        if (StringUtils.isNotBlank(server.url())) {
-            serverObject.setUrl(server.url());
-            isEmpty = false;
-        }
-        if (StringUtils.isNotBlank(server.description())) {
-            serverObject.setDescription(server.description());
-            isEmpty = false;
     }
 }

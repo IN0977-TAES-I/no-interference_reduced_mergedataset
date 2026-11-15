@@ -1,8 +1,94 @@
-// class name : org.elasticsearch.index.IndexSettings
-// method name: IndexSettings(IndexMetaData, Settings, Predicate<String>, IndexScopedSettings)
-// side       : base
-// region     : lines 238-269 (affected lines: [238, 246, 269])
 class IndexSettings {
-    void IndexSettings_IndexMetaData__Settings__Predicate_String___IndexScopedSettings_() {
+    static Setting<String> DEFAULT_FIELD_SETTING;
+    static Setting<Boolean> QUERY_STRING_LENIENT_SETTING;
+    static Setting<Boolean> QUERY_STRING_ANALYZE_WILDCARD;
+    static Setting<Boolean> QUERY_STRING_ALLOW_LEADING_WILDCARD;
+    static Setting<Boolean> ALLOW_UNMAPPED;
+    static Setting<TimeValue> INDEX_TRANSLOG_SYNC_INTERVAL_SETTING;
+    static Setting<Translog.Durability> INDEX_TRANSLOG_DURABILITY_SETTING;
+    static Setting<Boolean> INDEX_WARMER_ENABLED_SETTING;
+    static Setting<Boolean> INDEX_TTL_DISABLE_PURGE_SETTING;
+    static Setting<Integer> MAX_RESULT_WINDOW_SETTING;
+    static Setting<Integer> MAX_RESCORE_WINDOW_SETTING;
+    static Setting<TimeValue> INDEX_REFRESH_INTERVAL_SETTING;
+    static Setting<ByteSizeValue> INDEX_TRANSLOG_FLUSH_THRESHOLD_SIZE_SETTING;
+    static Setting<TimeValue> INDEX_GC_DELETES_SETTING;
+    Index index;
+    Version version;
+    ESLogger logger;
+    String nodeName;
+    int numberOfShards;
+    boolean isShadowReplicaIndex;
+    ParseFieldMatcher parseFieldMatcher;
+    Settings settings;
+    String defaultField;
+    boolean queryStringLenient;
+    boolean queryStringAnalyzeWildcard;
+    boolean queryStringAllowLeadingWildcard;
+    boolean defaultAllowUnmappedFields;
+    Translog.Durability durability;
+    TimeValue syncInterval;
+    TimeValue refreshInterval;
+    ByteSizeValue flushThresholdSize;
+    MergeSchedulerConfig mergeSchedulerConfig;
+    MergePolicyConfig mergePolicyConfig;
+    IndexScopedSettings scopedSettings;
+    long gcDeletesInMillis;
+    boolean warmerEnabled;
+    int maxResultWindow;
+    int maxRescoreWindow;
+    boolean TTLPurgeDisabled;
+
+    public IndexSettings(final IndexMetaData indexMetaData, final Settings nodeSettings, final Predicate<String> indexNameMatcher, IndexScopedSettings indexScopedSettings) {
+        scopedSettings = indexScopedSettings.copy(nodeSettings, indexMetaData);
+        this.nodeSettings = nodeSettings;
+        this.settings = Settings.builder().put(nodeSettings).put(indexMetaData.getSettings()).build();
+        this.index = indexMetaData.getIndex();
+        version = Version.indexCreated(settings);
+        logger = Loggers.getLogger(getClass(), settings, index);
+        nodeName = settings.get("node.name", "");
+        this.indexMetaData = indexMetaData;
+        numberOfShards = settings.getAsInt(IndexMetaData.SETTING_NUMBER_OF_SHARDS, null);
+        isShadowReplicaIndex = IndexMetaData.isIndexUsingShadowReplicas(settings);
+
+        this.defaultField = DEFAULT_FIELD_SETTING.get(settings);
+        this.queryStringLenient = QUERY_STRING_LENIENT_SETTING.get(settings);
+        this.queryStringAnalyzeWildcard = QUERY_STRING_ANALYZE_WILDCARD.get(nodeSettings);
+        this.queryStringAllowLeadingWildcard = QUERY_STRING_ALLOW_LEADING_WILDCARD.get(nodeSettings);
+        this.parseFieldMatcher = new ParseFieldMatcher(settings);
+        this.defaultAllowUnmappedFields = scopedSettings.get(ALLOW_UNMAPPED);
+        this.indexNameMatcher = indexNameMatcher;
+        this.durability = scopedSettings.get(INDEX_TRANSLOG_DURABILITY_SETTING);
+        syncInterval = INDEX_TRANSLOG_SYNC_INTERVAL_SETTING.get(settings);
+        refreshInterval = scopedSettings.get(INDEX_REFRESH_INTERVAL_SETTING);
+        flushThresholdSize = scopedSettings.get(INDEX_TRANSLOG_FLUSH_THRESHOLD_SIZE_SETTING);
+        mergeSchedulerConfig = new MergeSchedulerConfig(this);
+        gcDeletesInMillis = scopedSettings.get(INDEX_GC_DELETES_SETTING).getMillis();
+        warmerEnabled = scopedSettings.get(INDEX_WARMER_ENABLED_SETTING);
+        maxResultWindow = scopedSettings.get(MAX_RESULT_WINDOW_SETTING);
+        maxRescoreWindow = scopedSettings.get(MAX_RESCORE_WINDOW_SETTING);
+        TTLPurgeDisabled = scopedSettings.get(INDEX_TTL_DISABLE_PURGE_SETTING);
+        this.mergePolicyConfig = new MergePolicyConfig(logger, this);
+        assert indexNameMatcher.test(indexMetaData.getIndex().getName());
+
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_COMPOUND_FORMAT_SETTING, mergePolicyConfig::setNoCFSRatio);
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_MERGE_POLICY_EXPUNGE_DELETES_ALLOWED_SETTING, mergePolicyConfig::setExpungeDeletesAllowed);
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_MERGE_POLICY_FLOOR_SEGMENT_SETTING, mergePolicyConfig::setFloorSegmentSetting);
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_MERGE_POLICY_MAX_MERGE_AT_ONCE_SETTING, mergePolicyConfig::setMaxMergesAtOnce);
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_MERGE_POLICY_MAX_MERGE_AT_ONCE_EXPLICIT_SETTING, mergePolicyConfig::setMaxMergesAtOnceExplicit);
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_MERGE_POLICY_MAX_MERGED_SEGMENT_SETTING, mergePolicyConfig::setMaxMergedSegment);
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_MERGE_POLICY_SEGMENTS_PER_TIER_SETTING, mergePolicyConfig::setSegmentsPerTier);
+        scopedSettings.addSettingsUpdateConsumer(MergePolicyConfig.INDEX_MERGE_POLICY_RECLAIM_DELETES_WEIGHT_SETTING, mergePolicyConfig::setReclaimDeletesWeight);
+        scopedSettings.addSettingsUpdateConsumer(MergeSchedulerConfig.MAX_THREAD_COUNT_SETTING, mergeSchedulerConfig::setMaxThreadCount);
+        scopedSettings.addSettingsUpdateConsumer(MergeSchedulerConfig.MAX_MERGE_COUNT_SETTING, mergeSchedulerConfig::setMaxMergeCount);
+        scopedSettings.addSettingsUpdateConsumer(MergeSchedulerConfig.AUTO_THROTTLE_SETTING, mergeSchedulerConfig::setAutoThrottle);
+        scopedSettings.addSettingsUpdateConsumer(INDEX_TRANSLOG_DURABILITY_SETTING, this::setTranslogDurability);
+        scopedSettings.addSettingsUpdateConsumer(INDEX_TTL_DISABLE_PURGE_SETTING, this::setTTLPurgeDisabled);
+        scopedSettings.addSettingsUpdateConsumer(MAX_RESULT_WINDOW_SETTING, this::setMaxResultWindow);
+        scopedSettings.addSettingsUpdateConsumer(MAX_RESCORE_WINDOW_SETTING, this::setMaxRescoreWindow);
+        scopedSettings.addSettingsUpdateConsumer(INDEX_WARMER_ENABLED_SETTING, this::setEnableWarmer);
+        scopedSettings.addSettingsUpdateConsumer(INDEX_GC_DELETES_SETTING, this::setGCDeletes);
+        scopedSettings.addSettingsUpdateConsumer(INDEX_TRANSLOG_FLUSH_THRESHOLD_SIZE_SETTING, this::setTranslogFlushThresholdSize);
+        scopedSettings.addSettingsUpdateConsumer(INDEX_REFRESH_INTERVAL_SETTING, this::setRefreshInterval);
     }
 }

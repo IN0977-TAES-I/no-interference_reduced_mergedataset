@@ -1,9 +1,26 @@
-// class name : io.swagger.jaxrs2.OperationParser
-// method name: getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema)
-// side       : left
-// region     : lines 187-244 (affected lines: [187, 188, 234, 235, 236, 237, 238, 239, 240, 241, 244])
 class OperationParser {
-    void getSchemaFromAnnotation_io_swagger_oas_annotations_media_Schema_() {
+    static String COMMA;
+
+    public static Optional<Schema> getSchemaFromAnnotation(io.swagger.oas.annotations.media.Schema schema) {
+        if (schema == null) {
+            return Optional.empty();
+        }
+        Schema schemaObject = new Schema();
+        boolean isEmpty = true;
+        if (StringUtils.isNotBlank(schema.description())) {
+            schemaObject.setDescription(schema.description());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.ref())) {
+            schemaObject.set$ref(schema.ref());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema.type())) {
+            schemaObject.setType(schema.type());
+            isEmpty = false;
+        }
+        if (StringUtils.isNotBlank(schema._default())) {
+            schemaObject.setDefault(schema._default());
             isEmpty = false;
         }
         if (StringUtils.isNotBlank(schema.example())) {
@@ -62,5 +79,9 @@ class OperationParser {
         ReaderUtils.getStringListFromStringArray(schema._enum()).ifPresent(schemaObject::setEnum);
         getExternalDocumentation(schema.externalDocs()).ifPresent(schemaObject::setExternalDocs);
 
+        if (isEmpty) {
+            return Optional.empty();
+        }
+        return Optional.of(schemaObject);
     }
 }

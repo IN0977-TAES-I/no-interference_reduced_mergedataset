@@ -1,25 +1,26 @@
-// class name : org.elasticsearch.river.mongodb.Slurper
-// method name: addToStream(Operation, Timestamp<?>, DBObject, String)
-// side       : base
-// region     : lines 736-752 (affected lines: [736, 737, 738, 739, 740, 741, 742, 743, 747, 748, 751, 752])
 class Slurper {
-    void addToStream_Operation__Timestamp_____DBObject__String_() {
-                bulkBuilder.bulkActions(bulkActions);
-                bulkBuilder.bulkSize(DEFAULT_BULK_SIZE);
-                bulkBuilder.flushInterval(XContentMapValues.nodeTimeValue(indexSettings.get(BULK_TIMEOUT_FIELD), DEFAULT_FLUSH_INTERVAL));
-                bulkBuilder.concurrentRequests(XContentMapValues.nodeIntegerValue(indexSettings.get(CONCURRENT_BULK_REQUESTS_FIELD),
-                        EsExecutors.boundedNumberOfProcessors(ImmutableSettings.EMPTY)));
-                builder.throttleSize(XContentMapValues.nodeIntegerValue(indexSettings.get(THROTTLE_SIZE_FIELD), bulkActions * 5));
-            }
-            builder.bulk(bulkBuilder.build());
-        } else {
-            builder.indexName(builder.mongoDb);
-            builder.typeName(builder.mongoDb);
-            builder.bulk(new Bulk.Builder().build());
-        }
-        return builder.build();
-    }
+    static ESLogger logger;
+    MongoDBRiverDefinition definition;
+    SharedContext context;
+    DB slurpedDb;
 
-    private static SocketFactory getSSLSocketFactory() {
+    private void addToStream(final Operation operation, final Timestamp<?> currentTimestamp, final DBObject data, final String collection)
+            throws InterruptedException {
+        if (logger.isTraceEnabled()) {
+            logger.trace("addToStream - operation [{}], currentTimestamp [{}], data [{}], collection [{}]", operation, currentTimestamp,
+                    data, collection);
+        }
+
+        if (operation == Operation.DROP_DATABASE) {
+            if (definition.isImportAllCollections()) {
+                for (String name : slurpedDb.getCollectionNames()) {
+                    context.getStream().put(new MongoDBRiver.QueueEntry(currentTimestamp, Operation.DROP_COLLECTION, data, name));
+                }
+            } else {
+                context.getStream().put(new MongoDBRiver.QueueEntry(currentTimestamp, Operation.DROP_COLLECTION, data, collection));
+            }
+        } else {
+            context.getStream().put(new MongoDBRiver.QueueEntry(currentTimestamp, operation, data, collection));
+        }
     }
 }

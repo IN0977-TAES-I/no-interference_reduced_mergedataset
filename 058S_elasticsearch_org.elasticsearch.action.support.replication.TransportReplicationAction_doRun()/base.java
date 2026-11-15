@@ -1,8 +1,21 @@
-// class name : org.elasticsearch.action.support.replication.TransportReplicationAction
-// method name: doRun()
-// side       : base
-// region     : lines 455-462 (affected lines: [455, 457, 458, 459, 460, 462])
 class TransportReplicationAction {
-    void doRun__() {
+    String transportReplicaAction;
+    ReplicaRequest request;
+    TransportChannel channel;
+    ReplicationTask task;
+
+    @Override
+    protected void doRun() throws Exception {
+        setPhase(task, "replica");
+        assert request.shardId() != null : "request shardId must be set";
+        try (Releasable ignored = acquireReplicaOperationLock(request.shardId(), request.primaryTerm())) {
+            shardOperationOnReplica(request);
+            if (logger.isTraceEnabled()) {
+                logger.trace("action [{}] completed on shard [{}] for request [{}]", transportReplicaAction, request.shardId(),
+                    request);
+            }
+        }
+        setPhase(task, "finished");
+        channel.sendResponse(TransportResponse.Empty.INSTANCE);
     }
 }

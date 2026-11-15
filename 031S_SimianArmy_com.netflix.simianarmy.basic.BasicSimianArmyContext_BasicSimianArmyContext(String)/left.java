@@ -1,9 +1,27 @@
-// class name : com.netflix.simianarmy.basic.BasicSimianArmyContext
-// method name: BasicSimianArmyContext(String)
-// side       : left
-// region     : lines 110-141 (affected lines: [110, 111, 112, 113, 114, 115, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 141])
 class BasicSimianArmyContext {
-    void BasicSimianArmyContext_String_() {
+    static Logger LOGGER;
+    Properties properties;
+    MonkeyCalendar calendar;
+    BasicConfiguration config;
+    LinkedList<Event> eventReport;
+    AWSCredentialsProvider awsCredentialsProvider;
+    String assumeRoleArn;
+    String account;
+    String secret;
+    String region;
+    ClientConfiguration awsClientConfig;
+    String proxyHost;
+    String proxyPort;
+    String proxyUsernaem;
+    String proxyPassword;
+
+    protected BasicSimianArmyContext(String... configFiles) {
+        eventReport = new LinkedList<Event>();
+        for (String configFile : configFiles) {
+            loadConfigurationFileIntoProperties(configFile);
+        }
+        LOGGER.info("The following are properties in the context.");
+        for (Entry<Object, Object> prop : properties.entrySet()) {
             LOGGER.info(String.format("%s = %s", prop.getKey(), prop.getValue()));
         }
 
@@ -14,7 +32,6 @@ class BasicSimianArmyContext {
         secret = config.getStr("simianarmy.client.aws.secretKey");
         region = config.getStrOrElse("simianarmy.client.aws.region", "us-east-1");
 
-        // Check for and configure optional proxy configuration
         proxyHost = config.getStr("simianarmy.client.aws.proxyHost");
         proxyPort = config.getStr("simianarmy.client.aws.proxyPort");
         proxyUsernaem = config.getStr("simianarmy.client.aws.proxyUser");
@@ -33,8 +50,15 @@ class BasicSimianArmyContext {
             this.awsCredentialsProvider = new STSAssumeRoleSessionCredentialsProvider(assumeRoleArn, awsClientConfig);
         }
 
-        // if credentials are set explicitly make them available to the AWS SDK
         if (StringUtils.isNotBlank(account) && StringUtils.isNotBlank(secret)) {
             this.exportCredentials(account, secret);
+        }
+
+        createClient();
+
+        createScheduler();
+
+        createRecorder();
+
     }
 }

@@ -1,28 +1,29 @@
-// class name : org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory
-// method name: createDeploymentManager(ServletContextInitializer)
-// side       : base
-// region     : lines 345-364 (affected lines: [345, 357, 358, 359, 360, 361, 362, 364])
 class UndertowEmbeddedServletContainerFactory {
-    void createDeploymentManager_ServletContextInitializer_() {
-	}
+    List<UndertowDeploymentInfoCustomizer> deploymentInfoCustomizers;
 
-	private void registerServletContainerInitializerToDriveServletContextInitializers(
-			DeploymentInfo deployment, ServletContextInitializer... initializers) {
-		ServletContextInitializer[] mergedInitializers = mergeInitializers(initializers);
-		Initializer initializer = new Initializer(mergedInitializers);
-		deployment.addServletContainerInitalizer(new ServletContainerInitializerInfo(
-				Initializer.class,
-				new ImmediateInstanceFactory<ServletContainerInitializer>(initializer),
-				NO_CLASSES));
-	}
-
-	private ClassLoader getServletClassLoader() {
-		if (this.resourceLoader != null) {
-			return this.resourceLoader.getClassLoader();
-		}
-		return getClass().getClassLoader();
-	}
-
-	private ResourceManager getDocumentRootResourceManager() {
+    private DeploymentManager createDeploymentManager(
+    		ServletContextInitializer... initializers) {
+    	DeploymentInfo deployment = Servlets.deployment();
+    	registerServletContainerInitializerToDriveServletContextInitializers(deployment,
+    			initializers);
+    	deployment.setClassLoader(getServletClassLoader());
+    	deployment.setContextPath(getContextPath());
+    	deployment.setDeploymentName("spring-boot");
+    	if (isRegisterDefaultServlet()) {
+    		deployment.addServlet(Servlets.servlet("default", DefaultServlet.class));
+    	}
+    	configureErrorPages(deployment);
+    	deployment.setServletStackTraces(ServletStackTraces.NONE);
+    	deployment.setResourceManager(getDocumentRootResourceManager());
+    	configureMimeMappings(deployment);
+    	for (UndertowDeploymentInfoCustomizer customizer : this.deploymentInfoCustomizers) {
+    		customizer.customize(deployment);
+    	}
+    	DeploymentManager manager = Servlets.defaultContainer().addDeployment(deployment);
+    	manager.deploy();
+    	SessionManager sessionManager = manager.getDeployment().getSessionManager();
+    	int sessionTimeout = (getSessionTimeout() > 0 ? getSessionTimeout() : -1);
+    	sessionManager.setDefaultSessionTimeout(sessionTimeout);
+    	return manager;
     }
 }

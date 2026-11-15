@@ -1,20 +1,32 @@
-// class name : ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicyBase
-// method name: start()
-// side       : left
-// region     : lines 45-56 (affected lines: [45, 52, 53, 54, 55, 56])
 class TimeBasedFileNamingAndTriggeringPolicyBase {
-    void start__() {
-    if (dtc == null) {
-      throw new IllegalStateException("FileNamePattern ["
-              + tbrp.fileNamePattern.getPattern()
-              + "] does not contain a valid DateToken");
-    }
+    TimeBasedRollingPolicy<E> tbrp;
+    RollingCalendar rc;
+    Date dateInCurrentPeriod;
 
-    rc = new RollingCalendar();
-    rc.init(dtc.getDatePattern());
-    addInfo("The date pattern is '" + dtc.getDatePattern()
-            + "' from file name pattern '" + tbrp.fileNamePattern.getPattern()
-            + "'.");
-    rc.printPeriodicity(this);
+    public void start() {
+      DateTokenConverter<Object> dtc = tbrp.fileNamePattern.getPrimaryDateTokenConverter();
+      if (dtc == null) {
+        throw new IllegalStateException("FileNamePattern ["
+                + tbrp.fileNamePattern.getPattern()
+                + "] does not contain a valid DateToken");
+      }
+
+      rc = new RollingCalendar();
+      rc.init(dtc.getDatePattern());
+      addInfo("The date pattern is '" + dtc.getDatePattern()
+              + "' from file name pattern '" + tbrp.fileNamePattern.getPattern()
+              + "'.");
+      rc.printPeriodicity(this);
+
+      setDateInCurrentPeriod(new Date(getCurrentTime()));
+      if (tbrp.getParentsRawFileProperty() != null) {
+        File currentFile = new File(tbrp.getParentsRawFileProperty());
+        if (currentFile.exists() && currentFile.canRead()) {
+          setDateInCurrentPeriod(new Date(currentFile.lastModified()));
+        }
+      }
+
+      addInfo("Setting initial period to " + dateInCurrentPeriod);
+      computeNextCheck();
     }
 }

@@ -1,30 +1,54 @@
-// class name : org.elasticsearch.action.support.replication.ReplicationOperation
-// method name: execute()
-// side       : base
-// region     : lines 98-119 (affected lines: [98, 99, 101, 108, 109, 110, 113, 119])
 class ReplicationOperation {
-    void execute__() {
-        id = in.readString();
-        version = in.readZLong();
-    }
+    ESLogger logger;
+    Request request;
+    Supplier<ClusterState> clusterStateSupplier;
+    String opType;
+    AtomicInteger totalShards;
+    AtomicInteger pendingShards;
+    AtomicInteger successfulShards;
+    boolean executeOnReplicas;
+    boolean checkWriteConsistency;
+    Primary<Request, ReplicaRequest, Response> primary;
+    Response finalResponse;
 
-    @Override
-    public void writeTo(StreamOutput out) throws IOException {
-        super.writeTo(out);
-        shardId.writeTo(out);
-        out.writeString(type);
-        out.writeString(id);
-        out.writeZLong(version);
-    }
+    void execute() throws Exception {
+        final String writeConsistencyFailure = checkWriteConsistency ? checkWriteConsistency() : null;
+        final ShardId shardId = primary.routingEntry().shardId();
+        if (writeConsistencyFailure != null) {
+            finishAsFailed(new UnavailableShardsException(shardId,
+                "{} Timeout: [{}], request: [{}]", writeConsistencyFailure, request.timeout(), request));
+            return;
+        }
 
-    static final class Fields {
-        static final String _INDEX = "_index";
-        static final String _TYPE = "_type";
-        static final String _ID = "_id";
-        static final String _VERSION = "_version";
-    }
+        totalShards.incrementAndGet();
+        pendingShards.incrementAndGet();
+        Tuple<Response, ReplicaRequest> primaryResponse = primary.perform(request);
+        successfulShards.incrementAndGet();
+        finalResponse = primaryResponse.v1();
+        ReplicaRequest replicaRequest = primaryResponse.v2();
+        assert replicaRequest.primaryTerm() > 0 : "replicaRequest doesn't have a primary term";
+        if (logger.isTraceEnabled()) {
+            logger.trace("[{}] op [{}] completed on primary for request [{}]", shardId, opType, request);
+        }
+        List<ShardRouting> shards = getShards(shardId, clusterStateSupplier.get());
+        final String localNodeId = primary.routingEntry().currentNodeId();
+        for (final ShardRouting shard : shards) {
+            if (executeOnReplicas == false || shard.unassigned()) {
+                if (shard.primary() == false) {
+                    totalShards.incrementAndGet();
+                }
+                continue;
+            }
 
-    @Override
-    public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
+            if (shard.currentNodeId().equals(localNodeId) == false) {
+                performOnReplica(shard, replicaRequest);
+            }
+
+            if (shard.relocating() && shard.relocatingNodeId().equals(localNodeId) == false) {
+                performOnReplica(shard.buildTargetRelocatingShard(), replicaRequest);
+            }
+        }
+
+        decPendingAndFinishIfNeeded();
     }
 }

@@ -1,14 +1,34 @@
-// class name : voldemort.VoldemortClientShell
-// method name: VoldemortClientShell(ClientConfig, String, BufferedReader, PrintStream, PrintStream)
-// side       : base
-// region     : lines 123-128 (affected lines: [123, 127, 128])
 class VoldemortClientShell {
-    void VoldemortClientShell_ClientConfig__String__BufferedReader__PrintStream__PrintStream_() {
+    static String PROMPT;
+    StoreClient<Object, Object> client;
+    SocketStoreClientFactory factory;
+    StoreDefinition storeDef;
+    AdminClient adminClient;
+
+    public VoldemortClientShell(ClientConfig clientConfig,
+                                String storeName,
+                                BufferedReader commandReader,
+                                PrintStream commandOutput,
+                                PrintStream errorStream) {
+
+        this.commandReader = commandReader;
+        this.commandOutput = commandOutput;
+        this.errorStream = errorStream;
+
+        String bootstrapUrl = clientConfig.getBootstrapUrls()[0];
+
+        try {
+            factory = new SocketStoreClientFactory(clientConfig);
+            client = factory.getStoreClient(storeName);
+            adminClient = new AdminClient(bootstrapUrl, new AdminClientConfig(), new ClientConfig());
+
+            storeDef = StoreUtils.getStoreDef(factory.getStoreDefs(), storeName);
+
+            commandOutput.println("Established connection to " + storeName + " via " + bootstrapUrl);
+            commandOutput.print(PROMPT);
+        } catch(Exception e) {
             safeClose();
             Utils.croak("Could not connect to server: " + e.getMessage());
         }
-    }
-
-    // getter method for the Store
     }
 }

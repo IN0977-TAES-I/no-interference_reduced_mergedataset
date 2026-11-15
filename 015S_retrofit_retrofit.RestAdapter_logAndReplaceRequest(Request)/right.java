@@ -1,38 +1,52 @@
-// class name : retrofit.RestAdapter
-// method name: logAndReplaceRequest(Request)
-// side       : right
-// region     : lines 369-398 (affected lines: [369, 398])
 class RestAdapter {
-    void logAndReplaceRequest_Request_() {
-      for (Header header : request.getHeaders()) {
-        log.log(header.toString());
+    static int LOG_CHUNK_SIZE;
+    Log log;
+    LogLevel logLevel;
+
+    private Request logAndReplaceRequest(Request request) throws IOException {
+      log.log(String.format("---> HTTP %s %s", request.getMethod(), request.getUrl()));
+
+      if (logLevel.ordinal() >= LogLevel.HEADERS.ordinal()) {
+        for (Header header : request.getHeaders()) {
+          log.log(header.toString());
+        }
+
+        long bodySize = 0;
+        TypedOutput body = request.getBody();
+        if (body != null) {
+          bodySize = body.length();
+          String bodyMime = body.mimeType();
+
+          if (bodyMime != null) {
+            log.log("Content-Type: " + bodyMime);
+          }
+          if (bodySize != -1) {
+            log.log("Content-Length: " + bodySize);
+          }
+
+          if (logLevel.ordinal() >= LogLevel.FULL.ordinal()) {
+            if (!request.getHeaders().isEmpty()) {
+              log.log("");
+            }
+            if (!(body instanceof TypedByteArray)) {
+              request = Utils.readBodyToBytesIfNecessary(request);
+              body = request.getBody();
+            }
+
+            byte[] bodyBytes = ((TypedByteArray) body).getBytes();
+            bodySize = bodyBytes.length;
+            String bodyCharset = MimeUtil.parseCharset(bodyMime);
+            String bodyString = new String(bodyBytes, bodyCharset);
+            for (int i = 0, len = bodyString.length(); i < len; i += LOG_CHUNK_SIZE) {
+              int end = Math.min(len, i + LOG_CHUNK_SIZE);
+              log.log(bodyString.substring(i, end));
+            }
+          }
+        }
+
+        log.log(String.format("---> END HTTP (%s-byte body)", bodySize));
       }
 
-      long bodySize = 0;
-      TypedOutput body = request.getBody();
-      if (body != null) {
-        bodySize = body.length();
-        String bodyMime = body.mimeType();
-
-        if (bodyMime != null) {
-          log.log("Content-Type: " + bodyMime);
-        }
-        if (bodySize != -1) {
-          log.log("Content-Length: " + bodySize);
-        }
-
-        if (logLevel.ordinal() >= LogLevel.FULL.ordinal()) {
-          if (!request.getHeaders().isEmpty()) {
-            log.log("");
-          }
-          if (!(body instanceof TypedByteArray)) {
-            // Read the entire response body to we can log it and replace the original response
-            request = Utils.readBodyToBytesIfNecessary(request);
-            body = request.getBody();
-          }
-
-          byte[] bodyBytes = ((TypedByteArray) body).getBytes();
-          bodySize = bodyBytes.length;
-          String bodyCharset = MimeUtil.parseCharset(bodyMime);
+      return request;
     }
 }

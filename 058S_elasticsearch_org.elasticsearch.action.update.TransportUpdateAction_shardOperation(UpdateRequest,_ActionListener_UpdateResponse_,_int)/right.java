@@ -1,8 +1,124 @@
-// class name : org.elasticsearch.action.update.TransportUpdateAction
-// method name: shardOperation(UpdateRequest, ActionListener<UpdateResponse>, int)
-// side       : right
-// region     : lines 185-254 (affected lines: [185, 192, 224, 249, 250, 254])
 class TransportUpdateAction {
-    void shardOperation_UpdateRequest__ActionListener_UpdateResponse___int_() {
+    TransportDeleteAction deleteAction;
+    TransportIndexAction indexAction;
+    UpdateHelper updateHelper;
+    IndicesService indicesService;
+
+    protected void shardOperation(final UpdateRequest request, final ActionListener<UpdateResponse> listener, final int retryCount) {
+        final ShardId shardId = request.getShardId();
+        final IndexService indexService = indicesService.indexServiceSafe(shardId.getIndex());
+        final IndexShard indexShard = indexService.getShard(shardId.getId());
+        final UpdateHelper.Result result = updateHelper.prepare(request, indexShard);
+        switch (result.operation()) {
+            case UPSERT:
+                IndexRequest upsertRequest = result.action();
+                final BytesReference upsertSourceBytes = upsertRequest.source();
+                indexAction.execute(upsertRequest, new ActionListener<IndexResponse>() {
+                    @Override
+                    public void onResponse(IndexResponse response) {
+                        UpdateResponse update = new UpdateResponse(response.getShardInfo(), response.getShardId(), response.getType(), response.getId(), response.getVersion(), response.isCreated());
+                        if (request.fields() != null && request.fields().length > 0) {
+                            Tuple<XContentType, Map<String, Object>> sourceAndContent = XContentHelper.convertToMap(upsertSourceBytes, true);
+                            update.setGetResult(updateHelper.extractGetResult(request, request.concreteIndex(), response.getVersion(), sourceAndContent.v2(), sourceAndContent.v1(), upsertSourceBytes));
+                        } else {
+                            update.setGetResult(null);
+                        }
+                        update.setForcedRefresh(response.forcedRefresh());
+                        listener.onResponse(update);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e = ExceptionsHelper.unwrapCause(e);
+                        if (e instanceof VersionConflictEngineException) {
+                            if (retryCount < request.retryOnConflict()) {
+                                logger.trace("Retry attempt [{}] of [{}] on version conflict on [{}][{}][{}]",
+                                        retryCount + 1, request.retryOnConflict(), request.index(), request.getShardId(), request.id());
+                                threadPool.executor(executor()).execute(new ActionRunnable<UpdateResponse>(listener) {
+                                    @Override
+                                    protected void doRun() {
+                                        shardOperation(request, listener, retryCount + 1);
+                                    }
+                                });
+                                return;
+                            }
+                        }
+                        listener.onFailure(e);
+                    }
+                });
+                break;
+            case INDEX:
+                IndexRequest indexRequest = result.action();
+                final BytesReference indexSourceBytes = indexRequest.source();
+                indexAction.execute(indexRequest, new ActionListener<IndexResponse>() {
+                    @Override
+                    public void onResponse(IndexResponse response) {
+                        UpdateResponse update = new UpdateResponse(response.getShardInfo(), response.getShardId(), response.getType(), response.getId(), response.getVersion(), response.isCreated());
+                        update.setGetResult(updateHelper.extractGetResult(request, request.concreteIndex(), response.getVersion(), result.updatedSourceAsMap(), result.updateSourceContentType(), indexSourceBytes));
+                        update.setForcedRefresh(response.forcedRefresh());
+                        listener.onResponse(update);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e = ExceptionsHelper.unwrapCause(e);
+                        if (e instanceof VersionConflictEngineException) {
+                            if (retryCount < request.retryOnConflict()) {
+                                threadPool.executor(executor()).execute(new ActionRunnable<UpdateResponse>(listener) {
+                                    @Override
+                                    protected void doRun() {
+                                        shardOperation(request, listener, retryCount + 1);
+                                    }
+                                });
+                                return;
+                            }
+                        }
+                        listener.onFailure(e);
+                    }
+                });
+                break;
+            case DELETE:
+                DeleteRequest deleteRequest = result.action();
+                deleteAction.execute(deleteRequest, new ActionListener<DeleteResponse>() {
+                    @Override
+                    public void onResponse(DeleteResponse response) {
+                        UpdateResponse update = new UpdateResponse(response.getShardInfo(), response.getShardId(), response.getType(), response.getId(), response.getVersion(), false);
+                        update.setGetResult(updateHelper.extractGetResult(request, request.concreteIndex(), response.getVersion(), result.updatedSourceAsMap(), result.updateSourceContentType(), null));
+                        update.setForcedRefresh(response.forcedRefresh());
+                        listener.onResponse(update);
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e) {
+                        e = ExceptionsHelper.unwrapCause(e);
+                        if (e instanceof VersionConflictEngineException) {
+                            if (retryCount < request.retryOnConflict()) {
+                                threadPool.executor(executor()).execute(new ActionRunnable<UpdateResponse>(listener) {
+                                    @Override
+                                    protected void doRun() {
+                                        shardOperation(request, listener, retryCount + 1);
+                                    }
+                                });
+                                return;
+                            }
+                        }
+                        listener.onFailure(e);
+                    }
+                });
+                break;
+            case NONE:
+                UpdateResponse update = result.action();
+                IndexService indexServiceOrNull = indicesService.indexService(shardId.getIndex());
+                if (indexServiceOrNull !=  null) {
+                    IndexShard shard = indexService.getShardOrNull(shardId.getId());
+                    if (shard != null) {
+                        shard.noopUpdate(request.type());
+                    }
+                }
+                listener.onResponse(update);
+                break;
+            default:
+                throw new IllegalStateException("Illegal operation " + result.operation());
+        }
     }
 }

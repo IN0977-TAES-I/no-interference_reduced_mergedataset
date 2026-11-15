@@ -1,44 +1,88 @@
-// class name : com.zaxxer.hikari.HikariPool
-// method name: addConnection()
-// side       : base
-// region     : lines 339-374 (affected lines: [339, 340, 341, 342, 343, 344, 345, 346, 348, 356, 362, 365, 372, 374])
 class HikariPool {
-    void addConnection__() {
+    static Logger LOGGER;
+    DataSource dataSource;
+    IConnectionCustomizer connectionCustomizer;
+    HikariConfig configuration;
+    ConcurrentBag<IHikariConnectionProxy> idleConnectionBag;
+    AtomicInteger totalConnections;
+    boolean isAutoCommit;
+    String catalog;
+    int transactionIsolation;
+    boolean shutdown;
+    boolean debug;
 
-    /** {@inheritDoc} */
-    public long getLeakDetectionThreshold()
+    private void addConnection()
     {
-        return leakDetectionThreshold;
-    }
+        int retries = 0;
+        while (!shutdown)
+        {
+            try
+            {
+                if (totalConnections.incrementAndGet() > configuration.getMaximumPoolSize())
+                {
+                    totalConnections.decrementAndGet();
+                    break;
+                }
 
-    /** {@inheritDoc} */
-    public void setLeakDetectionThreshold(long leakDetectionThresholdMs)
-    {
-        this.leakDetectionThreshold = leakDetectionThresholdMs; 
-    }
+                Connection connection = dataSource.getConnection();
 
-    public void setUseInstrumentation(boolean useInstrumentation)
-    {
-        // no longer used as of HikariCP 1.2.5
-    }
+                if (transactionIsolation < 0)
+                {
+                    transactionIsolation = connection.getTransactionIsolation();
+                }
 
-    /** {@inheritDoc} */
-    public long getMaxLifetime()
-    {
-        return maxLifetime;
-    }
+                if (connectionCustomizer != null)
+                {
+                    connectionCustomizer.customize(connection);
+                }
 
-    /** {@inheritDoc} */
-    public void setMaxLifetime(long maxLifetimeMs)
-    {
-        this.maxLifetime = maxLifetimeMs;
-    }
+                IHikariConnectionProxy proxyConnection = ProxyFactory.getProxyConnection(this, connection, transactionIsolation, isAutoCommit, catalog);
 
-    /** {@inheritDoc} */
-    public int getMinimumPoolSize()
-    {
-        return minPoolSize;
-    }
+                String initSql = configuration.getConnectionInitSql();
+                if (initSql != null && initSql.length() > 0)
+                {
+                    connection.setAutoCommit(true);
+                    Statement statement = connection.createStatement();
+                    try
+                    {
+                        statement.execute(initSql);
+                    }
+                    finally
+                    {
+                    	statement.close();
+                    }
+                }
 
+            	proxyConnection.resetConnectionState();
+                idleConnectionBag.add(proxyConnection);
+                break;
+            }
+            catch (Exception e)
+            {
+                if (retries++ > configuration.getAcquireRetries())
+                {
+                    if (debug)
+                    {
+                        LOGGER.error("Maximum connection creation retries exceeded: {}", e.getMessage(), e);
+                    }
+                    else
+                    {
+                        LOGGER.error("Maximum connection creation retries exceeded: {}", e.getMessage());
+                    }
+                    totalConnections.decrementAndGet();
+                    break;
+                }
+
+                try
+                {
+                    Thread.sleep(configuration.getAcquireRetryDelay());
+                }
+                catch (InterruptedException e1)
+                {
+                    totalConnections.decrementAndGet();
+                    break;
+                }
+            }
+        }
     }
 }

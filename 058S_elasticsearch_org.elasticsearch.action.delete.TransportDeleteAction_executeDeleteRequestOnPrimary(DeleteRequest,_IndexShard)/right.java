@@ -1,13 +1,12 @@
-// class name : org.elasticsearch.action.delete.TransportDeleteAction
-// method name: executeDeleteRequestOnPrimary(DeleteRequest, IndexShard)
-// side       : right
-// region     : lines 136-140 (affected lines: [136, 140])
 class TransportDeleteAction {
-    void executeDeleteRequestOnPrimary_DeleteRequest__IndexShard_() {
-        static final String _ID = "_id";
-        static final String _VERSION = "_version";
-    }
+    public static WriteResult<DeleteResponse> executeDeleteRequestOnPrimary(DeleteRequest request, IndexShard indexShard) {
+        Engine.Delete delete = indexShard.prepareDeleteOnPrimary(request.type(), request.id(), request.version(), request.versionType());
+        indexShard.delete(delete);
+        request.versionType(delete.versionType().versionTypeForReplicationAndRecovery());
+        request.version(delete.version());
 
-    @Override
+        assert request.versionType().validateVersionForWrites(request.version());
+        DeleteResponse response = new DeleteResponse(indexShard.shardId(), request.type(), request.id(), delete.version(), delete.found());
+        return new WriteResult<>(response, delete.getTranslogLocation());
     }
 }

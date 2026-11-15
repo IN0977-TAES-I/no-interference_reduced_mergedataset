@@ -1,12 +1,20 @@
-// class name : com.thinkaurelius.titan.graphdb.database.serialize.SerializerInitialization
-// method name: initialize(Serializer)
-// side       : left
-// region     : lines 31-57 (affected lines: [31, 52, 53, 54, 55, 57])
 class SerializerInitialization {
-    void initialize_Serializer_() {
+    static int KRYO_OFFSET;
+    static int RESERVED_ID_OFFSET;
+
+    public static final void initialize(Serializer serializer) {
+        serializer.registerClass(String[].class, KRYO_OFFSET + 1);
+        serializer.registerClass(TypeAttributeType.class, KRYO_OFFSET + 2);
+        serializer.registerClass(TypeAttribute.class, KRYO_OFFSET + 3);
+        serializer.registerClass(String.class, new StringSerializer(), KRYO_OFFSET + 4);
+        serializer.registerClass(Date.class, new DateSerializer(), KRYO_OFFSET + 6);
+        serializer.registerClass(ArrayList.class, KRYO_OFFSET + 7);
+        serializer.registerClass(HashMap.class, KRYO_OFFSET + 8);
+        serializer.registerClass(int[].class, KRYO_OFFSET + 9);
+        serializer.registerClass(double[].class, KRYO_OFFSET + 10);
+        serializer.registerClass(long[].class, KRYO_OFFSET + 11);
         serializer.registerClass(byte[].class, KRYO_OFFSET + 12);
         serializer.registerClass(boolean[].class, KRYO_OFFSET + 13);
-//        serializer.registerClass(IndexType.class, KRYO_OFFSET + 14); //duplicate of 20
         serializer.registerClass(TitanTypeClass.class, KRYO_OFFSET + 15);
         serializer.registerClass(Integer.class, new IntegerSerializer(), KRYO_OFFSET + 16);
         serializer.registerClass(Double.class, new DoubleSerializer(), KRYO_OFFSET + 17);

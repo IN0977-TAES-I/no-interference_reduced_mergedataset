@@ -1,9 +1,24 @@
-// class name : com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext
-// method name: getInstanceJanitor()
-// side       : right
-// region     : lines 227-238 (affected lines: [227, 228, 229, 230, 232, 233, 234, 235, 237, 238])
 class BasicJanitorMonkeyContext {
-    void getInstanceJanitor__() {
+    JanitorResourceTracker janitorResourceTracker;
+    String monkeyRegion;
+    MonkeyCalendar monkeyCalendar;
+
+    private InstanceJanitor getInstanceJanitor() {
+        JanitorRuleEngine ruleEngine = new BasicJanitorRuleEngine();
+        if (configuration().getBoolOrElse("simianarmy.janitor.rule.orphanedInstanceRule.enabled", false)) {
+            ruleEngine.addRule(new OrphanedInstanceRule(monkeyCalendar,
+                    (int) configuration().getNumOrElse(
+                            "simianarmy.janitor.rule.orphanedInstanceRule.instanceAgeThreshold", 2),
+                            (int) configuration().getNumOrElse(
+                                    "simianarmy.janitor.rule.orphanedInstanceRule.retentionDaysWithOwner", 3),
+                                    (int) configuration().getNumOrElse(
+                                            "simianarmy.janitor.rule.orphanedInstanceRule.retentionDaysWithoutOwner",
+                                            8)));
+        }
+        if (configuration().getBoolOrElse("simianarmy.janitor.rule.untaggedRule.enabled", false)) {
+            ruleEngine.addRule(new UntaggedRule(monkeyCalendar, getPropertySet("simianarmy.janitor.rule.untaggedRule.requiredTags"),
+                    (int) configuration().getNumOrElse(
+                            "simianarmy.janitor.rule.untaggedRule.retentionDaysWithOwner", 3),
                             (int) configuration().getNumOrElse(
                                     "simianarmy.janitor.rule.untaggedRule.retentionDaysWithoutOwner",
                                     8)));
@@ -16,5 +31,8 @@ class BasicJanitorMonkeyContext {
             instanceCrawler = new InstanceJanitorCrawler(awsClient());
         }
         BasicJanitorContext instanceJanitorCtx = new BasicJanitorContext(
+                monkeyRegion, ruleEngine, instanceCrawler, janitorResourceTracker,
+                monkeyCalendar, configuration(), recorder());
+        return new InstanceJanitor(awsClient(), instanceJanitorCtx);
     }
 }

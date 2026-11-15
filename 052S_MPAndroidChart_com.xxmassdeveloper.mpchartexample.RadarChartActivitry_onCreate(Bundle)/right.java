@@ -1,22 +1,44 @@
-// class name : com.xxmassdeveloper.mpchartexample.RadarChartActivitry
-// method name: onCreate(Bundle)
-// side       : right
-// region     : lines 59-72 (affected lines: [59, 60, 61, 62, 72])
 class RadarChartActivitry {
-    void onCreate_Bundle_() {
+    RadarChart mChart;
+    Typeface tf;
 
-        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_radarchart);
 
-        mSeekBarX.setProgress(45);
-        mSeekBarY.setProgress(100);
+        mChart = (RadarChart) findViewById(R.id.chart1);
 
-        mSeekBarY.setOnSeekBarChangeListener(this);
-        mSeekBarX.setOnSeekBarChangeListener(this);
+        tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
 
-        mChart = (LineChart) findViewById(R.id.chart1);
-        mChart.setOnChartGestureListener(this);
-        mChart.setOnChartValueSelectedListener(this);
-        mChart.setDrawGridBackground(false);
+        mChart.setDescription("");
+
+        mChart.setWebLineWidth(1.5f);
+        mChart.setWebLineWidthInner(0.75f);
+        mChart.setWebAlpha(100);
+
+        MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view);
+
+        mChart.setMarkerView(mv);
+
+        setData();
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setTypeface(tf);
+        xAxis.setTextSize(9f);
+
+        YAxis yAxis = mChart.getYAxis();
+        yAxis.setTypeface(tf);
+        yAxis.setLabelCount(5, false);
+        yAxis.setTextSize(9f);
+        yAxis.setAxisMinValue(0f);
+
+        Legend l = mChart.getLegend();
+        l.setPosition(LegendPosition.RIGHT_OF_CHART);
+        l.setTypeface(tf);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(5f);
     }
 }

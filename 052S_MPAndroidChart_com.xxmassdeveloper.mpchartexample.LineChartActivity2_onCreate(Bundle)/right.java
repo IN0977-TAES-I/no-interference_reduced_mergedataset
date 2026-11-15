@@ -1,18 +1,81 @@
-// class name : com.xxmassdeveloper.mpchartexample.LineChartActivity2
-// method name: onCreate(Bundle)
-// side       : right
-// region     : lines 117-126 (affected lines: [117, 126])
 class LineChartActivity2 {
-    void onCreate_Bundle_() {
-        ll1.setTextSize(10f);
-        ll1.setTypeface(tf);
+    LineChart mChart;
+    SeekBar mSeekBarX;
+    SeekBar mSeekBarY;
+    TextView tvX;
+    TextView tvY;
 
-        LimitLine ll2 = new LimitLine(-30f, "Lower Limit");
-        ll2.setLineWidth(4f);
-        ll2.enableDashedLine(10f, 10f, 0f);
-        ll2.setLabelPosition(LimitLabelPosition.RIGHT_BOTTOM);
-        ll2.setTextSize(10f);
-        ll2.setTypeface(tf);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_linechart);
 
+        tvX = (TextView) findViewById(R.id.tvXMax);
+        tvY = (TextView) findViewById(R.id.tvYMax);
+        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+
+        mSeekBarX.setProgress(45);
+        mSeekBarY.setProgress(100);
+
+        mSeekBarY.setOnSeekBarChangeListener(this);
+        mSeekBarX.setOnSeekBarChangeListener(this);
+
+        mChart = (LineChart) findViewById(R.id.chart1);
+        mChart.setOnChartValueSelectedListener(this);
+
+        mChart.setDescription("");
+        mChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+        mChart.setTouchEnabled(true);
+
+        mChart.setDragDecelerationFrictionCoef(0.9f);
+
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        mChart.setDrawGridBackground(false);
+        mChart.setHighlightPerDragEnabled(true);
+
+        mChart.setPinchZoom(true);
+
+        mChart.setBackgroundColor(Color.LTGRAY);
+
+        setData(20, 30);
+
+        mChart.animateX(2500);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+
+        Legend l = mChart.getLegend();
+
+        l.setForm(LegendForm.LINE);
+        l.setTypeface(tf);
+        l.setTextSize(11f);
+        l.setTextColor(Color.WHITE);
+        l.setPosition(LegendPosition.BELOW_CHART_LEFT);
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setTypeface(tf);
+        xAxis.setTextSize(12f);
+        xAxis.setTextColor(Color.WHITE);
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setSpaceBetweenLabels(1);
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setTypeface(tf);
+        leftAxis.setTextColor(ColorTemplate.getHoloBlue());
+        leftAxis.setAxisMaxValue(200f);
+        leftAxis.setAxisMinValue(0f);
+        leftAxis.setDrawGridLines(true);
+
+        YAxis rightAxis = mChart.getAxisRight();
+        rightAxis.setTypeface(tf);
+        rightAxis.setTextColor(Color.RED);
+        rightAxis.setAxisMaxValue(900);
+        rightAxis.setAxisMinValue(-200);
+        rightAxis.setDrawGridLines(false);
     }
 }

@@ -1,29 +1,58 @@
-// class name : com.relayrides.pushy.apns.PushManager
-// method name: handleConnectionClosure(ApnsConnection<T>)
-// side       : base
-// region     : lines 500-520 (affected lines: [500, 502, 503, 510, 515, 520])
 class PushManager {
-    void handleConnectionClosure_ApnsConnection_T__() {
-					log.warn("Interrupted while waiting for closed connection's pending operations to finish.");
-				}
-			}
-		}).start();
-	}
+    ApnsEnvironment environment;
+    SSLContext sslContext;
+    ApnsConnectionPool<T> connectionPool;
+    Thread dispatchThread;
+    NioEventLoopGroup eventLoopGroup;
+    ReentrantLock connectionLock;
+    Condition connectionsFinished;
+    int unfinishedConnectionCount;
+    Logger log;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.relayrides.pushy.apns.ApnsConnectionListener#handleWriteFailure(com.relayrides.pushy.apns.ApnsConnection, com.relayrides.pushy.apns.ApnsPushNotification, java.lang.Throwable)
-	 */
-	public void handleWriteFailure(ApnsConnection<T> connection, T notification, Throwable cause) {
-		this.retryQueue.add(notification);
+    public void handleConnectionClosure(final ApnsConnection<T> connection) {
+    	this.connectionLock.lock();
 
-		if (this.dispatchThread != null) {
-			this.dispatchThread.interrupt();
-		}
-	}
+    	try {
+    		this.connectionPool.removeConnection(connection);
+    		this.unfinishedConnectionCount -= 1;
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.relayrides.pushy.apns.ApnsConnectionListener#handleRejectedNotification(com.relayrides.pushy.apns.ApnsConnection, com.relayrides.pushy.apns.ApnsPushNotification, com.relayrides.pushy.apns.RejectedNotificationReason)
+    		if (!this.isShutDown()) {
+    			new ApnsConnection<T>(this.environment, this.sslContext, this.eventLoopGroup, this).connect();
+    			this.unfinishedConnectionCount += 1;
+    		}
+
+    		if (this.unfinishedConnectionCount == 0) {
+    			this.connectionsFinished.signalAll();
+    		}
+    	} finally {
+    		this.connectionLock.unlock();
+    	}
+
+    	if (this.dispatchThread != null && this.dispatchThread.isAlive()) {
+    		this.dispatchThread.interrupt();
+    	}
+
+    	new Thread(new Runnable() {
+
+    		public void run() {
+    			try {
+    				connection.waitForPendingOperationsToFinish();
+
+    				connectionLock.lock();
+
+    				try {
+    					unfinishedConnectionCount -= 1;
+
+    					if (unfinishedConnectionCount == 0) {
+    						connectionsFinished.signalAll();
+    					}
+    				} finally {
+    					connectionLock.unlock();
+    				}
+    			} catch (InterruptedException e) {
+    				log.warn("Interrupted while waiting for closed connection's pending operations to finish.");
+    			}
+    		}
+    	}).start();
     }
 }

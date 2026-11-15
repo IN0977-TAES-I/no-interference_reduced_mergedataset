@@ -1,10 +1,7 @@
-// class name : quickdt.experiments.OutOfTimeCrossValidatorRunner
-// method name: getRandomForestBuilder(int, int)
-// side       : right
-// region     : lines 42-43 (affected lines: [42, 43])
 class OutOfTimeCrossValidatorRunner {
-    void getRandomForestBuilder_int__int_() {
+    private static PredictiveModelBuilder getRandomForestBuilder(int maxDepth, int numTrees) {
+        TreeBuilder treeBuilder = new TreeBuilder().maxDepth(maxDepth).ignoreAttributeAtNodeProbability(.7).minLeafInstances(20);
+        RandomForestBuilder RandomForestBuilder = new RandomForestBuilder(treeBuilder).numTrees(numTrees);
         return RandomForestBuilder;
-    }
     }
 }

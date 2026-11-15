@@ -1,9 +1,47 @@
-// class name : com.thinkaurelius.titan.graphdb.transaction.StandardTitanTx
-// method name: StandardTitanTx(StandardTitanGraph, TransactionConfiguration, BackendTransaction)
-// side       : right
-// region     : lines 182-199 (affected lines: [182, 183, 197, 198, 199])
 class StandardTitanTx {
-    void StandardTitanTx_StandardTitanGraph__TransactionConfiguration__BackendTransaction_() {
+    static Map<Long, InternalRelation> EMPTY_DELETED_RELATIONS;
+    static ConcurrentMap<UniqueLockApplication, Lock> UNINITIALIZED_LOCKS;
+    IDInspector idInspector;
+    AttributeHandling attributeHandler;
+    EdgeSerializer edgeSerializer;
+    IndexSerializer indexSerializer;
+    VertexCache vertexCache;
+    AddedRelationsContainer addedRelations;
+    Map<Long, InternalRelation> deletedRelations;
+    Cache<IndexQuery, List<Object>> indexCache;
+    IndexCache newVertexIndexEntries;
+    ConcurrentMap<UniqueLockApplication, Lock> uniqueLocks;
+    Map<String, Long> typeCache;
+    AtomicLong temporaryID;
+    boolean isOpen;
+
+    public StandardTitanTx(StandardTitanGraph graph, TransactionConfiguration config, BackendTransaction txHandle) {
+        Preconditions.checkNotNull(graph);
+        Preconditions.checkArgument(graph.isOpen());
+        Preconditions.checkNotNull(config);
+        Preconditions.checkNotNull(txHandle);
+        this.graph = graph;
+        this.config = config;
+        this.idInspector = graph.getIDInspector();
+        this.attributeHandler = graph.getAttributeHandling();
+        this.txHandle = txHandle;
+        this.edgeSerializer = graph.getEdgeSerializer();
+        this.indexSerializer = graph.getIndexSerializer();
+
+        temporaryID = new AtomicLong(-1);
+
+        int concurrencyLevel;
+        if (config.isSingleThreaded()) {
+            addedRelations = new SimpleBufferAddedRelations();
+            concurrencyLevel = 1;
+            typeCache = new HashMap<String, Long>();
+            newVertexIndexEntries = new SimpleIndexCache();
+        } else {
+            addedRelations = new ConcurrentBufferAddedRelations();
+            concurrencyLevel = 4;
+            typeCache = new ConcurrentHashMap<String, Long>();
+            newVertexIndexEntries = new ConcurrentIndexCache();
+        }
         vertexCache = new LRUVertexCache(config.getVertexCacheSize(), concurrencyLevel);
         indexCache = CacheBuilder.newBuilder().weigher(new Weigher<IndexQuery, List<Object>>() {
             @Override
@@ -19,8 +57,5 @@ class StandardTitanTx {
         if (null != config.getMetricsPrefix()) {
             MetricManager.INSTANCE.getCounter(config.getMetricsPrefix(), "tx", "begin").inc();
         }
-    }
-
-    /*
     }
 }

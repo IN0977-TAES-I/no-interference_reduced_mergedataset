@@ -1,9 +1,18 @@
-// class name : me.prettyprint.cassandra.connection.client.HSaslThriftClient
-// method name: open()
-// side       : left
-// region     : lines 94-122 (affected lines: [94, 95, 96, 97, 111, 122])
 class HSaslThriftClient {
-    void open__() {
+    static Logger log;
+    String servicePrincipalName;
+    TSSLTransportParameters params;
+
+    public HSaslThriftClient open() {
+      if ( isOpen() ) {
+        throw new IllegalStateException("Open called on already open SASL connection. You should not have gotten here.");
+      }
+      if ( log.isDebugEnabled() ) {
+        log.debug("Creating a new SASL thrift connection to {}", cassandraHost);
+      }
+
+      TSocket socket;
+      try {
         if (params == null)
           socket = new TSocket(cassandraHost.getHost(), cassandraHost.getPort(), timeout);
         else
@@ -33,5 +42,9 @@ class HSaslThriftClient {
       }
 
       if (cassandraHost.getUseThriftFramedTransport()) {
+        transport = new TFramedTransport(transport);
+      }
+
+      return this;
     }
 }

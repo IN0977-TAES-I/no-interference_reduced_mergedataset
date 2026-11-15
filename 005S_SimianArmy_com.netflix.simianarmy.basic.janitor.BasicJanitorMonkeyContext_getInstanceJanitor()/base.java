@@ -1,20 +1,29 @@
-// class name : com.netflix.simianarmy.basic.janitor.BasicJanitorMonkeyContext
-// method name: getInstanceJanitor()
-// side       : base
-// region     : lines 227-238 (affected lines: [227, 228, 229, 230, 232, 233, 234, 235, 237, 238])
 class BasicJanitorMonkeyContext {
-    void getInstanceJanitor__() {
-        if (configuration().getBoolOrElse("simianarmy.janitor.rule.oldDetachedVolumeRule.enabled", false)) {
-            ruleEngine.addRule(new OldDetachedVolumeRule(monkeyCalendar,
-                    (int) configuration().getNumOrElse(
-                            "simianarmy.janitor.rule.oldDetachedVolumeRule.detachDaysThreshold", 30),
-                            (int) configuration().getNumOrElse(
-                                    "simianarmy.janitor.rule.oldDetachedVolumeRule.retentionDays", 7)));
+    JanitorResourceTracker janitorResourceTracker;
+    String monkeyRegion;
+    MonkeyCalendar monkeyCalendar;
 
-            if (configuration().getBoolOrElse("simianarmy.janitor.edda.enabled", false)
-                && configuration().getBoolOrElse("simianarmy.janitor.rule.deleteOnTerminationRule.enabled", false)) {
-                ruleEngine.addRule(new DeleteOnTerminationRule(monkeyCalendar, (int) configuration().getNumOrElse(
-                        "simianarmy.janitor.rule.deleteOnTerminationRule.retentionDays", 3)));
-            }
+    private InstanceJanitor getInstanceJanitor() {
+        JanitorRuleEngine ruleEngine = new BasicJanitorRuleEngine();
+        if (configuration().getBoolOrElse("simianarmy.janitor.rule.orphanedInstanceRule.enabled", false)) {
+            ruleEngine.addRule(new OrphanedInstanceRule(monkeyCalendar,
+                    (int) configuration().getNumOrElse(
+                            "simianarmy.janitor.rule.orphanedInstanceRule.instanceAgeThreshold", 2),
+                            (int) configuration().getNumOrElse(
+                                    "simianarmy.janitor.rule.orphanedInstanceRule.retentionDaysWithOwner", 3),
+                                    (int) configuration().getNumOrElse(
+                                            "simianarmy.janitor.rule.orphanedInstanceRule.retentionDaysWithoutOwner",
+                                            8)));
+        }
+        JanitorCrawler instanceCrawler;
+        if (configuration().getBoolOrElse("simianarmy.janitor.edda.enabled", false)) {
+            instanceCrawler = new EddaInstanceJanitorCrawler(createEddaClient(), awsClient().region());
+        } else {
+            instanceCrawler = new InstanceJanitorCrawler(awsClient());
+        }
+        BasicJanitorContext instanceJanitorCtx = new BasicJanitorContext(
+                monkeyRegion, ruleEngine, instanceCrawler, janitorResourceTracker,
+                monkeyCalendar, configuration(), recorder());
+        return new InstanceJanitor(awsClient(), instanceJanitorCtx);
     }
 }
