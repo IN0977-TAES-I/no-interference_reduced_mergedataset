@@ -1,0 +1,584 @@
+# scenario   : 072S
+# project    : eureka
+# class name : com.netflix.appinfo.ApplicationInfoManager
+# method name: constructor()
+# side       : left (left-right-lines.csv)
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():19:import javax.inject.Inject;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():20:import java.util.Map;
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():21:import java.util.concurrent.ConcurrentHashMap;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():22:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():23:import com.netflix.appinfo.InstanceInfo.InstanceStatus;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():24:import com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider;
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():25:import com.netflix.discovery.StatusChangeEvent;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():26:import com.netflix.governator.guice.lazy.FineGrainedLazySingleton;
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():27:import org.slf4j.Logger;
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():28:import org.slf4j.LoggerFactory;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():29:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():30:/**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():31: * The class that initializes information required for registration with
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():32: * <tt>Eureka Server</tt> and to be discovered by other components.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():33: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():34: * <p>
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():35: * The information required for registration is provided by the user by passing
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():36: * the configuration defined by the contract in {@link EurekaInstanceConfig}
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():37: * }.AWS clients can either use or extend {@link CloudInstanceConfig
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():38: * }.Other non-AWS clients can use or extend either
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():39: * {@link MyDataCenterInstanceConfig} or very basic
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():40: * {@link AbstractInstanceConfig}.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():41: * </p>
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():42: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():43: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():44: * @author Karthik Ranganathan, Greg Kim
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():45: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():46: */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():47:@FineGrainedLazySingleton
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():48:public class ApplicationInfoManager {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():49:    private static final Logger logger = LoggerFactory.getLogger(ApplicationInfoManager.class);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():50:    private static ApplicationInfoManager instance = new ApplicationInfoManager();
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():51:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():52:    private InstanceInfo instanceInfo;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():53:    private EurekaInstanceConfig config;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():54:
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():55:    private Map<String, StatusChangeListener> listeners;
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():56:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():57:    private ApplicationInfoManager() {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():58:        listeners = new ConcurrentHashMap<String, StatusChangeListener>();
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():59:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():60:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():61:    @Inject
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():62:    ApplicationInfoManager(EurekaInstanceConfig config, InstanceInfo instanceInfo) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():63:        this.config = config;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():64:        this.instanceInfo = instanceInfo;
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():65:        this.listeners = new ConcurrentHashMap<String, StatusChangeListener>();
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():66:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():67:        // Hack to allow for getInstance() to use the DI'd ApplicationInfoManager
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():68:        instance = this;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():69:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():70:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():71:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():72:     * @deprecated please use DI instead
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():73:     */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():74:    @Deprecated
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():75:    public static ApplicationInfoManager getInstance() {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():76:        return instance;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():77:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():78:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():79:    public void initComponent(EurekaInstanceConfig config) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():80:        try {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():81:            this.config = config;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():82:            this.instanceInfo = new EurekaConfigBasedInstanceInfoProvider(config).get();
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():83:        } catch (Throwable e) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():84:            throw new RuntimeException(
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():85:                    "Failed to initialize ApplicationInfoManager", e);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():86:        }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():87:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():88:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():89:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():90:     * Gets the information about this instance that is registered with eureka.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():91:     *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():92:     * @return information about this instance that is registered with eureka.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():93:     */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():94:    public InstanceInfo getInfo() {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():95:        return instanceInfo;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():96:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():97:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():98:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():99:     * Register user-specific instance meta data. Application can send any other
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():100:     * additional meta data that need to be accessed for other reasons.The data
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():101:     * will be periodically sent to the eureka server.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():102:     *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():103:     * @param appMetadata
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():104:     *            application specific meta data.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():105:     */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():106:    public void registerAppMetadata(Map<String, String> appMetadata) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():107:        instanceInfo.registerRuntimeMetadata(appMetadata);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():108:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():109:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():110:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():111:     * Set the status of this instance. Application can use this to indicate
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():112:     * whether it is ready to receive traffic. Setting the status here also notifies all registered listeners
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():113:     * of a status change event.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():114:     *
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():115:     * @param status Status of the instance
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():116:     */
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():117:    public synchronized void setInstanceStatus(InstanceStatus status) {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():118:        InstanceStatus prev = instanceInfo.setStatus(status);
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():119:        if (prev != null) {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():120:            for (StatusChangeListener listener : listeners.values()) {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():121:                try {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():122:                    listener.notify(new StatusChangeEvent(prev, status));
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():123:                } catch (Exception e) {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():124:                    logger.warn("failed to notify listener: {}", listener.getId(), e);
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():125:                }
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():126:            }
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():127:        }
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():128:    }
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():129:
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():130:    public void registerStatusChangeListener(StatusChangeListener listener) {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():131:        listeners.put(listener.getId(), listener);
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():132:    }
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():133:
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():134:    public void unregisterStatusChangeListener(String listenerId) {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():135:        listeners.remove(listenerId);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():136:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():137:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():138:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():139:     * Refetches the hostname to check if it has changed. If it has, the entire
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():140:     * <code>DataCenterInfo</code> is refetched and passed on to the eureka
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():141:     * server on next heartbeat.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():142:     */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():143:    public void refreshDataCenterInfoIfRequired() {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():144:        String existingHostname = instanceInfo.getHostName();
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():145:        String newHostname = config.getHostName(true);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():146:        if (newHostname != null && !newHostname.equals(existingHostname)) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():147:            logger.warn("The public hostname changed from : "
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():148:                    + existingHostname + " => " + newHostname);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():149:            InstanceInfo.Builder builder = new InstanceInfo.Builder(
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():150:                    instanceInfo);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():151:            builder.setHostName(newHostname).setDataCenterInfo(
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():152:                    config.getDataCenterInfo());
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():153:            instanceInfo.setIsDirty();
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():154:        }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():155:    }
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():156:
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():157:    public static interface StatusChangeListener {
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():158:        String getId();
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():159:        void notify(StatusChangeEvent statusChangeEvent);
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():160:    }
+
+# same region in merge.java (scenario update):
+merge:19:import javax.inject.Inject;
+merge:20:import java.util.Map;
+merge:21:import java.util.concurrent.ConcurrentHashMap;
+merge:22:
+merge:23:import com.netflix.appinfo.InstanceInfo.InstanceStatus;
+merge:24:import com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider;
+merge:25:import com.netflix.discovery.StatusChangeEvent;
+merge:26:import com.netflix.governator.guice.lazy.FineGrainedLazySingleton;
+merge:27:import org.slf4j.Logger;
+merge:28:import org.slf4j.LoggerFactory;
+merge:29:
+merge:30:/**
+merge:31: * The class that initializes information required for registration with
+merge:32: * <tt>Eureka Server</tt> and to be discovered by other components.
+merge:33: *
+merge:34: * <p>
+merge:35: * The information required for registration is provided by the user by passing
+merge:36: * the configuration defined by the contract in {@link EurekaInstanceConfig}
+merge:37: * }.AWS clients can either use or extend {@link CloudInstanceConfig
+merge:38: * }.Other non-AWS clients can use or extend either
+merge:39: * {@link MyDataCenterInstanceConfig} or very basic
+merge:40: * {@link AbstractInstanceConfig}.
+merge:41: * </p>
+merge:42: *
+merge:43: *
+merge:44: * @author Karthik Ranganathan, Greg Kim
+merge:45: *
+merge:46: */
+merge:47:@FineGrainedLazySingleton
+merge:48:public class ApplicationInfoManager {
+merge:49:    private static final Logger logger = LoggerFactory.getLogger(ApplicationInfoManager.class);
+merge:50:    private static ApplicationInfoManager instance = new ApplicationInfoManager();
+merge:51:
+merge:52:    private InstanceInfo instanceInfo;
+merge:53:    private EurekaInstanceConfig config;
+merge:54:
+merge:55:    private Map<String, StatusChangeListener> listeners;
+merge:56:
+merge:57:    private ApplicationInfoManager() {
+merge:58:        listeners = new ConcurrentHashMap<String, StatusChangeListener>();
+merge:59:    }
+merge:60:
+merge:61:    @Inject
+merge:62:    public ApplicationInfoManager(EurekaInstanceConfig config, InstanceInfo instanceInfo) {
+merge:63:        this.config = config;
+merge:64:        this.instanceInfo = instanceInfo;
+merge:65:        this.listeners = new ConcurrentHashMap<String, StatusChangeListener>();
+merge:66:
+merge:67:        // Hack to allow for getInstance() to use the DI'd ApplicationInfoManager
+merge:68:        instance = this;
+merge:69:    }
+merge:70:
+merge:71:    /**
+merge:72:     * @deprecated please use DI instead
+merge:73:     */
+merge:74:    @Deprecated
+merge:75:    public static ApplicationInfoManager getInstance() {
+merge:76:        return instance;
+merge:77:    }
+merge:78:
+merge:79:    public void initComponent(EurekaInstanceConfig config) {
+merge:80:        try {
+merge:81:            this.config = config;
+merge:82:            this.instanceInfo = new EurekaConfigBasedInstanceInfoProvider(config).get();
+merge:83:        } catch (Throwable e) {
+merge:84:            throw new RuntimeException(
+merge:85:                    "Failed to initialize ApplicationInfoManager", e);
+merge:86:        }
+merge:87:    }
+merge:88:
+merge:89:    /**
+merge:90:     * Gets the information about this instance that is registered with eureka.
+merge:91:     *
+merge:92:     * @return information about this instance that is registered with eureka.
+merge:93:     */
+merge:94:    public InstanceInfo getInfo() {
+merge:95:        return instanceInfo;
+merge:96:    }
+merge:97:
+merge:98:    /**
+merge:99:     * Register user-specific instance meta data. Application can send any other
+merge:100:     * additional meta data that need to be accessed for other reasons.The data
+merge:101:     * will be periodically sent to the eureka server.
+merge:102:     *
+merge:103:     * @param appMetadata
+merge:104:     *            application specific meta data.
+merge:105:     */
+merge:106:    public void registerAppMetadata(Map<String, String> appMetadata) {
+merge:107:        instanceInfo.registerRuntimeMetadata(appMetadata);
+merge:108:    }
+merge:109:
+merge:110:    /**
+merge:111:     * Set the status of this instance. Application can use this to indicate
+merge:112:     * whether it is ready to receive traffic. Setting the status here also notifies all registered listeners
+merge:113:     * of a status change event.
+merge:114:     *
+merge:115:     * @param status Status of the instance
+merge:116:     */
+merge:117:    public synchronized void setInstanceStatus(InstanceStatus status) {
+merge:118:        InstanceStatus prev = instanceInfo.setStatus(status);
+merge:119:        if (prev != null) {
+merge:120:            for (StatusChangeListener listener : listeners.values()) {
+merge:121:                try {
+merge:122:                    listener.notify(new StatusChangeEvent(prev, status));
+merge:123:                } catch (Exception e) {
+merge:124:                    logger.warn("failed to notify listener: {}", listener.getId(), e);
+merge:125:                }
+merge:126:            }
+merge:127:        }
+merge:128:    }
+merge:129:
+merge:130:    public void registerStatusChangeListener(StatusChangeListener listener) {
+merge:131:        listeners.put(listener.getId(), listener);
+merge:132:    }
+merge:133:
+merge:134:    public void unregisterStatusChangeListener(String listenerId) {
+merge:135:        listeners.remove(listenerId);
+merge:136:    }
+merge:137:
+merge:138:    /**
+merge:139:     * Refetches the hostname to check if it has changed. If it has, the entire
+merge:140:     * <code>DataCenterInfo</code> is refetched and passed on to the eureka
+merge:141:     * server on next heartbeat.
+merge:142:     */
+merge:143:    public void refreshDataCenterInfoIfRequired() {
+merge:144:        String existingHostname = instanceInfo.getHostName();
+merge:145:        String newHostname = config.getHostName(true);
+merge:146:        if (newHostname != null && !newHostname.equals(existingHostname)) {
+merge:147:            logger.warn("The public hostname changed from : "
+merge:148:                    + existingHostname + " => " + newHostname);
+merge:149:            InstanceInfo.Builder builder = new InstanceInfo.Builder(
+merge:150:                    instanceInfo);
+merge:151:            builder.setHostName(newHostname).setDataCenterInfo(
+merge:152:                    config.getDataCenterInfo());
+merge:153:            instanceInfo.setIsDirty();
+merge:154:        }
+merge:155:    }
+merge:156:
+merge:157:    public static interface StatusChangeListener {
+merge:158:        String getId();
+merge:159:        void notify(StatusChangeEvent statusChangeEvent);
+merge:160:    }
+
+# scenario   : 072S
+# project    : eureka
+# class name : com.netflix.appinfo.ApplicationInfoManager
+# method name: constructor()
+# side       : right (right-left-lines.csv)
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():19:import java.util.Map;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():20:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():21:import javax.inject.Inject;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():22:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():23:import org.slf4j.Logger;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():24:import org.slf4j.LoggerFactory;
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():25:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():26:import com.netflix.appinfo.InstanceInfo.InstanceStatus;
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():27:import com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider;
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():28:import com.netflix.governator.guice.lazy.FineGrainedLazySingleton;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():29:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():30:/**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():31: * The class that initializes information required for registration with
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():32: * <tt>Eureka Server</tt> and to be discovered by other components.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():33: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():34: * <p>
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():35: * The information required for registration is provided by the user by passing
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():36: * the configuration defined by the contract in {@link EurekaInstanceConfig}
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():37: * }.AWS clients can either use or extend {@link CloudInstanceConfig
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():38: * }.Other non-AWS clients can use or extend either
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():39: * {@link MyDataCenterInstanceConfig} or very basic
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():40: * {@link AbstractInstanceConfig}.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():41: * </p>
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():42: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():43: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():44: * @author Karthik Ranganathan, Greg Kim
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():45: *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():46: */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():47:@FineGrainedLazySingleton
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():48:public class ApplicationInfoManager {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():49:    private static final Logger logger = LoggerFactory.getLogger(ApplicationInfoManager.class);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():50:    private static ApplicationInfoManager instance = new ApplicationInfoManager();
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():51:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():52:    private InstanceInfo instanceInfo;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():53:    private EurekaInstanceConfig config;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():54:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():55:    private ApplicationInfoManager() {
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():56:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():57:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():58:    @Inject
+sink@com.netflix.appinfo.ApplicationInfoManager.constructor():59:    public ApplicationInfoManager(EurekaInstanceConfig config, InstanceInfo instanceInfo) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():60:        this.config = config;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():61:        this.instanceInfo = instanceInfo;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():62:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():63:        // Hack to allow for getInstance() to use the DI'd ApplicationInfoManager
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():64:        instance = this;
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():65:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():66:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():67:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():68:     * @deprecated please use DI instead
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():69:     */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():70:    @Deprecated
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():71:    public static ApplicationInfoManager getInstance() {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():72:        return instance;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():73:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():74:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():75:    public void initComponent(EurekaInstanceConfig config) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():76:        try {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():77:            this.config = config;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():78:            this.instanceInfo = new EurekaConfigBasedInstanceInfoProvider(config).get();
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():79:        } catch (Throwable e) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():80:            throw new RuntimeException(
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():81:                    "Failed to initialize ApplicationInfoManager", e);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():82:        }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():83:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():84:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():85:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():86:     * Gets the information about this instance that is registered with eureka.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():87:     *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():88:     * @return information about this instance that is registered with eureka.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():89:     */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():90:    public InstanceInfo getInfo() {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():91:        return instanceInfo;
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():92:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():93:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():94:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():95:     * Register user-specific instance meta data. Application can send any other
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():96:     * additional meta data that need to be accessed for other reasons.The data
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():97:     * will be periodically sent to the eureka server.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():98:     *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():99:     * @param appMetadata
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():100:     *            application specific meta data.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():101:     */
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():102:    public void registerAppMetadata(Map<String, String> appMetadata) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():103:        instanceInfo.registerRuntimeMetadata(appMetadata);
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():104:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():105:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():106:    /**
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():107:     * Set the status of this instance. Application can use this to indicate
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():108:     * whether it is ready to receive traffic.
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():109:     *
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():110:     * @param status
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():111:     *            Status of the instance
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():112:     */
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():113:    public void setInstanceStatus(InstanceStatus status) {
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():114:        instanceInfo.setStatus(status);
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():115:    }
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():116:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():117:    /**
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():118:     * Refetches the hostname to check if it has changed. If it has, the entire
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():119:     * <code>DataCenterInfo</code> is refetched and passed on to the eureka
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():120:     * server on next heartbeat.
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():121:     */
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():122:    public void refreshDataCenterInfoIfRequired() {
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():123:        String existingHostname = instanceInfo.getHostName();
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():124:        String newHostname = config.getHostName(true);
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():125:        if (newHostname != null && !newHostname.equals(existingHostname)) {
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():126:            logger.warn("The public hostname changed from : "
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():127:                    + existingHostname + " => " + newHostname);
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():128:            InstanceInfo.Builder builder = new InstanceInfo.Builder(
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():129:                    instanceInfo);
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():130:            builder.setHostName(newHostname).setDataCenterInfo(
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():131:                    config.getDataCenterInfo());
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():132:            instanceInfo.setIsDirty(true);
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():133:        }
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():134:    }
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():135:}
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():136:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():137:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():138:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():139:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():140:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():141:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():142:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():143:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():144:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():145:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():146:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():147:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():148:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():149:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():150:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():151:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():152:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():153:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():154:
+region@com.netflix.appinfo.ApplicationInfoManager.constructor():155:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():156:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():157:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():158:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():159:
+source@com.netflix.appinfo.ApplicationInfoManager.constructor():160:
+
+# same region in merge.java (scenario update):
+merge:19:import javax.inject.Inject;
+merge:20:import java.util.Map;
+merge:21:import java.util.concurrent.ConcurrentHashMap;
+merge:22:
+merge:23:import com.netflix.appinfo.InstanceInfo.InstanceStatus;
+merge:24:import com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider;
+merge:25:import com.netflix.discovery.StatusChangeEvent;
+merge:26:import com.netflix.governator.guice.lazy.FineGrainedLazySingleton;
+merge:27:import org.slf4j.Logger;
+merge:28:import org.slf4j.LoggerFactory;
+merge:29:
+merge:30:/**
+merge:31: * The class that initializes information required for registration with
+merge:32: * <tt>Eureka Server</tt> and to be discovered by other components.
+merge:33: *
+merge:34: * <p>
+merge:35: * The information required for registration is provided by the user by passing
+merge:36: * the configuration defined by the contract in {@link EurekaInstanceConfig}
+merge:37: * }.AWS clients can either use or extend {@link CloudInstanceConfig
+merge:38: * }.Other non-AWS clients can use or extend either
+merge:39: * {@link MyDataCenterInstanceConfig} or very basic
+merge:40: * {@link AbstractInstanceConfig}.
+merge:41: * </p>
+merge:42: *
+merge:43: *
+merge:44: * @author Karthik Ranganathan, Greg Kim
+merge:45: *
+merge:46: */
+merge:47:@FineGrainedLazySingleton
+merge:48:public class ApplicationInfoManager {
+merge:49:    private static final Logger logger = LoggerFactory.getLogger(ApplicationInfoManager.class);
+merge:50:    private static ApplicationInfoManager instance = new ApplicationInfoManager();
+merge:51:
+merge:52:    private InstanceInfo instanceInfo;
+merge:53:    private EurekaInstanceConfig config;
+merge:54:
+merge:55:    private Map<String, StatusChangeListener> listeners;
+merge:56:
+merge:57:    private ApplicationInfoManager() {
+merge:58:        listeners = new ConcurrentHashMap<String, StatusChangeListener>();
+merge:59:    }
+merge:60:
+merge:61:    @Inject
+merge:62:    public ApplicationInfoManager(EurekaInstanceConfig config, InstanceInfo instanceInfo) {
+merge:63:        this.config = config;
+merge:64:        this.instanceInfo = instanceInfo;
+merge:65:        this.listeners = new ConcurrentHashMap<String, StatusChangeListener>();
+merge:66:
+merge:67:        // Hack to allow for getInstance() to use the DI'd ApplicationInfoManager
+merge:68:        instance = this;
+merge:69:    }
+merge:70:
+merge:71:    /**
+merge:72:     * @deprecated please use DI instead
+merge:73:     */
+merge:74:    @Deprecated
+merge:75:    public static ApplicationInfoManager getInstance() {
+merge:76:        return instance;
+merge:77:    }
+merge:78:
+merge:79:    public void initComponent(EurekaInstanceConfig config) {
+merge:80:        try {
+merge:81:            this.config = config;
+merge:82:            this.instanceInfo = new EurekaConfigBasedInstanceInfoProvider(config).get();
+merge:83:        } catch (Throwable e) {
+merge:84:            throw new RuntimeException(
+merge:85:                    "Failed to initialize ApplicationInfoManager", e);
+merge:86:        }
+merge:87:    }
+merge:88:
+merge:89:    /**
+merge:90:     * Gets the information about this instance that is registered with eureka.
+merge:91:     *
+merge:92:     * @return information about this instance that is registered with eureka.
+merge:93:     */
+merge:94:    public InstanceInfo getInfo() {
+merge:95:        return instanceInfo;
+merge:96:    }
+merge:97:
+merge:98:    /**
+merge:99:     * Register user-specific instance meta data. Application can send any other
+merge:100:     * additional meta data that need to be accessed for other reasons.The data
+merge:101:     * will be periodically sent to the eureka server.
+merge:102:     *
+merge:103:     * @param appMetadata
+merge:104:     *            application specific meta data.
+merge:105:     */
+merge:106:    public void registerAppMetadata(Map<String, String> appMetadata) {
+merge:107:        instanceInfo.registerRuntimeMetadata(appMetadata);
+merge:108:    }
+merge:109:
+merge:110:    /**
+merge:111:     * Set the status of this instance. Application can use this to indicate
+merge:112:     * whether it is ready to receive traffic. Setting the status here also notifies all registered listeners
+merge:113:     * of a status change event.
+merge:114:     *
+merge:115:     * @param status Status of the instance
+merge:116:     */
+merge:117:    public synchronized void setInstanceStatus(InstanceStatus status) {
+merge:118:        InstanceStatus prev = instanceInfo.setStatus(status);
+merge:119:        if (prev != null) {
+merge:120:            for (StatusChangeListener listener : listeners.values()) {
+merge:121:                try {
+merge:122:                    listener.notify(new StatusChangeEvent(prev, status));
+merge:123:                } catch (Exception e) {
+merge:124:                    logger.warn("failed to notify listener: {}", listener.getId(), e);
+merge:125:                }
+merge:126:            }
+merge:127:        }
+merge:128:    }
+merge:129:
+merge:130:    public void registerStatusChangeListener(StatusChangeListener listener) {
+merge:131:        listeners.put(listener.getId(), listener);
+merge:132:    }
+merge:133:
+merge:134:    public void unregisterStatusChangeListener(String listenerId) {
+merge:135:        listeners.remove(listenerId);
+merge:136:    }
+merge:137:
+merge:138:    /**
+merge:139:     * Refetches the hostname to check if it has changed. If it has, the entire
+merge:140:     * <code>DataCenterInfo</code> is refetched and passed on to the eureka
+merge:141:     * server on next heartbeat.
+merge:142:     */
+merge:143:    public void refreshDataCenterInfoIfRequired() {
+merge:144:        String existingHostname = instanceInfo.getHostName();
+merge:145:        String newHostname = config.getHostName(true);
+merge:146:        if (newHostname != null && !newHostname.equals(existingHostname)) {
+merge:147:            logger.warn("The public hostname changed from : "
+merge:148:                    + existingHostname + " => " + newHostname);
+merge:149:            InstanceInfo.Builder builder = new InstanceInfo.Builder(
+merge:150:                    instanceInfo);
+merge:151:            builder.setHostName(newHostname).setDataCenterInfo(
+merge:152:                    config.getDataCenterInfo());
+merge:153:            instanceInfo.setIsDirty();
+merge:154:        }
+merge:155:    }
+merge:156:
+merge:157:    public static interface StatusChangeListener {
+merge:158:        String getId();
+merge:159:        void notify(StatusChangeEvent statusChangeEvent);
+merge:160:    }
+

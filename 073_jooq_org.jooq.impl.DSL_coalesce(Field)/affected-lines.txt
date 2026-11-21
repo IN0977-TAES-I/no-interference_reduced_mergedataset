@@ -1,0 +1,48 @@
+# scenario   : 073S
+# project    : jooq
+# class name : org.jooq.impl.DSL
+# method name: coalesce(Field)
+# side       : left (left-right-lines.csv)
+sink@org.jooq.impl.DSL.coalesce(Field):7420:     * The <code>COALESCE(field, value)</code> function.
+sink@org.jooq.impl.DSL.coalesce(Field):7421:     *
+sink@org.jooq.impl.DSL.coalesce(Field):7422:     * @see #coalesce(Field, Field...)
+sink@org.jooq.impl.DSL.coalesce(Field):7423:     */
+sink@org.jooq.impl.DSL.coalesce(Field):7424:    @Support
+sink@org.jooq.impl.DSL.coalesce(Field):7425:    public static <T> Field<T> coalesce(Field<T> field, T value) {
+source@org.jooq.impl.DSL.coalesce(Field):7426:        return coalesce(field, Utils.field(value, field));
+source@org.jooq.impl.DSL.coalesce(Field):7427:    }
+
+# same region in merge.java (scenario update):
+merge:7420:     */
+merge:7421:    @Support
+merge:7422:    public static <T> Field<T> coalesce(Field<T> field, T value) {
+merge:7423:        return coalesce(field, Utils.field(value, field));
+merge:7424:    }
+merge:7425:
+merge:7426:    /**
+merge:7427:     * The <code>COALESCE(field1, field2, ... , field n)</code> function.
+
+# scenario   : 073S
+# project    : jooq
+# class name : org.jooq.impl.DSL
+# method name: coalesce(Field)
+# side       : right (right-left-lines.csv)
+source@org.jooq.impl.DSL.coalesce(Field):7420:    /**
+source@org.jooq.impl.DSL.coalesce(Field):7421:     * Gets the Oracle-style <code>COALESCE(field, value)</code>
+source@org.jooq.impl.DSL.coalesce(Field):7422:     * function.
+source@org.jooq.impl.DSL.coalesce(Field):7423:     *
+source@org.jooq.impl.DSL.coalesce(Field):7424:     * @see #coalesce(Field, Field...)
+source@org.jooq.impl.DSL.coalesce(Field):7425:     */
+sink@org.jooq.impl.DSL.coalesce(Field):7426:    @Support
+sink@org.jooq.impl.DSL.coalesce(Field):7427:    public static <T> Field<T> coalesce(Field<T> field, T value) {
+
+# same region in merge.java (scenario update):
+merge:7420:     */
+merge:7421:    @Support
+merge:7422:    public static <T> Field<T> coalesce(Field<T> field, T value) {
+merge:7423:        return coalesce(field, Utils.field(value, field));
+merge:7424:    }
+merge:7425:
+merge:7426:    /**
+merge:7427:     * The <code>COALESCE(field1, field2, ... , field n)</code> function.
+

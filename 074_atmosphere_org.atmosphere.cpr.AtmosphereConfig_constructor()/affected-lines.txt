@@ -1,0 +1,352 @@
+# scenario   : 074S
+# project    : atmosphere
+# class name : org.atmosphere.cpr.AtmosphereConfig
+# method name: constructor()
+# side       : left (left-right-lines.csv)
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():47:    private AtmosphereFramework framework;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():48:    private Map<String, Object> properties = new HashMap<String, Object>();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():49:    protected List<ShutdownHook> shutdownHooks = new ArrayList<ShutdownHook>();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():50:    protected List<StartupHook> startUpHook = new ArrayList<StartupHook>();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():51:
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():52:    protected AtmosphereConfig(AtmosphereFramework framework) {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():53:        this.framework = framework;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():54:    }
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():55:
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():56:    public List<AtmosphereHandlerConfig> getAtmosphereHandlerConfig() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():57:        return atmosphereHandlerConfig;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():58:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():59:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():60:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():61:     * Return the {@link AtmosphereFramework}.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():62:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():63:     * @return the {@link AtmosphereFramework}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():64:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():65:    public AtmosphereFramework framework() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():66:        return framework;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():67:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():68:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():69:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():70:     * Return the {@link ServletConfig}.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():71:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():72:     * @return {@link ServletConfig}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():73:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():74:    public ServletConfig getServletConfig() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():75:        return framework.getServletConfig();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():76:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():77:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():78:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():79:     * Return the {@link ServletContext}.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():80:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():81:     * @return {@link ServletContext}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():82:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():83:    public ServletContext getServletContext() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():84:        return framework.getServletContext();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():85:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():86:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():87:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():88:     * Return the current WebServer used.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():89:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():90:     * @return the current WebServer used
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():91:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():92:    public String getWebServerName() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():93:        return framework.getAsyncSupport().getContainerName();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():94:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():95:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():96:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():97:     * Return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}s.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():98:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():99:     * @return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():100:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():101:    public Map<String, AtmosphereFramework.AtmosphereHandlerWrapper> handlers() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():102:        return framework.getAtmosphereHandlers();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():103:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():104:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():105:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():106:     * Return the value of the init params defined in web.xml or application.xml.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():107:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():108:     * @param name the name
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():109:     * @return the list of init params defined in web.xml or application.xml
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():110:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():111:    public String getInitParameter(String name) {
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():112:        try {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():113:            return framework.getServletConfig().getInitParameter(name);
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():114:        } catch (Throwable ex) {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():115:            // Don't fail if Tomcat crash on startup with an NPE
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():116:            return null;
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():117:        }
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():118:    }
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():119:
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():120:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():121:     * Return all init param.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():122:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():123:     * @return
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():124:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():125:    public Enumeration<String> getInitParameterNames() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():126:        return framework().getServletConfig().getInitParameterNames();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():127:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():128:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():129:    /**
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():130:     * Is {@link javax.servlet.http.HttpSession} supported.
+
+# same region in merge.java (scenario update):
+merge:47:    private boolean useServletContextParameters;
+merge:48:    private AtmosphereFramework framework;
+merge:49:    private Map<String, Object> properties = new HashMap<String, Object>();
+merge:50:    protected List<ShutdownHook> shutdownHooks = new ArrayList<ShutdownHook>();
+merge:51:    protected List<StartupHook> startUpHook = new ArrayList<StartupHook>();
+merge:52:
+merge:53:    protected AtmosphereConfig(AtmosphereFramework framework) {
+merge:54:        this.framework = framework;
+merge:55:        String value=framework.getServletContext().getInitParameter(ApplicationConfig.USE_SERVLET_CONTEXT_PARAMETERS);
+merge:56:        useServletContextParameters=value!=null && Boolean.valueOf(value);
+merge:57:    }
+merge:58:
+merge:59:    public List<AtmosphereHandlerConfig> getAtmosphereHandlerConfig() {
+merge:60:        return atmosphereHandlerConfig;
+merge:61:    }
+merge:62:
+merge:63:    /**
+merge:64:     * Return the {@link AtmosphereFramework}.
+merge:65:     *
+merge:66:     * @return the {@link AtmosphereFramework}
+merge:67:     */
+merge:68:    public AtmosphereFramework framework() {
+merge:69:        return framework;
+merge:70:    }
+merge:71:
+merge:72:    /**
+merge:73:     * Return the {@link ServletConfig}.
+merge:74:     *
+merge:75:     * @return {@link ServletConfig}
+merge:76:     */
+merge:77:    public ServletConfig getServletConfig() {
+merge:78:        return framework.getServletConfig();
+merge:79:    }
+merge:80:
+merge:81:    /**
+merge:82:     * Return the {@link ServletContext}.
+merge:83:     *
+merge:84:     * @return {@link ServletContext}
+merge:85:     */
+merge:86:    public ServletContext getServletContext() {
+merge:87:        return framework.getServletContext();
+merge:88:    }
+merge:89:
+merge:90:    /**
+merge:91:     * Return the current WebServer used.
+merge:92:     *
+merge:93:     * @return the current WebServer used
+merge:94:     */
+merge:95:    public String getWebServerName() {
+merge:96:        return framework.getAsyncSupport().getContainerName();
+merge:97:    }
+merge:98:
+merge:99:    /**
+merge:100:     * Return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}s.
+merge:101:     *
+merge:102:     * @return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}
+merge:103:     */
+merge:104:    public Map<String, AtmosphereFramework.AtmosphereHandlerWrapper> handlers() {
+merge:105:        return framework.getAtmosphereHandlers();
+merge:106:    }
+merge:107:
+merge:108:    /**
+merge:109:     * Return the value of the init params defined in web.xml or application.xml.
+merge:110:     *
+merge:111:     * @param name the name
+merge:112:     * @return the value for the init parameter if defined
+merge:113:     */
+merge:114:    public String getInitParameter(String name) {
+merge:115:        try {
+merge:116:        	String value=framework.getServletConfig().getInitParameter(name);
+merge:117:        	if(value==null && useServletContextParameters) {
+merge:118:        		value=framework.getServletContext().getInitParameter(name);
+merge:119:        	}
+merge:120:        	return value;
+merge:121:        } catch (Throwable ex) {
+merge:122:            // Don't fail if Tomcat crash on startup with an NPE
+merge:123:            return null;
+merge:124:        }
+merge:125:    }
+merge:126:
+merge:127:    /**
+merge:128:     * Return all init param.
+merge:129:     *
+merge:130:     * @return the list of init params defined in web.xml or application.xml for the servlet
+
+# scenario   : 074S
+# project    : atmosphere
+# class name : org.atmosphere.cpr.AtmosphereConfig
+# method name: constructor()
+# side       : right (right-left-lines.csv)
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():47:    private boolean useServletContextParameters;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():48:    private AtmosphereFramework framework;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():49:    private Map<String, Object> properties = new HashMap<String, Object>();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():50:    protected List<ShutdownHook> shutdownHooks = new ArrayList<ShutdownHook>();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():51:    protected List<StartupHook> startUpHook = new ArrayList<StartupHook>();
+source@org.atmosphere.cpr.AtmosphereConfig.constructor():52:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():53:    public AtmosphereConfig(AtmosphereFramework framework) {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():54:        this.framework = framework;
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():55:        String value=framework.getServletContext().getInitParameter(ApplicationConfig.USE_SERVLET_CONTEXT_PARAMETERS);
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():56:        useServletContextParameters=value!=null && Boolean.valueOf(value);
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():57:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():58:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():59:    public List<AtmosphereHandlerConfig> getAtmosphereHandlerConfig() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():60:        return atmosphereHandlerConfig;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():61:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():62:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():63:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():64:     * Return the {@link AtmosphereFramework}.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():65:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():66:     * @return the {@link AtmosphereFramework}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():67:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():68:    public AtmosphereFramework framework() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():69:        return framework;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():70:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():71:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():72:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():73:     * Return the {@link ServletConfig}.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():74:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():75:     * @return {@link ServletConfig}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():76:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():77:    public ServletConfig getServletConfig() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():78:        return framework.getServletConfig();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():79:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():80:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():81:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():82:     * Return the {@link ServletContext}.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():83:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():84:     * @return {@link ServletContext}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():85:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():86:    public ServletContext getServletContext() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():87:        return framework.getServletContext();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():88:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():89:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():90:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():91:     * Return the current WebServer used.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():92:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():93:     * @return the current WebServer used
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():94:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():95:    public String getWebServerName() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():96:        return framework.getAsyncSupport().getContainerName();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():97:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():98:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():99:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():100:     * Return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}s.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():101:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():102:     * @return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():103:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():104:    public Map<String, AtmosphereFramework.AtmosphereHandlerWrapper> handlers() {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():105:        return framework.getAtmosphereHandlers();
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():106:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():107:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():108:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():109:     * Return the value of the init params defined in web.xml or application.xml.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():110:     *
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():111:     * @param name the name
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():112:     * @return the value for the init parameter if defined
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():113:     */
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():114:    public String getInitParameter(String name) {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():115:        try {
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():116:        	String value=framework.getServletConfig().getInitParameter(name);
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():117:        	if(value==null && useServletContextParameters) {
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():118:        		value=framework.getServletContext().getInitParameter(name);
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():119:        	}
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():120:        	return value;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():121:        } catch (Throwable ex) {
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():122:            // Don't fail if Tomcat crash on startup with an NPE
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():123:            return null;
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():124:        }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():125:    }
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():126:
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():127:    /**
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():128:     * Return all init param.
+region@org.atmosphere.cpr.AtmosphereConfig.constructor():129:     *
+sink@org.atmosphere.cpr.AtmosphereConfig.constructor():130:     * @return the list of init params defined in web.xml or application.xml for the servlet
+
+# same region in merge.java (scenario update):
+merge:47:    private boolean useServletContextParameters;
+merge:48:    private AtmosphereFramework framework;
+merge:49:    private Map<String, Object> properties = new HashMap<String, Object>();
+merge:50:    protected List<ShutdownHook> shutdownHooks = new ArrayList<ShutdownHook>();
+merge:51:    protected List<StartupHook> startUpHook = new ArrayList<StartupHook>();
+merge:52:
+merge:53:    protected AtmosphereConfig(AtmosphereFramework framework) {
+merge:54:        this.framework = framework;
+merge:55:        String value=framework.getServletContext().getInitParameter(ApplicationConfig.USE_SERVLET_CONTEXT_PARAMETERS);
+merge:56:        useServletContextParameters=value!=null && Boolean.valueOf(value);
+merge:57:    }
+merge:58:
+merge:59:    public List<AtmosphereHandlerConfig> getAtmosphereHandlerConfig() {
+merge:60:        return atmosphereHandlerConfig;
+merge:61:    }
+merge:62:
+merge:63:    /**
+merge:64:     * Return the {@link AtmosphereFramework}.
+merge:65:     *
+merge:66:     * @return the {@link AtmosphereFramework}
+merge:67:     */
+merge:68:    public AtmosphereFramework framework() {
+merge:69:        return framework;
+merge:70:    }
+merge:71:
+merge:72:    /**
+merge:73:     * Return the {@link ServletConfig}.
+merge:74:     *
+merge:75:     * @return {@link ServletConfig}
+merge:76:     */
+merge:77:    public ServletConfig getServletConfig() {
+merge:78:        return framework.getServletConfig();
+merge:79:    }
+merge:80:
+merge:81:    /**
+merge:82:     * Return the {@link ServletContext}.
+merge:83:     *
+merge:84:     * @return {@link ServletContext}
+merge:85:     */
+merge:86:    public ServletContext getServletContext() {
+merge:87:        return framework.getServletContext();
+merge:88:    }
+merge:89:
+merge:90:    /**
+merge:91:     * Return the current WebServer used.
+merge:92:     *
+merge:93:     * @return the current WebServer used
+merge:94:     */
+merge:95:    public String getWebServerName() {
+merge:96:        return framework.getAsyncSupport().getContainerName();
+merge:97:    }
+merge:98:
+merge:99:    /**
+merge:100:     * Return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}s.
+merge:101:     *
+merge:102:     * @return the list of {@link org.atmosphere.cpr.AtmosphereFramework.AtmosphereHandlerWrapper}
+merge:103:     */
+merge:104:    public Map<String, AtmosphereFramework.AtmosphereHandlerWrapper> handlers() {
+merge:105:        return framework.getAtmosphereHandlers();
+merge:106:    }
+merge:107:
+merge:108:    /**
+merge:109:     * Return the value of the init params defined in web.xml or application.xml.
+merge:110:     *
+merge:111:     * @param name the name
+merge:112:     * @return the value for the init parameter if defined
+merge:113:     */
+merge:114:    public String getInitParameter(String name) {
+merge:115:        try {
+merge:116:        	String value=framework.getServletConfig().getInitParameter(name);
+merge:117:        	if(value==null && useServletContextParameters) {
+merge:118:        		value=framework.getServletContext().getInitParameter(name);
+merge:119:        	}
+merge:120:        	return value;
+merge:121:        } catch (Throwable ex) {
+merge:122:            // Don't fail if Tomcat crash on startup with an NPE
+merge:123:            return null;
+merge:124:        }
+merge:125:    }
+merge:126:
+merge:127:    /**
+merge:128:     * Return all init param.
+merge:129:     *
+merge:130:     * @return the list of init params defined in web.xml or application.xml for the servlet
+

@@ -1,0 +1,221 @@
+# class name : org.atmosphere.cpr.AtmosphereConfig
+# method name: constructor()
+# variables referenced in the affected region:
+ApplicationConfigexternal/inherited    roles=sink
+ArrayList       external/inherited    roles=region
+AtmosphereFrameworkexternal/inherited    roles=region,sink,source
+AtmosphereHandlerConfigexternal/inherited    roles=region,source
+Boolean         external/inherited    roles=sink
+Enumeration     external/inherited    roles=region
+HashMap         external/inherited    roles=region
+Is              external/inherited    roles=source
+List            external/inherited    roles=region,source
+Map             external/inherited    roles=region
+Object          external/inherited    roles=region
+Return          external/inherited    roles=region
+ServletConfig   external/inherited    roles=region
+ServletContext  external/inherited    roles=region
+ShutdownHook    external/inherited    roles=region
+StartupHook     external/inherited    roles=region
+String          external/inherited    roles=region,sink
+Throwable       external/inherited    roles=region
+WebServer       external/inherited    roles=region
+all             external/inherited    roles=region
+application     external/inherited    roles=region,sink
+atmosphereHandlerConfigdeclared-in-file      roles=region
+current         external/inherited    roles=region
+defined         external/inherited    roles=region,sink
+ex              external/inherited    roles=region
+framework       declared-in-file      roles=region,sink,source
+in              external/inherited    roles=region,sink
+init            external/inherited    roles=region,sink
+javax           external/inherited    roles=source
+link            external/inherited    roles=region,source
+list            external/inherited    roles=region,sink
+name            external/inherited    roles=region,sink
+of              external/inherited    roles=region,sink
+or              external/inherited    roles=region,sink
+org             external/inherited    roles=region
+param           external/inherited    roles=region
+parameter       external/inherited    roles=sink
+params          external/inherited    roles=region,sink
+properties      declared-in-file      roles=region
+servlet         external/inherited    roles=sink
+shutdownHooks   declared-in-file      roles=region
+startUpHook     declared-in-file      roles=region
+supported       external/inherited    roles=source
+the             external/inherited    roles=region,sink
+useServletContextParametersdeclared-in-file      roles=sink
+used            external/inherited    roles=region
+value           declared-in-file      roles=region,sink
+web             external/inherited    roles=region,sink
+
+# per-line detail:
+left:source:47	AtmosphereFramework,framework
+left:region:48	Map,String,Object,properties,HashMap,String,Object
+left:region:49	List,ShutdownHook,shutdownHooks,ArrayList,ShutdownHook
+left:region:50	List,StartupHook,startUpHook,ArrayList,StartupHook
+left:region:51	
+left:sink:52	AtmosphereFramework,framework
+left:region:53	framework
+left:region:54	
+left:source:55	
+left:source:56	List,AtmosphereHandlerConfig
+left:region:57	atmosphereHandlerConfig
+left:region:58	
+left:region:59	
+left:region:60	
+left:region:61	Return,the,link,AtmosphereFramework
+left:region:62	
+left:region:63	the,link,AtmosphereFramework
+left:region:64	
+left:region:65	AtmosphereFramework
+left:region:66	framework
+left:region:67	
+left:region:68	
+left:region:69	
+left:region:70	Return,the,link,ServletConfig
+left:region:71	
+left:region:72	link,ServletConfig
+left:region:73	
+left:region:74	ServletConfig
+left:region:75	framework
+left:region:76	
+left:region:77	
+left:region:78	
+left:region:79	Return,the,link,ServletContext
+left:region:80	
+left:region:81	link,ServletContext
+left:region:82	
+left:region:83	ServletContext
+left:region:84	framework
+left:region:85	
+left:region:86	
+left:region:87	
+left:region:88	Return,the,current,WebServer,used
+left:region:89	
+left:region:90	the,current,WebServer,used
+left:region:91	
+left:region:92	String
+left:region:93	framework
+left:region:94	
+left:region:95	
+left:region:96	
+left:region:97	Return,the,list,of,link,org
+left:region:98	
+left:region:99	the,list,of,link,org
+left:region:100	
+left:region:101	Map,String,AtmosphereFramework
+left:region:102	framework
+left:region:103	
+left:region:104	
+left:region:105	
+left:region:106	Return,the,value,of,the,init,params,defined,in,web,or,application
+left:region:107	
+left:region:108	param,name,the,name
+left:region:109	the,list,of,init,params,defined,in,web,or,application
+left:region:110	
+left:region:111	String,String,name
+left:source:112	
+left:region:113	framework,name
+left:region:114	Throwable,ex
+left:region:115	
+left:source:116	
+left:source:117	
+left:source:118	
+left:source:119	
+left:source:120	
+left:region:121	Return,all,init,param
+left:region:122	
+left:region:123	
+left:region:124	
+left:region:125	Enumeration,String
+left:region:126	
+left:region:127	
+left:region:128	
+left:region:129	
+left:source:130	Is,link,javax,supported
+right:sink:47	useServletContextParameters
+right:region:48	AtmosphereFramework,framework
+right:region:49	Map,String,Object,properties,HashMap,String,Object
+right:region:50	List,ShutdownHook,shutdownHooks,ArrayList,ShutdownHook
+right:region:51	List,StartupHook,startUpHook,ArrayList,StartupHook
+right:source:52	
+right:region:53	AtmosphereFramework,framework
+right:region:54	framework
+right:sink:55	String,value,framework,ApplicationConfig
+right:sink:56	useServletContextParameters,value,Boolean,value
+right:region:57	
+right:region:58	
+right:region:59	List,AtmosphereHandlerConfig
+right:region:60	atmosphereHandlerConfig
+right:region:61	
+right:region:62	
+right:region:63	
+right:region:64	Return,the,link,AtmosphereFramework
+right:region:65	
+right:region:66	the,link,AtmosphereFramework
+right:region:67	
+right:region:68	AtmosphereFramework
+right:region:69	framework
+right:region:70	
+right:region:71	
+right:region:72	
+right:region:73	Return,the,link,ServletConfig
+right:region:74	
+right:region:75	link,ServletConfig
+right:region:76	
+right:region:77	ServletConfig
+right:region:78	framework
+right:region:79	
+right:region:80	
+right:region:81	
+right:region:82	Return,the,link,ServletContext
+right:region:83	
+right:region:84	link,ServletContext
+right:region:85	
+right:region:86	ServletContext
+right:region:87	framework
+right:region:88	
+right:region:89	
+right:region:90	
+right:region:91	Return,the,current,WebServer,used
+right:region:92	
+right:region:93	the,current,WebServer,used
+right:region:94	
+right:region:95	String
+right:region:96	framework
+right:region:97	
+right:region:98	
+right:region:99	
+right:region:100	Return,the,list,of,link,org
+right:region:101	
+right:region:102	the,list,of,link,org
+right:region:103	
+right:region:104	Map,String,AtmosphereFramework
+right:region:105	framework
+right:region:106	
+right:region:107	
+right:region:108	
+right:region:109	Return,the,value,of,the,init,params,defined,in,web,or,application
+right:region:110	
+right:region:111	param,name,the,name
+right:sink:112	the,value,the,init,parameter,defined
+right:region:113	
+right:region:114	String,String,name
+right:region:115	
+right:sink:116	String,value,framework,name
+right:sink:117	value,useServletContextParameters
+right:sink:118	value,framework,name
+right:sink:119	
+right:sink:120	value
+right:region:121	Throwable,ex
+right:region:122	
+right:region:123	
+right:region:124	
+right:region:125	
+right:region:126	
+right:region:127	
+right:region:128	Return,all,init,param
+right:region:129	
+right:sink:130	the,list,of,init,params,defined,in,web,or,application,the,servlet

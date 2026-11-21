@@ -1,0 +1,34 @@
+# class name : org.jooq.impl.DSL
+# method name: coalesce(Field)
+# variables referenced in the affected region:
+Field           external/inherited    roles=sink,source
+Gets            external/inherited    roles=source
+Oracle          external/inherited    roles=source
+Support         external/inherited    roles=sink
+The             external/inherited    roles=sink
+Utils           external/inherited    roles=source
+code            external/inherited    roles=sink,source
+field           declared-in-file      roles=sink,source
+function        external/inherited    roles=sink,source
+see             external/inherited    roles=sink,source
+style           external/inherited    roles=source
+the             external/inherited    roles=source
+value           external/inherited    roles=sink,source
+
+# per-line detail:
+left:sink:7420	The,code,field,value,code,function
+left:sink:7421	
+left:sink:7422	see,Field,Field
+left:sink:7423	
+left:sink:7424	Support
+left:sink:7425	Field,Field,field,value
+left:source:7426	field,Utils,value,field
+left:source:7427	
+right:source:7420	
+right:source:7421	Gets,the,Oracle,style,code,field,value,code
+right:source:7422	function
+right:source:7423	
+right:source:7424	see,Field,Field
+right:source:7425	
+right:sink:7426	Support
+right:sink:7427	Field,Field,field,value

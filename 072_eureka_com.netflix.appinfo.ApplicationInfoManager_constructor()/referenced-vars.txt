@@ -1,0 +1,420 @@
+# class name : com.netflix.appinfo.ApplicationInfoManager
+# method name: constructor()
+# variables referenced in the affected region:
+AWS             external/inherited    roles=region
+AbstractInstanceConfigexternal/inherited    roles=region
+ApplicationInfoManagerexternal/inherited    roles=region
+CloudInstanceConfigexternal/inherited    roles=region
+ConcurrentHashMapexternal/inherited    roles=sink
+DI              external/inherited    roles=region
+DataCenterInfo  external/inherited    roles=region,source
+Deprecated      external/inherited    roles=region
+Eureka          external/inherited    roles=region
+EurekaInstanceConfigexternal/inherited    roles=region,sink
+Exception       external/inherited    roles=sink
+FineGrainedLazySingletonexternal/inherited    roles=region
+Gets            external/inherited    roles=region
+Greg            external/inherited    roles=region
+Inject          external/inherited    roles=region,source
+InstanceInfo    external/inherited    roles=region,sink,source
+InstanceStatus  external/inherited    roles=sink,source
+Karthik         external/inherited    roles=region
+Kim             external/inherited    roles=region
+Logger          external/inherited    roles=region
+LoggerFactory   external/inherited    roles=region
+Map             external/inherited    roles=region,sink
+MyDataCenterInstanceConfigexternal/inherited    roles=region
+Ranganathan     external/inherited    roles=region
+Refetches       external/inherited    roles=region,source
+Register        external/inherited    roles=region
+Server          external/inherited    roles=region
+Set             external/inherited    roles=region
+Status          external/inherited    roles=region,sink
+StatusChangeEventexternal/inherited    roles=sink
+StatusChangeListenerexternal/inherited    roles=sink
+String          external/inherited    roles=region,sink,source
+The             external/inherited    roles=region
+Throwable       external/inherited    roles=region
+about           external/inherited    roles=region
+accessed        external/inherited    roles=region
+additional      external/inherited    roles=region
+all             external/inherited    roles=sink
+also            external/inherited    roles=sink
+and             external/inherited    roles=region,source
+any             external/inherited    roles=region
+appMetadata     external/inherited    roles=region
+application     external/inherited    roles=region
+author          external/inherited    roles=region
+basic           external/inherited    roles=region
+be              external/inherited    roles=region
+builder         declared-in-file      roles=region,source
+by              external/inherited    roles=region
+can             external/inherited    roles=region
+change          external/inherited    roles=sink
+changed         external/inherited    roles=region,source
+check           external/inherited    roles=region,source
+clients         external/inherited    roles=region
+code            external/inherited    roles=region,source
+com             external/inherited    roles=region,sink,source
+components      external/inherited    roles=region
+config          declared-in-file      roles=region,sink,source
+configuration   external/inherited    roles=region
+contract        external/inherited    roles=region
+data            external/inherited    roles=region
+defined         external/inherited    roles=region
+deprecated      external/inherited    roles=region
+discovered      external/inherited    roles=region
+either          external/inherited    roles=region
+entire          external/inherited    roles=region,source
+eureka          external/inherited    roles=region,source
+event           external/inherited    roles=sink
+existingHostnamedeclared-in-file      roles=region,source
+extend          external/inherited    roles=region
+has             external/inherited    roles=region,source
+heartbeat       external/inherited    roles=region,source
+here            external/inherited    roles=sink
+hostname        external/inherited    roles=region,source
+in              external/inherited    roles=region
+indicate        external/inherited    roles=region
+information     external/inherited    roles=region
+initializes     external/inherited    roles=region
+instance        declared-in-file      roles=region,sink
+instanceInfo    declared-in-file      roles=region,sink,source
+instead         external/inherited    roles=region
+is              external/inherited    roles=region,sink,source
+it              external/inherited    roles=region,sink,source
+java            external/inherited    roles=region,sink,source
+javax           external/inherited    roles=sink,source
+link            external/inherited    roles=region
+listener        external/inherited    roles=sink
+listenerId      external/inherited    roles=sink
+listeners       declared-in-file      roles=sink
+logger          declared-in-file      roles=region,sink,source
+meta            external/inherited    roles=region
+need            external/inherited    roles=region
+newHostname     declared-in-file      roles=region,source
+next            external/inherited    roles=region,source
+non             external/inherited    roles=region
+notifies        external/inherited    roles=sink
+of              external/inherited    roles=region,sink
+on              external/inherited    roles=region,source
+or              external/inherited    roles=region
+org             external/inherited    roles=region,sink
+other           external/inherited    roles=region
+param           external/inherited    roles=region,sink
+passed          external/inherited    roles=region,source
+passing         external/inherited    roles=region
+periodically    external/inherited    roles=region
+please          external/inherited    roles=region
+prev            declared-in-file      roles=sink
+provided        external/inherited    roles=region
+ready           external/inherited    roles=region,sink
+reasons         external/inherited    roles=region
+receive         external/inherited    roles=region,sink
+refetched       external/inherited    roles=region,source
+registered      external/inherited    roles=region,sink
+registration    external/inherited    roles=region
+required        external/inherited    roles=region
+send            external/inherited    roles=region
+sent            external/inherited    roles=region
+server          external/inherited    roles=region,source
+specific        external/inherited    roles=region
+status          external/inherited    roles=region,sink,source
+statusChangeEventexternal/inherited    roles=sink
+that            external/inherited    roles=region
+the             external/inherited    roles=region,sink,source
+to              external/inherited    roles=region,sink,source
+traffic         external/inherited    roles=region,sink
+tt              external/inherited    roles=region
+use             external/inherited    roles=region
+user            external/inherited    roles=region
+very            external/inherited    roles=region
+whether         external/inherited    roles=region,sink
+will            external/inherited    roles=region
+with            external/inherited    roles=region
+
+# per-line detail:
+left:sink:19	javax
+left:region:20	java
+left:sink:21	java
+left:region:22	
+left:region:23	com
+left:region:24	com
+left:sink:25	com
+left:region:26	com
+left:sink:27	org
+left:sink:28	org
+left:region:29	
+left:region:30	
+left:region:31	The,that,initializes,information,required,registration,with
+left:region:32	tt,Eureka,Server,tt,and,to,be,discovered,by,other,components
+left:region:33	
+left:region:34	
+left:region:35	The,information,required,registration,is,provided,by,the,user,by,passing
+left:region:36	the,configuration,defined,by,the,contract,in,link,EurekaInstanceConfig
+left:region:37	clients,can,either,use,or,extend,link,CloudInstanceConfig
+left:region:38	non,AWS,clients,can,use,or,extend,either
+left:region:39	link,MyDataCenterInstanceConfig,or,very,basic
+left:region:40	link,AbstractInstanceConfig
+left:region:41	
+left:region:42	
+left:region:43	
+left:region:44	author,Karthik,Ranganathan,Greg,Kim
+left:region:45	
+left:region:46	
+left:region:47	FineGrainedLazySingleton
+left:region:48	ApplicationInfoManager
+left:region:49	Logger,logger,LoggerFactory,ApplicationInfoManager
+left:region:50	ApplicationInfoManager,instance
+left:region:51	
+left:region:52	InstanceInfo,instanceInfo
+left:region:53	EurekaInstanceConfig,config
+left:region:54	
+left:sink:55	Map,String,StatusChangeListener,listeners
+left:sink:56	
+left:region:57	
+left:sink:58	listeners,ConcurrentHashMap,String,StatusChangeListener
+left:source:59	
+left:region:60	
+left:region:61	Inject
+left:region:62	EurekaInstanceConfig,config,InstanceInfo,instanceInfo
+left:region:63	config
+left:region:64	instanceInfo
+left:sink:65	ConcurrentHashMap,String,StatusChangeListener
+left:region:66	
+left:region:67	
+left:region:68	instance
+left:region:69	
+left:region:70	
+left:region:71	
+left:region:72	deprecated,please,use,DI,instead
+left:region:73	
+left:region:74	Deprecated
+left:region:75	ApplicationInfoManager
+left:region:76	instance
+left:region:77	
+left:region:78	
+left:region:79	EurekaInstanceConfig,config
+left:region:80	
+left:region:81	config
+left:region:82	config
+left:region:83	Throwable
+left:region:84	
+left:region:85	
+left:region:86	
+left:region:87	
+left:region:88	
+left:region:89	
+left:region:90	Gets,the,information,about,instance,that,is,registered,with,eureka
+left:region:91	
+left:region:92	information,about,instance,that,is,registered,with,eureka
+left:region:93	
+left:region:94	InstanceInfo
+left:region:95	instanceInfo
+left:region:96	
+left:region:97	
+left:region:98	
+left:region:99	Register,user,specific,instance,meta,data,can,send,any,other
+left:region:100	additional,meta,data,that,need,to,be,accessed,other,reasons,data
+left:region:101	will,be,periodically,sent,to,the,eureka,server
+left:region:102	
+left:region:103	param,appMetadata
+left:region:104	application,specific,meta,data
+left:region:105	
+left:region:106	Map,String,String,appMetadata
+left:region:107	instanceInfo,appMetadata
+left:region:108	
+left:region:109	
+left:region:110	
+left:region:111	Set,the,status,of,instance,can,use,to,indicate
+left:sink:112	whether,it,is,ready,to,receive,traffic,the,status,here,also,notifies,all,registered,listeners
+left:sink:113	of,status,change,event
+left:region:114	
+left:sink:115	param,status,Status,of,the,instance
+left:region:116	
+left:sink:117	InstanceStatus,status
+left:sink:118	InstanceStatus,prev,instanceInfo,status
+left:sink:119	prev
+left:sink:120	StatusChangeListener,listener,listeners
+left:sink:121	
+left:sink:122	listener,prev,status
+left:sink:123	Exception
+left:sink:124	logger,listener
+left:sink:125	
+left:sink:126	
+left:sink:127	
+left:sink:128	
+left:sink:129	
+left:sink:130	StatusChangeListener,listener
+left:sink:131	listeners,listener,listener
+left:sink:132	
+left:sink:133	
+left:sink:134	String,listenerId
+left:sink:135	listeners,listenerId
+left:region:136	
+left:region:137	
+left:region:138	
+left:region:139	Refetches,the,hostname,to,check,it,has,changed,it,has,the,entire
+left:region:140	code,DataCenterInfo,code,is,refetched,and,passed,on,to,the,eureka
+left:region:141	server,on,next,heartbeat
+left:region:142	
+left:region:143	
+left:region:144	String,existingHostname,instanceInfo
+left:region:145	String,newHostname,config
+left:region:146	newHostname,newHostname,existingHostname
+left:region:147	logger
+left:region:148	existingHostname,newHostname
+left:region:149	InstanceInfo,builder,InstanceInfo
+left:region:150	instanceInfo
+left:region:151	builder,newHostname
+left:region:152	config
+left:sink:153	instanceInfo
+left:region:154	
+left:region:155	
+left:sink:156	
+left:sink:157	StatusChangeListener
+left:sink:158	String
+left:sink:159	StatusChangeEvent,statusChangeEvent
+left:sink:160	
+right:source:19	java
+right:region:20	
+right:source:21	javax
+right:region:22	
+right:region:23	org
+right:region:24	org
+right:source:25	
+right:region:26	com
+right:source:27	com
+right:source:28	com
+right:region:29	
+right:region:30	
+right:region:31	The,that,initializes,information,required,registration,with
+right:region:32	tt,Eureka,Server,tt,and,to,be,discovered,by,other,components
+right:region:33	
+right:region:34	
+right:region:35	The,information,required,registration,is,provided,by,the,user,by,passing
+right:region:36	the,configuration,defined,by,the,contract,in,link,EurekaInstanceConfig
+right:region:37	clients,can,either,use,or,extend,link,CloudInstanceConfig
+right:region:38	non,AWS,clients,can,use,or,extend,either
+right:region:39	link,MyDataCenterInstanceConfig,or,very,basic
+right:region:40	link,AbstractInstanceConfig
+right:region:41	
+right:region:42	
+right:region:43	
+right:region:44	author,Karthik,Ranganathan,Greg,Kim
+right:region:45	
+right:region:46	
+right:region:47	FineGrainedLazySingleton
+right:region:48	ApplicationInfoManager
+right:region:49	Logger,logger,LoggerFactory,ApplicationInfoManager
+right:region:50	ApplicationInfoManager,instance
+right:region:51	
+right:region:52	InstanceInfo,instanceInfo
+right:region:53	EurekaInstanceConfig,config
+right:region:54	
+right:source:55	
+right:source:56	
+right:region:57	
+right:source:58	Inject
+right:sink:59	EurekaInstanceConfig,config,InstanceInfo,instanceInfo
+right:region:60	config
+right:region:61	instanceInfo
+right:region:62	
+right:region:63	
+right:region:64	instance
+right:source:65	
+right:region:66	
+right:region:67	
+right:region:68	deprecated,please,use,DI,instead
+right:region:69	
+right:region:70	Deprecated
+right:region:71	ApplicationInfoManager
+right:region:72	instance
+right:region:73	
+right:region:74	
+right:region:75	EurekaInstanceConfig,config
+right:region:76	
+right:region:77	config
+right:region:78	config
+right:region:79	Throwable
+right:region:80	
+right:region:81	
+right:region:82	
+right:region:83	
+right:region:84	
+right:region:85	
+right:region:86	Gets,the,information,about,instance,that,is,registered,with,eureka
+right:region:87	
+right:region:88	information,about,instance,that,is,registered,with,eureka
+right:region:89	
+right:region:90	InstanceInfo
+right:region:91	instanceInfo
+right:region:92	
+right:region:93	
+right:region:94	
+right:region:95	Register,user,specific,instance,meta,data,can,send,any,other
+right:region:96	additional,meta,data,that,need,to,be,accessed,other,reasons,data
+right:region:97	will,be,periodically,sent,to,the,eureka,server
+right:region:98	
+right:region:99	param,appMetadata
+right:region:100	application,specific,meta,data
+right:region:101	
+right:region:102	Map,String,String,appMetadata
+right:region:103	instanceInfo,appMetadata
+right:region:104	
+right:region:105	
+right:region:106	
+right:region:107	Set,the,status,of,instance,can,use,to,indicate
+right:region:108	whether,it,is,ready,to,receive,traffic
+right:region:109	
+right:region:110	param,status
+right:region:111	Status,of,the,instance
+right:source:112	
+right:source:113	InstanceStatus,status
+right:region:114	instanceInfo,status
+right:source:115	
+right:region:116	
+right:source:117	
+right:source:118	Refetches,the,hostname,to,check,it,has,changed,it,has,the,entire
+right:source:119	code,DataCenterInfo,code,is,refetched,and,passed,on,to,the,eureka
+right:source:120	server,on,next,heartbeat
+right:source:121	
+right:source:122	
+right:source:123	String,existingHostname,instanceInfo
+right:source:124	String,newHostname,config
+right:source:125	newHostname,newHostname,existingHostname
+right:source:126	logger
+right:source:127	existingHostname,newHostname
+right:source:128	InstanceInfo,builder,InstanceInfo
+right:source:129	instanceInfo
+right:source:130	builder,newHostname
+right:source:131	config
+right:source:132	instanceInfo
+right:source:133	
+right:source:134	
+right:source:135	
+right:region:136	
+right:region:137	
+right:region:138	
+right:region:139	
+right:region:140	
+right:region:141	
+right:region:142	
+right:region:143	
+right:region:144	
+right:region:145	
+right:region:146	
+right:region:147	
+right:region:148	
+right:region:149	
+right:region:150	
+right:region:151	
+right:region:152	
+right:source:153	
+right:region:154	
+right:region:155	
+right:source:156	
+right:source:157	
+right:source:158	
+right:source:159	
+right:source:160	

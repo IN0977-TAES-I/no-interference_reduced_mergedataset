@@ -1,0 +1,103 @@
+# class name : org.springframework.boot.loader.archive.ExplodedArchive
+# method name: getUrl()
+# variables referenced in the affected region:
+Archive         external/inherited    roles=region,source
+ArrayList       external/inherited    roles=region
+Collections     external/inherited    roles=region
+Entry           external/inherited    roles=region,source
+EntryFilter     external/inherited    roles=region
+File            external/inherited    roles=region
+FileEntry       external/inherited    roles=region
+FileInputStream external/inherited    roles=region
+FilteredURLStreamHandlerexternal/inherited    roles=region
+IOException     external/inherited    roles=region,source
+Iterator        external/inherited    roles=region
+List            external/inherited    roles=region
+MalformedURLExceptionexternal/inherited    roles=region
+Manifest        external/inherited    roles=region
+Override        external/inherited    roles=region
+SKIPPED_NAMES   declared-in-file      roles=region
+String          external/inherited    roles=region
+URL             external/inherited    roles=region
+child           external/inherited    roles=region
+entries         declared-in-file      roles=region
+entry           declared-in-file      roles=region,source
+file            declared-in-file      roles=region
+files           declared-in-file      roles=region
+filter          external/inherited    roles=region
+handler         declared-in-file      roles=region,sink
+inputStream     declared-in-file      roles=region
+name            declared-in-file      roles=region
+nestedArchives  declared-in-file      roles=region
+recursive       declared-in-file      roles=region
+root            declared-in-file      roles=source
+
+# per-line detail:
+left:sink:87	
+left:region:88	
+left:region:89	
+left:region:90	Override
+left:region:91	Manifest,IOException
+left:region:92	
+left:region:93	FileInputStream,inputStream
+left:region:94	
+left:region:95	inputStream
+left:region:96	
+left:region:97	
+left:region:98	inputStream
+left:region:99	
+left:region:100	
+left:region:101	
+left:region:102	
+left:region:103	
+left:region:104	Override
+left:region:105	List,Archive,EntryFilter,filter,IOException
+left:region:106	List,Archive,nestedArchives,ArrayList,Archive
+left:region:107	Entry,entry
+left:region:108	filter,entry
+left:region:109	nestedArchives,entry
+left:region:110	
+left:region:111	
+left:region:112	Collections,nestedArchives
+left:region:113	
+left:region:114	
+left:region:115	Override
+left:region:116	Iterator,Entry
+left:region:117	
+left:region:118	
+left:region:119	
+left:source:120	Archive,Entry,entry,IOException
+right:source:87	root
+right:region:88	
+right:region:89	
+right:region:90	Collections,entries
+right:region:91	
+right:region:92	
+right:region:93	File,file,recursive
+right:region:94	file
+right:region:95	String,name,file
+right:region:96	
+right:region:97	FileEntry,entry,name,file
+right:region:98	entry,entry
+right:region:99	
+right:region:100	file
+right:region:101	File,files,file
+right:region:102	files
+right:region:103	
+right:region:104	
+right:region:105	File,child,files
+right:region:106	SKIPPED_NAMES,child
+right:region:107	file,recursive
+right:region:108	file
+right:region:109	child,recursive
+right:region:110	
+right:region:111	
+right:region:112	
+right:region:113	
+right:region:114	
+right:region:115	
+right:region:116	Override
+right:region:117	URL,MalformedURLException
+right:region:118	FilteredURLStreamHandler,handler
+right:region:119	
+right:sink:120	handler

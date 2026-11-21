@@ -1,0 +1,51 @@
+# class name : org.springframework.boot.loader.archive.ExplodedArchiveTests
+# method name: getUrl()
+# variables referenced in the affected region:
+Archive         external/inherited    roles=region,source
+Entry           external/inherited    roles=region,source
+Exception       external/inherited    roles=region
+Map             external/inherited    roles=region,source
+String          external/inherited    roles=region,source
+Test            external/inherited    roles=region,source
+URLDecoder      external/inherited    roles=sink
+entries         declared-in-file      roles=region
+entry           declared-in-file      roles=region,source
+nested          declared-in-file      roles=region,source
+nestedEntries   declared-in-file      roles=source
+url             declared-in-file      roles=sink
+
+# per-line detail:
+left:sink:106	URLDecoder,url
+left:sink:107	
+left:region:108	
+left:region:109	
+left:region:110	Test
+left:region:111	Exception
+left:region:112	Entry,entry
+left:region:113	Archive,nested,entry
+left:region:114	nested
+left:region:115	
+left:region:116	
+left:region:117	
+left:region:118	Test
+left:region:119	Exception
+left:region:120	Entry,entry
+left:source:121	Archive,nested,entry
+left:source:122	Map,String,Entry,nestedEntries,nested
+right:source:106	
+right:source:107	Test
+right:region:108	Exception
+right:region:109	
+right:region:110	
+right:region:111	
+right:region:112	
+right:region:113	Test
+right:region:114	Exception
+right:region:115	Map,String,Archive,entries
+right:region:116	entries
+right:region:117	
+right:region:118	
+right:region:119	Test
+right:region:120	Exception
+right:sink:121	
+right:sink:122	

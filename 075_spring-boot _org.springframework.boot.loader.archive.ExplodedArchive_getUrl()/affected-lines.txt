@@ -1,0 +1,152 @@
+# scenario   : 075S
+# project    : spring-boot
+# class name : org.springframework.boot.loader.archive.ExplodedArchive
+# method name: getUrl()
+# side       : left (left-right-lines.csv)
+sink@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():87:		return new URL("file", "", -1, this.root.toURI().getPath());
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():88:	}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():89:
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():90:	@Override
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():91:	public Manifest getManifest() throws IOException {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():92:		if (this.manifest == null && this.manifestFile.exists()) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():93:			FileInputStream inputStream = new FileInputStream(this.manifestFile);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():94:			try {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():95:				this.manifest = new Manifest(inputStream);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():96:			}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():97:			finally {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():98:				inputStream.close();
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():99:			}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():100:		}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():101:		return this.manifest;
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():102:	}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():103:
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():104:	@Override
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():105:	public List<Archive> getNestedArchives(EntryFilter filter) throws IOException {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():106:		List<Archive> nestedArchives = new ArrayList<Archive>();
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():107:		for (Entry entry : this) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():108:			if (filter.matches(entry)) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():109:				nestedArchives.add(getNestedArchive(entry));
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():110:			}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():111:		}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():112:		return Collections.unmodifiableList(nestedArchives);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():113:	}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():114:
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():115:	@Override
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():116:	public Iterator<Entry> iterator() {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():117:		return new FileEntryIterator(this.root, this.recursive);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():118:	}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():119:
+source@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():120:	protected Archive getNestedArchive(Entry entry) throws IOException {
+
+# same region in merge.java (scenario update):
+merge:87:		return this.root.toURI().toURL();
+merge:88:	}
+merge:89:
+merge:90:	@Override
+merge:91:	public Manifest getManifest() throws IOException {
+merge:92:		if (this.manifest == null && this.manifestFile.exists()) {
+merge:93:			FileInputStream inputStream = new FileInputStream(this.manifestFile);
+merge:94:			try {
+merge:95:				this.manifest = new Manifest(inputStream);
+merge:96:			}
+merge:97:			finally {
+merge:98:				inputStream.close();
+merge:99:			}
+merge:100:		}
+merge:101:		return this.manifest;
+merge:102:	}
+merge:103:
+merge:104:	@Override
+merge:105:	public List<Archive> getNestedArchives(EntryFilter filter) throws IOException {
+merge:106:		List<Archive> nestedArchives = new ArrayList<Archive>();
+merge:107:		for (Entry entry : this) {
+merge:108:			if (filter.matches(entry)) {
+merge:109:				nestedArchives.add(getNestedArchive(entry));
+merge:110:			}
+merge:111:		}
+merge:112:		return Collections.unmodifiableList(nestedArchives);
+merge:113:	}
+merge:114:
+merge:115:	@Override
+merge:116:	public Iterator<Entry> iterator() {
+merge:117:		return new FileEntryIterator(this.root, this.recursive);
+merge:118:	}
+merge:119:
+merge:120:	protected Archive getNestedArchive(Entry entry) throws IOException {
+
+# scenario   : 075S
+# project    : spring-boot
+# class name : org.springframework.boot.loader.archive.ExplodedArchive
+# method name: getUrl()
+# side       : right (right-left-lines.csv)
+source@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():87:		this.root = root;
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():88:		// The entries are pre-filtered
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():89:		this.filtered = true;
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():90:		this.entries = Collections.unmodifiableMap(entries);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():91:	}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():92:
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():93:	private void buildEntries(File file, boolean recursive) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():94:		if (!file.equals(this.root)) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():95:			String name = file.toURI().getPath()
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():96:					.substring(this.root.toURI().getPath().length());
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():97:			FileEntry entry = new FileEntry(new AsciiBytes(name), file);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():98:			this.entries.put(entry.getName(), entry);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():99:		}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():100:		if (file.isDirectory()) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():101:			File[] files = file.listFiles();
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():102:			if (files == null) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():103:				return;
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():104:			}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():105:			for (File child : files) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():106:				if (!SKIPPED_NAMES.contains(child.getName())) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():107:					if (file.equals(this.root) || recursive
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():108:							|| file.getName().equals("META-INF")) {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():109:						buildEntries(child, recursive);
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():110:					}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():111:				}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():112:			}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():113:		}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():114:	}
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():115:
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():116:	@Override
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():117:	public URL getUrl() throws MalformedURLException {
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():118:		FilteredURLStreamHandler handler = this.filtered ? new FilteredURLStreamHandler()
+region@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():119:				: null;
+sink@org.springframework.boot.loader.archive.ExplodedArchive.getUrl():120:		return new URL("file", "", -1, this.root.toURI().toURL().getPath(), handler);
+
+# same region in merge.java (scenario update):
+merge:87:		return this.root.toURI().toURL();
+merge:88:	}
+merge:89:
+merge:90:	@Override
+merge:91:	public Manifest getManifest() throws IOException {
+merge:92:		if (this.manifest == null && this.manifestFile.exists()) {
+merge:93:			FileInputStream inputStream = new FileInputStream(this.manifestFile);
+merge:94:			try {
+merge:95:				this.manifest = new Manifest(inputStream);
+merge:96:			}
+merge:97:			finally {
+merge:98:				inputStream.close();
+merge:99:			}
+merge:100:		}
+merge:101:		return this.manifest;
+merge:102:	}
+merge:103:
+merge:104:	@Override
+merge:105:	public List<Archive> getNestedArchives(EntryFilter filter) throws IOException {
+merge:106:		List<Archive> nestedArchives = new ArrayList<Archive>();
+merge:107:		for (Entry entry : this) {
+merge:108:			if (filter.matches(entry)) {
+merge:109:				nestedArchives.add(getNestedArchive(entry));
+merge:110:			}
+merge:111:		}
+merge:112:		return Collections.unmodifiableList(nestedArchives);
+merge:113:	}
+merge:114:
+merge:115:	@Override
+merge:116:	public Iterator<Entry> iterator() {
+merge:117:		return new FileEntryIterator(this.root, this.recursive);
+merge:118:	}
+merge:119:
+merge:120:	protected Archive getNestedArchive(Entry entry) throws IOException {
+

@@ -1,0 +1,56 @@
+# class name : org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior
+# method name: execute(ActivityExecution)
+# variables referenced in the affected region:
+ActivitiEventBuilderexternal/inherited    roles=source
+ActivitiEventTypeexternal/inherited    roles=source
+ActivityExecutionexternal/inherited    roles=region,source
+Context         external/inherited    roles=source
+Exception       external/inherited    roles=region,source
+ExecutionEntity external/inherited    roles=region,source
+Object          external/inherited    roles=region,source
+String          external/inherited    roles=region,sink,source
+TaskListener    external/inherited    roles=region,sink
+execution       external/inherited    roles=region,source
+formKey         declared-in-file      roles=sink
+signalData      external/inherited    roles=region,source
+signalName      external/inherited    roles=region,source
+task            declared-in-file      roles=region,sink,source
+taskDefinition  declared-in-file      roles=sink
+
+# per-line detail:
+left:sink:110	formKey
+left:sink:111	formKey,String
+left:sink:112	task,String,formKey
+left:sink:113	
+left:sink:114	
+left:sink:115	taskDefinition
+left:sink:116	
+left:sink:117	
+left:source:118	
+left:region:119	
+left:region:120	task,execution
+left:region:121	
+left:region:122	
+left:region:123	task,TaskListener
+left:region:124	
+left:source:125	
+left:source:126	ActivityExecution,execution,String,signalName,Object,signalData,Exception
+left:source:127	ExecutionEntity,execution
+right:source:110	task,execution
+right:source:111	
+right:source:112	
+right:source:113	Context
+right:source:114	Context
+right:source:115	ActivitiEventBuilder,ActivitiEventType,task
+right:source:116	
+right:source:117	
+right:sink:118	task,TaskListener
+right:region:119	
+right:region:120	
+right:region:121	ActivityExecution,execution,String,signalName,Object,signalData,Exception
+right:region:122	ExecutionEntity,execution
+right:region:123	
+right:region:124	execution
+right:sink:125	
+right:sink:126	
+right:sink:127	

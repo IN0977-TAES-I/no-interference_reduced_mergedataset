@@ -1,0 +1,88 @@
+# scenario   : 077S
+# project    : activiti
+# class name : org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior
+# method name: execute(ActivityExecution)
+# side       : left (left-right-lines.csv)
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):110:    	if (formKey != null) {
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):111:    		if (formKey instanceof String) {
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):112:    			task.setFormKey((String) formKey);
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):113:    		} else {
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):114:    			 throw new ActivitiIllegalArgumentException("FormKey expression does not resolve to a string: " + 
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):115:               taskDefinition.getFormKeyExpression().getExpressionText());
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):116:    		}
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):117:    	}
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):118:    }
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):119:    
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):120:    handleAssignments(task, execution);
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):121:   
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):122:    // All properties set, now firing 'create' event
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):123:    task.fireEvent(TaskListener.EVENTNAME_CREATE);
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):124:  }
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):125:
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):126:  public void signal(ActivityExecution execution, String signalName, Object signalData) throws Exception {
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):127:    if (((ExecutionEntity) execution).getTasks().size() != 0)
+
+# same region in merge.java (scenario update):
+merge:110:    if (taskDefinition.getFormKeyExpression() != null) {
+merge:111:    	final Object formKey = (String) taskDefinition.getFormKeyExpression().getValue(execution);
+merge:112:    	if (formKey != null) {
+merge:113:    		if (formKey instanceof String) {
+merge:114:    			task.setFormKey((String) formKey);
+merge:115:    		} else {
+merge:116:    			 throw new ActivitiIllegalArgumentException("FormKey expression does not resolve to a string: " + 
+merge:117:               taskDefinition.getFormKeyExpression().getExpressionText());
+merge:118:    		}
+merge:119:    	}
+merge:120:    }
+merge:121:    
+merge:122:    handleAssignments(task, execution);
+merge:123:   
+merge:124:    // All properties set, now firing 'create' events
+merge:125:    if (Context.getProcessEngineConfiguration().getEventDispatcher().isEnabled()) {
+merge:126:      Context.getProcessEngineConfiguration().getEventDispatcher().dispatchEvent(
+merge:127:        ActivitiEventBuilder.createEntityEvent(ActivitiEventType.TASK_CREATED, task));
+
+# scenario   : 077S
+# project    : activiti
+# class name : org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior
+# method name: execute(ActivityExecution)
+# side       : right (right-left-lines.csv)
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):110:    handleAssignments(task, execution);
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):111:   
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):112:    // All properties set, now firing 'create' events
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):113:    if (Context.getProcessEngineConfiguration().getEventDispatcher().isEnabled()) {
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):114:      Context.getProcessEngineConfiguration().getEventDispatcher().dispatchEvent(
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):115:        ActivitiEventBuilder.createEntityEvent(ActivitiEventType.TASK_CREATED, task));
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):116:    }
+source@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):117:
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):118:    task.fireEvent(TaskListener.EVENTNAME_CREATE);
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):119:  }
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):120:
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):121:  public void signal(ActivityExecution execution, String signalName, Object signalData) throws Exception {
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):122:    if (((ExecutionEntity) execution).getTasks().size() != 0)
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):123:      throw new ActivitiException("UserTask should not be signalled before complete");
+region@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):124:    leave(execution);
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):125:  }
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):126:
+sink@org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior.execute(ActivityExecution):127:  @SuppressWarnings({ "unchecked", "rawtypes" })
+
+# same region in merge.java (scenario update):
+merge:110:    if (taskDefinition.getFormKeyExpression() != null) {
+merge:111:    	final Object formKey = (String) taskDefinition.getFormKeyExpression().getValue(execution);
+merge:112:    	if (formKey != null) {
+merge:113:    		if (formKey instanceof String) {
+merge:114:    			task.setFormKey((String) formKey);
+merge:115:    		} else {
+merge:116:    			 throw new ActivitiIllegalArgumentException("FormKey expression does not resolve to a string: " + 
+merge:117:               taskDefinition.getFormKeyExpression().getExpressionText());
+merge:118:    		}
+merge:119:    	}
+merge:120:    }
+merge:121:    
+merge:122:    handleAssignments(task, execution);
+merge:123:   
+merge:124:    // All properties set, now firing 'create' events
+merge:125:    if (Context.getProcessEngineConfiguration().getEventDispatcher().isEnabled()) {
+merge:126:      Context.getProcessEngineConfiguration().getEventDispatcher().dispatchEvent(
+merge:127:        ActivitiEventBuilder.createEntityEvent(ActivitiEventType.TASK_CREATED, task));
+

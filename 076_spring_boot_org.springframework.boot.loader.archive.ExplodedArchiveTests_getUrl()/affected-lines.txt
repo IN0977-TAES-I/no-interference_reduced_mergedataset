@@ -1,0 +1,84 @@
+# scenario   : 076S
+# project    : spring
+# class name : org.springframework.boot.loader.archive.ExplodedArchiveTests
+# method name: getUrl()
+# side       : left (left-right-lines.csv)
+sink@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():106:		assertThat(new File(URLDecoder.decode(url.getFile(), "UTF-8")))
+sink@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():107:				.isEqualTo(this.rootFolder);
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():108:	}
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():109:
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():110:	@Test
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():111:	public void getNestedArchive() throws Exception {
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():112:		Entry entry = getEntriesMap(this.archive).get("nested.jar");
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():113:		Archive nested = this.archive.getNestedArchive(entry);
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():114:		assertThat(nested.getUrl().toString())
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():115:				.isEqualTo("jar:" + this.rootFolder.toURI() + "nested.jar!/");
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():116:	}
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():117:
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():118:	@Test
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():119:	public void nestedDirArchive() throws Exception {
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():120:		Entry entry = getEntriesMap(this.archive).get("d/");
+source@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():121:		Archive nested = this.archive.getNestedArchive(entry);
+source@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():122:		Map<String, Entry> nestedEntries = getEntriesMap(nested);
+
+# same region in merge.java (scenario update):
+merge:106:	}
+merge:107:
+merge:108:	@Test
+merge:109:	public void getEntries() throws Exception {
+merge:110:		Map<String, Archive.Entry> entries = getEntriesMap(this.archive);
+merge:111:		assertThat(entries.size()).isEqualTo(10);
+merge:112:	}
+merge:113:
+merge:114:	@Test
+merge:115:	public void getUrl() throws Exception {
+merge:116:		assertThat(this.archive.getUrl()).isEqualTo(this.rootFolder.toURI().toURL());
+merge:117:	}
+merge:118:
+merge:119:	@Test
+merge:120:	public void getUrlWithSpaceInPath() throws Exception {
+merge:121:		createArchive("spaces in the name");
+merge:122:		assertThat(this.archive.getUrl()).isEqualTo(this.rootFolder.toURI().toURL());
+
+# scenario   : 076S
+# project    : spring
+# class name : org.springframework.boot.loader.archive.ExplodedArchiveTests
+# method name: getUrl()
+# side       : right (right-left-lines.csv)
+source@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():106:
+source@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():107:	@Test
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():108:	public void getManifest() throws Exception {
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():109:		assertThat(this.archive.getManifest().getMainAttributes().getValue("Built-By"),
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():110:				equalTo("j1"));
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():111:	}
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():112:
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():113:	@Test
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():114:	public void getEntries() throws Exception {
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():115:		Map<String, Archive.Entry> entries = getEntriesMap(this.archive);
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():116:		assertThat(entries.size(), equalTo(10));
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():117:	}
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():118:
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():119:	@Test
+region@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():120:	public void getUrl() throws Exception {
+sink@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():121:		assertThat(this.archive.getUrl(), equalTo(this.rootFolder.toURI().toURL()));
+sink@org.springframework.boot.loader.archive.ExplodedArchiveTests.getUrl():122:	}
+
+# same region in merge.java (scenario update):
+merge:106:	}
+merge:107:
+merge:108:	@Test
+merge:109:	public void getEntries() throws Exception {
+merge:110:		Map<String, Archive.Entry> entries = getEntriesMap(this.archive);
+merge:111:		assertThat(entries.size()).isEqualTo(10);
+merge:112:	}
+merge:113:
+merge:114:	@Test
+merge:115:	public void getUrl() throws Exception {
+merge:116:		assertThat(this.archive.getUrl()).isEqualTo(this.rootFolder.toURI().toURL());
+merge:117:	}
+merge:118:
+merge:119:	@Test
+merge:120:	public void getUrlWithSpaceInPath() throws Exception {
+merge:121:		createArchive("spaces in the name");
+merge:122:		assertThat(this.archive.getUrl()).isEqualTo(this.rootFolder.toURI().toURL());
+
